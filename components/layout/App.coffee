@@ -1,10 +1,10 @@
 React = require "react"
-{ div } = React.DOM
+{ div, h1 } = React.DOM
 
 module.exports = React.createClass
   render: -> 
-  	div className:"row",
-      div className: "col-md-6" , " testing "
+  	div className:"row-fluid",
+      h1 className: "center-block" , "Chat Overflow"
     
   
 
