@@ -1,3 +1,4 @@
-#ignore npm debug
+#ignore these
 npm-debug.log
 node_modules/
+.DS_Store

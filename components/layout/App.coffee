@@ -1,9 +1,10 @@
 React = require "react"
-{ h2 } = React.DOM
+{ div } = React.DOM
 
 module.exports = React.createClass
   render: -> 
-      h2 className: "foo" , " testing "
+  	div className:"row",
+      div className: "col-md-6" , " testing "
     
   
 
