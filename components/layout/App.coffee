@@ -4,12 +4,14 @@ React = require "react"
 module.exports = React.createClass
   render: -> 
     div {className:"col-md-offset-3 col-md-6"},
-      div className:"login-button",
+      div {className:"login-button", onClick: @loginClicked},
         button className: "btn btn-default", "Login"
       div className:{},
         h1 className: "center-block" , "Chat Overflow"
       div className:{},
         h3 className: "subtitle", "Neque porro quisquam est qui dolorem ipsum "
-      div className:"register-button",
+      div {className:"register-button", onClick: @loginClicked},
         button  className:"btn btn-default btn-lg" , "Register"
 
+  loginClicked: ->
+    console.log "You pressed my button."
