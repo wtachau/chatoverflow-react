@@ -1,0 +1,35 @@
+.chat-form {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 3px;
+  background: #7C7C7C;
+}
+
+.form-input {
+  border: 0;
+  padding: 10px;
+  width: 90%;
+  margin-right: .5%;
+}
+
+.form-button {
+  border: 0;
+  background: #D6F6FF; 
+  padding: 10px;
+  width: 9%;
+}
+
+.unordered-list-messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.messages {
+  padding: 5px 10px;
+}
+
+.messages:nth-child(odd) {
+  background: #eee;
+}
