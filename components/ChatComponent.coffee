@@ -1,5 +1,6 @@
 React = require "react"
-{ div, form, input, button } = React.DOM
+
+{ div, form, li, ul } = React.DOM
 ReactBootstrap = require 'react-bootstrap'
 Input = React.createFactory(ReactBootstrap.Input)
 Button = React.createFactory(ReactBootstrap.Button)
@@ -17,18 +18,23 @@ ChatComponent = React.createClass
     @socket.on "chat message", (msg) =>
       newList = @state.messageList
       newList.push msg
-      @setState { messageList: newList, message: '' }
+      @setState messageList: newList
 
   click: (e) ->
     @socket.emit "chat message", @state.message
+    @setState message: ''
     e.stopPropagation()
 
   inputChange: (e) ->
     @setState message: e.target.value
 
   render: ->
-    form {},
-      Input {type: 'text', id: "chat-input", autoComplete: off, value: @state.message, onChange: @inputChange}
-      Button {onClick: @click}, "send"
+    div {className: 'chat'},
+      form {className: 'chat-form'},
+        Input {type: 'text', id: "chat-input", autoComplete: off, value: @state.message, onChange: @inputChange}
+        Button {onClick: @click, className: 'form-button'}, "send"
+      ul {className: "unordered-list-messages"},
+        @state.messageList.map (msg) ->
+          li {className: "messages"}, msg
 
 module.exports = ChatComponent
