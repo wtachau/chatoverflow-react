@@ -8,10 +8,12 @@ module.exports = React.createClass
 
   loginClicked: ->
     @setState isLoggedIn: true
-
+    
   render: -> 
     if @state.isLoggedIn 
       React.createElement ChatComponent
     else
       React.createElement LoginComponent, loginClicked: @loginClicked
+
+
 

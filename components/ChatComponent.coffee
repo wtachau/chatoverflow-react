@@ -5,9 +5,14 @@ io = require "socket.io-client"
 $ = require "jquery"
 
 ChatComponent = React.createClass
+  getInitialState: ->
+    {messageList: []}
 
-  componentWillMount: ->
+  componentDidMount: ->
     @socket = io("http://127.0.0.1:3001")
+    @socket.on "chat message", (msg) =>
+      @state.messageList.push msg
+      console.log @state.messageList
 
   click: (e) ->
     @socket.emit "chat message", $("#chat-input").val()
