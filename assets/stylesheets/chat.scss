@@ -1,9 +1,11 @@
+@import "colors";
+
 .chat-form {
   position: fixed;
   bottom: 0;
   width: 100%;
   padding: 3px;
-  background: #7C7C7C;
+  background: $chat_input_grey; 
 }
 
 .form-input {
@@ -15,7 +17,7 @@
 
 .form-button {
   border: 0;
-  background: #D6F6FF; 
+  background: $chat_button_blue; 
   padding: 10px;
   width: 9%;
 }
@@ -31,5 +33,5 @@
 }
 
 .messages:nth-child(odd) {
-  background: #eee;
+  background: $chat_background_grey;
 }
