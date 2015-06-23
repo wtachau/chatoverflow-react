@@ -6,10 +6,10 @@ module.exports = React.createClass
     div {className:"col-md-offset-3 col-md-6"},
       div className:"login-button",
         button className: "btn btn-default", "Login"
-      div className:"row-fluid",
+      div className:{},
         h1 className: "center-block" , "Chat Overflow"
-      div className:"row-fluid",
+      div className:{},
         h3 className: "subtitle", "Neque porro quisquam est qui dolorem ipsum "
-      div className:"row-fluid register-button",
+      div className:"register-button",
         button  className:"btn btn-default btn-lg" , "Register"
 
