@@ -1,7 +1,7 @@
 React = require "react"
 
 { div, form, li, ul } = React.DOM
-ReactBootstrap = require 'react-bootstrap'
+ReactBootstrap = require "react-bootstrap"
 Input = React.createFactory(ReactBootstrap.Input)
 Button = React.createFactory(ReactBootstrap.Button)
 
@@ -11,7 +11,7 @@ $ = require "jquery"
 ChatComponent = React.createClass
   getInitialState: ->
     messageList: []
-    message: ''
+    message: ""
 
   componentWillMount: ->
     @socket = switch process.env.NODE_ENV
@@ -26,19 +26,19 @@ ChatComponent = React.createClass
     user_id = 1
     user_name = "Willy" #fixme
     @socket.emit "chat message", { user_id, user_name, "message":@state.message }
-    @setState message: ''
+    @setState message: ""
     e.stopPropagation()
 
   inputChange: (e) ->
     @setState message: e.target.value
 
   render: ->
-    div {className: 'chat'},
-      form {className: 'chat-form'},
-        Input {type: 'text', id: "chat-input", autoComplete: off, value: @state.message, onChange: @inputChange}
-        Button {onClick: @click, className: 'form-button'}, "send"
+    div {className: "chat"},
+      form {className: "chat-form"},
+        Input {type: "text", id: "chat-input", autoComplete: off, value: @state.message, onChange: @inputChange}
+        Button {onClick: @click, className: "form-button"}, "send"
       ul {className: "unordered-list-messages"},
         @state.messageList.map ({user_name, message}) ->
-          li {className: "messages"}, user_name+": "+message
+          li {className: "messages"}, "#{user_name}: #{message}"
 
 module.exports = ChatComponent
