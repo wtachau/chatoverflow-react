@@ -16,11 +16,15 @@ ChatComponent = React.createClass
   componentDidMount: ->
     @socket = io("http://127.0.0.1:3001")
     @socket.on "chat message", (msg) =>
+      if msg == ""
+        return
       newList = @state.messageList
       newList.push msg
       @setState messageList: newList
 
   click: (e) ->
+    if @state.message == ""
+      return
     @socket.emit "chat message", @state.message
     @setState message: ''
     e.stopPropagation()
