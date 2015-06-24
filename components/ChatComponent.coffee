@@ -37,7 +37,7 @@ ChatComponent = React.createClass
   render: ->
     div {className: "chat"},
       form {className: "chat-form" },
-        Input {type: "text", id: "chat-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress}
+        Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress}, {}
         Button {onClick: @submit, className: "form-button"}, "send"
       ul {className: "unordered-list-messages"},
         @state.messageList.map (msg) ->
