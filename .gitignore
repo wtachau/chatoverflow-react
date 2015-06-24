@@ -7,3 +7,7 @@ node_modules/
 bundle.js.map
 
 !bundle.js
+!webpack.config.js
+!webpack.dev.config.js
+!webpack.prod.config.js
+!webpack.staging.config.js
