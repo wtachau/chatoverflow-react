@@ -27,7 +27,7 @@ ChatComponent = React.createClass
     user_name = "Willy" #fixme
     @setState message: @state.message.trim()
     unless @state.message is "" 
-      @socket.emit "chat message", { user_id, user_name, "message": @state.message }
+      @socket.emit "chat message", { user_id, user_name, "message": @state.message.trim() }
       @setState message: ""
     e.preventDefault()
 
