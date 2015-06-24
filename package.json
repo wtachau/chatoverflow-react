@@ -10,8 +10,8 @@
   "scripts": {
     "devserve": "webpack-dev-server -d --config webpack.dev.config.js --content-base ./ --progress --colors",
     "devbuild": "webpack -d --config webpack.dev.config.js --profile --progress --colors",
-    "stagingbuild": "webpack -d --config webpack.staging.config.js --profile --progress --colors",
-    "prodbuild": "webpack -d --config webpack.prod.config.js --profile --progress --colors"
+    "stagingbuild": "webpack -p --config webpack.staging.config.js --profile --progress --colors",
+    "prodbuild": "webpack -p --config webpack.prod.config.js --profile --progress --colors"
   },
   "author": "Originate",
   "license": "ISC",
