@@ -1,37 +1,39 @@
 @import "colors";
 
-.chat-form {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 3px;
-  background: $chat_input_grey; 
-}
+.chat {
+  .chat-form {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 3px;
+    background: $chat_input_grey; 
+  }
 
-.form-input {
-  border: 0;
-  padding: 10px;
-  width: 90%;
-  margin-right: .5%;
-}
+  .form-input {
+    border: 0;
+    padding: 10px;
+    width: 90%;
+    margin-right: .5%;
+  }
 
-.form-button {
-  border: 0;
-  background: $chat_button_blue; 
-  padding: 10px;
-  width: 9%;
-}
+  .form-button {
+    border: 0;
+    background: $chat_button_blue; 
+    padding: 10px;
+    width: 9%;
+  }
 
-.unordered-list-messages {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
+  .unordered-list-messages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
 
-.messages {
-  padding: 5px 10px;
-}
+  .messages {
+    padding: 5px 10px;
+  }
 
-.messages:nth-child(odd) {
-  background: $chat_background_grey;
+  .messages:nth-child(odd) {
+    background: $chat_background_grey;
+  }
 }
