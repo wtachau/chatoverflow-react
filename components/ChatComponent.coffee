@@ -13,17 +13,21 @@ ChatComponent = React.createClass
     messageList: []
     message: ""
 
-  componentDidMount: ->
-    @socket = io("http://127.0.0.1:3001")
-    @socket.on "chat message", (msg) =>
+  componentWillMount: ->
+    @socket = switch process.env.NODE_ENV
+      when 'development' then io("http://127.0.0.1:3001")
+      when 'staging' then io("http://chat-overflow-node-staging.herokuapp.com")
+    @socket.on "chat message", ({user_id, user_name, message}) =>
       newList = @state.messageList
-      newList.push msg
+      newList.push {user_name, message}
       @setState messageList: newList
 
   submit: (e) ->
+    user_id = 1
+    user_name = "Willy" #fixme
     @setState message: @state.message.trim()
     unless @state.message is "" 
-      @socket.emit "chat message", @state.message
+      @socket.emit "chat message", { user_id, user_name, "message": @state.message }
       @setState message: ""
     e.preventDefault()
 
@@ -40,7 +44,7 @@ ChatComponent = React.createClass
         Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress}, {}
         Button {onClick: @submit, className: "form-button"}, "send"
       ul {className: "unordered-list-messages"},
-        @state.messageList.map (msg) ->
-          li {className: "messages"}, msg
+        @state.messageList.map ({user_name, message}) ->
+          li {className: "messages"}, "#{user_name}: #{message}"
 
 module.exports = ChatComponent
