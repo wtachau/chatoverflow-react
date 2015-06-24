@@ -14,6 +14,8 @@ module.exports = React.createClass
       when 'staging' then "http://chat-overflow-node-staging.herokuapp.com"
 
   loginClicked: ->
+    console.log "here"
+    console.log "#{ @getServerOrigin() }/login"
     window.location.assign("#{ @getServerOrigin() }/login")
 
   componentWillMount: ->
