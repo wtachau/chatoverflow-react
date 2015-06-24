@@ -25,7 +25,7 @@ ChatComponent = React.createClass
   click: (e) ->
     user_id = 1
     user_name = "Willy" #fixme
-    @socket.emit "chat message", { user_id, user_name, "message":@state.message }
+    @socket.emit "chat message", { user_id, user_name, "message": @state.message }
     @setState message: ""
     e.stopPropagation()
 
