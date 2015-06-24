@@ -22,21 +22,27 @@ ChatComponent = React.createClass
       newList.push {user_name, message}
       @setState messageList: newList
 
-  click: (e) ->
+  submit: (e) ->
     user_id = 1
     user_name = "Willy" #fixme
-    @socket.emit "chat message", { user_id, user_name, "message": @state.message }
-    @setState message: ""
-    e.stopPropagation()
+    @setState message: @state.message.trim()
+    unless @state.message is "" 
+      @socket.emit "chat message", { user_id, user_name, "message": @state.message }
+      @setState message: ""
+    e.preventDefault()
 
   inputChange: (e) ->
     @setState message: e.target.value
 
+  keyPress: (e) ->
+    if e.key == "Enter"
+      @submit e
+
   render: ->
     div {className: "chat"},
-      form {className: "chat-form"},
-        Input {type: "text", id: "chat-input", autoComplete: off, value: @state.message, onChange: @inputChange}
-        Button {onClick: @click, className: "form-button"}, "send"
+      form {className: "chat-form" },
+        Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress}, {}
+        Button {onClick: @submit, className: "form-button"}, "send"
       ul {className: "unordered-list-messages"},
         @state.messageList.map ({user_name, message}) ->
           li {className: "messages"}, "#{user_name}: #{message}"
