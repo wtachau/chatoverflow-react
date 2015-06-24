@@ -20,8 +20,8 @@ module.exports = React.createClass
 
   loginClicked: ->
     console.log "here"
-    console.log "#{ @getServerOrigin() }/login"
-    window.location.assign("#{ @getServerOrigin() }/login")
+    console.log "#{ @getLogicServerOrigin() }/login"
+    window.location.assign("#{ @getLogicServerOrigin() }/login")
 
   componentWillMount: ->
     jwt = new Uri(location.search).getQueryParamValue("jwt")
@@ -33,7 +33,7 @@ module.exports = React.createClass
       @getCurrentUser()
 
   getCurrentUser: ->
-    @readFromAPI "#{ @getServerOrigin() }/current_user", (response) =>
+    @readFromAPI "#{ @getLogicServerOrigin() }/current_user", (response) =>
       @setState user: response
 
   readFromAPI: (url, successFunction) ->
