@@ -8,9 +8,18 @@ module.exports = React.createClass
   getInitialState: ->
     {user: null}
 
+  getChatServerOrigin: ->
+    switch process.env.NODE_ENV
+      when 'development' then "http://127.0.0.1:3001"
+      when 'staging' then "http://chat-overflow-node-staging.herokuapp.com"
+
+  getLogicServerOrigin: ->
+    switch process.env.NODE_ENV
+      when 'development' then "http://127.0.0.1:3000"
+      when 'staging' then "http://chat-overflow-rails-staging.herokuapp.com"
+
   loginClicked: ->
-    location = if process.env.NODE_ENV == "development" then "http://localhost:3000/login"
-    window.location.assign(location)
+    window.location.assign("#{ @getLogicServerOrigin() }/login")
 
   componentWillMount: ->
     jwt = new Uri(location.search).getQueryParamValue("jwt")
@@ -22,7 +31,7 @@ module.exports = React.createClass
       @getCurrentUser()
 
   getCurrentUser: ->
-    @readFromAPI 'http://localhost:3000/current_user', (response) =>
+    @readFromAPI "#{ @getLogicServerOrigin() }/current_user", (response) =>
       @setState user: response
 
   readFromAPI: (url, successFunction) ->
