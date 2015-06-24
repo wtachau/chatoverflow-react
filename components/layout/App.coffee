@@ -8,10 +8,15 @@ module.exports = React.createClass
   getInitialState: ->
     {user: null}
 
-  getServerOrigin: ->
+  getChatServerOrigin: ->
+    switch process.env.NODE_ENV
+      when 'development' then "http://127.0.0.1:3001"
+      when 'staging' then "http://chat-overflow-node-staging.herokuapp.com"
+
+  getLogicServerOrigin: ->
     switch process.env.NODE_ENV
       when 'development' then "http://127.0.0.1:3000"
-      when 'staging' then "http://chat-overflow-node-staging.herokuapp.com"
+      when 'staging' then "http://chat-overflow-rails-staging.herokuapp.com"
 
   loginClicked: ->
     console.log "here"
