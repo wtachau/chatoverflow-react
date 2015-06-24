@@ -7,7 +7,9 @@ $ = require "jquery"
 ChatComponent = React.createClass
 
   componentWillMount: ->
-    @socket = io("http://127.0.0.1:3001")
+    @socket = switch process.env.NODE_ENV
+      when 'development' then io("http://127.0.0.1:3001")
+      when 'staging' then io("http://chat-overflow-node-staging.herokuapp.com")
 
   click: (e) ->
     @socket.emit "chat message", $("#chat-input").val()
