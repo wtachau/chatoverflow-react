@@ -27,7 +27,7 @@ ChatComponent = React.createClass
 
   submit: (e) ->
     user_id = @props.user.id
-    username = @props.user.name
+    username = if @props.user.name then @props.user.name else @props.user.username
     room_id = 1 #todo
     @setState message: @state.message.trim()
     unless @state.message is "" 
