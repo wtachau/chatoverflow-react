@@ -5,6 +5,7 @@ Uri = require("jsuri")
 URLResources = require("../../common/URLResources")
 
 module.exports = React.createClass
+
   getInitialState: ->
     {user: null}
 
@@ -22,12 +23,16 @@ module.exports = React.createClass
   loginClicked: ->
     window.location.assign("#{ URLResources.getLogicServerOrigin() }/login")
 
+  logoutClicked: ->
+    @setState user: null
+    sessionStorage.setItem('jwt', '')
+
   getCurrentUser: ->
     URLResources.readFromAPI "/current_user", (response) =>
       @setState user: response
 
   render: ->
     if @state.user
-      React.createElement ChatComponent, user:@state.user
+      React.createElement ChatComponent, user:@state.user, logoutClicked: @logoutClicked
     else
       React.createElement LoginComponent, loginClicked: @loginClicked
