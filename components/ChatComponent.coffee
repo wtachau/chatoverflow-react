@@ -22,7 +22,7 @@ ChatComponent = React.createClass
       @setState messageList: newList
 
   componentDidMount: ->
-    @URLResources.readFromAPI "#{ @URLResources.getLogicServerOrigin() }/messages", (response)=>
+    @URLResources.readFromAPI "/messages", (response)=>
       messages = response.map ({username, text}) -> {username, text}
       @setState messageList: messages
 

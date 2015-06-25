@@ -14,7 +14,7 @@ module.exports = class URLResources
 
   readFromAPI: (url, successFunction) ->
     Reqwest
-      url: url,
+      url: @getLogicServerOrigin + url,
       type: 'json',
       method: 'get',
       contentType: 'application/json',

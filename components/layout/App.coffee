@@ -22,7 +22,7 @@ module.exports = React.createClass
     window.location.assign("#{ @URLResources.getLogicServerOrigin() }/login")
 
   getCurrentUser: ->
-    @URLResources.readFromAPI "#{ @URLResources.getLogicServerOrigin() }/current_user", (response) =>
+    @URLResources.readFromAPI "/current_user", (response) =>
       @setState user: response
 
   render: ->
