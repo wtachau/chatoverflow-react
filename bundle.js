@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -23997,15 +23997,13 @@
   \******************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var App, DefaultRoute, React, Route, Router, routes;
+	var App, React, Route, Router, routes;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
 	Router = __webpack_require__(/*! react-router */ 157);
 	
 	App = __webpack_require__(/*! ../components/layout/App */ 197);
-	
-	DefaultRoute = Router.DefaultRoute;
 	
 	Route = React.createFactory(Router.Route);
 	
@@ -24055,9 +24053,14 @@
 	    }
 	  },
 	  componentDidMount: function() {
+	    var newurl;
 	    if (sessionStorage.getItem('jwt')) {
-	      return this.getCurrentUser();
+	      this.getCurrentUser();
 	    }
+	    newurl = window.location.protocol + "//" + window.location.host;
+	    return window.history.pushState({
+	      path: newurl
+	    }, '', newurl);
 	  },
 	  loginClicked: function() {
 	    return window.location.assign((URLResources.getLogicServerOrigin()) + "/login");
@@ -32400,6 +32403,10 @@
 	io = __webpack_require__(/*! socket.io-client */ 274);
 	
 	ChatComponent = React.createClass({
+	  propTypes: {
+	    user: React.PropTypes.object.isRequired,
+	    logoutClicked: React.PropTypes.func.isRequired
+	  },
 	  mixins: [Router.State],
 	  getInitialState: function() {
 	    return {
@@ -32478,7 +32485,6 @@
 	    }
 	  },
 	  render: function() {
-	    console.log(this.state);
 	    return div({
 	      className: "chat"
 	    }, Button({

@@ -17,6 +17,8 @@ module.exports = React.createClass
   componentDidMount: ->
     if sessionStorage.getItem('jwt')
       @getCurrentUser()
+    newurl = "#{window.location.protocol}//#{window.location.host}"
+    window.history.pushState path:newurl, '', newurl
 
   loginClicked: ->
     window.location.assign("#{ URLResources.getLogicServerOrigin() }/login")
