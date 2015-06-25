@@ -31,10 +31,10 @@ ChatComponent = React.createClass
     user_id = @props.user.id
     username = @props.user.name
     room_id = 1 #todo
-    @setState message: @state.message.trim()
-    unless @state.message is "" 
-      @socket.emit "chat message", { user_id, username, room_id, "text": @state.message.trim() }
-      @setState message: ""
+    trimmed = @state.message.trim()
+    unless trimmed is  "" 
+      @socket.emit "chat message", { user_id, username, room_id, "text": trimmed }
+    @setState message: ""
     e.preventDefault()
 
   inputChange: (e) ->
@@ -56,7 +56,7 @@ ChatComponent = React.createClass
       ul {className: "unordered-list-messages"},
         @state.messageList.map ({username, text}) ->
           li {className: "messages"}, "#{username}: #{text}"
-      form {className: "chat-form" },
+      form {className: "chat-form", autoComplete: off},
         Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress}, {}
         Button {onClick: @submit, className: "form-button"}, "send"
 
