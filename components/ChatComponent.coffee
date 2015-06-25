@@ -1,4 +1,5 @@
-React = require "react"
+React = require("react")
+URLResources = require("../common/URLResources")
 
 { div, form, li, ul } = React.DOM
 ReactBootstrap = require "react-bootstrap"
@@ -6,7 +7,6 @@ Input = React.createFactory(ReactBootstrap.Input)
 Button = React.createFactory(ReactBootstrap.Button)
 
 io = require "socket.io-client"
-$ = require "jquery"
 
 ChatComponent = React.createClass
   getInitialState: ->
@@ -14,14 +14,15 @@ ChatComponent = React.createClass
     message: ""
 
   componentWillMount: ->
-    @socket = io(@props.getChatServerOrigin())
+    @URLResources = new URLResources()
+    @socket = io(@URLResources.getChatServerOrigin())
     @socket.on "chat message", ({user_id, username, text}) =>
       newList = @state.messageList
       newList.push {username, text}
       @setState messageList: newList
 
   componentDidMount: ->
-    @props.readFromAPI "#{ @props.getLogicServerOrigin() }/messages", (response)=>
+    @URLResources.readFromAPI "#{ @URLResources.getLogicServerOrigin() }/messages", (response)=>
       messages = response.map ({username, text}) -> {username, text}
       @setState messageList: messages
 
