@@ -1,7 +1,7 @@
 Reqwest = require("reqwest")
 
-module.exports = 
-
+URLResources =
+  
   getChatServerOrigin: ->
     switch process.env.NODE_ENV
       when 'development' then "http://127.0.0.1:3001"
@@ -23,3 +23,5 @@ module.exports =
       error: (error) ->
         console.error(url, error['response']);
         location = '/';
+
+module.exports = URLResources

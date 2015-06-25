@@ -2,7 +2,8 @@ module.exports = {
   entry: ['./index'],
   output: {
     path: './',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   resolve: {
     extensions: ["", ".coffee", ".js"],
