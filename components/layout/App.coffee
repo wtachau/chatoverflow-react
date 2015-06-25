@@ -4,6 +4,9 @@ ChatComponent = require("../ChatComponent.coffee")
 Uri = require("jsuri")
 Reqwest = require("reqwest")
 
+Router = require("react-router")
+RouteHandler = Router.RouteHandler
+
 module.exports = React.createClass
   getInitialState: ->
     {user: null}
