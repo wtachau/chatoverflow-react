@@ -1,7 +1,6 @@
 React = require("react")
 Router = require("react-router")
 App = require("../components/layout/App")
-DefaultRoute = Router.DefaultRoute
 Route = React.createFactory Router.Route
 
 routes = 

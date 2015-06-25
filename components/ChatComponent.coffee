@@ -49,7 +49,6 @@ ChatComponent = React.createClass
       @submit e
 
   render: ->
-    console.log @state
     div {className: "chat"},
       Button {onClick:@props.logoutClicked}
       form {className: "chat-form" },
