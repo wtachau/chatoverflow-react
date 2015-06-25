@@ -11,3 +11,4 @@ bundle.js.map
 !webpack.dev.config.js
 !webpack.prod.config.js
 !webpack.staging.config.js
+!dev.js
