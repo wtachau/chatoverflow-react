@@ -48,6 +48,6 @@ module.exports = React.createClass
 
   render: ->
     if @state.user
-      React.createElement ChatComponent
+      React.createElement ChatComponent, user:@state.user, readFromAPI:@readFromAPI, getLogicServerOrigin:@getLogicServerOrigin, getChatServerOrigin:@getChatServerOrigin
     else
       React.createElement LoginComponent, loginClicked: @loginClicked
