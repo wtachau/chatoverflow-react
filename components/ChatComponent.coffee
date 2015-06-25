@@ -37,6 +37,11 @@ ChatComponent = React.createClass
     @setState message: ""
     e.preventDefault()
 
+  componentDidUpdate: (prevProps, prevState) ->
+    component = React.findDOMNode(this)
+    chat = component.getElementsByClassName('unordered-list-messages')[0]
+    chat.scrollTop = chat.scrollHeight
+
   inputChange: (e) ->
     @setState message: e.target.value
 
