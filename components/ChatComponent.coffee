@@ -14,15 +14,14 @@ ChatComponent = React.createClass
     message: ""
 
   componentWillMount: ->
-    @URLResources = new URLResources()
-    @socket = io(@URLResources.getChatServerOrigin())
+    @socket = io(URLResources.getChatServerOrigin())
     @socket.on "chat message", ({user_id, username, text}) =>
       newList = @state.messageList
       newList.push {username, text}
       @setState messageList: newList
 
   componentDidMount: ->
-    @URLResources.readFromAPI "/messages", (response)=>
+    URLResources.readFromAPI "/messages", (response)=>
       messages = response.map ({username, text}) -> {username, text}
       @setState messageList: messages
 

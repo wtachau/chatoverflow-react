@@ -9,7 +9,6 @@ module.exports = React.createClass
     {user: null}
 
   componentWillMount: ->
-    @URLResources = new URLResources()
     jwt = new Uri(location.search).getQueryParamValue("jwt")
     if jwt
       sessionStorage.setItem('jwt', jwt)
@@ -19,10 +18,10 @@ module.exports = React.createClass
       @getCurrentUser()
 
   loginClicked: ->
-    window.location.assign("#{ @URLResources.getLogicServerOrigin() }/login")
+    window.location.assign("#{ URLResources.getLogicServerOrigin() }/login")
 
   getCurrentUser: ->
-    @URLResources.readFromAPI "/current_user", (response) =>
+    URLResources.readFromAPI "/current_user", (response) =>
       @setState user: response
 
   render: ->

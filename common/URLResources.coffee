@@ -1,6 +1,6 @@
 Reqwest = require("reqwest")
 
-module.exports = class URLResources
+module.exports = 
 
   getChatServerOrigin: ->
     switch process.env.NODE_ENV
@@ -14,7 +14,7 @@ module.exports = class URLResources
 
   readFromAPI: (url, successFunction) ->
     Reqwest
-      url: @getLogicServerOrigin + url,
+      url: @getLogicServerOrigin() + url,
       type: 'json',
       method: 'get',
       contentType: 'application/json',
