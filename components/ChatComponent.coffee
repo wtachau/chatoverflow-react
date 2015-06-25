@@ -21,20 +21,21 @@ ChatComponent = React.createClass
   componentWillMount: ->
     @setState currentRoom: @getParams().room
     @socket = io(URLResources.getChatServerOrigin())
-    @socket.on "chat message", ({user_id, username, text}) =>
-      newList = @state.messageList
-      newList.push {username, text}
-      @setState messageList: newList
+    @socket.on "chat message", ({user_id, username, room_id, text}) =>
+      if room_id == @state.currentRoom
+        newList = @state.messageList
+        newList.push {username, text}
+        @setState messageList: newList
 
   componentDidMount: ->
-    URLResources.readFromAPI "/messages", (response)=>
+    URLResources.readFromAPI "/room/#{@state.currentRoom}/messages", (response)=>
       messages = response.map ({username, text}) -> {username, text}
       @setState messageList: messages
 
   submit: (e) ->
     user_id = @props.user.id
     username = if @props.user.name then @props.user.name else @props.user.username
-    room_id = 1 #todo
+    room_id = @state.currentRoom
     @setState message: @state.message.trim()
     unless @state.message is "" 
       @socket.emit "chat message", { user_id, username, room_id, "text": @state.message.trim() }

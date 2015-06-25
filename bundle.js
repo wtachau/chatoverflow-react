@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -23997,15 +23997,13 @@
   \******************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var App, DefaultRoute, React, Route, Router, routes;
+	var App, React, Route, Router, routes;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
 	Router = __webpack_require__(/*! react-router */ 157);
 	
 	App = __webpack_require__(/*! ../components/layout/App */ 197);
-	
-	DefaultRoute = Router.DefaultRoute;
 	
 	Route = React.createFactory(Router.Route);
 	
@@ -24015,7 +24013,7 @@
 	  handler: App
 	}, Route({
 	  name: "room",
-	  path: "/:room",
+	  path: "/room/:room",
 	  handler: App
 	}));
 	
@@ -32415,21 +32413,24 @@
 	    this.socket = io(URLResources.getChatServerOrigin());
 	    return this.socket.on("chat message", (function(_this) {
 	      return function(arg) {
-	        var newList, text, user_id, username;
-	        user_id = arg.user_id, username = arg.username, text = arg.text;
-	        newList = _this.state.messageList;
-	        newList.push({
-	          username: username,
-	          text: text
-	        });
-	        return _this.setState({
-	          messageList: newList
-	        });
+	        var newList, room_id, text, user_id, username;
+	        user_id = arg.user_id, username = arg.username, room_id = arg.room_id, text = arg.text;
+	        console.log(">>> " + room_id + " and " + _this.state.currentRoom);
+	        if (room_id === _this.state.currentRoom) {
+	          newList = _this.state.messageList;
+	          newList.push({
+	            username: username,
+	            text: text
+	          });
+	          return _this.setState({
+	            messageList: newList
+	          });
+	        }
 	      };
 	    })(this));
 	  },
 	  componentDidMount: function() {
-	    return URLResources.readFromAPI("/messages", (function(_this) {
+	    return URLResources.readFromAPI("/room/" + this.state.currentRoom + "/messages", (function(_this) {
 	      return function(response) {
 	        var messages;
 	        messages = response.map(function(arg) {
@@ -32450,7 +32451,7 @@
 	    var room_id, user_id, username;
 	    user_id = this.props.user.id;
 	    username = this.props.user.name ? this.props.user.name : this.props.user.username;
-	    room_id = 1;
+	    room_id = this.state.currentRoom;
 	    this.setState({
 	      message: this.state.message.trim()
 	    });
@@ -32478,7 +32479,6 @@
 	    }
 	  },
 	  render: function() {
-	    console.log(this.state);
 	    return div({
 	      className: "chat"
 	    }, Button({
