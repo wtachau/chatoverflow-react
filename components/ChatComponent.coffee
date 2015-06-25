@@ -32,7 +32,7 @@ ChatComponent = React.createClass
     username = @props.user.name
     room_id = 1 #todo
     trimmed = @state.message.trim()
-    unless trimmed is  "" 
+    unless trimmed is ""
       @socket.emit "chat message", { user_id, username, room_id, "text": trimmed }
     @setState message: ""
     e.preventDefault()
