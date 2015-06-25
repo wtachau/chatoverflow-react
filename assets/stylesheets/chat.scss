@@ -4,9 +4,10 @@
   .chat-form {
     position: fixed;
     bottom: -13px;
-    width: 100%;
+    width: 90%;
     padding: 3px;
-    background: $chat_input_grey; 
+    background: $chat_input_grey;
+    left: 150px; 
   }
 
   .form-input {
@@ -32,6 +33,10 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+    position: absolute;
+    width: 100%;
+    left: 150px;
+    top: 0px;
   }
 
   .messages {
@@ -40,6 +45,16 @@
 
   .messages:nth-child(odd) {
     background: $chat_background_grey;
+  }
+
+  .side-bar {
+    width: 150px;
+    padding-left: 2px;
+    padding-top: 2px;
+    min-height: 100vh;
+    height: 100%;
+    position: fixed;
+    background-color: $chat_sidebar_grey;
   }
 
 }

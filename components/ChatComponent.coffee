@@ -1,9 +1,11 @@
 React = require "react"
 
-{ div, form, li, ul } = React.DOM
+{ div, form, li, ul} = React.DOM
 ReactBootstrap = require "react-bootstrap"
 Input = React.createFactory(ReactBootstrap.Input)
 Button = React.createFactory(ReactBootstrap.Button)
+ListGroup = React.createFactory(ReactBootstrap.ListGroup)
+ListGroupItem = React.createFactory(ReactBootstrap.ListGroupItem)
 
 io = require "socket.io-client"
 $ = require "jquery"
@@ -44,11 +46,18 @@ ChatComponent = React.createClass
 
   render: ->
     div {className: "chat"},
-      form {className: "chat-form" },
-        Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress}, {}
-        Button {onClick: @submit, className: "form-button"}, "send"
+      ListGroup {className: "side-bar"},
+        ListGroupItem {}, "Ruby"
+        ListGroupItem {}, "Java"
+        ListGroupItem {}, "C++"
+        ListGroupItem {}, "Scala"
+        ListGroupItem {}, "Android"
+        ListGroupItem {}, "iOS"
       ul {className: "unordered-list-messages"},
         @state.messageList.map ({username, text}) ->
           li {className: "messages"}, "#{username}: #{text}"
+      form {className: "chat-form" },
+        Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress}, {}
+        Button {onClick: @submit, className: "form-button"}, "send"
 
 module.exports = ChatComponent
