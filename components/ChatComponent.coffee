@@ -14,20 +14,24 @@ ChatComponent = React.createClass
     message: ""
 
   componentWillMount: ->
-    @socket = switch process.env.NODE_ENV
-      when 'development' then io("http://127.0.0.1:3001")
-      when 'staging' then io("http://chat-overflow-node-staging.herokuapp.com")
-    @socket.on "chat message", ({user_id, user_name, message}) =>
+    @socket = io(@props.getChatServerOrigin())
+    @socket.on "chat message", ({user_id, username, text}) =>
       newList = @state.messageList
-      newList.push {user_name, message}
+      newList.push {username, text}
       @setState messageList: newList
 
+  componentDidMount: ->
+    @props.readFromAPI "#{ @props.getLogicServerOrigin() }/messages", (response)=>
+      messages = response.map ({username, text}) -> {username, text}
+      @setState messageList: messages
+
   submit: (e) ->
-    user_id = 1
-    user_name = "Willy" #fixme
+    user_id = @props.user.id
+    username = @props.user.name
+    room_id = 1 #todo
     @setState message: @state.message.trim()
     unless @state.message is "" 
-      @socket.emit "chat message", { user_id, user_name, "message": @state.message.trim() }
+      @socket.emit "chat message", { user_id, username, room_id, "text": @state.message.trim() }
       @setState message: ""
     e.preventDefault()
 
@@ -44,7 +48,7 @@ ChatComponent = React.createClass
         Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress}, {}
         Button {onClick: @submit, className: "form-button"}, "send"
       ul {className: "unordered-list-messages"},
-        @state.messageList.map ({user_name, message}) ->
-          li {className: "messages"}, "#{user_name}: #{message}"
+        @state.messageList.map ({username, text}) ->
+          li {className: "messages"}, "#{username}: #{text}"
 
 module.exports = ChatComponent
