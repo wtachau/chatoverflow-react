@@ -11,6 +11,10 @@ io = require "socket.io-client"
 
 ChatComponent = React.createClass
 
+  propTypes: 
+    user: React.PropTypes.object.isRequired,
+    logoutClicked: React.PropTypes.func.isRequired
+
   mixins: [ Router.State ],
 
   getInitialState: ->
