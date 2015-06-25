@@ -1,6 +1,6 @@
 React = require "react"
 
-{ div, form, li, ul} = React.DOM
+{ div, form, li, ul } = React.DOM
 ReactBootstrap = require "react-bootstrap"
 Input = React.createFactory(ReactBootstrap.Input)
 Button = React.createFactory(ReactBootstrap.Button)
@@ -57,7 +57,7 @@ ChatComponent = React.createClass
         @state.messageList.map ({username, text}) ->
           li {className: "messages"}, "#{username}: #{text}"
       form {className: "chat-form", autoComplete: off},
-        Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress}, {}
+        Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress} 
         Button {onClick: @submit, className: "form-button"}, "send"
 
 module.exports = ChatComponent
