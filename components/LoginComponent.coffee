@@ -1,5 +1,5 @@
-React = require "react"
-ReactBootstrap = require 'react-bootstrap'
+React = require("react")
+ReactBootstrap = require("react-bootstrap")
 Row = React.createFactory(ReactBootstrap.Row)
 Col = React.createFactory(ReactBootstrap.Col)
 Button = React.createFactory(ReactBootstrap.Button)
