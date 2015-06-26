@@ -32,24 +32,16 @@
   
   }
 
-  .unordered-list-messages {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    left: 150px;
-    top: 0px;
-    overflow: auto;
-    height: calc(100% - #{$chat_box_height});
-    width: calc(100% - #{$sidebar_width});
-  }
-
   .messages {
-    padding: 5px 10px;
-  }
-
-  .messages:nth-child(odd) {
-    background: $chat_background_grey;
+    position: absolute;
+    left: 160px;
+    top: 5px;
+    overflow-y: scroll;
+    height: calc(100% - #{$chat_box_height});
+    width: calc(100% - #{$sidebar_width};
+    .odd {
+      background-color: $chat_background_grey;
+    }
   }
 
   .side-bar {
@@ -59,6 +51,10 @@
     height: 100vh;
     position: fixed;
     background-color: $chat_sidebar_grey;
+  }
+
+  .username {
+    text-align: right;
   }
 
 }
