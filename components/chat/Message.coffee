@@ -13,7 +13,8 @@ Message = React.createClass
 
   getDate: ->
     myDate = new Date()
-    return myDate.getHours() + ":" + myDate.getMinutes()
+    currentTime = myDate.getHours() % 12 + ":" + myDate.getMinutes()
+    if myDate.geHours < 12 then currentTime + " AM" else currentTime + " PM"
 
   render: ->
     oddClass = if @props.index % 2 == 1 then "odd" else ""
