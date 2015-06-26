@@ -39,8 +39,10 @@
     overflow-y: scroll;
     height: calc(100% - #{$chat_box_height});
     width: calc(100% - #{$sidebar_width};
+    vertical-align: top;
     .odd {
       background-color: $chat_background_grey;
+      vertical-align: top;
     }
   }
 
