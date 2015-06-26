@@ -6,7 +6,7 @@
     background: $chat_input_grey;
     position: fixed;
     bottom: 0;
-    width: 90%;
+    width: calc(100% - #{$sidebar_width};
     padding: 3px;
     left: 150px;
     height: $chat_box_height;
