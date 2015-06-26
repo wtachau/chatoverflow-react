@@ -1,62 +1,40 @@
 React = require("react")
-Router = require("react-router")
+io = require("socket.io-client")
+
+{ div } = React.DOM
+TopicSidebar = React.createFactory require("./chat/TopicSidebar")
+MessageList = React.createFactory require("./chat/MessageList")
+ChatForm = React.createFactory require("./chat/ChatForm")
+HomePageComponent = React.createFactory require("./HomePageComponent")
 URLResources = require("../common/URLResources")
-
-{ div, form, li, ul } = React.DOM
-ReactBootstrap = require "react-bootstrap"
-Input = React.createFactory ReactBootstrap.Input
-Button = React.createFactory ReactBootstrap.Button
-
-io = require "socket.io-client"
 
 ChatComponent = React.createClass
 
-  mixins: [ Router.State ],
-
-  getInitialState: ->
-    messageList: []
-    message: ""
-    currentRoom: null
+  propTypes: 
+    user: React.PropTypes.object.isRequired,
+    logoutClicked: React.PropTypes.func.isRequired,
+    room: React.PropTypes.number.isRequired
 
   componentWillMount: ->
-    @setState currentRoom: @getParams().room
     @socket = io(URLResources.getChatServerOrigin())
-    @socket.on "chat message", ({user_id, username, room_id, text}) =>
-      if room_id == @state.currentRoom
-        newList = @state.messageList
-        newList.push {username, text}
-        @setState messageList: newList
+    @username = if @props.user.name then @props.user.name else @props.user.username
 
-  componentDidMount: ->
-    URLResources.readFromAPI "/room/#{@state.currentRoom}/messages", (response)=>
-      messages = response.map ({username, text}) -> {username, text}
-      @setState messageList: messages
-
-  submit: (e) ->
-    user_id = @props.user.id
-    username = if @props.user.name then @props.user.name else @props.user.username
-    room_id = @state.currentRoom
-    @setState message: @state.message.trim()
-    unless @state.message is "" 
-      @socket.emit "chat message", { user_id, username, room_id, "text": @state.message.trim() }
-      @setState message: ""
+  submitMessage: (e, message) ->
+    unless message is "" 
+      @socket.emit "chat message", { user_id: @props.user.id, username: @username, room_id:@props.currentRoom, "text": message.trim() }
     e.preventDefault()
 
-  inputChange: (e) ->
-    @setState message: e.target.value
-
-  keyPress: (e) ->
-    if e.key == "Enter"
-      @submit e
-
   render: ->
+    mainSection = if @props.currentRoom then (
+      div {},
+        MessageList {currentRoom: @props.currentRoom, socket: @socket, username: @username}
+        ChatForm {submitMessage: @submitMessage} )
+    else
+      HomePageComponent {}
+
     div {className: "chat"},
-      Button {onClick: @props.logoutClicked}
-      form {className: "chat-form" },
-        Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress}, {}
-        Button {onClick: @submit, className: "form-button"}, "send"
-      ul {className: "unordered-list-messages"},
-        @state.messageList.map ({username, text}) ->
-          li {className: "messages"}, "#{username}: #{text}"
+      TopicSidebar {}
+      mainSection
+      
 
 module.exports = ChatComponent

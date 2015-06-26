@@ -1,10 +1,13 @@
 React = require("react")
-LoginComponent = require("../LoginComponent.coffee")
-ChatComponent = require("../ChatComponent.coffee")
 Uri = require("jsuri")
+Router = require("react-router")
+LoginComponent = React.createFactory require("../LoginComponent.coffee")
+ChatComponent = React.createFactory require("../ChatComponent.coffee")
 URLResources = require("../../common/URLResources")
 
 module.exports = React.createClass
+
+  mixins: [ Router.State ],
 
   getInitialState: ->
     {user: null}
@@ -17,6 +20,8 @@ module.exports = React.createClass
   componentDidMount: ->
     if sessionStorage.getItem('jwt')
       @getCurrentUser()
+    newurl = "#{window.location.protocol}//#{window.location.host}#{window.location.pathname}"
+    window.history.pushState path:newurl, '', newurl
 
   loginClicked: ->
     window.location.assign("#{ URLResources.getLogicServerOrigin() }/login")
@@ -31,6 +36,6 @@ module.exports = React.createClass
 
   render: ->
     if @state.user
-      React.createElement ChatComponent, user:@state.user, logoutClicked: @logoutClicked
+      ChatComponent user:@state.user, logoutClicked: @logoutClicked, currentRoom: @getParams().id
     else
-      React.createElement LoginComponent, loginClicked: @loginClicked
+      LoginComponent loginClicked: @loginClicked
