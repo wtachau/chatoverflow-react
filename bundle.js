@@ -40630,11 +40630,16 @@
 	    return ListGroup({
 	      className: "side-bar"
 	    }, this.state.topics.map(function(arg) {
-	      var id, name;
-	      name = arg.name, id = arg.id;
-	      return Link({
-	        to: "/room/" + id
-	      }, ListGroupItem({}, name));
+	      var id, name, rooms;
+	      name = arg.name, id = arg.id, rooms = arg.rooms;
+	      ListGroupItem({}, name);
+	      return rooms.map(function(arg1) {
+	        var id;
+	        id = arg1.id;
+	        return Link({
+	          to: "/room/" + id
+	        }, ListGroupItem({}, "room " + id));
+	      });
 	    }));
 	  }
 	});

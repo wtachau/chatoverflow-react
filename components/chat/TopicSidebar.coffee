@@ -6,6 +6,8 @@ ListGroup = React.createFactory ReactBootstrap.ListGroup
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Link = React.createFactory Router.Link
 
+{ div } = React.DOM
+
 TopicSidebar = React.createClass
 
   getInitialState: ->
@@ -17,8 +19,10 @@ TopicSidebar = React.createClass
 
   render: ->
     ListGroup {className: "side-bar"},
-      @state.topics.map ({name, id}) ->
-        Link {to: "/room/#{id}"},
-          ListGroupItem {}, name
+      @state.topics.map ({name, id, rooms}) ->
+        div {className:"topic-name"}, name,
+          rooms.map ({id}) ->
+            Link {to: "/room/#{id}"},
+              ListGroupItem {}, "room #{id}"
 
 module.exports = TopicSidebar
