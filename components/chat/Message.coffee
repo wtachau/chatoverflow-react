@@ -14,7 +14,7 @@ Message = React.createClass
   getDate: ->
     myDate = new Date()
     currentTime = myDate.getHours() % 12 + ":" + myDate.getMinutes()
-    if myDate.geHours < 12 then currentTime + " AM" else currentTime + " PM"
+    if myDate.getHours() < 12 then currentTime + " AM" else currentTime + " PM"
 
   isImage: (text) ->
     if text.match ///((^https?:\/\/.*\.(?:png|jpg|gif)$)){1}///
