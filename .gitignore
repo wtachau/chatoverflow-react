@@ -4,6 +4,8 @@ node_modules/
 .DS_Store
 *.js
 *.svg
+*.swp
+*~
 bundle.js.map
 
 !bundle.js

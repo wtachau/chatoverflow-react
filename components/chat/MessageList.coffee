@@ -1,6 +1,7 @@
 React = require("react")
 
-{ ul, li } = React.DOM
+{ ul, li, div } = React.DOM
+Message = React.createFactory require("./Message")
 URLResources = require("../../common/URLResources")
 
 MessageList = React.createClass
@@ -36,8 +37,9 @@ MessageList = React.createClass
       @setState messages: messages
 
   render: ->
-    ul {className: "unordered-list-messages"},
-      @state.messages.map ({username, text}) ->
-        li {className: "messages"}, "#{username}: #{text}"
+    div {className: "messages"},
+      @state.messages.map ({username, text}, index) ->
+        oddClass = if index % 2 == 1 then "odd" else ""
+        Message username: username, text: text, key: index, className: oddClass
 
 module.exports = MessageList

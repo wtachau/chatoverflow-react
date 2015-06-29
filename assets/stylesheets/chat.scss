@@ -6,7 +6,7 @@
     background: $chat_input_grey;
     position: fixed;
     bottom: 0;
-    width: 90%;
+    width: calc(100% - #{$sidebar_width};
     padding: 3px;
     left: 150px;
     height: $chat_box_height;
@@ -32,24 +32,18 @@
   
   }
 
-  .unordered-list-messages {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  .messages {
     position: absolute;
-    left: 150px;
-    top: 0px;
-    overflow: auto;
+    left: 160px;
+    top: 5px;
+    overflow-y: scroll;
     height: calc(100% - #{$chat_box_height});
     width: calc(100% - #{$sidebar_width});
-  }
-
-  .messages {
-    padding: 5px 10px;
-  }
-
-  .messages:nth-child(odd) {
-    background: $chat_background_grey;
+    vertical-align: top;
+    .odd {
+      background-color: $chat_background_grey;
+      vertical-align: top;
+    }
   }
 
   .side-bar {
@@ -61,5 +55,13 @@
     background-color: $chat_sidebar_grey;
   }
 
+  .username {
+    text-align: right;
+  }
+
+  .image {
+    max-width: 500px;
+    height: "auto";
+  }
 }
 
