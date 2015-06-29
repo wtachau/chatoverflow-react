@@ -28,7 +28,7 @@ Install the `aws-cli` tool (amazon web services command line interface)
 
 ``` pip install awscli```
 
-Configure your shell to use the `chatoverflow` s3 bucket by following [these steps](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). You'll need the aws credentials, which you can get [here](https://drive.google.com/open?id=0BxI3aj0CvwjudDJITEx6LUJxNVE).
+Configure your shell to use the `chatoverflow` s3 bucket by following [these steps](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). You'll need the aws key and secret key from [here](https://drive.google.com/open?id=0BxI3aj0CvwjudDJITEx6LUJxNVE). The region is `us-east-1`.
 
 Then deploy:
 
