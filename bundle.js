@@ -24319,7 +24319,7 @@
 	  handler: App
 	}, Route({
 	  name: "room",
-	  path: "/room/:id",
+	  path: "/rooms/:id",
 	  handler: App
 	}));
 	
@@ -33163,7 +33163,7 @@
   \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var ChatComponent, ChatForm, HomePageComponent, MessageList, React, TopicSidebar, URLResources, div, io;
+	var ChatComponent, ChatForm, HomeComponent, MessageList, React, TopicSidebar, URLResources, div, io;
 	
 	React = __webpack_require__(/*! react */ 11);
 	
@@ -33177,7 +33177,7 @@
 	
 	ChatForm = React.createFactory(__webpack_require__(/*! ./chat/ChatForm */ 338));
 	
-	HomePageComponent = React.createFactory(__webpack_require__(/*! ./HomePageComponent */ 339));
+	HomeComponent = React.createFactory(__webpack_require__(/*! ./HomeComponent */ 339));
 	
 	URLResources = __webpack_require__(/*! ../common/URLResources */ 335);
 	
@@ -33187,15 +33187,17 @@
 	    logoutClicked: React.PropTypes.func.isRequired,
 	    room: React.PropTypes.number.isRequired
 	  },
+	  username: function() {
+	    return this.props.user.name || this.props.user.username;
+	  },
 	  componentWillMount: function() {
-	    this.socket = io(URLResources.getChatServerOrigin());
-	    return this.username = this.props.user.name ? this.props.user.name : this.props.user.username;
+	    return this.socket = io(URLResources.getChatServerOrigin());
 	  },
 	  submitMessage: function(e, message) {
 	    if (message !== "") {
 	      this.socket.emit("chat message", {
 	        user_id: this.props.user.id,
-	        username: this.username,
+	        username: this.username(),
 	        room_id: this.props.currentRoom,
 	        "text": message.trim()
 	      });
@@ -33207,10 +33209,10 @@
 	    mainSection = this.props.currentRoom ? div({}, MessageList({
 	      currentRoom: this.props.currentRoom,
 	      socket: this.socket,
-	      username: this.username
+	      username: this.username()
 	    }), ChatForm({
 	      submitMessage: this.submitMessage
-	    })) : HomePageComponent({});
+	    })) : HomeComponent({});
 	    return div({
 	      className: "chat"
 	    }, TopicSidebar({}), mainSection);
@@ -40595,7 +40597,7 @@
   \*********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var Link, ListGroup, ListGroupItem, React, ReactBootstrap, Router, TopicSidebar, URLResources;
+	var Link, ListGroup, ListGroupItem, React, ReactBootstrap, Router, TopicSidebar, URLResources, div;
 	
 	React = __webpack_require__(/*! react */ 11);
 	
@@ -40610,6 +40612,8 @@
 	ListGroupItem = React.createFactory(ReactBootstrap.ListGroupItem);
 	
 	Link = React.createFactory(Router.Link);
+	
+	div = React.DOM.div;
 	
 	TopicSidebar = React.createClass({
 	  getInitialState: function() {
@@ -40632,14 +40636,15 @@
 	    }, this.state.topics.map(function(arg) {
 	      var id, name, rooms;
 	      name = arg.name, id = arg.id, rooms = arg.rooms;
-	      ListGroupItem({}, name);
-	      return rooms.map(function(arg1) {
+	      return div({
+	        className: "topic-name"
+	      }, name, rooms.map(function(arg1) {
 	        var id;
 	        id = arg1.id;
 	        return Link({
-	          to: "/room/" + id
+	          to: "/rooms/" + id
 	        }, ListGroupItem({}, "room " + id));
-	      });
+	      }));
 	    }));
 	  }
 	});
@@ -41342,8 +41347,7 @@
 	  },
 	  getInitialState: function() {
 	    return {
-	      messages: [],
-	      currentRoom: null
+	      messages: []
 	    };
 	  },
 	  componentWillMount: function() {
@@ -41388,7 +41392,7 @@
 	    return component.scrollTop = component.scrollHeight;
 	  },
 	  fetchRoomHistory: function(room_id) {
-	    return URLResources.readFromAPI("/room/" + room_id + "/messages", (function(_this) {
+	    return URLResources.readFromAPI("/rooms/" + room_id + "/messages", (function(_this) {
 	      return function(response) {
 	        var messages;
 	        messages = response.map(function(arg) {
@@ -41489,9 +41493,9 @@
 
 /***/ },
 /* 339 */
-/*!*********************************************!*\
-  !*** ./components/HomePageComponent.coffee ***!
-  \*********************************************/
+/*!*****************************************!*\
+  !*** ./components/HomeComponent.coffee ***!
+  \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	var HomePageComponent, React, h1;
@@ -41615,7 +41619,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(/*! ./~/css-loader/cssToString.js */ 4)();
-	exports.push([module.id, ".center-block {\n  text-align: center;\n  margin-top: 200px;\n  font-size: 72px; }\n\n.subtitle {\n  text-align: center;\n  font-size: 36px; }\n\n.register-button {\n  text-align: center; }\n\n.login-button {\n  right: 35px;\n  position: absolute;\n  top: 35px;\n  bsSize: \"large\"; }\n", ""]);
+	exports.push([module.id, ".center-block {\n  text-align: center;\n  margin-top: 200px;\n  font-size: 72px; }\n\n.subtitle {\n  text-align: center;\n  font-size: 36px; }\n\n.register-button {\n  text-align: center; }\n\n.login-button {\n  right: 35px;\n  position: absolute;\n  top: 35px; }\n", ""]);
 
 /***/ }
 /******/ ]);
