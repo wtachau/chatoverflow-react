@@ -8,8 +8,7 @@ MessageList = React.createClass
     messages: React.PropTypes.array.isRequired
 
   getInitialState: ->
-    messages: [],
-    currentRoom: null
+    messages: []
 
   componentWillMount: ->
     @props.socket.emit "subscribe", {username: @props.username, room: @props.currentRoom}
@@ -31,8 +30,8 @@ MessageList = React.createClass
     component = React.findDOMNode(this)
     component.scrollTop = component.scrollHeight
 
-  fetchRoomHistory: (room_id)->
-    URLResources.readFromAPI "/room/#{room_id}/messages", (response)=>
+  fetchRoomHistory: (room_id) ->
+    URLResources.readFromAPI "/rooms/#{room_id}/messages", (response)=>
       messages = response.map ({username, text}) -> {username, text}
       @setState messages: messages
 
