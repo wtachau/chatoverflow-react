@@ -14,6 +14,7 @@ MessageList = React.createClass
   render: ->
     div {className: "messages"},
       @props.messages.map ({username, text}, index) ->
-        Message username: username, text: text, key: index, index: index
+        oddClass = if index % 2 == 1 then "odd" else ""
+        Message username: username, text: text, key: index, className: oddClass
 
 module.exports = MessageList

@@ -24,8 +24,7 @@ Message = React.createClass
     else ""
 
   render: ->
-    oddClass = if @props.index % 2 == 1 then "odd" else ""
-    Row {style: {marginBottom: 10}, className: oddClass},
+    Row {style: {marginBottom: 10}, className: @props.className},
       Col xs: 1,
         p {className: "username"}, " " + @props.username
       Col xs: 10,
