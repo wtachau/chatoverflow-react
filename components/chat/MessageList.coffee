@@ -1,7 +1,7 @@
 React = require "react"
 
 { ul, li, div } = React.DOM
-Message = React.createFactory(require("./Message"))
+Message = React.createFactory require("./Message")
 
 MessageList = React.createClass
   propTypes: 

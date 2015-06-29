@@ -16,13 +16,12 @@ Message = React.createClass
     currentTime = myDate.getHours() % 12 + ":" + myDate.getMinutes()
     if myDate.getHours() < 12 then currentTime + " AM" else currentTime + " PM"
 
-  isImage: (text) ->
+  decorateText: (text) ->
     if text.match ///((^https?:\/\/.*\.(?:png|jpg|gif)$)){1}///
       return img {src: text}
     else if text.match ///((^https?:\/\/.*\.(?:gifv)$)){1}///
-      return video {src: text, type: "video/mp4"}
+      return video {src: (text.replace "gifv", "mp4"), type: "video/mp4", preload: "auto", autoPlay: "autoplay", loop: "loop"}
     else ""
-
 
   render: ->
     oddClass = if @props.index % 2 == 1 then "odd" else ""
@@ -30,7 +29,7 @@ Message = React.createClass
       Col xs: 1,
         p {className: "username"}, " " + @props.username
       Col xs: 10,
-        p {}, @props.text, @isImage @props.text
+        p {}, @props.text, @decorateText @props.text
       Col xs: 1,
         p {}, @getDate()
 
