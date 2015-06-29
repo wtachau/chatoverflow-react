@@ -37,6 +37,7 @@
     left: 160px;
     top: 5px;
     overflow-y: scroll;
+    overflow-x: hidden;
     height: calc(100% - #{$chat_box_height});
     width: calc(100% - #{$sidebar_width});
     vertical-align: top;
