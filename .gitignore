@@ -5,6 +5,7 @@ node_modules/
 *.js
 *.svg
 *.swp
+*~
 bundle.js.map
 
 !bundle.js

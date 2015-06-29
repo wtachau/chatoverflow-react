@@ -59,5 +59,16 @@
     text-align: right;
   }
 
+  .image {
+    .gif-video {
+      type: "video/mp4";
+      preload: "auto";
+      autoplay: "autoplay";
+      loop: "loop";
+      muted: "muted";
+    }
+    max-width: 500px;
+    height: "auto";
+  }
 }
 

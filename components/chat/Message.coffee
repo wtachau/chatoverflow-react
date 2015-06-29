@@ -20,9 +20,9 @@ Message = React.createClass
 
   decorateText: (text) ->
     if text.match ///((^https?:\/\/.*\.(?:png|jpg|gif)$)){1}///
-      return img {src: text, maxWidth: "100%", width: "500px", height: "auto"}
+      return img {src: text, className: "image"}
     else if text.match ///((^https?:\/\/.*\.(?:gifv)$)){1}///
-      return video {src: (text.replace "gifv", "mp4"), type: "video/mp4", preload: "auto", autoPlay: "autoplay", loop: "loop", muted: "muted", maxWidth: "100%", width: "500px", height: "auto"}
+      return video {src: (text.replace "gifv", "mp4"), className: "image gif-video"}
     else ""
 
   render: ->
