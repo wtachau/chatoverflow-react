@@ -1,8 +1,8 @@
 React = require("react")
 
 ReactBootstrap = require("react-bootstrap")
-Row = React.createFactory(ReactBootstrap.Row)
-Col = React.createFactory(ReactBootstrap.Col)
+Row = React.createFactory ReactBootstrap.Row
+Col = React.createFactory ReactBootstrap.Col
 {p, img} = React.DOM
 
 Message = React.createClass
