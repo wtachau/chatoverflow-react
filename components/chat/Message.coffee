@@ -13,11 +13,6 @@ Message = React.createClass
     text: React.PropTypes.string.isRequired
     index: React.PropTypes.number.isRequired
 
-  getDate: ->
-    myDate = new Date()
-    currentTime = myDate.getHours() % 12 + ":" + myDate.getMinutes()
-    if myDate.getHours() < 12 then currentTime + " AM" else currentTime + " PM"
-
   decorateText: (text) ->
     if text.match ///((^https?:\/\/.*\.(?:png|jpg|gif)$)){1}///
       return img {src: text, className: "image"}
