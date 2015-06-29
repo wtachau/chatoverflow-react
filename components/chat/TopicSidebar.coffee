@@ -1,16 +1,28 @@
-React = require "react"
-ReactBootstrap = require "react-bootstrap"
+React = require("react")
+ReactBootstrap = require("react-bootstrap")
+Router = require("react-router")
+URLResources = require("../../common/URLResources")
 ListGroup = React.createFactory ReactBootstrap.ListGroup
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
+Link = React.createFactory Router.Link
+
+{ div } = React.DOM
 
 TopicSidebar = React.createClass
+
+  getInitialState: ->
+    topics: []
+
+  componentWillMount: ->
+    URLResources.readFromAPI "/topics", (response)=>
+      @setState topics: response
+
   render: ->
     ListGroup {className: "side-bar"},
-      ListGroupItem {}, "Ruby"
-      ListGroupItem {}, "Java"
-      ListGroupItem {}, "C++"
-      ListGroupItem {}, "Scala"
-      ListGroupItem {}, "Android"
-      ListGroupItem {}, "iOS"
+      @state.topics.map ({name, id, rooms}) ->
+        div {className:"topic-name"}, name,
+          rooms.map ({id}) ->
+            Link {to: "/room/#{id}"},
+              ListGroupItem {}, "room #{id}"
 
 module.exports = TopicSidebar

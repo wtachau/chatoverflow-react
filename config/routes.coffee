@@ -5,6 +5,6 @@ Route = React.createFactory Router.Route
 
 routes = 
   Route {name: "app", path: "/", handler: App},
-    Route {name: "room", path: "/:room", handler: App}
+    Route {name: "room", path: "/rooms/:id", handler: App}
 
 module.exports = routes
