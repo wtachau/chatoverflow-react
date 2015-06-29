@@ -11,7 +11,6 @@ Message = React.createClass
   propTypes:
     username: React.PropTypes.string.isRequired
     text: React.PropTypes.string.isRequired
-    index: React.PropTypes.number.isRequired
 
   decorateText: (text) ->
     if text.match ///((^https?:\/\/.*\.(?:png|jpg|gif)$)){1}///
