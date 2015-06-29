@@ -15,19 +15,21 @@ ChatComponent = React.createClass
     logoutClicked: React.PropTypes.func.isRequired,
     room: React.PropTypes.number.isRequired
 
+  username: ->
+    @props.user.name or @props.user.username
+
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
-    @username = if @props.user.name then @props.user.name else @props.user.username
 
   submitMessage: (e, message) ->
     unless message is "" 
-      @socket.emit "chat message", { user_id: @props.user.id, username: @username, room_id:@props.currentRoom, "text": message.trim() }
+      @socket.emit "chat message", { user_id: @props.user.id, username: @username(), room_id:@props.currentRoom, "text": message.trim() }
     e.preventDefault()
 
   render: ->
     mainSection = if @props.currentRoom then (
       div {},
-        MessageList {currentRoom: @props.currentRoom, socket: @socket, username: @username}
+        MessageList {currentRoom: @props.currentRoom, socket: @socket, username: @username()}
         ChatForm {submitMessage: @submitMessage} )
     else
       HomePageComponent {}
