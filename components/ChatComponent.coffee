@@ -5,7 +5,7 @@ io = require("socket.io-client")
 TopicSidebar = React.createFactory require("./chat/TopicSidebar")
 MessageList = React.createFactory require("./chat/MessageList")
 ChatForm = React.createFactory require("./chat/ChatForm")
-HomePageComponent = React.createFactory require("./HomePageComponent")
+HomeComponent = React.createFactory require("./HomeComponent")
 URLResources = require("../common/URLResources")
 
 ChatComponent = React.createClass
@@ -32,7 +32,7 @@ ChatComponent = React.createClass
         MessageList {currentRoom: @props.currentRoom, socket: @socket, username: @username()}
         ChatForm {submitMessage: @submitMessage} )
     else
-      HomePageComponent {}
+      HomeComponent {}
 
     div {className: "chat"},
       TopicSidebar {}
