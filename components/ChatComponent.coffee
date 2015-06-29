@@ -1,51 +1,42 @@
 React = require("react")
-Router = require("react-router")
-URLResources = require("../common/URLResources")
+io = require("socket.io-client")
 
 { div } = React.DOM
-TopicSidebar = React.createFactory (require "./chat/TopicSidebar")
-MessageList = React.createFactory (require "./chat/MessageList")
-ChatForm = React.createFactory (require "./chat/ChatForm")
-
-io = require "socket.io-client"
+TopicSidebar = React.createFactory require("./chat/TopicSidebar")
+MessageList = React.createFactory require("./chat/MessageList")
+ChatForm = React.createFactory require("./chat/ChatForm")
+HomeComponent = React.createFactory require("./HomeComponent")
+URLResources = require("../common/URLResources")
 
 ChatComponent = React.createClass
 
   propTypes: 
     user: React.PropTypes.object.isRequired,
-    logoutClicked: React.PropTypes.func.isRequired
+    logoutClicked: React.PropTypes.func.isRequired,
+    room: React.PropTypes.number.isRequired
 
-  mixins: [ Router.State ],
-
-  getInitialState: ->
-    messages: [],
-    currentRoom: null
+  username: ->
+    @props.user.name or @props.user.username
 
   componentWillMount: ->
-    @setState currentRoom: @getParams().room
     @socket = io(URLResources.getChatServerOrigin())
-    @socket.on "chat message", ({user_id, username, text}) =>
-      newList = @state.messages
-      newList.push {username, text}
-      @setState messages: newList
-
-  componentDidMount: ->
-    URLResources.readFromAPI "/messages", (response)=>
-      messages = response.map ({username, text}) -> {username, text}
-      @setState messageList: messages
 
   submitMessage: (e, message) ->
-    user_id = @props.user.id
-    username = if @props.user.name then @props.user.name else @props.user.username
-    room_id = 1 #todo
-    unless message is  "" 
-      @socket.emit "chat message", { user_id, username, room_id, "text": message }
+    unless message is "" 
+      @socket.emit "chat message", { user_id: @props.user.id, username: @username(), room_id:@props.currentRoom, "text": message.trim() }
     e.preventDefault()
 
   render: ->
+    mainSection = if @props.currentRoom then (
+      div {},
+        MessageList {currentRoom: @props.currentRoom, socket: @socket, username: @username()}
+        ChatForm {submitMessage: @submitMessage} )
+    else
+      HomeComponent {}
+
     div {className: "chat"},
       TopicSidebar {}
-      MessageList {messages: @state.messages}
-      ChatForm {submitMessage: @submitMessage}
+      mainSection
+      
 
 module.exports = ChatComponent
