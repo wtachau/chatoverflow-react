@@ -23,7 +23,8 @@ HomePageComponent = React.createClass
       @submitQuestion()
 
   onQuestionEntered: (e) ->
-    @setState questionEntered: true
+    @setState questionEntered: not @state.questionEntered 
+    if @state.buttonText is "Next" then @setState buttonText: "Back" else @setState buttonText: "Next"
 
   inputChange: (e) ->
     @setState question: e.target.value
@@ -46,6 +47,8 @@ HomePageComponent = React.createClass
         if @state.questionEntered
           Row {},
             Col xs: 8,
+            #Button {className: "welcome-form-button", onClick: @onQuestionEntered}, "Back"
+            Col xs: 12,
               DropdownButton title: "Choose a topic",
                 MenuItem eventKey = '1', "Java"
                 MenuItem eventKey = '2', "Android"
