@@ -1,6 +1,6 @@
 ChatOverflow - React frontend
 =============================
-[![Circle CI](https://circleci.com/gh/Originate/chat-overflow-rails/tree/develop.svg?style=svg)](https://circleci.com/gh/Originate/chat-overflow-rails/tree/develop)
+[![Circle CI](https://circleci.com/gh/Originate/chat-overflow-rails/tree/develop.svg?style=svg&circle-token=c2656a4a66ee9cbb0d5e8be0bf7ee5451cf2b0ca)](https://circleci.com/gh/Originate/chat-overflow-rails/tree/develop)
 
 This repository includes the entire frontend component to ChatOverflow, written using React. It is meant to be used in conjunction with the [Rails API](https://github.com/originate/chat-overflow-rails) and the [Node socket service](https://github.com/originate/chat-overflow-node).
 
@@ -41,12 +41,12 @@ Deploying
 
 1. Install the `aws-cli` tool (amazon web services command line interface)
 
-``` pip install awscli```
+ ``` pip install awscli```
 
 2. Configure your shell to use the `chatoverflow` s3 bucket by following [these steps](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). You'll need the aws key and secret key from [here](https://drive.google.com/open?id=0BxI3aj0CvwjudDJITEx6LUJxNVE). 
   * `awscli` will prompt you for the region, which is `us-east-1`.
 
 3. Then deploy:
 
-```npm run pushToStaging```
+ ```npm run pushToStaging```
 
