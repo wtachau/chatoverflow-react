@@ -14,7 +14,8 @@ ChatForm = React.createClass
 
   getInitialState: ->
     message: "",
-    users: [{id: 1, display: "bob"},{id: 2, display: "bjones"}]
+    users: [{id: 1, display: "bob"},{id: 2, display: "bjones"}],
+    mentions: []
 
   keyPress: (e) ->
     if e.key == "Enter"
@@ -24,16 +25,16 @@ ChatForm = React.createClass
   submit: (e) ->
     @props.submitMessage e, @state.message.trim()
 
-  inputChange: (e) ->
+  inputChange: (e, newValue, newPlainTextValue, mentions) ->
     @setState message: e.target.value
+    @setState mentions: mentions
 
   displayMention: (id, display, type) -> "@" + display
 
   render: ->
     form {className: "chat-form", autoComplete: off},
-      # Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress} 
-      MentionsInput {value: @state.message, onChange: @inputChange, displayTransform: @displayMention},
-        Mention {trigger: "@", data: @state.users} 
+      MentionsInput {value: @state.message, onChange: @inputChange, displayTransform: @displayMention, singleLine: true, onKeyDown: @keyPress},
+        Mention {trigger: "@", data: @state.users}, 
       Button {onClick: @submit, className: "form-button"}, "send"
 
 module.exports = ChatForm

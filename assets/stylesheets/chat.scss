@@ -86,6 +86,15 @@
   box-shadow: $value; 
 }
 .react-mentions {
+  width: 90%;
+  background-color: white;
+
+  input {
+    border: 0;
+    padding: 10px;
+    width: 100% !important;
+    margin-right: .5%;
+  }
 
   .control {
     &.textarea {
@@ -101,17 +110,12 @@
     }
 
     &.input {
-      display: inline-block;
-      width: 130px;
-      background: #fff;
-      font-size: 12px;
-      font-weight: normal;
-
       .highlighter {
-        padding: 1px;
+        padding: 8px;
         border: 2px inset transparent;
       }
     }
+
 
     .highlighter {
       strong {
@@ -129,12 +133,6 @@
     margin: 0;
 
     @include box-sizing(border-box);
-  }
-
-  input {
-    padding: 1px;
-    margin: 0;
-    border: 2px inset;
   }
 
   .suggestions {
