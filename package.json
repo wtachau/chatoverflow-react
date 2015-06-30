@@ -21,6 +21,7 @@
     "node": "0.10.x"
   },
   "dependencies": {
+    "alt": "^0.16.10",
     "coffee-loader": "^0.7.2",
     "css-loader": "^0.9.1",
     "express": "^4.13.0",
