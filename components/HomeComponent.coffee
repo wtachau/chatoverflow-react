@@ -1,6 +1,8 @@
 React = require("react")
+Router = require("react-router")
 
 ReactBootstrap = require("react-bootstrap")
+URLResources = require("../common/URLResources")
 { h1, form, div } = React.DOM
 
 Row = React.createFactory ReactBootstrap.Row
@@ -13,40 +15,27 @@ MenuItem = React.createFactory ReactBootstrap.MenuItem
 HomePageComponent = React.createClass
 
   getInitialState: ->
-    buttonText: "Next"
     question: ""
-    questionEntered: false
-    topicSelected: "Choose a topic"
+    topicSelected: null
+    topics: []
 
-  keyPress: (e) ->
-    if e.key is "Enter"
-      @submitQuestion()
-
-  onQuestionEntered: (e) ->
-    @setState questionEntered: not @state.questionEntered 
-    if @state.buttonText is "Next" then @setState buttonText: "Back" else @setState buttonText: "Next"
+  componentWillMount: ->
+    URLResources.readFromAPI "/topics", (response) =>
+      @setState topics: response
 
   inputChange: (e) ->
     @setState question: e.target.value
 
-  submitQuestion:  ->
+  keyPress: (e) ->
+    if e.key is "Enter"
+      @submitQuestion e
+
+  submitQuestion: (e) ->
     console.log "todo"
-    # todo: writeToAPI then render different component
+    e.preventDefault()
 
   onTopicSelected: (eventKey, href, target) ->
-    @setState topicSelected: target
-
-
-  getTopics: ->
-    topics = [
-      {id: 1, topic: "java"},
-      {id: 2, topic: "php"},
-      {id: 3, topic: "android"},
-      {id: 4, topic: "ios"},
-      {id: 5, topic: "css"},
-      {id: 6, topic: "ruby"},
-      {id: 7, topic: "scala"}
-    ]
+    @setState topicSelected: {eventKey, name: target}
 
   render: ->
     div {className: "home"},
@@ -54,25 +43,20 @@ HomePageComponent = React.createClass
         Col xs: 8,
           h1 {}, "Select a Topic"
       Row {},
-        Col xs: 8,
         Col xs: 4,
-        DropdownButton title: @state.topicSelected,
-          @getTopics().map ({id, topic}) =>
-            MenuItem {eventKey: id, target: topic, onSelect: @onTopicSelected}, topic 
-      if @state.topicSelected isnt "Choose a topic"
+        DropdownButton title: (if @state.topicSelected then @state.topicSelected.name else "Select a topic"),
+          @state.topics.map ({id, name}) =>
+            MenuItem {eventKey: id, target: name, onSelect: @onTopicSelected}, name
+      if @state.topicSelected
         div {},
           Row {},
             Col xs: 12, 
-              h1 {}, "What's your " + @state.topicSelected + " question ?"
+              h1 {}, "What's your " + @state.topicSelected.name + " question?"
           Row {},
             Col xs: 4, {},
               form {className: "welcome-form", autoComplete: off},
                 Input {type: "text", className: "welcome-input", id: "welcome-input", autoComplete: off, value: @state.question, onChange: @inputChange, onKeyDown: @keyPress}
             Col xs: 4, {},
-                Button {className: "welcome-form-button", onClick: @onQuestionEntered}, @state.buttonText
-      if @state.questionEntered and @state.topicSelected
-        div {},
-          Row {},
-            Col xs: 12, "Your question: " + @state.question
+                Button {className: "welcome-form-button", onClick: @submitQuestion}, "Submit"
 
 module.exports = HomePageComponent
