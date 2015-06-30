@@ -7,30 +7,50 @@ Row = React.createFactory ReactBootstrap.Row
 Col = React.createFactory ReactBootstrap.Col
 Input = React.createFactory ReactBootstrap.Input
 Button = React.createFactory ReactBootstrap.Button
+DropdownButton = React.createFactory ReactBootstrap.DropdownButton
+MenuItem = React.createFactory ReactBootstrap.MenuItem
 
 HomePageComponent = React.createClass
 
   getInitialState: ->
     buttonText: "Next"
-    inputMessage: "testing"
+    question: ""
+    questionEntered: false
+    topic: null
 
   keyPress: (e) ->
     if e.key is "Enter"
-      @props.submitMessage e, @state.inputMessage.trim()
-      @setState inputMessage: ""
+      @submitQuestion()
 
-  submit: (e) ->
-    @props.submitMessage e, @state.inputMessage.trim()
+  onQuestionEntered: (e) ->
+    @setState questionEntered: true
+
+  inputChange: (e) ->
+    @setState question: e.target.value
+
+  submitQuestion:  ->
+    console.log "todo"
+    # todo: writeToAPI then render different component
 
   render: ->
     div {className: "home"},
-      Row {}
-        Col xs: 12, 
-          h1 {}, "Ask a question!"
-      Row {}
-        Col xs: 1, {}
-          form {className: "welcome-form", autoComplete: off},
-            Input {text: "text", className: "welcome-input", id: "welcome-input", autoComplete: off, value: @state.inputMessage, onChange: @inputChange, onKeyDown: @keyPress}
-            Button {className: "welcome-form-button", onClick: @submit}, @state.buttonText
+        Row {},
+          Col xs: 12, 
+            h1 {}, "Ask a question!"
+        Row {},
+          Col xs: 1, {},
+            form {className: "welcome-form", autoComplete: off},
+              Input {type: "text", className: "welcome-input", id: "welcome-input", autoComplete: off, value: @state.question, onChange: @inputChange, onKeyDown: @keyPress}
+              Button {className: "welcome-form-button", onClick: @onQuestionEntered}, @state.buttonText
+        if @state.questionEntered
+          Row {},
+            Col xs: 12,
+              DropdownButton title: "Choose a topic",
+                MenuItem eventKey = '1', "Java"
+                MenuItem eventKey = '2', "Android"
+                MenuItem eventKey = '3', "iOS"
+
+
+
 
 module.exports = HomePageComponent

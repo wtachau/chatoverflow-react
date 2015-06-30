@@ -15,10 +15,12 @@ h1 {
 
   .welcome-form {
     background: $chat_input_grey;
+    width: 310px;
   }
   .welcome-input {
     border: 0;
-    padding: 10px;
+    padding: 5px;
+    width: 300px;
   }
 
   .welcome-form-button {
