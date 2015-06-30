@@ -19,17 +19,17 @@ Installation
 
 1. Install local npm modules
 
-```npm install```
+ ```npm install```
 
 2. And start the dev server
 
-```npm run devserve```
+ ```npm run devserve```
 
   * If that script fails because node can't find webpack-dev-serve*:
 
   Make sure `webpack-dev-server` is installed globally
 
-  ```npm install webpack-dev-server -g```
+   ```npm install webpack-dev-server -g```
 
 
 #### Note: 
