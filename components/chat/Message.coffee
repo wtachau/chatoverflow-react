@@ -8,10 +8,11 @@ Col = React.createFactory ReactBootstrap.Col
 { p, img, video } = React.DOM
 
 Message = React.createClass
+  displayName: "Message"
+
   propTypes:
     username: React.PropTypes.string.isRequired
     text: React.PropTypes.string.isRequired
-    index: React.PropTypes.number.isRequired
 
   decorateText: (text) ->
     if text.match ///((^https?:\/\/.*\.(?:png|jpg|gif)$)){1}///

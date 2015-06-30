@@ -4,13 +4,17 @@ Router = require("react-router")
 LoginComponent = React.createFactory require("../LoginComponent.coffee")
 ChatComponent = React.createFactory require("../ChatComponent.coffee")
 URLResources = require("../../common/URLResources")
+AppStore = require("../../stores/AppStore")
+AppActions = require("../../actions/AppActions")
+ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 module.exports = React.createClass
+  displayName: "App"
 
-  mixins: [ Router.State ],
+  mixins: [ Router.State, ReactStateMagicMixin ]
 
-  getInitialState: ->
-    {user: null}
+  statics:
+    registerStore: AppStore
 
   componentWillMount: ->
     jwt = new Uri(location.search).getQueryParamValue("jwt")
@@ -19,23 +23,12 @@ module.exports = React.createClass
 
   componentDidMount: ->
     if sessionStorage.getItem('jwt')
-      @getCurrentUser()
+      AppActions.fetchUser()
     newurl = "#{window.location.protocol}//#{window.location.host}#{window.location.pathname}"
-    window.history.pushState path:newurl, '', newurl
-
-  loginClicked: ->
-    window.location.assign("#{ URLResources.getLogicServerOrigin() }/login")
-
-  logoutClicked: ->
-    @setState user: null
-    sessionStorage.setItem('jwt', '')
-
-  getCurrentUser: ->
-    URLResources.readFromAPI "/current_user", (response) =>
-      @setState user: response
+    window.history.pushState path: newurl, '', newurl
 
   render: ->
     if @state.user
-      ChatComponent user:@state.user, logoutClicked: @logoutClicked, currentRoom: @getParams().id
+      ChatComponent user: @state.user, logoutClicked: AppActions.logout, currentRoom: @getParams().id
     else
-      LoginComponent loginClicked: @loginClicked
+      LoginComponent loginClicked: AppActions.login
