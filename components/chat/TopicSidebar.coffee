@@ -23,6 +23,6 @@ TopicSidebar = React.createClass
         div {className:"topic-name"}, name,
           rooms.map ({id}) ->
             Link {to: "/rooms/#{id}"},
-              ListGroupItem {}, "room #{id}"
+              ListGroupItem {className: "sidebar-room"}, "room #{id}"
 
 module.exports = TopicSidebar

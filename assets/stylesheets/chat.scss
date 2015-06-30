@@ -52,7 +52,8 @@
     padding-top: 2px;
     height: 100vh;
     position: fixed;
-    background-color: $chat_sidebar_grey;
+    color: $chat_sidebar_hover_periwinkle;
+    background-color: $chat_sidebar_background;
   }
 
   .username {
@@ -62,6 +63,20 @@
   .image {
     max-width: 500px;
     height: "auto";
+  }
+
+  .topic-name {
+    color: $white;
+  }
+
+  .sidebar-room {
+    &:hover {
+      background-color: $chat_sidebar_hover_periwinkle;
+    }
+    background-color: $chat_sidebar_background;
+    color: $white;
+    border: 0px;
+    border-radius: 0px;
   }
 }
 
