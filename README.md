@@ -4,6 +4,8 @@ ChatOverflow - React frontend
 
 This repository includes the entire frontend component to ChatOverflow, written using React. It is meant to be used in conjunction with the [Rails API](https://github.com/originate/chat-overflow-rails) and the [Node socket service](https://github.com/originate/chat-overflow-node).
 
+Note that the other services, when run locally, expect the frontend to be served on port 8080.
+
 The codebase is primarily written in CoffeeScript, including wrappers for creating React elements. The entire project (including its dependencies) is bundled before runtime by webpack, which serves up a single `bundle.js` file.
 
 Stack
