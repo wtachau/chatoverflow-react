@@ -3,6 +3,7 @@ React = require "react"
 ReactBootstrap = require "react-bootstrap"
 Input = React.createFactory ReactBootstrap.Input
 Button = React.createFactory ReactBootstrap.Button
+URLResources = require("../../common/URLResources")
 
 mentions = require "react-mentions"
 MentionsInput = React.createFactory mentions.MentionsInput
@@ -14,8 +15,13 @@ ChatForm = React.createClass
 
   getInitialState: ->
     message: "",
-    users: [{id: 1, display: "bob"},{id: 2, display: "bjones"}],
+    users: [],
     mentions: []
+
+  componentWillMount: ->
+    URLResources.readFromAPI "/users", (response) =>
+      users = response.map ({id, username}) -> {id: id, display: username}
+      @setState users: users
 
   keyPress: (e) ->
     if e.key == "Enter"
