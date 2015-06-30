@@ -48,7 +48,7 @@ HomePageComponent = React.createClass
           Row {},
             Col xs: 8,
             #Button {className: "welcome-form-button", onClick: @onQuestionEntered}, "Back"
-            Col xs: 12,
+            Col xs: 4,
               DropdownButton title: "Choose a topic",
                 MenuItem eventKey = '1', "Java"
                 MenuItem eventKey = '2', "Android"
