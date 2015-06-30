@@ -16,8 +16,7 @@ HomePageComponent = React.createClass
     buttonText: "Next"
     question: ""
     questionEntered: false
-    topicSelected: false
-    dropDownTitle: "Choose a topic"
+    topicSelected: "Choose a topic"
 
   keyPress: (e) ->
     if e.key is "Enter"
@@ -34,8 +33,8 @@ HomePageComponent = React.createClass
     console.log "todo"
     # todo: writeToAPI then render different component
 
-  onTopicSelected: ->
-    @setState topicSelected: not @state.topicSelected
+  onTopicSelected: (eventKey, href, target) ->
+    @setState topicSelected: target
 
 
   getTopics: ->
@@ -57,14 +56,14 @@ HomePageComponent = React.createClass
       Row {},
         Col xs: 8,
         Col xs: 4,
-        DropdownButton title: @state.dropDownTitle,
+        DropdownButton title: @state.topicSelected,
           @getTopics().map ({id, topic}) =>
-            MenuItem {eventKey: id, onSelect: @onTopicSelected}, topic 
-      if @state.topicSelected
+            MenuItem {eventKey: id, target: topic, onSelect: @onTopicSelected}, topic 
+      if @state.topicSelected isnt "Choose a topic"
         div {},
           Row {},
             Col xs: 12, 
-              h1 {}, "What's your question?"
+              h1 {}, "What's your " + @state.topicSelected + " question ?"
           Row {},
             Col xs: 4, {},
               form {className: "welcome-form", autoComplete: off},
@@ -75,27 +74,5 @@ HomePageComponent = React.createClass
         div {},
           Row {},
             Col xs: 12, "Your question: " + @state.question
-      # Row {},
-        #   Col xs: 8, 
-        #     h1 {}, "Ask a question!"
-        # Row {},
-        #   Col xs: 4, {},
-        #     form {className: "welcome-form", autoComplete: off},
-        #       Input {type: "text", className: "welcome-input", id: "welcome-input", autoComplete: off, value: @state.question, onChange: @inputChange, onKeyDown: @keyPress}
-        #   Col xs: 4, {},
-        #       Button {className: "welcome-form-button", onClick: @onQuestionEntered}, @state.buttonText
-        # if @state.questionEntered
-        #   Row {},
-        #     Col xs: 8,
-        #     #Button {className: "welcome-form-button", onClick: @onQuestionEntered}, "Back"
-        #     Col xs: 4,
-        #       DropdownButton title: "Choose a topic",
-        #         @getTopics().map ({id, topic}) =>
-        #           MenuItem {eventKey: id, onSelect: @onTopicSelected}, topic 
-        # if @state.topicSelected
-        #   Row {},
-        #     Col xs: 8, "it worked!"
-
-
 
 module.exports = HomePageComponent
