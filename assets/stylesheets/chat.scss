@@ -66,7 +66,12 @@
   }
 
   .topic-name {
+    padding: 10px;
     color: $white;
+    background-color: $chat_sidebar_background;
+    &:hover {
+      background-color: $chat_sidebar_hover_periwinkle;
+    }
   }
 
   .active {
@@ -84,5 +89,15 @@
     border: 0px;
     border-radius: 0px;
   }
+
+  .categories {
+    background-color: $chat_sidebar_background;
+    color: $white;
+    font-size: 24px;
+    font-size: 1vw;
+    text-align: left;
+    padding: 5px;
+  }
+
 }
 
