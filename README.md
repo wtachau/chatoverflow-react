@@ -1,36 +1,52 @@
-# chat-overflow-react
-Front end React components for chatoverflow
+ChatOverflow - React frontend
+=============================
+[![Circle CI](https://circleci.com/gh/Originate/chat-overflow-rails/tree/develop.svg?style=svg)](https://circleci.com/gh/Originate/chat-overflow-rails/tree/develop)
 
-## Installation
+This repository includes the entire frontend component to ChatOverflow, written using React. It is meant to be used in conjunction with the [Rails API](https://github.com/originate/chat-overflow-rails) and the [Node socket service](https://github.com/originate/chat-overflow-node).
 
-Install local npm modules
+The codebase is primarily written in CoffeeScript, including wrappers for creating React elements. The entire project (including its dependencies) is bundled before runtime by webpack, which serves up a single `bundle.js` file.
+
+Stack
+------------
+- [React](http://facebook.github.io/react/)
+- [Coffeescript](http://coffeescript.org/)
+- [SCSS] (http://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html)
+- [Webpack](http://webpack.github.io/docs/) for bundling
+
+
+Installation
+------------
+
+1. Install local npm modules
 
 ```npm install```
 
-And start the dev server
+2. And start the dev server
 
 ```npm run devserve```
 
-*If that script fails because node can't find webpack-dev-serve*:
+  * If that script fails because node can't find webpack-dev-serve*:
 
-Make sure `webpack-dev-server` is installed globally
+  Make sure `webpack-dev-server` is installed globally
 
-```npm install webpack-dev-server -g```
+  ```npm install webpack-dev-server -g```
 
 
-### Note: 
+#### Note: 
 The `devserve` script doesn't handle the router properly, so if you try to reload something like `domain.com/path/subpath`, it will throw an error. If you need to use the routes, run the `npm run testRoutes` script. This script builds the `bundle.js` then starts a simple express server, so it will handle the routes, but you'll need to re-run the script to for file changes to register.
 
 
-## Deploying
+Deploying
+---------
 
-Install the `aws-cli` tool (amazon web services command line interface)
+1. Install the `aws-cli` tool (amazon web services command line interface)
 
 ``` pip install awscli```
 
-Configure your shell to use the `chatoverflow` s3 bucket by following [these steps](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). You'll need the aws key and secret key from [here](https://drive.google.com/open?id=0BxI3aj0CvwjudDJITEx6LUJxNVE). The region is `us-east-1`.
+2. Configure your shell to use the `chatoverflow` s3 bucket by following [these steps](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). You'll need the aws key and secret key from [here](https://drive.google.com/open?id=0BxI3aj0CvwjudDJITEx6LUJxNVE). 
+  * `awscli` will prompt you for the region, which is `us-east-1`.
 
-Then deploy:
+3. Then deploy:
 
 ```npm run pushToStaging```
 
