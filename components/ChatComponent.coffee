@@ -14,7 +14,7 @@ ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 ChatComponent = React.createClass
   displayName: "ChatComponent"
 
-  propTypes: 
+  propTypes:
     user: React.PropTypes.shape
       username: React.PropTypes.string.isRequired
       id: React.PropTypes.number.isRequired
