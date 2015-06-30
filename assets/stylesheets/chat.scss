@@ -67,11 +67,14 @@
 
   .topic-name {
     padding: 10px;
+    padding-left: 30px;
     color: $white;
     background-color: $chat_sidebar_background;
     &:hover {
       background-color: $chat_sidebar_hover_periwinkle;
     }
+    border: 0px;
+    border-radius: 0px;
   }
 
   .active {
@@ -90,13 +93,13 @@
     border-radius: 0px;
   }
 
-  .categories {
+  .categories-header {
     background-color: $chat_sidebar_background;
     color: $white;
     font-size: 24px;
-    font-size: 1vw;
     text-align: left;
     padding: 5px;
+    padding-left: 10px;
   }
 
 }

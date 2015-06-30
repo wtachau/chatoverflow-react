@@ -6,6 +6,7 @@ TopicSidebar = React.createFactory require("./chat/TopicSidebar")
 MessageList = React.createFactory require("./chat/MessageList")
 ChatForm = React.createFactory require("./chat/ChatForm")
 HomeComponent = React.createFactory require("./HomeComponent")
+RoomList = React.createFactory require("./chat/RoomList")
 URLResources = require("../common/URLResources")
 
 ChatComponent = React.createClass
@@ -13,7 +14,8 @@ ChatComponent = React.createClass
   propTypes: 
     user: React.PropTypes.object.isRequired,
     logoutClicked: React.PropTypes.func.isRequired,
-    room: React.PropTypes.number.isRequired
+    currentRoom: React.PropTypes.number.isRequired,
+    currentTopic: React.PropTypes.number.isRequired
 
   username: ->
     @props.user.name or @props.user.username
@@ -31,6 +33,10 @@ ChatComponent = React.createClass
       div {},
         MessageList {currentRoom: @props.currentRoom, socket: @socket, username: @username()}
         ChatForm {submitMessage: @submitMessage} )
+    else if @props.currentTopic then (
+      div {},
+        RoomList {currentTopic: @props.currentTopic}
+      )
     else
       HomeComponent {}
 

@@ -19,11 +19,11 @@ TopicSidebar = React.createClass
 
   render: ->
     ListGroup {className: "side-bar"},
-      h1 {className: "categories"}, "Categories"
+      h1 {className: "categories-header"}, "Categories"
       @state.topics.map ({name, id, rooms}) ->
-        div {className:"topic-name"}, name
-          #rooms.map ({id}) ->
-            #Link {to: "/rooms/#{id}"},
-              #ListGroupItem {className: "sidebar-room"}, "room #{id}"
+        div {}, 
+          rooms.map ({id}) ->
+            Link {to: "/topics/#{id}"},
+              ListGroupItem {className: "topic-name"}, name 
 
 module.exports = TopicSidebar
