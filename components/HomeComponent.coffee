@@ -35,16 +35,17 @@ HomePageComponent = React.createClass
   render: ->
     div {className: "home"},
         Row {},
-          Col xs: 12, 
+          Col xs: 8, 
             h1 {}, "Ask a question!"
         Row {},
-          Col xs: 1, {},
+          Col xs: 4, {},
             form {className: "welcome-form", autoComplete: off},
               Input {type: "text", className: "welcome-input", id: "welcome-input", autoComplete: off, value: @state.question, onChange: @inputChange, onKeyDown: @keyPress}
+          Col xs: 4, {},
               Button {className: "welcome-form-button", onClick: @onQuestionEntered}, @state.buttonText
         if @state.questionEntered
           Row {},
-            Col xs: 12,
+            Col xs: 8,
               DropdownButton title: "Choose a topic",
                 MenuItem eventKey = '1', "Java"
                 MenuItem eventKey = '2', "Android"

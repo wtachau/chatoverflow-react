@@ -14,19 +14,22 @@ h1 {
   left: 30%;
 
   .welcome-form {
-    background: $chat_input_grey;
-    width: 310px;
+    background: $chat_sidebar_grey;
+    width: 550px;
+    padding: 1px;
   }
   .welcome-input {
     border: 0;
     padding: 5px;
-    width: 300px;
+    width: 90%;
   }
 
   .welcome-form-button {
     background: $chat_button_blue; 
     border: 0;
     padding: 10px;
+    position: fixed;
+    left: 500px;
   }
 
 }
