@@ -6,7 +6,7 @@
     background: $chat_input_grey;
     position: fixed;
     bottom: 0;
-    width: calc(100% - #{$sidebar_width};
+    width: calc(100% - #{$sidebar_width});
     padding: 3px;
     left: 150px;
     height: $chat_box_height;
@@ -67,6 +67,12 @@
 
   .topic-name {
     color: $white;
+  }
+
+  .active {
+    >span {
+      background-color: $chat_sidebar_hover_periwinkle;
+    }
   }
 
   .sidebar-room {
