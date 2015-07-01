@@ -1,5 +1,5 @@
 React = require "react"
-Marked = require "marked"
+Marked = require "react-marked"
 {form} = React.DOM
 ReactBootstrap = require "react-bootstrap"
 Input = React.createFactory ReactBootstrap.Input
