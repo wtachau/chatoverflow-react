@@ -1,0 +1,49 @@
+@import "colors";
+@import "sizes";
+
+.sidebar {
+  width: $sidebar_width;
+  padding-left: 2px;
+  padding-top: 2px;
+  height: 100vh;
+  position: fixed;
+  color: $chat_sidebar_hover_periwinkle;
+  background-color: $chat_sidebar_background;
+}
+
+.categories-header {
+  background-color: $chat_sidebar_background;
+  color: $white;
+  font-size: 24px;
+  text-align: left;
+  padding: 5px;
+  padding-left: 10px;
+}
+
+.topic-name {
+  padding: 10px;
+  padding-left: 30px;
+  color: $white;
+  background-color: $chat_sidebar_background;
+  &:hover {
+    background-color: $chat_sidebar_hover_periwinkle;
+  }
+  border: 0px;
+  border-radius: 0px;
+}
+
+.active {
+  >span {
+    background-color: $chat_sidebar_hover_periwinkle;
+  }
+}
+
+.sidebar-room {
+  &:hover {
+    background-color: $chat_sidebar_hover_periwinkle;
+  }
+  background-color: $chat_sidebar_background;
+  color: $white;
+  border: 0px;
+  border-radius: 0px;
+}

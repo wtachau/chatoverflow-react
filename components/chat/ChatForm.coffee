@@ -13,12 +13,13 @@ ChatForm = React.createClass
     currentMessage: React.PropTypes.string.isRequired
 
   keyPress: (e) ->
-    if e.key == "Enter"
+    if e.key is "Enter"
       @props.submitMessage e, @props.currentMessage.trim()
-      ChatActions.setCurrentMessage ""
+      ChatActions.setCurrentMessage ""   
 
   submit: (e) ->
     @props.submitMessage e, @props.currentMessage.trim()
+    ChatActions.setCurrentMessage ""
 
   inputChange: (e) ->
     ChatActions.setCurrentMessage e.target.value
