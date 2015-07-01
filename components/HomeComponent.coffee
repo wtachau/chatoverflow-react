@@ -59,7 +59,7 @@ HomeComponent = React.createClass
           Row {},
             Col xs: 4, {},
               form {className: "welcome-form", autoComplete: off},
-                Input {type: "text", className: "welcome-input", id: "welcome-input", autoComplete: off, value: @state.question, onChange: @inputChange, onKeyDown: @keyPress}
+                Input {type: "text", className: "welcome-input", autoComplete: off, value: @state.question, onChange: @inputChange, onKeyDown: @keyPress}
             Col xs: 4, {},
                 Button {className: "welcome-form-button", onClick: @submitQuestion}, "Submit"
 
