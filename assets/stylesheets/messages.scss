@@ -2,6 +2,7 @@
 @import "sizes";
 
 .messages {
+
   position: absolute;
   left: $sidebar_width;
   top: 5px;
@@ -47,10 +48,6 @@
       }
     }
   }
-}
-
-.username {
-  text-align: right;
 }
 
 .image {
