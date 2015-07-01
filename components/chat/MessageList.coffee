@@ -24,7 +24,7 @@ MessageList = React.createClass
     component.scrollTop = component.scrollHeight
 
   followRoom: ->
-    action = @followingCurrentRoom() ? AppActions.unfollowRoom : AppActions.followRoom
+    action = if @followingCurrentRoom() then AppActions.unfollowRoom else AppActions.followRoom
     action @props.currentRoom
 
   followingCurrentRoom: ->
