@@ -12,16 +12,14 @@ URLResources =
       when 'development' then "http://127.0.0.1:3000"
       when 'staging' then "http://chat-overflow-rails-staging.herokuapp.com"
 
-  readFromAPI: (url, successFunction) ->
+  readFromAPI: (url, successFunction, errorFunction) ->
     Reqwest
-      url: @getLogicServerOrigin() + url,
-      type: 'json',
-      method: 'get',
-      contentType: 'application/json',
+      url: @getLogicServerOrigin() + url
+      type: 'json'
+      method: 'get'
+      contentType: 'application/json'
       headers: { 'Authorization': sessionStorage.getItem("jwt") }
-      success: successFunction,
-      error: (error) ->
-        console.error(url, error['response']);
-        location = '/';
+      success: successFunction
+      error: errorFunction
 
 module.exports = URLResources

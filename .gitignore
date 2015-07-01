@@ -14,3 +14,4 @@ bundle.js.map
 !webpack.prod.config.js
 !webpack.staging.config.js
 !dev.js
+!assets/vendor/*.js

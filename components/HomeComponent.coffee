@@ -11,7 +11,8 @@ Button = React.createFactory ReactBootstrap.Button
 DropdownButton = React.createFactory ReactBootstrap.DropdownButton
 MenuItem = React.createFactory ReactBootstrap.MenuItem
 
-HomePageComponent = React.createClass
+HomeComponent = React.createClass
+  displayName: "HomeComponent"
 
   getInitialState: ->
     question: ""
@@ -58,4 +59,5 @@ HomePageComponent = React.createClass
             Col xs: 4, {},
                 Button {className: "welcome-form-button", onClick: @submitQuestion}, "Submit"
 
-module.exports = HomePageComponent
+module.exports = HomeComponent
+

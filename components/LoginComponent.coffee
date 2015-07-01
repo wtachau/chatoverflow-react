@@ -6,6 +6,7 @@ Button = React.createFactory(ReactBootstrap.Button)
 { div, h1, h3, button } = React.DOM
 
 LoginComponent = React.createClass
+  displayName: "LoginComponent"
 
   propTypes:
     loginClicked: React.PropTypes.func.isRequired
