@@ -55,7 +55,7 @@ HomeComponent = React.createClass
         div {},
           Row {},
             Col xs: 12, 
-              h1 {}, "What's your " + @state.topicSelected.name + " question?"
+              h1 {}, "What's your #{@state.topicSelected.name} question?"
           Row {},
             Col xs: 4, {},
               form {className: "welcome-form", autoComplete: off},
