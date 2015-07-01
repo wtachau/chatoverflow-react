@@ -13,7 +13,7 @@ class ChatActions
     @actions.setMessagesList messages
 
   fetchTopicInfo: (currentTopic) ->
-    URLResources.readFromAPI "/topics/#{currentTopic}", @actions.setTopicInfo
+    URLResources.readFromAPI "/topics/#{currentTopic}", @actions.setTopicInfo, @actions.fetchFailure
 
   fetchFailure: (error) ->
     console.error(error)
