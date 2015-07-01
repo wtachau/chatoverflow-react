@@ -1,6 +1,6 @@
 React = require("react")
 
-{ ul, li, div, button } = React.DOM
+{ div, button } = React.DOM
 Message = React.createFactory require("./Message")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
@@ -24,10 +24,8 @@ MessageList = React.createClass
     component.scrollTop = component.scrollHeight
 
   followRoom: ->
-    if @followingCurrentRoom()
-      AppActions.unfollowRoom @props.currentRoom
-    else
-      AppActions.followRoom @props.currentRoom
+    action = @followingCurrentRoom() ? AppActions.unfollowRoom : AppActions.followRoom
+    action @props.currentRoom
 
   followingCurrentRoom: ->
     followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
