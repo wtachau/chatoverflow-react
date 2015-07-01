@@ -36,14 +36,15 @@ RoomList = React.createClass
   render: ->
     div {className: "rooms"},
       if @state.topicInfo
-        Row {},
-          Col xs: 8,
-            h1 {className: "current-topic"}, @state.topicInfo.name
-        Row {},
-          Col xs: 8,
-            @state.topicInfo.rooms.map ({id}) ->
-              Link {to: "/rooms/#{id}"},
-                ListGroupItem {className: "topic-name"}, "Room #{id}"
+        div {className: "room-list-page"},
+          Row {},
+            Col xs: 8, xsOffset: 2,
+              h1 {className: "current-topic"}, @state.topicInfo.name
+          Row {className: "room-list-page"},
+            Col xs: 8, xsOffset: 2,
+              @state.topicInfo.rooms.map ({id}) ->
+                Link {to: "/rooms/#{id}"},
+                  ListGroupItem {className: "topic-name"}, "Room #{id}"
 
 
 module.exports = RoomList

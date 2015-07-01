@@ -2,12 +2,18 @@
 @import "sizes";
 
 .rooms {
-
+  left: $sidebar_width;
+  width: calc(100% - #{$sidebar_width});
   .current-topic {
     color: $chat_sidebar_hover_periwinkle;
     background-color: $chat_background_grey;
   }
 
+  .room-list-page {
+    margin-left: $sidebar_width;
+  }
 
-
+  .row {
+    margin-left: $sidebar_width;
+  }
 }

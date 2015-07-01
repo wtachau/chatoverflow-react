@@ -7,6 +7,7 @@ require("./assets/vendor/bootstrap/stylesheets/_bootstrap.scss")
 require("./assets/stylesheets/home.scss")
 require("./assets/stylesheets/chat.scss")
 require("./assets/stylesheets/login.scss")
+require("./assets/stylesheets/rooms.scss")
 
 Router.run routes, Router.HistoryLocation, (Handler) ->
   React.render (React.createElement Handler), document.getElementById("react-root")
