@@ -8,8 +8,13 @@ class ChatStore
     @currentMessage = ""
     @messages = []
     @topics = []
+    @currentQuestion = ""
+    @topicSelected = null
 
     @bindActions(ChatActions)
+
+  onSetCurrentQuestion: (question) ->
+    @currentQuestion = question
 
   onSetCurrentMessage: (message) ->
     @currentMessage = message
@@ -19,5 +24,9 @@ class ChatStore
 
   onSetTopics: (topics) ->
     @topics = topics
+
+  onSetTopicSelected: (topicSelected) ->
+    @topicSelected = topicSelected
+
 
 module.exports = alt.createStore(ChatStore)

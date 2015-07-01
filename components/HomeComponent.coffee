@@ -1,4 +1,7 @@
 React = require("react")
+ChatStore = require("../stores/ChatStore")
+ChatActions = require("../actions/ChatActions")
+ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 
 ReactBootstrap = require("react-bootstrap")
 URLResources = require("../common/URLResources")
@@ -14,28 +17,32 @@ MenuItem = React.createFactory ReactBootstrap.MenuItem
 HomeComponent = React.createClass
   displayName: "HomeComponent"
 
-  getInitialState: ->
-    question: ""
-    topicSelected: null
-    topics: []
+  mixins: [ReactStateMagicMixin]
 
-  componentWillMount: ->
-    URLResources.readFromAPI "/topics", (response) =>
-      @setState topics: response
+  statics:
+    registerStore: ChatStore
 
   inputChange: (e) ->
-    @setState question: e.target.value
+    ChatActions.setCurrentQuestion e.target.value
 
   keyPress: (e) ->
     if e.key is "Enter"
       @submitQuestion e
 
+  successFunction: (response) ->
+    console.log response
+
+  errorFunction: ->
+    console.log "errorFunction"
+
   submitQuestion: (e) ->
-    console.log "todo"
+    console.log "Question: " + @state.currentQuestion
+    console.log "ID: " + @state.topicSelected.eventKey
     e.preventDefault()
+    URLResources.writeToAPI "/rooms", {topic_id: @state.topicSelected.eventKey, text: @state.currentQuestion}, @successFunction, @errorFunction
 
   onTopicSelected: (eventKey, href, target) ->
-    @setState topicSelected: {eventKey, name: target}
+    ChatActions.setTopicSelected {eventKey, name: target}
 
   render: ->
     div {className: "home"},
