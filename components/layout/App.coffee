@@ -29,6 +29,6 @@ module.exports = React.createClass
 
   render: ->
     if @state.user
-      ChatComponent user: @state.user, logoutClicked: AppActions.logout, currentRoom: @getParams().id
+      ChatComponent user: @state.user, logoutClicked: AppActions.logout, currentRoom: @getParams().room_id, currentTopic: @getParams().topic_id
     else
       LoginComponent loginClicked: AppActions.login

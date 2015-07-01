@@ -2,7 +2,7 @@ alt = require("../alt")
 ChatActions = require("../actions/ChatActions")
 
 class ChatStore
-  displayName: 'ChatStore'
+  displayName: "ChatStore"
   
   constructor: ->
     @currentMessage = ""
@@ -10,6 +10,7 @@ class ChatStore
     @topics = []
     @currentQuestion = ""
     @topicSelected = null
+    @topicInfo = null
 
     @bindActions(ChatActions)
 
@@ -28,5 +29,7 @@ class ChatStore
   onSetTopicSelected: (topicSelected) ->
     @topicSelected = topicSelected
 
+  onSetTopicInfo: (topicInfo) ->
+    @topicInfo = topicInfo
 
 module.exports = alt.createStore(ChatStore)

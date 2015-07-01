@@ -5,7 +5,7 @@ ListGroup = React.createFactory ReactBootstrap.ListGroup
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Link = React.createFactory Router.Link
 
-{ div } = React.DOM
+{ div, h1 } = React.DOM
 
 TopicSidebar = React.createClass
   displayName: "TopicSidebar"
@@ -14,11 +14,10 @@ TopicSidebar = React.createClass
     topics: React.PropTypes.array.isRequired
 
   render: ->
-    ListGroup {className: "side-bar"},
+    ListGroup {className: "sidebar"},
+      h1 {className: "categories-header"}, "Categories"
       @props.topics.map ({name, id, rooms}, index) ->
-        div {className:"topic-name", key: index}, name,
-          rooms.map ({id}, index) ->
-            Link {to: "/rooms/#{id}", key: index},
-              ListGroupItem {}, "room #{id}"
+        Link {to: "/topics/#{id}", key: index},
+          ListGroupItem {className: "topic-name"}, name
 
 module.exports = TopicSidebar
