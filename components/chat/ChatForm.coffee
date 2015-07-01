@@ -15,7 +15,7 @@ ChatForm = React.createClass
   keyPress: (e) ->
     if e.key is "Enter"
       @props.submitMessage e, @props.currentMessage.trim()
-      ChatActions.setCurrentMessage ""   
+      ChatActions.setCurrentMessage ""
 
   submit: (e) ->
     @props.submitMessage e, @props.currentMessage.trim()
