@@ -36,7 +36,9 @@ HomeComponent = React.createClass
     console.log "errorFunction"
 
   submitQuestion: (e) ->
-    URLResources.writeToAPI "/rooms", {topic_id: @state.topicSelected.eventKey, text: @state.currentQuestion}, @successFunction, @errorFunction
+    unless @state.currentQuestion.trim() is ""
+      URLResources.writeToAPI "/rooms", {topic_id: @state.topicSelected.eventKey, text: @state.currentQuestion.trim()}, @successFunction, @errorFunction
+      ChatActions.setCurrentQuestion ""
 
   onTopicSelected: (eventKey, href, target) ->
     ChatActions.setTopicSelected {eventKey, name: target}
