@@ -1,11 +1,10 @@
 React = require("react")
 
-{ h1 } = React.DOM
-
+{ div } = React.DOM
 HomeComponent = React.createClass
   displayName: "HomeComponent"
 
   render: ->
-    h1 {}, "welcome!"
+    div {}, ("Welcome!")
 
 module.exports = HomeComponent
