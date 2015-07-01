@@ -34,15 +34,49 @@
 
   .messages {
     position: absolute;
-    left: 160px;
+    left: $sidebar_width;
     top: 5px;
     overflow-y: scroll;
+    overflow-x: hidden;
     height: calc(100% - #{$chat_box_height});
     width: calc(100% - #{$sidebar_width});
     vertical-align: top;
-    .odd {
-      background-color: $chat_background_grey;
-      vertical-align: top;
+    .message-row {
+      padding: 5px;
+
+      &.odd {
+        background-color: $chat_background_grey;
+      }
+
+      .username {
+        text-align: right;
+        width: $username_width;
+        float: left;
+        padding: 0px 10px;
+      }
+
+      .chat-body {
+        float: left;
+        position: relative;
+        width: calc(100% - #{$username_width});
+
+        .text {
+          padding-right: 75px;
+        }
+
+        img, video {
+          max-width: 500px;
+          padding-top: 5px;
+        }
+
+        .timestamp {
+          position: absolute;
+          top: 2px;
+          right: 20px;
+          color: gray;
+          font-size: 12px;
+        }
+      }
     }
   }
 

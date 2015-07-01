@@ -3,28 +3,36 @@ React = require "react"
 ReactBootstrap = require "react-bootstrap"
 Input = React.createFactory ReactBootstrap.Input
 Button = React.createFactory ReactBootstrap.Button
+ChatActions = require("../../actions/ChatActions")
 
 ChatForm = React.createClass
+  displayName: "ChatForm"
+
   propTypes:
     submitMessage: React.PropTypes.func.isRequired
-
-  getInitialState: ->
-    message: ""
+    currentMessage: React.PropTypes.string.isRequired
 
   keyPress: (e) ->
     if e.key == "Enter"
-      @props.submitMessage e, @state.message.trim()
-      @setState message: ""
+      @props.submitMessage e, @props.currentMessage.trim()
+      ChatActions.setCurrentMessage ""
 
   submit: (e) ->
-    @props.submitMessage e, @state.message.trim()
+    @props.submitMessage e, @props.currentMessage.trim()
 
   inputChange: (e) ->
-    @setState message: e.target.value
+    ChatActions.setCurrentMessage e.target.value
 
   render: ->
     form {className: "chat-form", autoComplete: off},
-      Input {type: "text", id: "chat-input", className: "form-input", autoComplete: off, value: @state.message, onChange: @inputChange, onKeyDown: @keyPress} 
+      Input
+        type: "text"
+        id: "chat-input"
+        className: "form-input"
+        autoComplete: off
+        value: @props.currentMessage
+        onChange: @inputChange
+        onKeyDown: @keyPress
       Button {onClick: @submit, className: "form-button"}, "send"
 
 module.exports = ChatForm
