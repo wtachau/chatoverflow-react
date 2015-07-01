@@ -46,7 +46,7 @@ ChatComponent = React.createClass
       ChatActions.fetchRoomHistory @props.currentRoom
 
   componentWillReceiveProps: (nextProps) ->
-    unless nextProps.currentRoom is @props.currentRoom
+    unless nextProps.currentRoom is @props.currentRoom or nextProps.currentRoom is undefined
       @socket.emit "subscribe", {username: @props.username, room: nextProps.currentRoom}
       @socket.emit "unsubscribe", {username: @props.username, room: @props.currentRoom}
       ChatActions.fetchRoomHistory nextProps.currentRoom
