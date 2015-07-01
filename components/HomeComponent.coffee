@@ -1,5 +1,4 @@
 React = require("react")
-Router = require("react-router")
 
 ReactBootstrap = require("react-bootstrap")
 URLResources = require("../common/URLResources")
