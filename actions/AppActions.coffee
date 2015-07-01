@@ -11,6 +11,12 @@ class AppActions
   fetchUsers: ->
     URLResources.readFromAPI "/users", @actions.setCurrentUsers, @actions.failure
 
+  followRoom: (roomId) ->
+    URLResources.putFromAPI "/users/follow/#{roomId}", @actions.setCurrentUser, @actions.failure
+
+  unfollowRoom: (roomId) ->
+    URLResources.putFromAPI "/users/unfollow/#{roomId}", @actions.setCurrentUser, @actions.failure
+
   login: ->
     window.location.assign("#{ URLResources.getLogicServerOrigin() }/login")
 
