@@ -12,6 +12,7 @@ TopicSidebar = React.createClass
 
   propTypes:
     topics: React.PropTypes.array.isRequired
+    user: React.PropTypes.object.isRequired
 
   render: ->
     ListGroup {className: "side-bar"},
@@ -20,5 +21,7 @@ TopicSidebar = React.createClass
           rooms.map ({id}, index) ->
             Link {to: "/rooms/#{id}", key: index},
               ListGroupItem {}, "room #{id}"
+      @props.user.followed_rooms.map ({id}) ->
+        ListGroupItem {}, "room #{id} is currently being followed"
 
 module.exports = TopicSidebar

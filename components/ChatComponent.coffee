@@ -68,7 +68,7 @@ ChatComponent = React.createClass
       HomeComponent {}
 
     div {className: "chat"},
-      TopicSidebar {topics: @state.chat.topics}
+      TopicSidebar {topics: @state.chat.topics, user: @state.app.user}
       mainSection
       
 
