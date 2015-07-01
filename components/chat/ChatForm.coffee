@@ -47,7 +47,6 @@ ChatForm = React.createClass
         value: @props.currentMessage
         onChange: @inputChange
         displayTransform: @displayMention
-        singleLine: true
         onKeyDown: @keyPress,
         Mention {trigger: "@", data: @formattedUserMentionsData()},
       Button {onClick: @submit, className: "form-button"}, "send"
