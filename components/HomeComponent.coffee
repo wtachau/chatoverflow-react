@@ -36,9 +36,6 @@ HomeComponent = React.createClass
     console.log "errorFunction"
 
   submitQuestion: (e) ->
-    console.log "Question: " + @state.currentQuestion
-    console.log "ID: " + @state.topicSelected.eventKey
-    e.preventDefault()
     URLResources.writeToAPI "/rooms", {topic_id: @state.topicSelected.eventKey, text: @state.currentQuestion}, @successFunction, @errorFunction
 
   onTopicSelected: (eventKey, href, target) ->
