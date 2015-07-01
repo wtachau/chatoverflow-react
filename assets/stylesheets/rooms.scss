@@ -4,7 +4,8 @@
 .rooms {
 
   .current-topic {
-    color = $chat_sidebar_hover_periwinkle;
+    color: $chat_sidebar_hover_periwinkle;
+    background-color: $chat_background_grey;
   }
 
 

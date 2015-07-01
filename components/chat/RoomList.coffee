@@ -17,24 +17,25 @@ RoomList = React.createClass
     currentTopic: React.PropTypes.number.isRequired
 
   getInitialState: ->
-    rooms: []
+    topic: null
 
   componentWillMount: ->
-    URLResources.readFromAPI "/topics", (response)=>
-      @setState rooms: response
+    console.log "In componentWillMount"
+    URLResources.readFromAPI "/topics/#{@props.currentTopic}", (response)=>
+      @setState topic: response
 
   render: ->
+    console.log "In render room list with currentTopic = ", @props.currentTopic
     div {className: "rooms"},
-      Row {},
-        Col xs: 8,
-          h1 {className: "current-topic"}, @props.currentTopic 
-      Row {},
-        Col xs: 8,
-          @state.rooms.map ({name, id, rooms}) ->
-        div {}, 
-          @state.rooms.map ({id}) ->
-            Link {to: "/rooms/#{id}"},
-              ListGroupItem {className: "topic-name"}, "Room #{id}"
+      if @state.topic
+        Row {},
+          Col xs: 8,
+            h1 {className: "current-topic"}, @state.topic.name
+        Row {},
+          Col xs: 8,
+            @state.topic.rooms.map ({id}) ->
+              Link {to: "/rooms/#{id}"},
+                ListGroupItem {className: "topic-name"}, "Room #{id}"
 
 
 module.exports = RoomList

@@ -29,13 +29,13 @@ ChatComponent = React.createClass
     e.preventDefault()
 
   render: ->
+    console.log "In render chat component"
     mainSection = if @props.currentRoom then (
       div {},
         MessageList {currentRoom: @props.currentRoom, socket: @socket, username: @username()}
         ChatForm {submitMessage: @submitMessage} )
     else if @props.currentTopic then (
-      div {},
-        RoomList {currentTopic: @props.currentTopic}
+      RoomList {currentTopic: @props.currentTopic}
       )
     else
       HomeComponent {}
