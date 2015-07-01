@@ -8,7 +8,9 @@ ChatForm = React.createFactory require("./chat/ChatForm")
 HomeComponent = React.createFactory require("./HomeComponent")
 URLResources = require("../common/URLResources")
 ChatStore = require("../stores/ChatStore")
+AppStore = require("../stores/AppStore")
 ChatActions = require("../actions/ChatActions")
+AppActions = require("../actions/AppActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 
 ChatComponent = React.createClass
@@ -25,7 +27,9 @@ ChatComponent = React.createClass
   mixins: [ReactStateMagicMixin]
 
   statics:
-    registerStore: ChatStore
+    registerStores: 
+      chat: ChatStore
+      app: AppStore
 
   username: ->
     @props.user.name or @props.user.username
@@ -34,12 +38,13 @@ ChatComponent = React.createClass
     @socket = io(URLResources.getChatServerOrigin())
     @socket.on "chat message", ({user_id, username, room_id, text}) =>
       if room_id == @props.currentRoom
-        newList = @state.messages
+        newList = @state.chat.messages
         newList.push {username, text}
         ChatActions.setMessagesList newList
 
   componentDidMount: ->
     ChatActions.fetchTopics()
+    AppActions.fetchUsers()
     if @props.currentRoom
       ChatActions.fetchRoomHistory @props.currentRoom
 
@@ -57,13 +62,13 @@ ChatComponent = React.createClass
   render: ->
     mainSection = if @props.currentRoom then (
       div {},
-        MessageList {messages: @state.messages}
-        ChatForm {submitMessage: @submitMessage, currentMessage: @state.currentMessage} )
+        MessageList {messages: @state.chat.messages}
+        ChatForm {submitMessage: @submitMessage, currentMessage: @state.chat.currentMessage, users: @state.app.users} )
     else
       HomeComponent {}
 
     div {className: "chat"},
-      TopicSidebar {topics: @state.topics}
+      TopicSidebar {topics: @state.chat.topics}
       mainSection
       
 
