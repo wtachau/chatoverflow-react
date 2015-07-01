@@ -1,6 +1,10 @@
 React = require("react")
+ChatStore = require("../stores/ChatStore")
+ChatActions = require("../actions/ChatActions")
+ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 
 ReactBootstrap = require("react-bootstrap")
+URLResources = require("../common/URLResources")
 { h1, form, div } = React.DOM
 
 Row = React.createFactory ReactBootstrap.Row
@@ -13,46 +17,51 @@ MenuItem = React.createFactory ReactBootstrap.MenuItem
 HomeComponent = React.createClass
   displayName: "HomeComponent"
 
-  getInitialState: ->
-    buttonText: "Next"
-    question: ""
-    questionEntered: false
-    topic: null
+  mixins: [ReactStateMagicMixin]
+
+  statics:
+    registerStore: ChatStore
+
+  inputChange: (e) ->
+    ChatActions.setCurrentQuestion e.target.value
 
   keyPress: (e) ->
     if e.key is "Enter"
-      @submitQuestion()
+      @submitQuestion e
 
-  onQuestionEntered: (e) ->
-    @setState questionEntered: not @state.questionEntered 
-    if @state.buttonText is "Next" then @setState buttonText: "Back" else @setState buttonText: "Next"
+  successFunction: (response) ->
+    console.log response
 
-  inputChange: (e) ->
-    @setState question: e.target.value
+  errorFunction: ->
+    console.log "errorFunction"
 
-  submitQuestion:  ->
-    console.log "todo"
-    # todo: writeToAPI then render different component
+  submitQuestion: (e) ->
+    URLResources.writeToAPI "/rooms", {topic_id: @state.topicSelected.eventKey, text: @state.currentQuestion}, @successFunction, @errorFunction
+
+  onTopicSelected: (eventKey, href, target) ->
+    ChatActions.setTopicSelected {eventKey, name: target}
 
   render: ->
     div {className: "home"},
-        Row {},
-          Col xs: 8, 
-            h1 {}, "Ask a question!"
-        Row {},
-          Col xs: 4, {},
-            form {className: "welcome-form", autoComplete: off},
-              Input {type: "text", className: "welcome-input", id: "welcome-input", autoComplete: off, value: @state.question, onChange: @inputChange, onKeyDown: @keyPress}
-          Col xs: 4, {},
-              Button {className: "welcome-form-button", onClick: @onQuestionEntered}, @state.buttonText
-        if @state.questionEntered
+      Row {},
+        Col xs: 8,
+          h1 {}, "Select a Topic"
+      Row {},
+        Col xs: 4,
+        DropdownButton title: (if @state.topicSelected then @state.topicSelected.name else "Select a topic"),
+          @state.topics.map ({id, name}) =>
+            MenuItem {eventKey: id, target: name, onSelect: @onTopicSelected}, name
+      if @state.topicSelected
+        div {},
           Row {},
-            Col xs: 8,
-            #Button {className: "welcome-form-button", onClick: @onQuestionEntered}, "Back"
-            Col xs: 4,
-              DropdownButton title: "Choose a topic",
-                MenuItem eventKey = '1', "Java"
-                MenuItem eventKey = '2', "Android"
-                MenuItem eventKey = '3', "iOS"
+            Col xs: 12, 
+              h1 {}, "What's your #{@state.topicSelected.name} question?"
+          Row {},
+            Col xs: 4, {},
+              form {className: "welcome-form", autoComplete: off},
+                Input {type: "text", className: "welcome-input", autoComplete: off, value: @state.question, onChange: @inputChange, onKeyDown: @keyPress}
+            Col xs: 4, {},
+                Button {className: "welcome-form-button", onClick: @submitQuestion}, "Submit"
 
 module.exports = HomeComponent
+

@@ -21,7 +21,7 @@ Message = React.createClass
     else ""
 
   render: ->
-    Row {className: "message-row "+ @props.className},
+    Row {className: "message-row " + @props.className},
       div {className: "username"}, @props.username
       div {className: "chat-body"},
         div {className: "text"}, @props.text
