@@ -1,0 +1,101 @@
+/* React Mentions */
+
+@mixin box-sizing($value) {
+  -webkit-box-sizing: $value;
+  -khtml-box-sizing: $value;
+  -moz-box-sizing: $value;
+  -ms-box-sizing: $value;
+  -o-box-sizing: $value;
+  box-sizing: $value; 
+}
+
+@mixin box-shadow($value) {
+  -webkit-box-shadow: $value;
+  -khtml-box-shadow: $value;
+  -moz-box-shadow: $value;
+  -ms-box-shadow: $value;
+  -o-box-shadow: $value;
+  box-shadow: $value; 
+}
+.react-mentions {
+  width: 90%;
+  background-color: white;
+
+  input {
+    border: 0;
+    padding: 10px;
+    width: 100% !important;
+    margin-right: .5%;
+  }
+
+  .control {
+    &.textarea {
+      background: #fff;
+      font-family: monospace;
+      font-size: 12px;
+      border: 1px solid silver;
+      font-weight: normal;
+
+      .highlighter {
+        padding: 9px;
+      }
+    }
+
+    &.input {
+      .highlighter {
+        padding: 8px;
+        border: 2px inset transparent;
+      }
+    }
+
+
+    .highlighter {
+      strong {
+        font-weight: normal;
+        background: #cee4e5;
+      }
+    }
+  }
+
+  textarea {
+    padding: 9px;
+    min-height: 63px;
+    outline: 0;
+    border: 0;
+    margin: 0;
+
+    @include box-sizing(border-box);
+  }
+
+  .suggestions {
+    position: absolute;
+    z-index: 1;
+
+    border: 1px solid rgba(0,0,0,0.15);
+    background-color: white;
+    margin-top: 14px;
+    font-size: 10pt;
+
+    @include box-shadow(2px 2px 0 rgba(0,0,0,0.06));
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+
+      li {
+        padding: 5px 15px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(0,0,0,0.15);;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &.focus {
+          background-color: #cee4e5;
+        }
+      }
+    }
+  }
+}
