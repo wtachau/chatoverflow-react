@@ -1,6 +1,6 @@
 React = require("react")
 
-{ div, h1 } = React.DOM
+{ div } = React.DOM
 HomeComponent = React.createClass
   displayName: "HomeComponent"
 

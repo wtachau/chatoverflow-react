@@ -1,5 +1,5 @@
 React = require("react")
-Marked = require "react-marked"
+Marked = require("react-marked")
 ReactBootstrap = require("react-bootstrap")
 moment = require("moment")
 
