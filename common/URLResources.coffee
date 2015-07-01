@@ -22,4 +22,14 @@ URLResources =
       success: successFunction
       error: errorFunction
 
+  putFromAPI: (url, successFunction, errorFunction) ->
+    Reqwest
+      url: @getLogicServerOrigin() + url
+      type: 'json'
+      method: 'put'
+      contentType: 'application/json'
+      headers: { 'Authorization': sessionStorage.getItem("jwt") }
+      success: successFunction
+      error: errorFunction
+
 module.exports = URLResources

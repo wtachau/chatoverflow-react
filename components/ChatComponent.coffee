@@ -62,13 +62,13 @@ ChatComponent = React.createClass
   render: ->
     mainSection = if @props.currentRoom then (
       div {},
-        MessageList {messages: @state.chat.messages}
+        MessageList {messages: @state.chat.messages, currentRoom: @props.currentRoom}
         ChatForm {submitMessage: @submitMessage, currentMessage: @state.chat.currentMessage, users: @state.app.users} )
     else
       HomeComponent {}
 
     div {className: "chat"},
-      TopicSidebar {topics: @state.chat.topics}
+      TopicSidebar {topics: @state.chat.topics, user: @state.app.user}
       mainSection
       
 
