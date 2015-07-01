@@ -3,7 +3,7 @@ URLResources = require("../common/URLResources")
 
 class ChatActions
   constructor: ->
-    @generateActions 'setCurrentMessage', 'setMessagesList', 'setTopics'
+    @generateActions "setCurrentMessage", "setMessagesList", "setTopics", "setTopicInfo"
 
   fetchRoomHistory: (roomId) ->
     URLResources.readFromAPI "/rooms/#{roomId}/messages", @actions.fetchRoomHistorySuccess, @actions.fetchFailure
@@ -11,6 +11,9 @@ class ChatActions
   fetchRoomHistorySuccess: (response) ->
     messages = response.map ({username, text}) -> {username, text}
     @actions.setMessagesList messages
+
+  fetchTopicInfo: (currentTopic) ->
+    URLResources.readFromAPI "/topics/#{currentTopic}", @actions.setTopicInfo
 
   fetchFailure: (error) ->
     console.error(error)

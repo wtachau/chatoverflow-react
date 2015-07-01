@@ -4,6 +4,9 @@ ReactBootstrap = require("react-bootstrap")
 
 Router = require("react-router")
 URLResources = require("../../common/URLResources")
+ChatStore = require("../../stores/ChatStore")
+ChatActions = require("../../actions/ChatActions")
+ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 ListGroup = React.createFactory ReactBootstrap.ListGroup
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Link = React.createFactory Router.Link
@@ -13,27 +16,32 @@ Col = React.createFactory ReactBootstrap.Col
 { div, h1 } = React.DOM
 
 RoomList = React.createClass
+  displayName: "RoomList"
+
   propTypes:
     currentTopic: React.PropTypes.number.isRequired
 
-  getInitialState: ->
-    topic: null
+  mixins: [ReactStateMagicMixin]
+
+  statics:
+    registerStore: ChatStore
+
+  componentWillReceiveProps: (nextProps) ->
+    unless nextProps.currentTopic is @props.currentTopic
+      ChatActions.fetchTopicInfo nextProps.currentTopic
 
   componentWillMount: ->
-    console.log "In componentWillMount"
-    URLResources.readFromAPI "/topics/#{@props.currentTopic}", (response)=>
-      @setState topic: response
+    ChatActions.fetchTopicInfo @props.currentTopic
 
   render: ->
-    console.log "In render room list with currentTopic = ", @props.currentTopic
     div {className: "rooms"},
-      if @state.topic
+      if @state.topicInfo
         Row {},
           Col xs: 8,
-            h1 {className: "current-topic"}, @state.topic.name
+            h1 {className: "current-topic"}, @state.topicInfo.name
         Row {},
           Col xs: 8,
-            @state.topic.rooms.map ({id}) ->
+            @state.topicInfo.rooms.map ({id}) ->
               Link {to: "/rooms/#{id}"},
                 ListGroupItem {className: "topic-name"}, "Room #{id}"
 

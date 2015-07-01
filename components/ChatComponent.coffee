@@ -35,7 +35,7 @@ ChatComponent = React.createClass
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
     @socket.on "chat message", ({user_id, username, room_id, text}) =>
-      if room_id == @props.currentRoom
+      if room_id is @props.currentRoom
         newList = @state.messages
         newList.push {username, text}
         ChatActions.setMessagesList newList
@@ -57,7 +57,6 @@ ChatComponent = React.createClass
     e.preventDefault()
 
   render: ->
-    console.log "In render chat component"
     mainSection = if @props.currentRoom then (
       div {},
         MessageList {messages: @state.messages}
