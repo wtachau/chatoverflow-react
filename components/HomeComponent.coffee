@@ -10,7 +10,8 @@ Button = React.createFactory ReactBootstrap.Button
 DropdownButton = React.createFactory ReactBootstrap.DropdownButton
 MenuItem = React.createFactory ReactBootstrap.MenuItem
 
-HomePageComponent = React.createClass
+HomeComponent = React.createClass
+  displayName: "HomeComponent"
 
   getInitialState: ->
     buttonText: "Next"
@@ -54,7 +55,4 @@ HomePageComponent = React.createClass
                 MenuItem eventKey = '2', "Android"
                 MenuItem eventKey = '3', "iOS"
 
-
-
-
-module.exports = HomePageComponent
+module.exports = HomeComponent
