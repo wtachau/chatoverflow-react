@@ -1,46 +1,55 @@
 React = require "react"
-{form} = React.DOM
+mentions = require "react-mentions"
 ReactBootstrap = require "react-bootstrap"
-Input = React.createFactory ReactBootstrap.Input
-Button = React.createFactory ReactBootstrap.Button
+ChatActions = require("../../actions/ChatActions")
+ChatStore = require("../../stores/ChatStore")
 URLResources = require("../../common/URLResources")
 
-mentions = require "react-mentions"
+{form} = React.DOM
+Button = React.createFactory ReactBootstrap.Button
 MentionsInput = React.createFactory mentions.MentionsInput
 Mention = React.createFactory mentions.Mention
+ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 ChatForm = React.createClass
+  displayName: "ChatForm"
+
   propTypes:
     submitMessage: React.PropTypes.func.isRequired
+    currentMessage: React.PropTypes.string.isRequired
 
-  getInitialState: ->
-    message: "",
-    users: [],
-    mentions: []
+  mixins: [ReactStateMagicMixin]
 
-  componentWillMount: ->
-    URLResources.readFromAPI "/users", (response) =>
-      users = response.map ({id, username}) -> {id: id, display: username}
-      @setState users: users
+  statics:
+    registerStore: ChatStore
 
   keyPress: (e) ->
     if e.key == "Enter"
-      @props.submitMessage e, @state.message.trim()
-      @setState message: ""
+      @submit e
 
   submit: (e) ->
-    @props.submitMessage e, @state.message.trim()
-
-  inputChange: (e, newValue, newPlainTextValue, mentions) ->
-    @setState message: e.target.value
-    @setState mentions: mentions
+    @props.submitMessage e, @props.currentMessage.trim()
+    ChatActions.setCurrentMessage ""
 
   displayMention: (id, display, type) -> "@" + display
 
+  formattedUserMentionsData: () ->
+    @props.users.map ({username, id}) ->
+      {id: id, display: username}
+
+  inputChange: (e, newValue, newPlainTextValue, mentions) ->
+    ChatActions.setCurrentMessage e.target.value
+    ChatActions.setMentions mentions
+
   render: ->
     form {className: "chat-form", autoComplete: off},
-      MentionsInput {value: @state.message, onChange: @inputChange, displayTransform: @displayMention, singleLine: true, onKeyDown: @keyPress},
-        Mention {trigger: "@", data: @state.users}, 
+      MentionsInput 
+        value: @props.currentMessage
+        onChange: @inputChange
+        displayTransform: @displayMention
+        singleLine: true
+        onKeyDown: @keyPress,
+        Mention {trigger: "@", data: @formattedUserMentionsData()},
       Button {onClick: @submit, className: "form-button"}, "send"
 
 module.exports = ChatForm
