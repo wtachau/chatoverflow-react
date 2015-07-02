@@ -3,7 +3,7 @@ URLResources = require("../common/URLResources")
 
 class AppActions
   constructor: ->
-    @generateActions 'setCurrentUser', 'setCurrentUsers', 'failure'
+    @generateActions "setCurrentUser", "userFetchFailure", "setCurrentUsers", "failure"
 
   fetchUser: ->
     URLResources.readFromAPI "/current_user", @actions.setCurrentUser, @actions.failure
@@ -22,6 +22,6 @@ class AppActions
 
   logout: ->
     @actions.setCurrentUser null
-    sessionStorage.setItem('jwt', '')
+    sessionStorage.setItem("jwt", "")
 
 module.exports = alt.createActions(AppActions)
