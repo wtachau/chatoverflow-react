@@ -38,7 +38,12 @@ HomeComponent = React.createClass
     @socket = io(URLResources.getChatServerOrigin())
 
   successFunction: (response) ->
-    @socket.emit "chat message", { user_id: @state.app.user.id, username: @state.app.user.username, room_id: response.id, "text": @state.chat.currentQuestion, mentions: [] }
+    @socket.emit "chat message",
+      user_id: @state.app.user.id
+      username: @state.app.user.username
+      room_id: response.id
+      text: @state.chat.currentQuestion
+      mentions: []
     ChatActions.setCurrentQuestion ""
     @transitionTo 'room', room_id: response.id
 
@@ -47,32 +52,53 @@ HomeComponent = React.createClass
 
   submitQuestion: (e) ->
     unless @state.chat.currentQuestion.trim() is ""
-      URLResources.writeToAPI "/rooms", {topic_id: @state.chat.topicSelected.eventKey, text: @state.chat.currentQuestion.trim()}, @successFunction, @errorFunction
+      URLResources.callAPI "/rooms", "post",
+        {topic_id: @state.chat.topicSelected.eventKey,
+        text: @state.chat.currentQuestion.trim()},
+        @successFunction
 
   onTopicSelected: (eventKey, href, target) ->
     ChatActions.setTopicSelected {eventKey, name: target}
 
   render: ->
+    dropdownTitle = if @state.topicSelected
+      @state.chat.topicSelected.name
+    else
+      "Select a topic"
+
     div {className: "home"},
       Row {},
         Col xs: 8,
           h1 {}, "Select a Topic"
       Row {},
         Col xs: 4,
-        DropdownButton title: (if @state.chat.topicSelected then @state.chat.topicSelected.name else "Select a topic"),
+        DropdownButton title: dropdownTitle,
           @state.chat.topics.map ({id, name}) =>
-            MenuItem {eventKey: id, target: name, onSelect: @onTopicSelected}, name
+            MenuItem
+              eventKey: id
+              target: name
+              onSelect: @onTopicSelected,
+              name
       if @state.chat.topicSelected
         div {},
           Row {},
-            Col xs: 12, 
+            Col xs: 12,
               h1 {}, "What's your #{@state.chat.topicSelected.name} question?"
           Row {},
             Col xs: 4, {},
               form {className: "welcome-form", autoComplete: off},
-                Input {type: "text", className: "welcome-input", autoComplete: off, value: @state.chat.question, onChange: @inputChange, onKeyDown: @keyPress}
+                Input
+                  type: "text"
+                  className: "welcome-input"
+                  autoComplete: off
+                  value: @state.chat.question
+                  onChange: @inputChange
+                  onKeyDown: @keyPress
             Col xs: 4, {},
-                Button {className: "welcome-form-button", onClick: @submitQuestion}, "Submit"
+                Button
+                  className: "welcome-form-button"
+                  onClick: @submitQuestion,
+                  "Submit"
 
 module.exports = HomeComponent
 
