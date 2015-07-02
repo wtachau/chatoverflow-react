@@ -3,6 +3,7 @@ io = require("socket.io-client")
 ChatStore = require("../stores/ChatStore")
 AppStore = require("../stores/AppStore")
 ChatActions = require("../actions/ChatActions")
+AppActions = require("../actions/AppActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 Router = require("react-router")
 
@@ -39,6 +40,7 @@ HomeComponent = React.createClass
 
   successFunction: (response) ->
     @socket.emit "chat message", { user_id: @state.app.user.id, username: @state.app.user.username, room_id: response.id, "text": @state.chat.currentQuestion, mentions: [] }
+    AppActions.fetchUser()
     ChatActions.setCurrentQuestion ""
     @transitionTo 'room', room_id: response.id
 
