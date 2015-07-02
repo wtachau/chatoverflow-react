@@ -5,7 +5,7 @@ ListGroup = React.createFactory ReactBootstrap.ListGroup
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Link = React.createFactory Router.Link
 
-{ div, h1 } = React.DOM
+{ h1 } = React.DOM
 
 TopicSidebar = React.createClass
   displayName: "TopicSidebar"
