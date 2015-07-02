@@ -24,8 +24,9 @@ ChatForm = React.createClass
     registerStore: ChatStore
 
   keyPress: (e) ->
-    if e.key == "Enter"
-      @submit e
+    if e.key is "Enter"
+      @props.submitMessage e, @props.currentMessage.trim()
+      ChatActions.setCurrentMessage ""
 
   submit: (e) ->
     @props.submitMessage e, @props.currentMessage.trim(), @state.mentions

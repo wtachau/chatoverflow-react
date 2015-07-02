@@ -1,5 +1,37 @@
+@import "colors";
+@import "sizes";
+
 h1 {
   text-align: center;
+}
+
+.home {
+
+  position: relative;
+  width: 60%;
+  top: 50%;
+  transform: translateY(50%);
+  left: 30%;
+
+  .welcome-form {
+    background: $chat_background_grey;
+    width: 550px;
+    padding: 1px;
+  }
+  .welcome-input {
+    border: 0;
+    padding: 5px;
+    width: 90%;
+  }
+
+  .welcome-form-button {
+    background: $chat_button_blue; 
+    border: 0;
+    padding: 10px;
+    position: fixed;
+    left: 500px;
+  }
+
 }
 
 body {

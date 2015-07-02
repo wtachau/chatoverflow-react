@@ -7,6 +7,9 @@ require("./assets/vendor/bootstrap/stylesheets/_bootstrap.scss")
 require("./assets/stylesheets/home.scss")
 require("./assets/stylesheets/chat.scss")
 require("./assets/stylesheets/login.scss")
+require("./assets/stylesheets/rooms.scss")
+require("./assets/stylesheets/sidebar.scss")
+require("./assets/stylesheets/messages.scss")
 require("./assets/stylesheets/mentions.scss")
 
 Router.run routes, Router.HistoryLocation, (Handler) ->

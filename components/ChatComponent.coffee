@@ -6,6 +6,7 @@ TopicSidebar = React.createFactory require("./chat/TopicSidebar")
 MessageList = React.createFactory require("./chat/MessageList")
 ChatForm = React.createFactory require("./chat/ChatForm")
 HomeComponent = React.createFactory require("./HomeComponent")
+RoomList = React.createFactory require("./chat/RoomList")
 URLResources = require("../common/URLResources")
 ChatStore = require("../stores/ChatStore")
 AppStore = require("../stores/AppStore")
@@ -23,6 +24,7 @@ ChatComponent = React.createClass
       name: React.PropTypes.string
     logoutClicked: React.PropTypes.func.isRequired
     currentRoom: React.PropTypes.string
+    currentTopic: React.PropTypes.number.isRequired
 
   mixins: [ReactStateMagicMixin]
 
@@ -37,7 +39,7 @@ ChatComponent = React.createClass
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
     @socket.on "chat message", ({user_id, username, room_id, text}) =>
-      if room_id == @props.currentRoom
+      if room_id is @props.currentRoom
         newList = @state.chat.messages
         newList.push {username, text}
         ChatActions.setMessagesList newList
@@ -51,7 +53,7 @@ ChatComponent = React.createClass
       ChatActions.fetchRoomHistory @props.currentRoom
 
   componentWillReceiveProps: (nextProps) ->
-    unless nextProps.currentRoom is @props.currentRoom
+    unless nextProps.currentRoom is @props.currentRoom or nextProps.currentRoom is undefined
       @socket.emit "subscribe", {username: @username(), room: nextProps.currentRoom}
       @socket.emit "unsubscribe", {username: @username(), room: @props.currentRoom}
       ChatActions.fetchRoomHistory nextProps.currentRoom
@@ -66,6 +68,9 @@ ChatComponent = React.createClass
       div {},
         MessageList {messages: @state.chat.messages, currentRoom: @props.currentRoom}
         ChatForm {submitMessage: @submitMessage, currentMessage: @state.chat.currentMessage, users: @state.app.users} )
+    else if @props.currentTopic then (
+      RoomList {currentTopic: @props.currentTopic}
+      )
     else
       HomeComponent {}
 
@@ -73,5 +78,4 @@ ChatComponent = React.createClass
       TopicSidebar {topics: @state.chat.topics, user: @state.app.user}
       mainSection
       
-
 module.exports = ChatComponent
