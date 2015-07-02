@@ -14,13 +14,21 @@ TopicSidebar = React.createClass
     topics: React.PropTypes.array.isRequired
     user: React.PropTypes.object.isRequired
 
+  logger: ->
+    console.log "length is: " + @props.user.followed_rooms.length
+
   render: ->
     ListGroup {className: "sidebar"},
-      h1 {className: "categories-header"}, "Categories"
+      h1 {className: "categories-header"}, "Languages"
       @props.topics.map ({name, id, rooms}, index) ->
         Link {to: "/topics/#{id}", key: index},
           ListGroupItem {className: "topic-name"}, name
-      @props.user.followed_rooms.map ({id}) ->
-        ListGroupItem {}, "room #{id} is currently being followed"
+      h1 {className: "categories-header"}, "Rooms Following"
+      if @props.user.followed_rooms.length
+        @props.user.followed_rooms.map ({id}) ->
+          Link {to: "/rooms/#{id}"},
+            ListGroupItem {}, "room #{id} is currently being followed"
+      else
+        h1 {}, "Not following any rooms!"
 
 module.exports = TopicSidebar

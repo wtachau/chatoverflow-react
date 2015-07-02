@@ -15,14 +15,15 @@
   .categories-header {
     background-color: $chat_sidebar_background;
     color: $white;
-    font-size: 24px;
+    font-size: 16px;
     text-align: left;
     padding: 5px;
     padding-left: 10px;
   }
 
   .topic-name {
-    padding: 10px;
+    text-transform: lowercase;
+    padding: 5px;
     padding-left: 30px;
     color: $white;
     background-color: $chat_sidebar_background;
