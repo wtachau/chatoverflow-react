@@ -32,4 +32,7 @@ class ChatStore
   onSetTopicInfo: (topicInfo) ->
     @topicInfo = topicInfo
 
+  onSetMentions: (mentions) ->
+    @mentions = mentions
+
 module.exports = alt.createStore(ChatStore)

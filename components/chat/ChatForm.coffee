@@ -1,9 +1,15 @@
 React = require "react"
-{form} = React.DOM
+mentions = require "react-mentions"
 ReactBootstrap = require "react-bootstrap"
-Input = React.createFactory ReactBootstrap.Input
-Button = React.createFactory ReactBootstrap.Button
 ChatActions = require("../../actions/ChatActions")
+ChatStore = require("../../stores/ChatStore")
+URLResources = require("../../common/URLResources")
+
+{form} = React.DOM
+Button = React.createFactory ReactBootstrap.Button
+MentionsInput = React.createFactory mentions.MentionsInput
+Mention = React.createFactory mentions.Mention
+ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 ChatForm = React.createClass
   displayName: "ChatForm"
@@ -11,6 +17,11 @@ ChatForm = React.createClass
   propTypes:
     submitMessage: React.PropTypes.func.isRequired
     currentMessage: React.PropTypes.string.isRequired
+
+  mixins: [ReactStateMagicMixin]
+
+  statics:
+    registerStore: ChatStore
 
   keyPress: (e) ->
     if e.key is "Enter"
@@ -21,19 +32,24 @@ ChatForm = React.createClass
     @props.submitMessage e, @props.currentMessage.trim()
     ChatActions.setCurrentMessage ""
 
-  inputChange: (e) ->
+  displayMention: (id, display, type) -> "@" + display
+
+  formattedUserMentionsData: () ->
+    @props.users.map ({username, id}) ->
+      {id: id, display: username}
+
+  inputChange: (e, newValue, newPlainTextValue, mentions) ->
     ChatActions.setCurrentMessage e.target.value
+    ChatActions.setMentions mentions
 
   render: ->
     form {className: "chat-form", autoComplete: off},
-      Input
-        type: "text"
-        id: "chat-input"
-        className: "form-input"
-        autoComplete: off
+      MentionsInput 
         value: @props.currentMessage
         onChange: @inputChange
-        onKeyDown: @keyPress
+        displayTransform: @displayMention
+        onKeyDown: @keyPress,
+        Mention {trigger: "@", data: @formattedUserMentionsData()},
       Button {onClick: @submit, className: "form-button"}, "send"
 
 module.exports = ChatForm

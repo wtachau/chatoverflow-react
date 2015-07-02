@@ -28,4 +28,14 @@ URLResources =
   writeToAPI: (url, data, successFunction, errorFunction) ->
     @callAPI(url, "post", data, successFunction, errorFunction)
 
+  putFromAPI: (url, successFunction, errorFunction) ->
+    Reqwest
+      url: @getLogicServerOrigin() + url
+      type: 'json'
+      method: 'put'
+      contentType: 'application/json'
+      headers: { 'Authorization': sessionStorage.getItem("jwt") }
+      success: successFunction
+      error: errorFunction
+
 module.exports = URLResources

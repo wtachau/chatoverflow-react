@@ -3,10 +3,19 @@ URLResources = require("../common/URLResources")
 
 class AppActions
   constructor: ->
-    @generateActions "setCurrentUser", "userFetchFailure"
+    @generateActions "setCurrentUser", "userFetchFailure", "setCurrentUsers", "failure"
 
   fetchUser: ->
-    URLResources.readFromAPI "/current_user", @actions.setCurrentUser, @actions.userFetchFailure
+    URLResources.readFromAPI "/current_user", @actions.setCurrentUser, @actions.failure
+
+  fetchUsers: ->
+    URLResources.readFromAPI "/users", @actions.setCurrentUsers, @actions.failure
+
+  followRoom: (roomId) ->
+    URLResources.putFromAPI "/users/follow/#{roomId}", @actions.setCurrentUser, @actions.failure
+
+  unfollowRoom: (roomId) ->
+    URLResources.putFromAPI "/users/unfollow/#{roomId}", @actions.setCurrentUser, @actions.failure
 
   login: ->
     window.location.assign("#{ URLResources.getLogicServerOrigin() }/login")

@@ -6,6 +6,7 @@ class AppStore
 
   constructor: () ->
     @user = null
+    @users = null
     @error = null
 
     @bindActions(AppActions)
@@ -13,7 +14,10 @@ class AppStore
   onSetCurrentUser: (user) ->
     @user = user
 
-  onUserFetchFailure: (error) ->
+  onSetCurrentUsers: (users) ->
+    @users = users
+
+  onFailure: (error) ->
     @error = error
 
 module.exports = alt.createStore(AppStore, 'AppStore')
