@@ -33,15 +33,15 @@ MessageList = React.createClass
 
   buttonText: ->
     if @followingCurrentRoom()
-      'Unfollow Room'
+      "Unfollow Room"
     else
-      'Follow Room'
+      "Follow Room"
 
   render: ->
     div {className: "messages"},
       button {onClick: @followRoom}, @buttonText()
-      @props.messages.map ({username, text}, index) ->
+      @props.messages.map ({username, text, created_at}, index) ->
         oddClass = if index % 2 == 1 then "odd" else ""
-        Message username: username, text: text, key: index, className: oddClass
+        Message username: username, text: text, key: index, className: oddClass, created_at: created_at
 
 module.exports = MessageList

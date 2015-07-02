@@ -13,7 +13,7 @@ class ChatActions
       @actions.fetchRoomHistorySuccess
 
   fetchRoomHistorySuccess: (response) ->
-    messages = response.map ({username, text}) -> {username, text}
+    messages = response.map ({username, text, created_at}) -> {username, text, created_at}
     @actions.setMessagesList messages
 
   fetchTopicInfo: (currentTopic) ->
