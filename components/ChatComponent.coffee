@@ -29,7 +29,7 @@ ChatComponent = React.createClass
   mixins: [ReactStateMagicMixin]
 
   statics:
-    registerStores: 
+    registerStores:
       chat: ChatStore
       app: AppStore
 
