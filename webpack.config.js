@@ -12,7 +12,7 @@ module.exports = {
     loaders: [
       { test: /\.scss$/, loaders: ['style', 'css', 'sass-loader'] },
       { test: /\.coffee$/, loader: "coffee-loader"},
-      { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
+      { test: /\.(png|woff|woff2|eot|ttf|svg|otf)$/, loader: 'url-loader?limit=100000' }
     ]
   },
   plugins: []

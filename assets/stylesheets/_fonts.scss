@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "CircularPro-Book";
+  src: url("../fonts/CircularPro-Book.otf") format("opentype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "CircularPro-Medium";
+  src: url("../fonts/CircularPro-Medium.otf") format("opentype");
+  font-weight: normal;
+}
+
+$sidebar_list_item_font : "CircularPro-Book";
+$sidebar_list_title_font : "CircularPro-Medium";

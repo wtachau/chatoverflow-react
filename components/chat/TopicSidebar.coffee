@@ -24,11 +24,8 @@ TopicSidebar = React.createClass
         Link {to: "/topics/#{id}", key: index},
           ListGroupItem {className: "topic-name"}, name
       h1 {className: "categories-header"}, "Rooms Following"
-      if @props.user.followed_rooms.length
         @props.user.followed_rooms.map ({id}) ->
           Link {to: "/rooms/#{id}"},
-            ListGroupItem {}, "room #{id} is currently being followed"
-      else
-        h1 {}, "Not following any rooms!"
+            ListGroupItem {className: "topic-name"}, "room #{id}"
 
 module.exports = TopicSidebar

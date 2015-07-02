@@ -1,5 +1,6 @@
 @import "colors";
 @import "sizes";
+@import "fonts";
 
 .sidebar {
   
@@ -16,6 +17,7 @@
     background-color: $chat_sidebar_background;
     color: $white;
     font-size: 16px;
+    font-family: $sidebar_list_title_font;
     text-align: left;
     padding: 5px;
     padding-left: 10px;
@@ -23,7 +25,9 @@
 
   .topic-name {
     text-transform: lowercase;
-    padding: 5px;
+    font-family: $sidebar_list_item_font;
+    font-size: medium;
+    padding: 3px;
     padding-left: 30px;
     color: $white;
     background-color: $chat_sidebar_background;
