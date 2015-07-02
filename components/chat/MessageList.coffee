@@ -40,8 +40,8 @@ MessageList = React.createClass
   render: ->
     div {className: "messages"},
       button {onClick: @followRoom}, @buttonText()
-      @props.messages.map ({username, text}, index) ->
+      @props.messages.map ({username, text, created_at}, index) ->
         oddClass = if index % 2 == 1 then "odd" else ""
-        Message username: username, text: text, key: index, className: oddClass
+        Message username: username, text: text, key: index, className: oddClass, timestamp: created_at
 
 module.exports = MessageList
