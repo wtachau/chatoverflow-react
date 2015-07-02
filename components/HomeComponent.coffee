@@ -3,6 +3,7 @@ io = require("socket.io-client")
 ChatStore = require("../stores/ChatStore")
 AppStore = require("../stores/AppStore")
 ChatActions = require("../actions/ChatActions")
+AppActions = require("../actions/AppActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 Router = require("react-router")
 
@@ -44,6 +45,7 @@ HomeComponent = React.createClass
       room_id: response.id
       text: @state.chat.currentQuestion
       mentions: []
+    AppActions.fetchUser()
     ChatActions.setCurrentQuestion ""
     @transitionTo 'room', room_id: response.id
 
@@ -56,6 +58,7 @@ HomeComponent = React.createClass
         {topic_id: @state.chat.topicSelected.eventKey,
         text: @state.chat.currentQuestion.trim()},
         @successFunction
+      e.preventDefault()
 
   onTopicSelected: (eventKey, href, target) ->
     ChatActions.setTopicSelected {eventKey, name: target}
