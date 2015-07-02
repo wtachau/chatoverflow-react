@@ -24,15 +24,10 @@ MessageList = React.createClass
     component.scrollTop = component.scrollHeight
 
   followRoom: ->
-    action = if @followingCurrentRoom() then AppActions.unfollowRoom else AppActions.followRoom
-    action @props.currentRoom
-
-  followingCurrentRoom: ->
-    followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
-    parseInt(@props.currentRoom) in followedRoomIds
+    AppActions.followRoom @props.currentRoom, @props.isFollowingRoom
 
   buttonText: ->
-    if @followingCurrentRoom()
+    if @props.isFollowingRoom @props.currentRoom
       'Unfollow Room'
     else
       'Follow Room'

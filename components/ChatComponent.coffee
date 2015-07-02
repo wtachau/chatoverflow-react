@@ -58,6 +58,10 @@ ChatComponent = React.createClass
       @socket.emit "unsubscribe", {username: @username(), room: @props.currentRoom}
       ChatActions.fetchRoomHistory nextProps.currentRoom
 
+  isFollowingRoom: (room_id) ->
+    followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
+    parseInt(room_id) in followedRoomIds
+
   submitMessage: (e, message, mentions) ->
     unless message is ""
       @socket.emit "chat message", { user_id: @props.user.id, username: @username(), room_id: @props.currentRoom, "text": message.trim(), mentions: mentions }
@@ -66,7 +70,7 @@ ChatComponent = React.createClass
   render: ->
     mainSection = if @props.currentRoom then (
       div {},
-        MessageList {messages: @state.chat.messages, currentRoom: @props.currentRoom}
+        MessageList {messages: @state.chat.messages, currentRoom: @props.currentRoom, isFollowingRoom: @isFollowingRoom}
         ChatForm {submitMessage: @submitMessage, currentMessage: @state.chat.currentMessage, users: @state.app.users} )
     else if @props.currentTopic then (
       RoomList {currentTopic: @props.currentTopic}
@@ -75,7 +79,7 @@ ChatComponent = React.createClass
       HomeComponent {}
 
     div {className: "chat"},
-      TopicSidebar {topics: @state.chat.topics, user: @state.app.user}
+      TopicSidebar {topics: @state.chat.topics, user: @state.app.user, isFollowingRoom: @isFollowingRoom}
       mainSection
       
 module.exports = ChatComponent

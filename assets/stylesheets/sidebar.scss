@@ -33,9 +33,21 @@
     background-color: $chat_sidebar_background;
     &:hover {
       background-color: $chat_sidebar_hover_periwinkle;
+      .exit-x {
+        display: inherit;
+      }
     }
     border: 0px;
     border-radius: 0px;
+
+    .exit-x {
+      display: none;
+      float: right;
+      padding-right: 8px;
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 
   .active {
