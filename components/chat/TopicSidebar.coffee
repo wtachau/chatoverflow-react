@@ -4,8 +4,9 @@ Router = require("react-router")
 ListGroup = React.createFactory ReactBootstrap.ListGroup
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Link = React.createFactory Router.Link
+Button = React.createFactory ReactBootstrap.Button
 
-{ h1 } = React.DOM
+{ h1, bsStyle } = React.DOM
 
 TopicSidebar = React.createClass
   displayName: "TopicSidebar"
@@ -13,9 +14,6 @@ TopicSidebar = React.createClass
   propTypes:
     topics: React.PropTypes.array.isRequired
     user: React.PropTypes.object.isRequired
-
-  logger: ->
-    console.log "length is: " + @props.user.followed_rooms.length
 
   render: ->
     ListGroup {className: "sidebar"},
@@ -27,5 +25,7 @@ TopicSidebar = React.createClass
         @props.user.followed_rooms.map ({id}) ->
           Link {to: "/rooms/#{id}"},
             ListGroupItem {className: "topic-name"}, "room #{id}"
+              Button {bsStyle: "xsmall"}, "X"
+
 
 module.exports = TopicSidebar
