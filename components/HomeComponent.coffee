@@ -2,6 +2,7 @@ React = require("react")
 ChatStore = require("../stores/ChatStore")
 ChatActions = require("../actions/ChatActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
+Router = require("react-router")
 
 ReactBootstrap = require("react-bootstrap")
 URLResources = require("../common/URLResources")
@@ -17,7 +18,7 @@ MenuItem = React.createFactory ReactBootstrap.MenuItem
 HomeComponent = React.createClass
   displayName: "HomeComponent"
 
-  mixins: [ReactStateMagicMixin]
+  mixins: [ReactStateMagicMixin, Router.Navigation]
 
   statics:
     registerStore: ChatStore
@@ -30,7 +31,7 @@ HomeComponent = React.createClass
       @submitQuestion e
 
   successFunction: (response) ->
-    console.log response
+    @transitionTo 'room', room_id: response.id
 
   errorFunction: ->
     console.log "errorFunction"
