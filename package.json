@@ -8,12 +8,12 @@
     "url": ""
   },
   "scripts": {
-    "devserve": "webpack-dev-server -d --config webpack.dev.config.js --content-base ./ --progress --colors",
-    "devbuild": "webpack -d --config webpack.dev.config.js --profile --progress --colors",
+    "devserve": "env UV_THREADPOOL_SIZE=100 webpack-dev-server -d --config webpack.dev.config.js --content-base ./ --progress --colors",
+    "devbuild": "env UV_THREADPOOL_SIZE=100 webpack -d --config webpack.dev.config.js --profile --progress --colors",
     "testRoutes": "npm run devbuild && node dev.js",
-    "stagingbuild": "webpack -p --config webpack.staging.config.js --profile --progress --colors",
+    "stagingbuild": "env UV_THREADPOOL_SIZE=100 webpack -p --config webpack.staging.config.js --profile --progress --colors",
     "pushToStaging": "npm run stagingbuild && aws s3 sync . s3://chatoverflow",
-    "prodbuild": "webpack -p --config webpack.prod.config.js --profile --progress --colors"
+    "prodbuild": "env UV_THREADPOOL_SIZE=100 webpack -p --config webpack.prod.config.js --profile --progress --colors"
   },
   "author": "Originate",
   "license": "ISC",
