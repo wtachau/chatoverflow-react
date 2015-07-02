@@ -48,6 +48,7 @@ HomeComponent = React.createClass
   submitQuestion: (e) ->
     unless @state.chat.currentQuestion.trim() is ""
       URLResources.writeToAPI "/rooms", {topic_id: @state.chat.topicSelected.eventKey, text: @state.chat.currentQuestion.trim()}, @successFunction, @errorFunction
+    e.preventDefault()
 
   onTopicSelected: (eventKey, href, target) ->
     ChatActions.setTopicSelected {eventKey, name: target}
