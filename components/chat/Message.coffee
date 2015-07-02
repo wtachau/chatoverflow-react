@@ -12,7 +12,7 @@ Message = React.createClass
   propTypes:
     username: React.PropTypes.string.isRequired
     text: React.PropTypes.string.isRequired
-    timestamp: React.PropTypes.string.isRequired
+    created_at: React.PropTypes.string.isRequired
 
   decorateText: (text) ->
     if text.match ///((^https?:\/\/.*\.(?:png|jpg|gif)$)){1}///
@@ -22,7 +22,7 @@ Message = React.createClass
     else ""
 
   render: ->
-    timestamp = moment(@props.timestamp).format("h:mm A")
+    timestamp = moment(@props.created_at).format("h:mm A")
     Row {className: "message-row " + @props.className},
       div {className: "username"}, @props.username
       div {className: "chat-body"},

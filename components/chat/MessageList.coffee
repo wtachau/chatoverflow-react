@@ -42,6 +42,6 @@ MessageList = React.createClass
       button {onClick: @followRoom}, @buttonText()
       @props.messages.map ({username, text, created_at}, index) ->
         oddClass = if index % 2 == 1 then "odd" else ""
-        Message username: username, text: text, key: index, className: oddClass, timestamp: created_at
+        Message username: username, text: text, key: index, className: oddClass, created_at: created_at
 
 module.exports = MessageList
