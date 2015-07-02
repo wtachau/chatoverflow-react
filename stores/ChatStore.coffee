@@ -8,6 +8,7 @@ class ChatStore
     @currentMessage = ""
     @messages = []
     @topics = []
+    @mentions = []
 
     @bindActions(ChatActions)
 

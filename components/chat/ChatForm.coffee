@@ -28,7 +28,7 @@ ChatForm = React.createClass
       @submit e
 
   submit: (e) ->
-    @props.submitMessage e, @props.currentMessage.trim()
+    @props.submitMessage e, @props.currentMessage.trim(), @state.mentions
     ChatActions.setCurrentMessage ""
 
   displayMention: (id, display, type) -> "@" + display

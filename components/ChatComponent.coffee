@@ -32,7 +32,7 @@ ChatComponent = React.createClass
       app: AppStore
 
   username: ->
-    @props.user.name or @props.user.username
+    @props.user.username
 
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
@@ -41,6 +41,8 @@ ChatComponent = React.createClass
         newList = @state.chat.messages
         newList.push {username, text}
         ChatActions.setMessagesList newList
+    @socket.on "mention", ({user_id, username, room_id, text}) =>
+      alert "#{username} mentioned you in room #{room_id}: #{text}"
 
   componentDidMount: ->
     ChatActions.fetchTopics()
@@ -50,13 +52,13 @@ ChatComponent = React.createClass
 
   componentWillReceiveProps: (nextProps) ->
     unless nextProps.currentRoom is @props.currentRoom
-      @socket.emit "subscribe", {username: @props.username, room: nextProps.currentRoom}
-      @socket.emit "unsubscribe", {username: @props.username, room: @props.currentRoom}
+      @socket.emit "subscribe", {username: @username(), room: nextProps.currentRoom}
+      @socket.emit "unsubscribe", {username: @username(), room: @props.currentRoom}
       ChatActions.fetchRoomHistory nextProps.currentRoom
 
-  submitMessage: (e, message) ->
-    unless message is "" 
-      @socket.emit "chat message", { user_id: @props.user.id, username: @username(), room_id: @props.currentRoom, "text": message.trim() }
+  submitMessage: (e, message, mentions) ->
+    unless message is ""
+      @socket.emit "chat message", { user_id: @props.user.id, username: @username(), room_id: @props.currentRoom, "text": message.trim(), mentions: mentions }
     e.preventDefault()
 
   render: ->
