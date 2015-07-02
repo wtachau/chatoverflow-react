@@ -22,7 +22,7 @@ Message = React.createClass
     else ""
 
   render: ->
-    timestamp = if @props.timestamp then moment(@props.timestamp).format("h:mm A") else moment(new Date()).format("h:mm A").toString()
+    timestamp = moment(@props.timestamp).format("h:mm A")
     Row {className: "message-row " + @props.className},
       div {className: "username"}, @props.username
       div {className: "chat-body"},

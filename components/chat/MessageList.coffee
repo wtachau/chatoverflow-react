@@ -33,9 +33,9 @@ MessageList = React.createClass
 
   buttonText: ->
     if @followingCurrentRoom()
-      'Unfollow Room'
+      "Unfollow Room"
     else
-      'Follow Room'
+      "Follow Room"
 
   render: ->
     div {className: "messages"},
