@@ -33,5 +33,4 @@ TopicSidebar = React.createClass
             ListGroupItem {className: "topic-name"}, "room #{id}",
               div {className: "exit-x", "data-id": id, onClick: @onCloseRoom}, "x"
 
-
 module.exports = TopicSidebar

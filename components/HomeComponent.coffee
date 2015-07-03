@@ -49,17 +49,17 @@ HomeComponent = React.createClass
         Col xs: 8,
           h1 {}, "Select a Topic"
       Row {},
-        Col xs: 4,
+        Col xs: 8,
         DropdownButton title: (if @state.topicSelected then @state.topicSelected.name else "Select a topic"),
           @state.topics.map ({id, name}) =>
             MenuItem {eventKey: id, target: name, onSelect: @onTopicSelected}, name
       if @state.topicSelected
         div {},
           Row {},
-            Col xs: 12, 
+            Col xs: 8, 
               h1 {}, "What's your #{@state.topicSelected.name} question?"
           Row {},
-            Col xs: 4, {},
+            Col xs: 8, {},
               form {className: "welcome-form", autoComplete: off},
                 Input {type: "text", className: "welcome-input", autoComplete: off, value: @state.question, onChange: @inputChange, onKeyDown: @keyPress}
             Col xs: 4, {},
