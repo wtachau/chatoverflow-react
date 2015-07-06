@@ -1,0 +1,45 @@
+@import "colors";
+@import "sizes";
+
+.pinnedPost {
+
+  background-color: $pinned_post_background_grey;
+  position: absolute;
+  max-height: $pinned_post_height;
+  left: $sidebar_width;
+  width: calc(100% - #{$sidebar_width});
+  vertical-align: top;
+  padding: 5px;
+  margin-left: 0px;
+
+  .username {
+    text-align: right;
+    width: $username_width;
+    float: left;
+    padding: 0px 10px;
+  }
+
+  .chat-body {
+    float: left;
+    position: relative;
+    width: calc(100% - #{$username_width});
+
+    .text {
+      padding-right: 75px;
+    }
+
+    img, video {
+      max-width: 500px;
+      padding-top: 5px;
+    }
+
+    .timestamp {
+      position: absolute;
+      top: 2px;
+      right: 20px;
+      color: gray;
+      font-size: 12px;
+    }
+  }
+
+}

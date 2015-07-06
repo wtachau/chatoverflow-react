@@ -11,6 +11,7 @@ require("./assets/stylesheets/rooms.scss")
 require("./assets/stylesheets/sidebar.scss")
 require("./assets/stylesheets/messages.scss")
 require("./assets/stylesheets/mentions.scss")
+require("./assets/stylesheets/pinnedPost.scss")
 
 Router.run routes, Router.HistoryLocation, (Handler) ->
   React.render (React.createElement Handler), document.getElementById("react-root")

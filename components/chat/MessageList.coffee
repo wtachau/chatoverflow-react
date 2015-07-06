@@ -1,10 +1,13 @@
 React = require("react")
 
-{ div, button } = React.DOM
 Message = React.createFactory require("./Message")
+PinnedPost = React.createFactory require("./PinnedPost")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+
+
+{ div, button } = React.DOM
 
 MessageList = React.createClass
   displayName: "MessageList"
@@ -31,10 +34,16 @@ MessageList = React.createClass
     if isFollowing then 'Unfollow Room' else "Follow Room"
 
   render: ->
-    div {className: "messages"},
-      button {onClick: @followRoom}, @buttonText()
-      @props.messages.map ({username, text, created_at}, index) ->
-        oddClass = if index % 2 == 1 then "odd" else ""
-        Message { username, text, key: index, className: oddClass, created_at }
+    [first, rest...] = @props.messages
+    if @props.messages.length is 0
+      div {}
+    else
+      div {},
+        button {onClick: @followRoom}, @buttonText()
+        PinnedPost { username: first.username, text: first.text, created_at: first.created_at }
+        div {className: "messages"},
+          rest.map ({username, text, created_at}, index) ->
+            oddClass = if index % 2 == 1 then "odd" else ""
+            Message { username, text, key: index, className: oddClass, created_at }
 
 module.exports = MessageList
