@@ -13,7 +13,7 @@ MessageList = React.createClass
     currentRoom: React.PropTypes.string.isRequired
 
   componentDidUpdate: ->
-    component = React.findDOMNode this
+    component = React.findDOMNode this.refs.messages
     component.scrollTop = component.scrollHeight
 
   render: ->
@@ -23,7 +23,7 @@ MessageList = React.createClass
     else
       div {},
         PinnedPost { username: first.username, text: first.text, created_at: first.created_at, currentRoom: @props.currentRoom, isFollowingRoom: @props.isFollowingRoom}
-        div {className: "messages"},
+        div {className: "messages", ref: "messages"},
           rest.map ({username, text, created_at}, index) ->
             oddClass = if index % 2 == 1 then "odd" else ""
             Message { username, text, key: index, className: oddClass, created_at }
