@@ -10,6 +10,7 @@ ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 ListGroup = React.createFactory ReactBootstrap.ListGroup
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Link = React.createFactory Router.Link
+RoomInfo = React.createFactory require("./RoomInfo")
 
 Row = React.createFactory ReactBootstrap.Row
 Col = React.createFactory ReactBootstrap.Col
@@ -42,9 +43,6 @@ RoomList = React.createClass
               h1 {className: "current-topic"}, @state.topicInfo.name
           Row {className: "room-list-page"},
             Col xs: 8, xsOffset: 2,
-              @state.topicInfo.rooms.map ({id}) ->
-                Link {to: "/rooms/#{id}"},
-                  ListGroupItem {className: "topic-name"}, "Room #{id}"
-
+              @state.topicInfo.rooms.map (room) -> RoomInfo { room }
 
 module.exports = RoomList

@@ -11,6 +11,34 @@
 
   .room-list-page {
     margin-left: $sidebar_width;
+
+    .room-info {
+      overflow: hidden;
+
+      .answers {
+        float: left;
+        width: 75px;
+        text-align: center;
+        background-color: rgb(224, 224, 224);
+        color: rgb(90, 90, 90);
+        margin-right: 40px;
+        padding: 5px 10px;
+
+        .answer-total {
+          font-weight: bold;
+          font-size: 20px;
+        }
+      }
+
+      .question {
+        font-size: 18px;
+        line-height: 30px;
+      }
+
+      .time-asked {
+        font-size: 12px;
+      }
+    }
   }
 
   .row {
