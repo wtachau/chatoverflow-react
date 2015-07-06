@@ -34,7 +34,7 @@ MessageList = React.createClass
     div {className: "messages"},
       button {onClick: @followRoom}, @buttonText()
       @props.messages.map ({username, text, created_at}, index) =>
-        userColorClass = if username == @state.app.user.username then "usercolor" else ""
+        userColorClass = if username is @state.app.user.username then "usercolor" else ""
         Message { username, text, key: index, className: userColorClass, created_at }
 
 module.exports = MessageList
