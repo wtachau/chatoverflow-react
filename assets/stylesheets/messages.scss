@@ -5,17 +5,17 @@
 
   position: absolute;
   left: $sidebar_width;
-  top: $pinned_post_height;
+  top: $pinned_post_height + $header_height;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: calc(100% - #{$chat_box_height} - #{$pinned_post_height};
+  height: calc(100% - #{$chat_box_height} - #{$pinned_post_height} - #{$header_height});
   width: calc(100% - #{$sidebar_width});
   vertical-align: top;
   .message-row {
 
     padding: 5px;
 
-    &.odd {
+    &.usercolor {
       background-color: $chat_background_grey;
     }
 

@@ -1,0 +1,19 @@
+@import "colors";
+
+nav {
+  &.navbar-default {
+    margin-bottom: 0px;
+    background-color: $purple;
+    border: none;
+    border-radius: 0px;
+    z-index: 1;
+  }
+  h3 {
+    &:hover{
+      text-decoration: none;
+    }
+    color: white;
+    margin-top: 12px;
+    margin-left: -55px;
+  }
+}
