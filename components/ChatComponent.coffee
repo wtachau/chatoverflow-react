@@ -42,7 +42,7 @@ ChatComponent = React.createClass
       ({user_id, username, room_id, text, created_at}) =>
         if room_id is @props.currentRoom
           newList = @state.chat.messages
-          newList.push {username, text, created_at}
+          newList.push {id: user_id, vote_total: 0, room_id, username, text, created_at}
           ChatActions.setMessagesList newList
     @socket.on "mention", ({user_id, username, room_id, text}) ->
       alert "#{username} mentioned you in room #{room_id}: #{text}"
