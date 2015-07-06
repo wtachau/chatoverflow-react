@@ -29,7 +29,7 @@ ChatComponent = React.createClass
   mixins: [ReactStateMagicMixin]
 
   statics:
-    registerStores: 
+    registerStores:
       chat: ChatStore
       app: AppStore
 
@@ -38,12 +38,13 @@ ChatComponent = React.createClass
 
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
-    @socket.on "chat message", ({user_id, username, room_id, text}) =>
-      if room_id is @props.currentRoom
-        newList = @state.chat.messages
-        newList.push {username, text}
-        ChatActions.setMessagesList newList
-    @socket.on "mention", ({user_id, username, room_id, text}) =>
+    @socket.on "chat message",
+      ({user_id, username, room_id, text, created_at}) =>
+        if room_id is @props.currentRoom
+          newList = @state.chat.messages
+          newList.push {username, text, created_at}
+          ChatActions.setMessagesList newList
+    @socket.on "mention", ({user_id, username, room_id, text}) ->
       alert "#{username} mentioned you in room #{room_id}: #{text}"
 
   componentDidMount: ->
@@ -53,9 +54,13 @@ ChatComponent = React.createClass
       ChatActions.fetchRoomHistory @props.currentRoom
 
   componentWillReceiveProps: (nextProps) ->
-    unless nextProps.currentRoom is @props.currentRoom or nextProps.currentRoom is undefined
-      @socket.emit "subscribe", {username: @username(), room: nextProps.currentRoom}
-      @socket.emit "unsubscribe", {username: @username(), room: @props.currentRoom}
+    sameRoom = nextProps.currentRoom is @props.currentRoom
+    nullRoom = nextProps.currentRoom is null
+    unless sameRoom or nullRoom
+      @socket.emit "subscribe",
+        {username: @username(), room: nextProps.currentRoom}
+      @socket.emit "unsubscribe",
+        {username: @username(), room: @props.currentRoom}
       ChatActions.fetchRoomHistory nextProps.currentRoom
 
   isFollowingRoom: (room_id) ->
@@ -64,22 +69,35 @@ ChatComponent = React.createClass
 
   submitMessage: (e, message, mentions) ->
     unless message is ""
-      @socket.emit "chat message", { user_id: @props.user.id, username: @username(), room_id: @props.currentRoom, "text": message.trim(), mentions: mentions }
+      @socket.emit "chat message",
+       user_id: @props.user.id
+       username: @username()
+       room_id: @props.currentRoom
+       "text": message.trim()
+       mentions: mentions
     e.preventDefault()
 
   render: ->
-    mainSection = if @props.currentRoom then (
+    mainSection = if @props.currentRoom
       div {},
-        MessageList {messages: @state.chat.messages, currentRoom: @props.currentRoom, isFollowingRoom: @isFollowingRoom}
-        ChatForm {submitMessage: @submitMessage, currentMessage: @state.chat.currentMessage, users: @state.app.users} )
-    else if @props.currentTopic then (
+        MessageList
+          messages: @state.chat.messages
+          currentRoom: @props.currentRoom
+          isFollowingRoom: @isFollowingRoom
+        ChatForm
+          submitMessage: @submitMessage
+          currentMessage: @state.chat.currentMessage
+          users: @state.app.users
+    else if @props.currentTopic
       RoomList {currentTopic: @props.currentTopic}
-      )
     else
       HomeComponent {}
 
     div {className: "chat"},
-      TopicSidebar {topics: @state.chat.topics, user: @state.app.user, isFollowingRoom: @isFollowingRoom}
+      TopicSidebar
+        topics: @state.chat.topics
+        user: @state.app.user
+        isFollowingRoom: @isFollowingRoom
       mainSection
-      
+
 module.exports = ChatComponent
