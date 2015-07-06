@@ -30,14 +30,22 @@
         }
       }
 
-      .question {
-        font-size: 18px;
-        line-height: 30px;
-        color: rgb(103, 114, 183);
+      .question-info {
+        float: left;
+
+        .question {
+          font-size: 18px;
+          line-height: 30px;
+          color: rgb(103, 114, 183);
+        }
       }
 
       .time-asked {
         font-size: 12px;
+      }
+
+      .recent-answers {
+        margin-top: 10px;
       }
     }
   }
