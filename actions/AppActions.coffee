@@ -3,19 +3,22 @@ URLResources = require("../common/URLResources")
 
 class AppActions
   constructor: ->
-    @generateActions "setCurrentUser", "userFetchFailure", "setCurrentUsers", "failure"
+    @generateActions "setCurrentUser", "userFetchFailure",
+      "setCurrentUsers", "failure"
 
   fetchUser: ->
-    URLResources.readFromAPI "/current_user", @actions.setCurrentUser, @actions.failure
+    URLResources.readFromAPI "/current_user", @actions.setCurrentUser
 
   fetchUsers: ->
-    URLResources.readFromAPI "/users", @actions.setCurrentUsers, @actions.failure
+    URLResources.readFromAPI "/users", @actions.setCurrentUsers
 
   followRoom: (roomId, alreadyFollowing) ->
     unless alreadyFollowing roomId
-      URLResources.putFromAPI "/users/follow/#{roomId}", @actions.setCurrentUser, @actions.failure
+      URLResources.callAPI "/users/follow/#{roomId}",
+        "put", null, @actions.setCurrentUser
     else
-      URLResources.putFromAPI "/users/unfollow/#{roomId}", @actions.setCurrentUser, @actions.failure
+      URLResources.callAPI "/users/follow/#{roomId}",
+        "delete", null, @actions.setCurrentUser
 
   login: ->
     window.location.assign("#{ URLResources.getLogicServerOrigin() }/login")
