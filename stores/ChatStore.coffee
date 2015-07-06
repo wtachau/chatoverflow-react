@@ -21,6 +21,14 @@ class ChatStore
   onSetCurrentMessage: (message) ->
     @currentMessage = message
 
+  onSetMessage: (message) ->
+    index = -1
+    for m, i in @messages
+      if m.id is message.id
+        index = i
+    if index > -1
+      @messages[index] = message
+
   onSetMessagesList: (messages) ->
     @messages = messages
 
