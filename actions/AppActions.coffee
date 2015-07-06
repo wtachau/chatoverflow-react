@@ -12,13 +12,13 @@ class AppActions
   fetchUsers: ->
     URLResources.readFromAPI "/users", @actions.setCurrentUsers
 
-  followRoom: (roomId) ->
-    URLResources.callAPI "/users/follow/#{roomId}",
-      "put", null, @actions.setCurrentUser
-
-  unfollowRoom: (roomId) ->
-    URLResources.callAPI "/users/follow/#{roomId}",
-      "delete", null, @actions.setCurrentUser
+  followRoom: (roomId, alreadyFollowing) ->
+    unless alreadyFollowing roomId
+      URLResources.callAPI "/users/follow/#{roomId}",
+        "put", null, @actions.setCurrentUser
+    else
+      URLResources.callAPI "/users/follow/#{roomId}",
+        "delete", null, @actions.setCurrentUser
 
   login: ->
     window.location.assign("#{ URLResources.getLogicServerOrigin() }/login")

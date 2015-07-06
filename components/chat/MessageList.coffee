@@ -12,10 +12,10 @@ MessageList = React.createClass
   mixins: [ReactStateMagicMixin]
 
   statics:
-    registerStores: 
+    registerStores:
       app: AppStore
 
-  propTypes: 
+  propTypes:
     messages: React.PropTypes.array.isRequired
     currentRoom: React.PropTypes.string.isRequired
 
@@ -24,24 +24,17 @@ MessageList = React.createClass
     component.scrollTop = component.scrollHeight
 
   followRoom: ->
-    action = if @followingCurrentRoom() then AppActions.unfollowRoom else AppActions.followRoom
-    action @props.currentRoom
-
-  followingCurrentRoom: ->
-    followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
-    parseInt(@props.currentRoom) in followedRoomIds
+    AppActions.followRoom @props.currentRoom, @props.isFollowingRoom
 
   buttonText: ->
-    if @followingCurrentRoom()
-      "Unfollow Room"
-    else
-      "Follow Room"
+    isFollowing = @props.isFollowingRoom @props.currentRoom
+    if isFollowing then 'Unfollow Room' else "Follow Room"
 
   render: ->
     div {className: "messages"},
       button {onClick: @followRoom}, @buttonText()
       @props.messages.map ({username, text, created_at}, index) ->
         oddClass = if index % 2 == 1 then "odd" else ""
-        Message username: username, text: text, key: index, className: oddClass, created_at: created_at
+        Message { username, text, key: index, className: oddClass, created_at }
 
 module.exports = MessageList

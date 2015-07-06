@@ -88,7 +88,7 @@ HomeComponent = React.createClass
             Col xs: 12,
               h1 {}, "What's your #{@state.chat.topicSelected.name} question?"
           Row {},
-            Col xs: 4, {},
+            Col xs: 8, {},
               form {className: "welcome-form", autoComplete: off},
                 Input
                   type: "text"
