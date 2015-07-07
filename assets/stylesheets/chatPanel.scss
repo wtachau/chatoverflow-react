@@ -1,0 +1,11 @@
+@import "sizes";
+
+.chat-panel {
+
+  position: absolute;
+  top: $header_height;
+  left: $sidebar_width;
+  height: 100%;
+  width: 100%;
+
+}
