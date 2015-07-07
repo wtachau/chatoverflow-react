@@ -8,6 +8,7 @@ class AppStore
     @user = null
     @users = null
     @error = null
+    @unread_mentions = {}
 
     @bindActions(AppActions)
 
@@ -16,6 +17,9 @@ class AppStore
 
   onSetCurrentUsers: (users) ->
     @users = users
+
+  onSetUnreadMentions: (unread_mentions) ->
+    @unread_mentions = unread_mentions
 
   onFailure: (error) ->
     @error = error
