@@ -27,6 +27,7 @@ MessageList = React.createClass
 
   render: ->
     [first, rest...] = @props.messages
+    console.log first
     div {},
       unless @props.messages.length is 0
         div {},
