@@ -40,13 +40,17 @@ ChatComponent = React.createClass
     @socket = io(URLResources.getChatServerOrigin())
     @socket.on "chat message",
       ({id, user_id, username, room_id, text, created_at}) =>
-        if room_id is @props.currentRoom
-          newList = @state.chat.messages
-          newList.push {vote_total: 0, id, user_id, room_id, username, text, created_at}
-          ChatActions.setMessagesList newList
-
+        newList = @state.chat.messages
+        newList.push {vote_total: 0, id, user_id, room_id,
+                      username, text, created_at}
+        ChatActions.setMessagesList newList
+        @scrollDownMessages()
     @socket.on "mention", ({user_id, username, room_id, text}) ->
       alert "#{username} mentioned you in room #{room_id}: #{text}"
+
+  scrollDownMessages: ->
+    component = React.findDOMNode @refs.messageList
+    component.scrollTop = component.scrollHeight
 
   componentDidMount: ->
     ChatActions.fetchTopics()
@@ -85,6 +89,7 @@ ChatComponent = React.createClass
           messages: @state.chat.messages
           currentRoom: @props.currentRoom
           isFollowingRoom: @isFollowingRoom
+          ref: "messageList"
         ChatForm
           submitMessage: @submitMessage
           currentMessage: @state.chat.currentMessage
