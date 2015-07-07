@@ -20,9 +20,11 @@
 
     .votes {
       width: $votes_width;
-      float: left;
-      height: calc($votes_width * 2);
-
+      float: right;
+      .vote-button {
+        height: 20px;
+        padding: 0px 5px;
+      }
       .vote-total {
         padding-left: 15px;
       }

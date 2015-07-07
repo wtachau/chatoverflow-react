@@ -26,15 +26,24 @@ Message = React.createClass
         muted: "muted"
     else ""
 
-  upvote: -> ChatActions.upvoteMessage @props.message.id, @props.message.room_id
-  downvote: -> ChatActions.downvoteMessage @props.message.id, @props.message.room_id
+  upvote: ->
+    ChatActions.upvoteMessage @props.message.id, @props.message.room_id
+
+  downvote: ->
+    ChatActions.downvoteMessage @props.message.id, @props.message.room_id
 
   render: ->
     timestamp = moment(@props.message.created_at).format("h:mm A")
     Row {className: "message-row " + @props.className},
       div {className: "votes"},
-        button {className: "upvote btn btn-default", onClick: @upvote}, "▲"
-        button {className: "downvote btn btn-default", onClick: @downvote}, "▼"
+        button
+          className: "vote-button upvote btn btn-default"
+          onClick: @upvote,
+          "▲"
+        button
+          className: "vote-button downvote btn btn-default"
+          onClick: @downvote,
+          "▼"
         div {className: "vote-total"}, @props.message.vote_total
       div {className: "username"}, @props.message.username
       div {className: "chat-body"},
