@@ -31,7 +31,7 @@ Message = React.createClass
 
   render: ->
     timestamp = moment(@props.message.created_at).format("h:mm A")
-    Row {className: "message-row " + @props.message.className},
+    Row {className: "message-row " + @props.className},
       div {className: "votes"},
         button {className: "upvote btn btn-default", onClick: @upvote}, "▲"
         button {className: "downvote btn btn-default", onClick: @downvote}, "▼"
