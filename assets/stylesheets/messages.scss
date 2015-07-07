@@ -18,6 +18,18 @@
       background-color: $chat_background_grey;
     }
 
+    .votes {
+      width: $votes_width;
+      float: right;
+      .vote-button {
+        height: 20px;
+        padding: 0px 5px;
+      }
+      .vote-total {
+        padding-left: 15px;
+      }
+    }
+
     .username {
       text-align: right;
       width: $username_width;
@@ -28,7 +40,7 @@
     .chat-body {
       float: left;
       position: relative;
-      width: calc(100% - #{$username_width});
+      width: calc(100% - #{$username_width} - #{$votes_width});
 
       .text {
         padding-right: 75px;
