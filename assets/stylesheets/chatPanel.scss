@@ -5,7 +5,7 @@
   position: absolute;
   top: $header_height;
   left: $sidebar_width;
-  height: 100%;
-  width: 100%;
+  width: calc(100% - #{$sidebar_width});
+  height: calc(100% - #{$header_height});
 
 }
