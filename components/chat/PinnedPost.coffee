@@ -34,7 +34,7 @@ PinnedPost = React.createClass
   render: ->
     timestamp = moment(@props.created_at).format("h:mm A")
     Row {className: "pinnedPost"},
-      div {className: "username"}, "@props.username"
+      div {className: "username"}, @props.username
       div {className: "chat-body"},
         div {className: "text"}, Marked @props.text
         div {className: "timestamp"}, timestamp
