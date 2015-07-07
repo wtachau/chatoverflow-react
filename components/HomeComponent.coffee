@@ -102,6 +102,5 @@ HomeComponent = React.createClass
                   onClick: @submitQuestion
                   "Submit"
 
-
 module.exports = HomeComponent
 
