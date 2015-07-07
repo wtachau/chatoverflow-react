@@ -33,10 +33,10 @@ RoomInfo = React.createClass
     "asked #{date} at #{time} by #{@username()}"
 
   username: ->
-    if @props.room.messages.length > 0
-      @props.room.messages[0].username
-    else
+    if @props.room.messages.length is 0
       ""
+    else
+      @props.room.messages[0].username
 
   answersTotal: -> @props.room.messages.length - 1
 

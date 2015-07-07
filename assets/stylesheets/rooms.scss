@@ -19,8 +19,8 @@
         float: left;
         width: 75px;
         text-align: center;
-        background-color: rgb(224, 224, 224);
-        color: rgb(90, 90, 90);
+        background-color: $answers_light_grey;
+        color: $answers_dark_grey;
         margin-right: 40px;
         padding: 5px 10px;
 
@@ -40,7 +40,7 @@
         .question {
           font-size: 18px;
           line-height: 30px;
-          color: rgb(103, 114, 183);
+          color: $questions_purple;
         }
       }
 
