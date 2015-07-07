@@ -8,30 +8,29 @@ h1 {
 .home {
 
   position: relative;
-  width: 60%;
-  top: 50%;
-  transform: translateY(50%);
-  left: 30%;
 
   .welcome-form {
     background: $chat_background_grey;
-    width: 570px;
+    width: 100%;
     padding: 1px;
-  }
-  .welcome-input {
-    border: 0;
-    padding: 5px;
-    width: 90%;
-  }
+    height: $welcome_chat_height;
 
-  .welcome-form-button {
-    background: $chat_button_blue; 
-    border: 0;
-    padding: 10px;
-    position: fixed;
-    left: 500px;
-  }
+    .welcome-input {
+      border: 0;
+      padding: 5px;
+      width: 90%;
+    }
 
+    .welcome-form-button {
+      background: $chat_button_blue;
+      border: 0;
+      padding: 10px;
+      position: relative;
+      left: 90%;
+      top: -50px;
+      width: 10%;
+    }
+  }
 }
 
 body {

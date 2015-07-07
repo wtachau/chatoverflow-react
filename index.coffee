@@ -12,6 +12,7 @@ require("./assets/stylesheets/sidebar.scss")
 require("./assets/stylesheets/messages.scss")
 require("./assets/stylesheets/mentions.scss")
 require("./assets/stylesheets/header.scss")
+require("./assets/stylesheets/chatPanel.scss")
 
 Router.run routes, Router.HistoryLocation, (Handler) ->
   React.render (React.createElement Handler),

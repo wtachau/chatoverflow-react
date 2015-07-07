@@ -99,6 +99,7 @@ ChatComponent = React.createClass
         topics: @state.chat.topics
         user: @state.app.user
         isFollowingRoom: @isFollowingRoom
-      mainSection
+      div {className: "chat-panel"},
+        mainSection
 
 module.exports = ChatComponent
