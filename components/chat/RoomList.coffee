@@ -38,11 +38,9 @@ RoomList = React.createClass
     div {className: "rooms"},
       if @state.topicInfo
         div {className: "room-list-page"},
-          Row {},
-            Col xs: 8, xsOffset: 2,
-              h1 {className: "current-topic"}, @state.topicInfo.name
-          Row {className: "room-list-page"},
-            Col xs: 8, xsOffset: 2,
-              @state.topicInfo.rooms.map (room) -> RoomInfo { room }
+          Row {className: "topic-header"},
+            h1 {className: "current-topic"}, @state.topicInfo.name
+          Row {className: "rooms-list"},
+            @state.topicInfo.rooms.map (room) -> RoomInfo { room }
 
 module.exports = RoomList

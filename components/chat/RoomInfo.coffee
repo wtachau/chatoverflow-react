@@ -21,43 +21,33 @@ RoomInfo = React.createClass
   statics:
     registerStore: ChatStore
 
-  question: ->
-    if @props.room.messages.length > 0
-      @props.room.messages[0].text
-    else
-      "No question here!"
+  render: ->
+    message = @props.room.messages[0]
+    question = if message then message.text else ""
+    username = if message then message.username else ""
 
-  timestamp: ->
     date = moment(@props.room.created_at).format("MM/DD/YY")
     time = moment(@props.room.created_at).format("HH:mm")
-    "asked #{date} at #{time} by #{@username()}"
+    timestamp = "asked #{date} at #{time} by #{@username}"
 
-  username: ->
-    if @props.room.messages.length > 0
-      @props.room.messages[0].username
-    else
-      ""
+    answersTotal = @props.room.messages.length - 1
 
-  answersTotal: -> @props.room.messages.length - 1
-
-  recentAnswers: ->
     # By using the two slices, the original questions won't be in the list
-    @props.room.messages.slice(-4).slice(1)
+    recentAnswers = @props.room.messages.slice(-4).slice(1)
 
-  render: ->
     ListGroupItem {className: "room-info"},
       div {className: "answers"},
-        div {className: "answer-total"}, @answersTotal()
+        div {className: "answer-total"}, answersTotal
         div {className: "answer-text"},
-          if @answersTotal() is 1 then "answer" else "answers"
+          if answersTotal is 1 then "answer" else "answers"
       div {className: "question-info"},
         Link {to: "/rooms/#{@props.room.id}"},
-          div {className: "question"}, @question()
-        div {className: "time-asked"}, @timestamp()
+          div {className: "question"}, question
+        div {className: "time-asked"}, timestamp
         div {className: "recent-answers"},
           "Recent Answers:"
           ul {className: "recent-answers-list"},
-            @recentAnswers().map ({username, text}) ->
+            recentAnswers.map ({username, text}) ->
               li {className: "recent-answer"}, "#{username} answered: #{text}"
 
 module.exports = RoomInfo
