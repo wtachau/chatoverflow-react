@@ -44,8 +44,9 @@ ChatComponent = React.createClass
           newList = @state.chat.messages
           newList.push {username, text, created_at}
           ChatActions.setMessagesList newList
-    @socket.on "mention", ({user_id, username, room_id, text}) ->
+    @socket.on "mention", ({user_id, username, room_id, text}) =>
       alert "#{username} mentioned you in room #{room_id}: #{text}"
+      AppActions.followRoom room_id, @isFollowingRoom
 
   componentDidMount: ->
     ChatActions.fetchTopics()
