@@ -64,17 +64,17 @@ HomeComponent = React.createClass
     ChatActions.setTopicSelected {eventKey, name: target}
 
   render: ->
-    dropdownTitle = if @state.topicSelected
+    dropdownTitle = if @state.chat.topicSelected
       @state.chat.topicSelected.name
     else
       "Select a topic"
 
     div {className: "home"},
       Row {},
-        Col xs: 8,
+        Col xs: 8, xsOffset: 2,
           h1 {}, "Select a Topic"
       Row {},
-        Col xs: 4,
+        Col xs: 4, xsOffset: 2,
         DropdownButton title: dropdownTitle,
           @state.chat.topics.map ({id, name}) =>
             MenuItem
@@ -88,7 +88,7 @@ HomeComponent = React.createClass
             Col xs: 12,
               h1 {}, "What's your #{@state.chat.topicSelected.name} question?"
           Row {},
-            Col xs: 8, {},
+            Col xs: 8, xsOffset: 2,
               form {className: "welcome-form", autoComplete: off},
                 Input
                   type: "text"
@@ -97,11 +97,11 @@ HomeComponent = React.createClass
                   value: @state.chat.question
                   onChange: @inputChange
                   onKeyDown: @keyPress
-            Col xs: 4, {},
                 Button
                   className: "welcome-form-button"
-                  onClick: @submitQuestion,
+                  onClick: @submitQuestion
                   "Submit"
+
 
 module.exports = HomeComponent
 
