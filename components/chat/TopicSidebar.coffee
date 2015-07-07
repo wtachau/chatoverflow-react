@@ -37,7 +37,6 @@ TopicSidebar = React.createClass
       ""
 
   render: ->
-    console.log @state.app.unread_mentions
     ListGroup {className: "sidebar"},
       h1 {className: "categories-header"}, "Languages"
       @props.topics.map ({name, id, rooms}, index) ->
