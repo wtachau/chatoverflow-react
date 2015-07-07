@@ -71,10 +71,10 @@ HomeComponent = React.createClass
 
     div {className: "home"},
       Row {},
-        Col xs: 8, xsOffset: 2,
+        Col md: 8, mdOffset: 2,
           h1 {}, "Select a Topic"
       Row {},
-        Col xs: 4, xsOffset: 2,
+        Col md: 4, mdOffset: 2,
         DropdownButton title: dropdownTitle,
           @state.chat.topics.map ({id, name}) =>
             MenuItem
@@ -85,10 +85,10 @@ HomeComponent = React.createClass
       if @state.chat.topicSelected
         div {},
           Row {},
-            Col xs: 12,
+            Col md: 12,
               h1 {}, "What's your #{@state.chat.topicSelected.name} question?"
           Row {},
-            Col xs: 8, xsOffset: 2,
+            Col md: 8, mdOffset: 2,
               form {className: "welcome-form", autoComplete: off},
                 Input
                   type: "text"
