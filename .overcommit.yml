@@ -17,6 +17,7 @@ PreCommit:
 
   JsLint:
     enabled: true
+    exclude: bundle.js
 
   TrailingWhitespace:
     enabled: true

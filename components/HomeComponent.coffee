@@ -1,7 +1,11 @@
 React = require("react")
+io = require("socket.io-client")
 ChatStore = require("../stores/ChatStore")
+AppStore = require("../stores/AppStore")
 ChatActions = require("../actions/ChatActions")
+AppActions = require("../actions/AppActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
+Router = require("react-router")
 
 ReactBootstrap = require("react-bootstrap")
 URLResources = require("../common/URLResources")
@@ -17,10 +21,12 @@ MenuItem = React.createFactory ReactBootstrap.MenuItem
 HomeComponent = React.createClass
   displayName: "HomeComponent"
 
-  mixins: [ReactStateMagicMixin]
+  mixins: [ReactStateMagicMixin, Router.Navigation]
 
   statics:
-    registerStore: ChatStore
+    registerStores:
+      chat: ChatStore
+      app: AppStore
 
   inputChange: (e) ->
     ChatActions.setCurrentQuestion e.target.value
@@ -29,41 +35,72 @@ HomeComponent = React.createClass
     if e.key is "Enter"
       @submitQuestion e
 
+  componentWillMount: ->
+    @socket = io(URLResources.getChatServerOrigin())
+
   successFunction: (response) ->
-    console.log response
+    @socket.emit "chat message",
+      user_id: @state.app.user.id
+      username: @state.app.user.username
+      room_id: response.id
+      text: @state.chat.currentQuestion
+      mentions: []
+    AppActions.fetchUser()
+    ChatActions.setCurrentQuestion ""
+    @transitionTo 'room', room_id: response.id
 
   errorFunction: ->
     console.log "errorFunction"
 
   submitQuestion: (e) ->
-    unless @state.currentQuestion.trim() is ""
-      URLResources.writeToAPI "/rooms", {topic_id: @state.topicSelected.eventKey, text: @state.currentQuestion.trim()}, @successFunction, @errorFunction
-      ChatActions.setCurrentQuestion ""
+    unless @state.chat.currentQuestion.trim() is ""
+      URLResources.callAPI "/rooms", "post",
+        {topic_id: @state.chat.topicSelected.eventKey,
+        text: @state.chat.currentQuestion.trim()},
+        @successFunction
+      e.preventDefault()
 
   onTopicSelected: (eventKey, href, target) ->
     ChatActions.setTopicSelected {eventKey, name: target}
 
   render: ->
+    dropdownTitle = if @state.chat.topicSelected
+      @state.chat.topicSelected.name
+    else
+      "Select a topic"
+
     div {className: "home"},
       Row {},
-        Col xs: 8,
+        Col md: 8, mdOffset: 2,
           h1 {}, "Select a Topic"
       Row {},
-        Col xs: 4,
-        DropdownButton title: (if @state.topicSelected then @state.topicSelected.name else "Select a topic"),
-          @state.topics.map ({id, name}) =>
-            MenuItem {eventKey: id, target: name, onSelect: @onTopicSelected}, name
-      if @state.topicSelected
+        Col md: 4, mdOffset: 2,
+        DropdownButton title: dropdownTitle,
+          @state.chat.topics.map ({id, name}) =>
+            MenuItem
+              eventKey: id
+              target: name
+              onSelect: @onTopicSelected,
+              name
+      if @state.chat.topicSelected
         div {},
           Row {},
-            Col xs: 12, 
-              h1 {}, "What's your #{@state.topicSelected.name} question?"
+            Col md: 12,
+              h1 {}, "What's your #{@state.chat.topicSelected.name} question?"
           Row {},
-            Col xs: 4, {},
+            Col md: 8, mdOffset: 2,
               form {className: "welcome-form", autoComplete: off},
-                Input {type: "text", className: "welcome-input", autoComplete: off, value: @state.question, onChange: @inputChange, onKeyDown: @keyPress}
-            Col xs: 4, {},
-                Button {className: "welcome-form-button", onClick: @submitQuestion}, "Submit"
+                Input
+                  type: "text"
+                  className: "welcome-input"
+                  autoComplete: off
+                  value: @state.chat.question
+                  onChange: @inputChange
+                  onKeyDown: @keyPress
+                Button
+                  className: "welcome-form-button"
+                  onClick: @submitQuestion
+                  "Submit"
 
 module.exports = HomeComponent
 

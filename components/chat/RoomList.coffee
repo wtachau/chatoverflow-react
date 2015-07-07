@@ -13,6 +13,7 @@ Link = React.createFactory Router.Link
 
 Row = React.createFactory ReactBootstrap.Row
 Col = React.createFactory ReactBootstrap.Col
+
 { div, h1 } = React.DOM
 
 RoomList = React.createClass
@@ -36,15 +37,13 @@ RoomList = React.createClass
   render: ->
     div {className: "rooms"},
       if @state.topicInfo
-        div {className: "room-list-page"},
+        Col md: 8, mdOffset: 2,
           Row {},
-            Col xs: 8, xsOffset: 2,
-              h1 {className: "current-topic"}, @state.topicInfo.name
-          Row {className: "room-list-page"},
-            Col xs: 8, xsOffset: 2,
-              @state.topicInfo.rooms.map ({id}) ->
-                Link {to: "/rooms/#{id}"},
-                  ListGroupItem {className: "topic-name"}, "Room #{id}"
+            h1 {className: "current-topic"}, @state.topicInfo.name
+          Row {},
+            @state.topicInfo.rooms.map ({id}) ->
+              Link {to: "/rooms/#{id}"},
+                ListGroupItem {className: "topic-name"}, "Room #{id}"
 
 
 module.exports = RoomList

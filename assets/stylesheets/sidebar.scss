@@ -1,5 +1,6 @@
 @import "colors";
 @import "sizes";
+@import "fonts";
 
 .sidebar {
   
@@ -15,22 +16,38 @@
   .categories-header {
     background-color: $chat_sidebar_background;
     color: $white;
-    font-size: 24px;
+    font-size: 16px;
+    font-family: $sidebar_list_title_font;
     text-align: left;
     padding: 5px;
     padding-left: 10px;
   }
 
   .topic-name {
-    padding: 10px;
+    text-transform: lowercase;
+    font-family: $sidebar_list_item_font;
+    font-size: medium;
+    padding: 3px;
     padding-left: 30px;
     color: $white;
     background-color: $chat_sidebar_background;
     &:hover {
       background-color: $chat_sidebar_hover_periwinkle;
+      .exit-x {
+        display: inherit;
+      }
     }
     border: 0px;
     border-radius: 0px;
+
+    .exit-x {
+      display: none;
+      float: right;
+      padding-right: 8px;
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 
   .active {
