@@ -27,20 +27,18 @@ MessageList = React.createClass
 
   render: ->
     [first, rest...] = @props.messages
-    if @props.messages.length is 0
-      div {}
-    else
-      user = @state.app.user
-      div {},
-        PinnedPost
-          username: first.username
-          text: first.text
-          created_at: first.created_at
-          currentRoom: @props.currentRoom
-          isFollowingRoom: @props.isFollowingRoom
-        div {className: "messages", ref: "messages"},
-          rest.map ({username, text, created_at}, index) ->
-            userColorClass = if username is user.username then "usercolor" else ""
-            Message { username, text, key: index, className: userColorClass, created_at }
+    div {},
+      unless @props.messages.length is 0
+        div {},
+          PinnedPost
+            username: first.username
+            text: first.text
+            created_at: first.created_at
+            currentRoom: @props.currentRoom
+            isFollowingRoom: @props.isFollowingRoom
+          div {className: "messages", ref: "messages"},
+            rest.map (message, index) =>
+              userColorClass = if message.username is @state.app.user.username then "usercolor" else ""
+              Message { message, key: index, className: userColorClass }
 
 module.exports = MessageList

@@ -1,6 +1,10 @@
 @import "colors";
+@import "sizes";
 
 nav {
+
+  height: $header_height;
+
   &.navbar-default {
     margin-bottom: 0px;
     background-color: $purple;

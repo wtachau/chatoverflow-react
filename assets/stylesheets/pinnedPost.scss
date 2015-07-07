@@ -6,8 +6,8 @@
   background-color: $pinned_post_background_grey;
   position: absolute;
   max-height: $pinned_post_height;
-  left: $sidebar_width;
-  width: calc(100% - #{$sidebar_width});
+  overflow: auto;
+  width: 100%;
   vertical-align: top;
   padding: 5px;
   margin-left: 0px;
