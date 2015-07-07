@@ -19,10 +19,6 @@ MessageList = React.createClass
     messages: React.PropTypes.array.isRequired
     currentRoom: React.PropTypes.string.isRequired
 
-  componentDidUpdate: ->
-    component = React.findDOMNode this
-    component.scrollTop = component.scrollHeight
-
   followRoom: ->
     AppActions.followRoom @props.currentRoom, @props.isFollowingRoom
 

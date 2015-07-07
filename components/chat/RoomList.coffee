@@ -14,6 +14,7 @@ RoomInfo = React.createFactory require("./RoomInfo")
 
 Row = React.createFactory ReactBootstrap.Row
 Col = React.createFactory ReactBootstrap.Col
+
 { div, h1 } = React.DOM
 
 RoomList = React.createClass
