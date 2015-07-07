@@ -18,6 +18,12 @@
   }
 
   .rooms-list {
+    position: absolute;
+    top: calc(#{$header_height} + #{$topic_height});
+    right: 0;
+    left: $sidebar_width;
+    bottom: 0;
+    overflow: scroll;
 
     .room-info {
       overflow: hidden;
