@@ -44,6 +44,8 @@ ChatComponent = React.createClass
           newList = @state.chat.messages
           newList.push {vote_total: 0, id, user_id, room_id, username, text, created_at}
           ChatActions.setMessagesList newList
+          component = React.findDOMNode @refs.messageList
+          component.scrollTop = component.scrollHeight
 
     @socket.on "mention", ({user_id, username, room_id, text}) ->
       alert "#{username} mentioned you in room #{room_id}: #{text}"
@@ -85,6 +87,7 @@ ChatComponent = React.createClass
           messages: @state.chat.messages
           currentRoom: @props.currentRoom
           isFollowingRoom: @isFollowingRoom
+          ref: "messageList"
         ChatForm
           submitMessage: @submitMessage
           currentMessage: @state.chat.currentMessage
