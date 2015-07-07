@@ -39,11 +39,12 @@ ChatComponent = React.createClass
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
     @socket.on "chat message",
-      ({user_id, username, room_id, text, created_at}) =>
+      ({id, user_id, username, room_id, text, created_at}) =>
         if room_id is @props.currentRoom
           newList = @state.chat.messages
-          newList.push {username, text, created_at}
+          newList.push {vote_total: 0, id, user_id, room_id, username, text, created_at}
           ChatActions.setMessagesList newList
+
     @socket.on "mention", ({user_id, username, room_id, text}) =>
       alert "#{username} mentioned you in room #{room_id}: #{text}"
       AppActions.followRoom room_id, @isFollowingRoom
