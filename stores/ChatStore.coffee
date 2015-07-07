@@ -3,7 +3,7 @@ ChatActions = require("../actions/ChatActions")
 
 class ChatStore
   displayName: "ChatStore"
-  
+
   constructor: ->
     @currentMessage = ""
     @messages = []
@@ -22,12 +22,9 @@ class ChatStore
     @currentMessage = message
 
   onSetMessage: (message) ->
-    index = -1
     for m, i in @messages
       if m.id is message.id
-        index = i
-    if index > -1
-      @messages[index] = message
+        @messages[i] = message
 
   onSetMessagesList: (messages) ->
     @messages = messages
