@@ -2,8 +2,6 @@
 @import "sizes";
 
 .rooms {
-  margin-left: $sidebar_width;
-  width: calc(100% - #{$sidebar_width});
   .current-topic {
     color: $chat_sidebar_hover_periwinkle;
     background-color: $chat_background_grey;
@@ -19,9 +17,9 @@
 
   .rooms-list {
     position: absolute;
-    top: calc(#{$header_height} + #{$topic_height});
+    top: $topic_height;
     right: 0;
-    left: $sidebar_width;
+    left: 0;
     bottom: 0;
     overflow: scroll;
 
