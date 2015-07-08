@@ -39,10 +39,10 @@ ChatComponent = React.createClass
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
     @socket.on "chat message",
-      ({id, user_id, username, room_id, text, created_at}) =>
+      ({id, user_id, username, room_id, text, created_at, pic_url}) =>
         if room_id is @props.currentRoom
           newList = @state.chat.messages
-          newList.push {vote_total: 0, id, user_id, room_id,
+          newList.push {vote_total: 0, pic_url, id, user_id, room_id,
                         username, text, created_at}
           ChatActions.setMessagesList newList
           @scrollDownMessages()
@@ -80,11 +80,15 @@ ChatComponent = React.createClass
   submitMessage: (e, message, mentions) ->
     unless message is ""
       @socket.emit "chat message",
+
+      # user: { user_id: @props.user_id, ..., pic_url: pic_url }
+
        user_id: @props.user.id
        username: @username()
        room_id: @props.currentRoom
        "text": message.trim()
        mentions: mentions
+       pic_url: @props.user.pic_url
     e.preventDefault()
 
   render: ->

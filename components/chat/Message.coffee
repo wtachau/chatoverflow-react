@@ -34,10 +34,9 @@ Message = React.createClass
 
   render: ->
     try
-      @props.message.user.pic_url
-      has_image = true
+      profilePicture = @props.message.user.pic_url
     catch e
-      has_image = false
+      profilePicture = @props.message.pic_url
     timestamp = moment(@props.message.created_at).format("h:mm A")
     Row {className: "message-row " + @props.className},
       div {className: "votes"},
@@ -51,7 +50,7 @@ Message = React.createClass
           "▼"
         div {className: "vote-total"}, @props.message.vote_total
       div {className: "username"}, @props.message.username,
-        if has_image then img {className: "profile-pic", src: @props.message.user.pic_url}
+        img {className: "profile-pic", src: profilePicture}
       div {className: "chat-body"},
         div {className: "text"}, Marked @props.message.text
         @decorateText @props.message.text
