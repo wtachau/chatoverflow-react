@@ -28,6 +28,7 @@ MessageList = React.createClass
   render: ->
     [first, rest...] = @props.messages
     console.log first
+ #   if first.profile_picture is null then first.profile_picture = "http://i.imgur.com/GleAY3f.jpg"
     div {},
       unless @props.messages.length is 0
         div {},
@@ -35,6 +36,7 @@ MessageList = React.createClass
             username: first.username
             text: first.text
             created_at: first.created_at
+            profile_picture: "http://i.imgur.com/GleAY3f.jpg" # TODO first.profile_picture
             currentRoom: @props.currentRoom
             isFollowingRoom: @props.isFollowingRoom
           div {className: "messages", ref: "messages"},

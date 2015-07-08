@@ -16,6 +16,11 @@
     width: $username_width;
     float: left;
     padding: 0px 10px;
+
+    img {
+      max-width: 40px;
+      border-radius: 20px;
+    }
   }
 
   .chat-body {
