@@ -33,10 +33,6 @@ Message = React.createClass
     ChatActions.downvoteMessage @props.message.id, @props.message.room_id
 
   render: ->
-    try
-      profilePicture = @props.message.user.pic_url
-    catch e
-      profilePicture = @props.message.pic_url
     timestamp = moment(@props.message.created_at).format("h:mm A")
     Row {className: "message-row " + @props.className},
       div {className: "votes"},
@@ -49,8 +45,8 @@ Message = React.createClass
           onClick: @downvote,
           "▼"
         div {className: "vote-total"}, @props.message.vote_total
-      div {className: "username"}, @props.message.username,
-        img {className: "profile-pic", src: profilePicture}
+      div {className: "username"}, @props.message.user.username,
+        img {className: "profile-pic", src: @props.message.user.pic_url}
       div {className: "chat-body"},
         div {className: "text"}, Marked @props.message.text
         @decorateText @props.message.text
