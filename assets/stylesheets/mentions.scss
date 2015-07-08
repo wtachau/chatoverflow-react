@@ -21,7 +21,6 @@
   width: 90%;
   background-color: white;
   height: 100%;
-  overflow: scroll;
 
   input {
     border: 0;
@@ -37,7 +36,7 @@
       border: 1px solid silver;
       font-weight: normal;
       height: 100%;
-      overflow: scroll;
+
       .highlighter {
         padding: 9px;
         height: 100%;
