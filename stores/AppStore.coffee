@@ -18,8 +18,11 @@ class AppStore
   onSetCurrentUsers: (users) ->
     @users = users
 
-  onSetUnreadMentions: (unread_mentions) ->
-    @unread_mentions = unread_mentions
+  onSetUnreadMentions: (room_id) ->
+    @unread_mentions[parseInt(room_id)] = true
+
+  onSetReadMentions: (room_id) ->
+    @unread_mentions[parseInt(room_id)] = false
 
   onFailure: (error) ->
     @error = error

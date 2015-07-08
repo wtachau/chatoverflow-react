@@ -48,9 +48,7 @@ ChatComponent = React.createClass
     @socket.on "mention", ({user_id, username, room_id, text}) =>
       alert "#{username} mentioned you in room #{room_id}: #{text}"
       AppActions.followRoom room_id, @isFollowingRoom
-      unread = @state.app.unread_mentions
-      unread[parseInt(room_id)] = true
-      AppActions.setUnreadMentions unread
+      AppActions.setUnreadMentions room_id
 
   componentDidMount: ->
     ChatActions.fetchTopics()
@@ -67,9 +65,7 @@ ChatComponent = React.createClass
       @socket.emit "unsubscribe",
         {username: @username(), room: @props.currentRoom}
       ChatActions.fetchRoomHistory nextProps.currentRoom
-      unread = @state.app.unread_mentions
-      unread[parseInt(@props.currentRoom)] = false
-      AppActions.setUnreadMentions unread
+      AppActions.setReadMentions @props.currentRoom, false
 
   isFollowingRoom: (room_id) ->
     followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
