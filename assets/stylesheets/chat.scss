@@ -12,9 +12,8 @@
     background: $chat_input_grey;
     position: fixed;
     bottom: 0;
-    width: calc(52% - #{$sidebar_width});
+    width: calc(55% - #{$sidebar_width});
     padding: 3px;
-    left: calc(150px + 48%);
     height: $chat_box_height;
   }
 
