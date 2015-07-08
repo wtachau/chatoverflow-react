@@ -24,7 +24,7 @@ ChatComponent = React.createClass
       name: React.PropTypes.string
     logoutClicked: React.PropTypes.func.isRequired
     currentRoom: React.PropTypes.string
-    currentTopic: React.PropTypes.number.isRequired
+    currentTopic: React.PropTypes.string
 
   mixins: [ReactStateMagicMixin]
 

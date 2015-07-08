@@ -5,7 +5,7 @@ ChatActions = require("../../actions/ChatActions")
 moment = require("moment")
 
 Row = React.createFactory ReactBootstrap.Row
-{ div, p, img, video, button, span } = React.DOM
+{ div, p, img, video, button } = React.DOM
 
 Message = React.createClass
   displayName: "Message"
@@ -33,6 +33,11 @@ Message = React.createClass
     ChatActions.downvoteMessage @props.message.id, @props.message.room_id
 
   render: ->
+    try
+      @props.message.user.pic_url
+      has_image = true
+    catch e
+      has_image = false
     timestamp = moment(@props.message.created_at).format("h:mm A")
     Row {className: "message-row " + @props.className},
       div {className: "votes"},
@@ -45,7 +50,8 @@ Message = React.createClass
           onClick: @downvote,
           "▼"
         div {className: "vote-total"}, @props.message.vote_total
-      div {className: "username"}, @props.message.username
+      div {className: "username"}, @props.message.username,
+        if has_image then img {className: "profile-pic", src: @props.message.user.pic_url}
       div {className: "chat-body"},
         div {className: "text"}, Marked @props.message.text
         @decorateText @props.message.text

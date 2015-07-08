@@ -76,11 +76,12 @@ HomeComponent = React.createClass
       Row {},
         Col md: 4, mdOffset: 2,
         DropdownButton title: dropdownTitle,
-          @state.chat.topics.map ({id, name}) =>
+          @state.chat.topics.map ({id, name}, index) =>
             MenuItem
               eventKey: id
               target: name
               onSelect: @onTopicSelected,
+              key: index
               name
       if @state.chat.topicSelected
         div {},
