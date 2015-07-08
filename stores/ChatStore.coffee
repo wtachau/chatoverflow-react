@@ -12,6 +12,7 @@ class ChatStore
     @currentQuestion = ""
     @topicSelected = null
     @topicInfo = null
+    @currentPage = null
 
     @bindActions(ChatActions)
 
@@ -21,6 +22,10 @@ class ChatStore
   onSetCurrentMessage: (message) ->
     @currentMessage = message
 
+  onSetCurrentPage: (page) ->
+    @currentPage = page
+    console.log @currentPage
+
   onSetMessage: (message) ->
     for m, i in @messages
       if m.id is message.id
@@ -28,6 +33,15 @@ class ChatStore
 
   onSetMessagesList: (messages) ->
     @messages = messages
+
+  onAddToMessages: (messages) ->
+    #console.log "adding to messages:"
+    #console.log messages
+    #console.log "@messages"
+    #console.log @messages
+    @messages = messages.concat(@messages)
+    #console.log "together"
+    #console.log @messages
 
   onSetTopics: (topics) ->
     @topics = topics
