@@ -1,10 +1,12 @@
 React = require("react")
 
-{ div, button } = React.DOM
 Message = React.createFactory require("./Message")
+PinnedPost = React.createFactory require("./PinnedPost")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+
+{ div } = React.DOM
 
 MessageList = React.createClass
   displayName: "MessageList"
@@ -19,18 +21,22 @@ MessageList = React.createClass
     messages: React.PropTypes.array.isRequired
     currentRoom: React.PropTypes.string.isRequired
 
-  followRoom: ->
-    AppActions.followRoom @props.currentRoom, @props.isFollowingRoom
-
-  buttonText: ->
-    isFollowing = @props.isFollowingRoom @props.currentRoom
-    if isFollowing then 'Unfollow Room' else "Follow Room"
+  componentDidUpdate: ->
+    component = React.findDOMNode this.refs.messages
+    component.scrollTop = component.scrollHeight
 
   render: ->
-    div {className: "messages"},
-      button {onClick: @followRoom}, @buttonText()
-      @props.messages.map (message, index) =>
-        userColorClass = if message.username is @state.app.user.username then "usercolor" else ""
-        Message { message, key: index, className: userColorClass }
+    [first, rest...] = @props.messages
+    div {},
+      unless @props.messages.length is 0
+        div {},
+          PinnedPost
+            first: first
+            currentRoom: @props.currentRoom
+            isFollowingRoom: @props.isFollowingRoom
+          div {className: "messages", ref: "messages"},
+            rest.map (message, index) =>
+              userColorClass = if message.username is @state.app.user.username then "usercolor" else ""
+              Message { message, key: index, className: userColorClass }
 
 module.exports = MessageList
