@@ -1,6 +1,6 @@
 @import "colors";
 @import "sizes";
-
+@import "fonts";
 .chat {
 
   .chat-form {
@@ -29,8 +29,10 @@
     width: 8%;
     position: fixed;
     right: 0.5%;
-    bottom: 0.5%;
-    height: 3%;
+    bottom: 20px;
+    height: 5%;
     line-height: 50%;
+    font-family: $chat_send_button_font;
+    font-size: medium;
   }
 }

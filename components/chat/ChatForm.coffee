@@ -33,8 +33,6 @@ ChatForm = React.createClass
   submit: (e) ->
     @props.submitMessage e, @props.currentMessage.trim(), @state.mentions
     ChatActions.setCurrentMessage ""
-    component = React.findDOMNode this
-    component.scrollTop = 0
 
   displayMention: (id, display, type) -> "@" + display
 
@@ -50,7 +48,7 @@ ChatForm = React.createClass
 
   render: ->
     form {className: "chat-form", autoComplete: off},
-      MentionsInput 
+      MentionsInput
         value: @props.currentMessage
         onChange: @inputChange
         displayTransform: @displayMention

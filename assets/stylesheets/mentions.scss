@@ -20,6 +20,8 @@
 .react-mentions {
   width: 90%;
   background-color: white;
+  height: 100%;
+  overflow: scroll;
 
   input {
     border: 0;
@@ -31,13 +33,14 @@
   .control {
     &.textarea {
       background: #fff;
-      font-family: monospace;
       font-size: 12px;
       border: 1px solid silver;
       font-weight: normal;
-
+      height: 100%;
+      overflow: scroll;
       .highlighter {
         padding: 9px;
+        height: 100%;
       }
     }
 
@@ -45,6 +48,7 @@
       .highlighter {
         padding: 8px;
         border: 2px inset transparent;
+        height: 100%;
       }
     }
 
@@ -63,6 +67,9 @@
     outline: 0;
     border: 0;
     margin: 0;
+    overflow: scroll !important;
+
+    
 
     @include box-sizing(border-box);
   }
