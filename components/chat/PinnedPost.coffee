@@ -23,7 +23,7 @@ PinnedPost = React.createClass
     text: React.PropTypes.string.isRequired
     created_at: React.PropTypes.string.isRequired
     currentRoom: React.PropTypes.string.isRequired
-    profile_picture: React.PropTypes.string.isRequired
+    pic_url: React.PropTypes.string.isRequired
 
   followRoom: ->
     AppActions.followRoom @props.currentRoom, @props.isFollowingRoom
@@ -36,7 +36,7 @@ PinnedPost = React.createClass
     timestamp = moment(@props.created_at).format("h:mm A")
     Row {className: "pinnedPost"},
       div {className: "username"}, @props.username,
-        img {className: "profile-pic", src: @props.profile_picture}
+        img {className: "profile-pic", src: @props.pic_url}
       div {className: "chat-body"},
         div {className: "text"}, Marked @props.text
         div {className: "timestamp"}, timestamp
