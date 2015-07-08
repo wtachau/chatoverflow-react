@@ -5,8 +5,8 @@ AppActions = require("./AppActions")
 class ChatActions
   constructor: ->
     @generateActions "setCurrentMessage", "setMessagesList",
-      "setTopics", "setCurrentQuestion", "setTopicSelected",
-      "setTopicInfo", "setMentions", "setMessage"
+      "setTopics", "setCurrentQuestionTitle", "setCurrentQuestionText",
+      "setTopicSelected", "setTopicInfo", "setMentions", "setMessage"
 
   fetchRoomHistory: (roomId) ->
     URLResources.readFromAPI "/rooms/#{roomId}/messages",
@@ -25,10 +25,12 @@ class ChatActions
     URLResources.readFromAPI "/topics", @actions.setTopics
 
   upvoteMessage: (id, room_id) ->
-    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/upvote", "PUT", null, @actions.setMessage
+    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/upvote",
+      "PUT", null, @actions.setMessage
 
   downvoteMessage: (id, room_id) ->
-    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/downvote", "PUT", null, @actions.setMessage
+    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/downvote",
+      "PUT", null, @actions.setMessage
 
 
 module.exports = alt.createActions(ChatActions)

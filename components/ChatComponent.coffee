@@ -5,7 +5,7 @@ io = require("socket.io-client")
 TopicSidebar = React.createFactory require("./chat/TopicSidebar")
 MessageList = React.createFactory require("./chat/MessageList")
 ChatForm = React.createFactory require("./chat/ChatForm")
-HomeComponent = React.createFactory require("./HomeComponent")
+AskComponent = React.createFactory require("./AskComponent")
 RoomList = React.createFactory require("./chat/RoomList")
 URLResources = require("../common/URLResources")
 ChatStore = require("../stores/ChatStore")
@@ -102,7 +102,7 @@ ChatComponent = React.createClass
     else if @props.currentTopic
       RoomList {currentTopic: @props.currentTopic}
     else
-      HomeComponent {}
+      AskComponent {}
 
     div {className: "chat"},
       TopicSidebar

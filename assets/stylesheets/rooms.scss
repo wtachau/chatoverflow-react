@@ -48,15 +48,24 @@
       .question-info {
         float: left;
 
-        .question {
+        .question-header {
+          margin-bottom: 5px;
+        }
+
+        .question-title {
           font-size: 18px;
-          line-height: 30px;
           color: $questions_purple;
+          float: left;
+          padding-right: 10px;
+        }
+        .question-text {
+          font-size: 16px;
         }
       }
 
       .time-asked {
         font-size: 12px;
+        padding-top: 8px;
       }
 
       .recent-answers {

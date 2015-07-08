@@ -9,15 +9,19 @@ class ChatStore
     @messages = []
     @topics = []
     @mentions = []
-    @currentQuestion = ""
+    @currentQuestionTitle = ""
+    @currentQuestionText = ""
     @topicSelected = null
     @topicInfo = null
     @keyPressMap = []
 
     @bindActions(ChatActions)
 
-  onSetCurrentQuestion: (question) ->
-    @currentQuestion = question
+  onSetCurrentQuestionTitle: (questionTitle) ->
+    @currentQuestionTitle = questionTitle
+
+  onSetCurrentQuestionText: (questionText) ->
+    @currentQuestionText = questionText
 
   onSetCurrentMessage: (message) ->
     @currentMessage = message

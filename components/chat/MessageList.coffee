@@ -23,7 +23,8 @@ MessageList = React.createClass
 
   componentDidUpdate: ->
     component = React.findDOMNode this.refs.messages
-    component.scrollTop = component.scrollHeight
+    if component
+      component.scrollTop = component.scrollHeight
 
   render: ->
     [first, rest...] = @props.messages
@@ -36,7 +37,10 @@ MessageList = React.createClass
             isFollowingRoom: @props.isFollowingRoom
           div {className: "messages", ref: "messages"},
             rest.map (message, index) =>
-              userColorClass = if message.username is @state.app.user.username then "usercolor" else ""
+              userColorClass = if message.username is @state.app.user.username
+                "usercolor"
+              else
+                ""
               Message { message, key: index, className: userColorClass }
 
 module.exports = MessageList
