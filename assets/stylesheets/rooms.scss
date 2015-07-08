@@ -2,13 +2,17 @@
 @import "sizes";
 
 .rooms {
+  width: 48%;
+  margin-right: 2%;
+  float: left;
+
   .current-topic {
     color: $chat_sidebar_hover_periwinkle;
     background-color: $chat_background_grey;
   }
 
   .row {
-    margin: 0px;
+    margin: 0;
     overflow: scroll;
     &.topic-header {
       height: $topic-height;
@@ -18,7 +22,7 @@
   .rooms-list {
     position: absolute;
     top: $topic_height;
-    right: 0;
+    right: 52%;
     left: 0;
     bottom: 0;
     overflow: scroll;
