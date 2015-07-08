@@ -51,7 +51,6 @@
       }
     }
 
-
     .highlighter {
       strong {
         font-weight: normal;
@@ -67,9 +66,6 @@
     border: 0;
     margin: 0;
     overflow: scroll !important;
-
-    
-
     @include box-sizing(border-box);
   }
 
