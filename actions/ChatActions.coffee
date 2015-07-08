@@ -10,7 +10,7 @@ class ChatActions
       "setOldestPage", "prependToMessages"
 
   fetchRecentMessages: (roomId) ->
-    URLResources.readFromAPI "/rooms/#{roomId}/messages", 
+    URLResources.readFromAPI "/rooms/#{roomId}/messages",
       @actions.fetchRecentMessagesSuccess
 
   fetchRecentMessagesSuccess: (response) ->
