@@ -13,6 +13,6 @@ HeaderComponent = React.createClass
     Navbar {},
       Nav {},
         Link to: "/",
-          h3 {}, "ChatOverflow"
+          h3 {}, "chatsignal"
 
 module.exports = HeaderComponent
