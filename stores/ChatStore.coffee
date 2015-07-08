@@ -12,6 +12,7 @@ class ChatStore
     @currentQuestion = ""
     @topicSelected = null
     @topicInfo = null
+    @keyPressMap = []
 
     @bindActions(ChatActions)
 

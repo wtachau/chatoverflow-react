@@ -6,6 +6,7 @@
   position: absolute;
   overflow-y: scroll;
   overflow-x: hidden;
+
   height: calc(100% - #{$chat_box_height});
   width: 100%;
   vertical-align: top;
@@ -44,6 +45,7 @@
 
       .text {
         padding-right: 75px;
+        white-space: pre;
       }
 
       img, video {
