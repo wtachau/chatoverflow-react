@@ -4,19 +4,30 @@
 .messages {
 
   position: absolute;
-  left: $sidebar_width;
-  top: $header_height;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: calc(100% - #{$chat_box_height} - #{$header_height});
-  width: calc(100% - #{$sidebar_width});
-  vertical-align: top; 
+
+  height: calc(100% - #{$chat_box_height});
+  width: 100%;
+  vertical-align: top;
 
   .message-row {
     padding: 5px;
 
     &.usercolor {
       background-color: $chat_background_grey;
+    }
+
+    .votes {
+      width: $votes_width;
+      float: right;
+      .vote-button {
+        height: 20px;
+        padding: 0px 5px;
+      }
+      .vote-total {
+        padding-left: 15px;
+      }
     }
 
     .username {
@@ -29,7 +40,7 @@
     .chat-body {
       float: left;
       position: relative;
-      width: calc(100% - #{$username_width});
+      width: calc(100% - #{$username_width} - #{$votes_width});
 
       .text {
         padding-right: 75px;

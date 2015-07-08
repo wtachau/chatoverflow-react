@@ -19,10 +19,6 @@ MessageList = React.createClass
     messages: React.PropTypes.array.isRequired
     currentRoom: React.PropTypes.string.isRequired
 
-  componentDidUpdate: ->
-    component = React.findDOMNode this
-    component.scrollTop = component.scrollHeight
-
   followRoom: ->
     AppActions.followRoom @props.currentRoom, @props.isFollowingRoom
 
@@ -33,8 +29,8 @@ MessageList = React.createClass
   render: ->
     div {className: "messages"},
       button {onClick: @followRoom}, @buttonText()
-      @props.messages.map ({username, text, created_at}, index) =>
-        userColorClass = if username is @state.app.user.username then "usercolor" else ""
-        Message { username, text, key: index, className: userColorClass, created_at }
+      @props.messages.map (message, index) =>
+        userColorClass = if message.username is @state.app.user.username then "usercolor" else ""
+        Message { message, key: index, className: userColorClass }
 
 module.exports = MessageList
