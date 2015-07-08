@@ -29,27 +29,21 @@ MessageList = React.createClass
     isFollowing = @props.isFollowingRoom @props.currentRoom
     if isFollowing then 'Unfollow Room' else "Follow Room"
 
-  checkWindowScroll: (e)->
+  checkWindowScroll: (e) ->
     target = event.target
-    # height = Math.max target.clientHeight, (target.innerHeight || 0)
     scrollTop = target.scrollTop
-    # offset = target.offsetHeight
-    # console.log "height: #{height}, scroll: #{scrollTop}, offset: #{offset}"
     if scrollTop is 0
-      console.log "fetching previous messages"
-      console.log @state.chat.currentPage
-      ChatActions.fetchRoomHistory @props.currentRoom,
-                                    parseInt(@state.chat.currentPage) + 1
+      ChatActions.fetchOldMessages @props.currentRoom,
+        parseInt(@state.chat.oldestPage) + 1
 
   render: ->
-    userColorClass = if message.username is @state.app.user.username
-      "usercolor"
-    else
-      ""
-
     div {className: "messages", onScroll: @checkWindowScroll},
       button {onClick: @followRoom}, @buttonText()
-      @props.messages.map (message, index) ->
+      @props.messages.map (message, index) =>
+        userColorClass = if message.username is @state.app.user.username
+          "usercolor"
+        else
+          ""
         Message { message, key: index, className: userColorClass }
 
 module.exports = MessageList

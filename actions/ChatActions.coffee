@@ -6,27 +6,24 @@ class ChatActions
   constructor: ->
     @generateActions "setCurrentMessage", "setMessagesList",
       "setTopics", "setCurrentQuestion", "setTopicSelected",
-      "setTopicInfo", "setMentions", "setMessage", "setCurrentPage",
-      "addToMessages"
+      "setTopicInfo", "setMentions", "setMessage",
+      "setOldestPage", "prependToMessages"
 
-  fetchRoomHistory: (roomId, page) ->
-    if page
-      URLResources.readFromAPI "/rooms/#{roomId}/messages?page=#{page}",
-        @actions.fetchPreviousMessagesSuccess
-    else
-      URLResources.readFromAPI "/rooms/#{roomId}/messages",
-        @actions.fetchRoomHistorySuccess
+  fetchRecentMessages: (roomId) ->
+    URLResources.readFromAPI "/rooms/#{roomId}/messages",
+      @actions.fetchRecentMessagesSuccess
 
-  fetchPreviousMessagesSuccess: (response) ->
-    console.log response.messages
-    console.log "----"
-    console.log response.page
-    @actions.addToMessages response.messages
-    @actions.setCurrentPage response.page
-
-  fetchRoomHistorySuccess: (response) ->
+  fetchRecentMessagesSuccess: (response) ->
     @actions.setMessagesList response.messages
-    @actions.setCurrentPage response.page
+    @actions.setOldestPage response.page
+
+  fetchOldMessages: (roomId, page) ->
+    URLResources.readFromAPI "/rooms/#{roomId}/messages?page=#{page}",
+      @actions.fetchOldMessagesSuccess
+
+  fetchOldMessagesSuccess: (response) ->
+    @actions.prependToMessages response.messages
+    @actions.setOldestPage response.page
 
   fetchTopicInfo: (currentTopic) ->
     URLResources.readFromAPI "/topics/#{currentTopic}", @actions.setTopicInfo

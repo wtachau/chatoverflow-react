@@ -56,7 +56,7 @@ ChatComponent = React.createClass
     ChatActions.fetchTopics()
     AppActions.fetchUsers()
     if @props.currentRoom
-      ChatActions.fetchRoomHistory @props.currentRoom
+      ChatActions.fetchRecentMessages @props.currentRoom
 
   componentWillReceiveProps: (nextProps) ->
     sameRoom = nextProps.currentRoom is @props.currentRoom
@@ -66,7 +66,7 @@ ChatComponent = React.createClass
         {username: @username(), room: nextProps.currentRoom}
       @socket.emit "unsubscribe",
         {username: @username(), room: @props.currentRoom}
-      ChatActions.fetchRoomHistory nextProps.currentRoom
+      ChatActions.fetchRecentMessages nextProps.currentRoom
 
   isFollowingRoom: (room_id) ->
     followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id

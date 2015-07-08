@@ -32,7 +32,7 @@
     "moment": "^2.10.3",
     "react": "^0.13.3",
     "react-bootstrap": "^0.23.5",
-    "react-marked": "^0.3.1",
+    "react-marked": "Originate/react-marked",
     "react-mentions": "Originate/react-mentions",
     "react-router": "^0.13.3",
     "reqwest": "^1.1.5",
