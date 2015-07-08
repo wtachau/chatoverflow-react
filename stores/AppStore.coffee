@@ -9,6 +9,7 @@ class AppStore
     @users = null
     @error = null
     @unread_mentions = {}
+    @showUserPopup = false
 
     @bindActions(AppActions)
 
@@ -23,6 +24,9 @@ class AppStore
 
   onSetReadMentions: (room_id) ->
     @unread_mentions[parseInt(room_id)] = false
+
+  onShowUserPopup: (value) ->
+    @showUserPopup = value
 
   onFailure: (error) ->
     @error = error
