@@ -26,7 +26,7 @@ ChatForm = React.createClass
   keyPress: (e) ->
     @state.keyPressMap[e.key] = (e.type == "keydown")
     if @state.keyPressMap["Enter"] and (@state.keyPressMap["Control"] or @state.keyPressMap["Shift"])
-      @state.currentMessage = @state.currentMessage + {"/n"}
+      @state.currentMessage = @state.currentMessage + {"\n"}
     else if @state.keyPressMap["Enter"]
       @submit e
 
