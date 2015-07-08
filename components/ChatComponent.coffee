@@ -48,7 +48,8 @@ ChatComponent = React.createClass
           @scrollDownMessages()
 
     @socket.on "mention", ({user_id, username, room_id, text}) =>
-      AppActions.followRoom room_id, @isFollowingRoom
+      unless @isFollowingRoom room_id
+        AppActions.followRoom room_id, @isFollowingRoom
       AppActions.setUnreadMentions room_id
 
   scrollDownMessages: ->
