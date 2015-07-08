@@ -12,6 +12,7 @@ class ChatStore
     @currentQuestion = ""
     @topicSelected = null
     @topicInfo = null
+    @oldestPage = null
 
     @bindActions(ChatActions)
 
@@ -29,6 +30,9 @@ class ChatStore
   onSetMessagesList: (messages) ->
     @messages = messages
 
+  onPrependToMessages: (messages) ->
+    @messages = messages.concat(@messages)
+
   onSetTopics: (topics) ->
     @topics = topics
 
@@ -40,5 +44,8 @@ class ChatStore
 
   onSetMentions: (mentions) ->
     @mentions = mentions
+
+  onSetOldestPage: (page) ->
+    @oldestPage = page
 
 module.exports = alt.createStore(ChatStore)
