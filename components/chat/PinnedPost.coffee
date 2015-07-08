@@ -19,11 +19,8 @@ PinnedPost = React.createClass
       app: AppStore
 
   propTypes:
-    username: React.PropTypes.string.isRequired
-    text: React.PropTypes.string.isRequired
-    created_at: React.PropTypes.string.isRequired
+    first: React.PropTypes.object.isRequired
     currentRoom: React.PropTypes.string.isRequired
-    pic_url: React.PropTypes.string.isRequired
 
   followRoom: ->
     AppActions.followRoom @props.currentRoom, @props.isFollowingRoom
@@ -33,12 +30,12 @@ PinnedPost = React.createClass
     if isFollowing then 'Unfollow Room' else "Follow Room"
 
   render: ->
-    timestamp = moment(@props.created_at).format("h:mm A")
+    timestamp = moment(@props.first.created_at).format("h:mm A")
     Row {className: "pinnedPost"},
-      div {className: "username"}, @props.username,
-        img {className: "profile-pic", src: @props.pic_url}
+      div {className: "username"}, @props.first.username,
+        img {className: "profile-pic", src: @props.first.user.pic_url}
       div {className: "chat-body"},
-        div {className: "text"}, Marked @props.text
+        div {className: "text"}, Marked @props.first.text
         div {className: "timestamp"}, timestamp
         button {onClick: @followRoom}, @buttonText()
 

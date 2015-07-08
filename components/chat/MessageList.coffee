@@ -31,10 +31,7 @@ MessageList = React.createClass
       unless @props.messages.length is 0
         div {},
           PinnedPost
-            username: first.username
-            text: first.text
-            created_at: first.created_at
-            pic_url: first.user.pic_url
+            first: first
             currentRoom: @props.currentRoom
             isFollowingRoom: @props.isFollowingRoom
           div {className: "messages", ref: "messages"},
