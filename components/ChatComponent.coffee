@@ -42,13 +42,18 @@ ChatComponent = React.createClass
       ({id, user_id, username, room_id, text, created_at}) =>
         if room_id is @props.currentRoom
           newList = @state.chat.messages
-          newList.push {vote_total: 0, id, user_id, room_id, username, text, created_at}
+          newList.push {vote_total: 0, id, user_id, room_id,
+                        username, text, created_at}
           ChatActions.setMessagesList newList
+          @scrollDownMessages()
 
     @socket.on "mention", ({user_id, username, room_id, text}) =>
-      alert "#{username} mentioned you in room #{room_id}: #{text}"
       AppActions.followRoom room_id, @isFollowingRoom
       AppActions.setUnreadMentions room_id
+
+  scrollDownMessages: ->
+    component = React.findDOMNode @refs.messageList
+    component.scrollTop = component.scrollHeight
 
   componentDidMount: ->
     ChatActions.fetchTopics()
@@ -65,7 +70,7 @@ ChatComponent = React.createClass
       @socket.emit "unsubscribe",
         {username: @username(), room: @props.currentRoom}
       ChatActions.fetchRoomHistory nextProps.currentRoom
-      AppActions.setReadMentions @props.currentRoom, false
+      AppActions.setReadMentions @props.currentRoom
 
   isFollowingRoom: (room_id) ->
     followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
@@ -88,6 +93,7 @@ ChatComponent = React.createClass
           messages: @state.chat.messages
           currentRoom: @props.currentRoom
           isFollowingRoom: @isFollowingRoom
+          ref: "messageList"
         ChatForm
           submitMessage: @submitMessage
           currentMessage: @state.chat.currentMessage
@@ -102,6 +108,7 @@ ChatComponent = React.createClass
         topics: @state.chat.topics
         user: @state.app.user
         isFollowingRoom: @isFollowingRoom
-      mainSection
+      div {className: "chat-panel"},
+        mainSection
 
 module.exports = ChatComponent
