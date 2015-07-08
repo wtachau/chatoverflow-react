@@ -2,10 +2,66 @@
 @import "sizes";
 
 .rooms {
-
   .current-topic {
     color: $chat_sidebar_hover_periwinkle;
     background-color: $chat_background_grey;
   }
 
+  .row {
+    margin: 0px;
+    overflow: scroll;
+    &.topic-header {
+      height: $topic-height;
+    }
+  }
+
+  .rooms-list {
+    position: absolute;
+    top: $topic_height;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: scroll;
+
+    .room-info {
+      overflow: hidden;
+
+      .answers {
+        float: left;
+        width: 75px;
+        text-align: center;
+        background-color: $answers_light_grey;
+        color: $answers_dark_grey;
+        margin-right: 40px;
+        padding: 5px 10px;
+
+        .answer-total {
+          font-weight: bold;
+          font-size: 20px;
+        }
+
+        .answer-text {
+          font-size: 12px;
+        }
+      }
+
+      .question-info {
+        float: left;
+
+        .question {
+          font-size: 18px;
+          line-height: 30px;
+          color: $questions_purple;
+        }
+      }
+
+      .time-asked {
+        font-size: 12px;
+      }
+
+      .recent-answers {
+        margin-top: 10px;
+      }
+    }
+  }
 }
