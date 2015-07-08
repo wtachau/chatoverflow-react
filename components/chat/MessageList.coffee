@@ -29,6 +29,20 @@ MessageList = React.createClass
     isFollowing = @props.isFollowingRoom @props.currentRoom
     if isFollowing then 'Unfollow Room' else "Follow Room"
 
+  # If we are receiving new messages, maintain scroll height
+  componentWillReceiveProps: (nextProps) ->
+    noNewMessages = (nextProps.messages.length is @props.messages.length)
+    unless noNewMessages or (@props.messages.length is 0)
+      component = React.findDOMNode this
+      @shouldUpdateScrollHeight = true
+      @oldScrollHeight = component.scrollHeight
+
+  componentDidUpdate: ->
+    component = React.findDOMNode this
+    if @shouldUpdateScrollHeight
+      component.scrollTop = component.scrollHeight - @oldScrollHeight
+      @shouldUpdateScrollHeight = false
+
   checkWindowScroll: (e) ->
     target = event.target
     scrollTop = target.scrollTop
