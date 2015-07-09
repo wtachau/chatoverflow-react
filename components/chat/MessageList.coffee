@@ -24,24 +24,24 @@ MessageList = React.createClass
     messages: React.PropTypes.array.isRequired
     currentRoom: React.PropTypes.string.isRequired
 
-  componentDidUpdate: ->
-    component = React.findDOMNode this.refs.messages
-    if component
-      component.scrollTop = component.scrollHeight
-
   # If we are receiving new messages, maintain scroll height
   componentWillReceiveProps: (nextProps) ->
     noNewMessages = (nextProps.messages.length is @props.messages.length)
     unless noNewMessages or (@props.messages.length is 0)
-      component = React.findDOMNode this
+      component = React.findDOMNode this.refs.messages
       @shouldUpdateScrollHeight = true
       @oldScrollHeight = component.scrollHeight
 
+  componentWillUpdate: ->
+    @hasReceivedMessage
+
   componentDidUpdate: ->
-    component = React.findDOMNode this
+    component = React.findDOMNode this.refs.messages
     if @shouldUpdateScrollHeight
       component.scrollTop = component.scrollHeight - @oldScrollHeight
       @shouldUpdateScrollHeight = false
+    else if @props.hasSubmittedReply
+      component.scrollTop = component.scrollHeight
 
   checkWindowScroll: (e) ->
     target = event.target

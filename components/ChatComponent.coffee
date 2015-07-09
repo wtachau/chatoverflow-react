@@ -88,6 +88,7 @@ ChatComponent = React.createClass
        "text": message.trim()
        mentions: mentions
     e.preventDefault()
+    @hasSubmittedReply = true
 
   render: ->
     mainSection = if @props.currentTopic
@@ -100,12 +101,15 @@ ChatComponent = React.createClass
               currentRoom: @props.currentRoom
               isFollowingRoom: @isFollowingRoom
               ref: "messageList"
+              hasSubmittedReply: @hasSubmittedReply
             ChatForm
               submitMessage: @submitMessage
               currentMessage: @state.chat.currentMessage
               users: @state.app.users
     else
       AskComponent {}
+
+    @hasSubmittedReply = false
 
     div {className: "chat"},
       TopicSidebar
