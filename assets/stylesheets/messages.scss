@@ -1,6 +1,11 @@
 @import "colors";
 @import "sizes";
 
+.messages-section {
+  width: 50%;
+  float: left;
+}
+
 .messages {
 
   position: absolute;
@@ -8,7 +13,7 @@
   overflow-x: hidden;
 
   height: calc(100% - #{$chat_box_height});
-  width: 100%;
+  width: 50%;
   vertical-align: top;
 
   .message-row {

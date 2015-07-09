@@ -4,7 +4,7 @@ routes = require("./config/routes")
 App = require("./components/layout/App")
 
 require("./assets/vendor/bootstrap/stylesheets/_bootstrap.scss")
-require("./assets/stylesheets/home.scss")
+require("./assets/stylesheets/ask.scss")
 require("./assets/stylesheets/chat.scss")
 require("./assets/stylesheets/login.scss")
 require("./assets/stylesheets/rooms.scss")

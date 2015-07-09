@@ -23,9 +23,15 @@ ChatForm = React.createClass
   statics:
     registerStore: ChatStore
 
+  componentWillUnmount: ->
+    console.log "Unmounting chat form"
+    ChatActions.setCurrentRoom null
+
   keyPress: (e) ->
     @state.keyPressMap[e.key] = (e.type == "keydown")
-    if @state.keyPressMap["Enter"] and (@state.keyPressMap["Control"] or @state.keyPressMap["Shift"])
+    controlOrShift = @state.keyPressMap["Control"] or
+                      @state.keyPressMap["Shift"]
+    if @state.keyPressMap["Enter"] and controlOrShift
       @state.currentMessage = @state.currentMessage + "\n"
     else if @state.keyPressMap["Enter"]
       @submit e
