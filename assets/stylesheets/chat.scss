@@ -3,21 +3,24 @@
 @import "fonts";
 .chat {
 
+  .main-section {
+    overflow: hidden;
+    width: 100%;
+  }
+
   .chat-form {
     background: $chat_input_grey;
     position: fixed;
     bottom: 0;
-    width: calc(100% - #{$sidebar_width});
+    width: calc(55% - #{$sidebar_width});
     padding: 3px;
-    left: 150px;
     height: $chat_box_height;
-    overflow: scroll;
   }
 
   .form-input {
     border: 0;
     padding: 10px;
-    width: 90%;
+    width: 80%;
     margin-right: .5%;
     position: fixed;
   }

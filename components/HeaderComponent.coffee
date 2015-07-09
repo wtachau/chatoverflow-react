@@ -12,7 +12,7 @@ HeaderComponent = React.createClass
   render: ->
     Navbar {},
       Nav {},
-        Link to: "/",
+        Link to: "app",
           h3 {}, "chatsignal"
 
 module.exports = HeaderComponent

@@ -13,6 +13,7 @@ class ChatStore
     @currentQuestionText = ""
     @topicSelected = null
     @topicInfo = null
+    @currentRoom = null
     @keyPressMap = []
 
     @bindActions(ChatActions)
@@ -25,6 +26,10 @@ class ChatStore
 
   onSetCurrentMessage: (message) ->
     @currentMessage = message
+
+  onSetCurrentRoom: (room) ->
+    @currentRoom = room
+    @messages = room?.messages
 
   onSetMessage: (message) ->
     for m, i in @messages
