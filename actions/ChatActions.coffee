@@ -5,8 +5,9 @@ AppActions = require("./AppActions")
 class ChatActions
   constructor: ->
     @generateActions "setCurrentMessage", "setMessagesList",
-      "setTopics", "setCurrentQuestion", "setTopicSelected",
-      "setTopicInfo", "setMentions", "setMessage", "setCurrentRoom"
+      "setTopics", "setCurrentQuestionTitle", "setCurrentQuestionText",
+      "setTopicSelected", "setTopicInfo", "setMentions", "setMessage",
+      "setCurrentRoom"
 
   fetchRoomHistory: (room_id) ->
     URLResources.readFromAPI "/rooms/#{room_id}", @actions.setCurrentRoom
@@ -18,10 +19,12 @@ class ChatActions
     URLResources.readFromAPI "/topics", @actions.setTopics
 
   upvoteMessage: (id, room_id) ->
-    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/upvote", "PUT", null, @actions.setMessage
+    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/upvote",
+      "PUT", null, @actions.setMessage
 
   downvoteMessage: (id, room_id) ->
-    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/downvote", "PUT", null, @actions.setMessage
+    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/downvote",
+      "PUT", null, @actions.setMessage
 
   fetchFailure: (error) ->
     console.error(error)
