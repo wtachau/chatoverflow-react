@@ -35,9 +35,6 @@ AskComponent = React.createClass
     ChatActions.setCurrentQuestionText e.target.value
 
   keyPress: (e) ->
-    # console.log e
-    # console.log e.target.
-    # e.preventDefault()
     if e.key is "Enter"
       @submitQuestion e
 
