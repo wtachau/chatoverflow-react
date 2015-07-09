@@ -6,6 +6,8 @@ ChatStore = require("../../stores/ChatStore")
 ChatActions = require("../../actions/ChatActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
+Row = React.createFactory ReactBootstrap.Row
+Col = React.createFactory ReactBootstrap.Col
 Link = React.createFactory Router.Link
 { div, ul, li } = React.DOM
 moment = require("moment")
@@ -15,6 +17,7 @@ RoomInfo = React.createClass
 
   propTypes:
     room: React.PropTypes.object.isRequired
+    topic: React.PropTypes.string.isRequired
 
   mixins: [ReactStateMagicMixin]
 
@@ -28,7 +31,7 @@ RoomInfo = React.createClass
 
     date = moment(@props.room.created_at).format("MM/DD/YY")
     time = moment(@props.room.created_at).format("HH:mm")
-    timestamp = "asked #{date} at #{time} by #{@username}"
+    timestamp = "asked #{date} at #{time} by #{username}"
 
     answersTotal = @props.room.messages.length - 1
 
@@ -40,14 +43,17 @@ RoomInfo = React.createClass
         div {className: "answer-total"}, answersTotal
         div {className: "answer-text"},
           if answersTotal is 1 then "answer" else "answers"
-      div {className: "question-info"},
-        Link {to: "/rooms/#{@props.room.id}"},
-          div {className: "question"}, question
-        div {className: "time-asked"}, timestamp
-        div {className: "recent-answers"},
-          "Recent Answers:"
-          ul {className: "recent-answers-list"},
-            recentAnswers.map ({username, text}) ->
-              li {className: "recent-answer"}, "#{username} answered: #{text}"
+      Row {},
+        Col {className: "question-info", xs:8},
+          div {className: "question-header"},
+            Link {to: "/topics/#{@props.topic}/rooms/#{@props.room.id}"},
+              div {className: "question-title"}, @props.room.title
+            div {className: "time-asked"}, timestamp
+          div {className: "question-text"}, question
+          div {className: "recent-answers"},
+            "Recent Answers:"
+            ul {className: "recent-answers-list"},
+              recentAnswers.map ({username, text}) ->
+                li {className: "recent-answer"}, "#{username} answered: #{text}"
 
 module.exports = RoomInfo

@@ -18,8 +18,8 @@ Button = React.createFactory ReactBootstrap.Button
 DropdownButton = React.createFactory ReactBootstrap.DropdownButton
 MenuItem = React.createFactory ReactBootstrap.MenuItem
 
-HomeComponent = React.createClass
-  displayName: "HomeComponent"
+AskComponent = React.createClass
+  displayName: "AskComponent"
 
   mixins: [ReactStateMagicMixin, Router.Navigation]
 
@@ -28,37 +28,38 @@ HomeComponent = React.createClass
       chat: ChatStore
       app: AppStore
 
-  inputChange: (e) ->
-    ChatActions.setCurrentQuestion e.target.value
+  questionTitleChange: (e) ->
+    ChatActions.setCurrentQuestionTitle e.target.value
+
+  questionTextChange: (e) ->
+    ChatActions.setCurrentQuestionText e.target.value
 
   keyPress: (e) ->
     if e.key is "Enter"
       @submitQuestion e
 
+  # Initialize socket.io connection
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
 
-  successFunction: (response) ->
-    @socket.emit "chat message",
-      user_id: @state.app.user.id
-      username: @state.app.user.username
-      room_id: response.id
-      text: @state.chat.currentQuestion
-      mentions: []
-    AppActions.fetchUser()
-    ChatActions.setCurrentQuestion ""
-    @transitionTo 'room', room_id: response.id
-
-  errorFunction: ->
-    console.log "errorFunction"
-
+  # Send a new question to the node server
   submitQuestion: (e) ->
-    unless @state.chat.currentQuestion.trim() is ""
+    console.log "here"
+    unless @state.chat.currentQuestionText.trim() is ""
       URLResources.callAPI "/rooms", "post",
         {topic_id: @state.chat.topicSelected.eventKey,
-        text: @state.chat.currentQuestion.trim()},
-        @successFunction
+        title: @state.chat.currentQuestionTitle.trim(),
+        text: @state.chat.currentQuestionText.trim()},
+        @onSubmitQuestion
       e.preventDefault()
+
+  # After a new question is created, reset parameters
+  onSubmitQuestion: (response) ->
+    AppActions.fetchUser()
+    ChatActions.setCurrentQuestionText ""
+    ChatActions.setCurrentQuestionTitle ""
+    
+    @transitionTo 'room', room_id: response.id, topic_id: response.topic_id
 
   onTopicSelected: (eventKey, href, target) ->
     ChatActions.setTopicSelected {eventKey, name: target}
@@ -90,18 +91,23 @@ HomeComponent = React.createClass
               h1 {}, "What's your #{@state.chat.topicSelected.name} question?"
           Row {},
             Col md: 8, mdOffset: 2,
-              form {className: "welcome-form", autoComplete: off},
+              form {className: "ask-form", autoComplete: off},
                 Input
                   type: "text"
-                  className: "welcome-input"
+                  className: "ask-title"
                   autoComplete: off
-                  value: @state.chat.question
-                  onChange: @inputChange
+                  value: @state.chat.currentQuestionTitle
+                  onChange: @questionTitleChange
+                Input
+                  type: "textarea"
+                  className: "ask-question"
+                  value: @state.chat.currentQuestionText
+                  onChange: @questionTextChange
                   onKeyDown: @keyPress
                 Button
-                  className: "welcome-form-button"
+                  className: "ask-form-button"
                   onClick: @submitQuestion
                   "Submit"
 
-module.exports = HomeComponent
+module.exports = AskComponent
 

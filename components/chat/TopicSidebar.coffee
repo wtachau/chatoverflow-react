@@ -43,8 +43,8 @@ TopicSidebar = React.createClass
         Link {to: "/topics/#{id}", key: index},
           ListGroupItem {className: "topic-name"}, name
       h1 {className: "categories-header"}, "Rooms Following"
-        @props.user.followed_rooms.map ({id}, index) =>
-          Link {to: "/rooms/#{id}", key: index},
+        @props.user.followed_rooms.map ({id, topic_id}, index) =>
+          Link {to: "/topics/#{topic_id}/rooms/#{id}", key: index},
             ListGroupItem {className: "topic-name"},
               "room #{id}",
               @badge(id),

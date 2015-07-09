@@ -5,30 +5,42 @@ AppActions = require("./AppActions")
 class ChatActions
   constructor: ->
     @generateActions "setCurrentMessage", "setMessagesList",
-      "setTopics", "setCurrentQuestion", "setTopicSelected",
-      "setTopicInfo", "setMentions", "setMessage"
+      "setTopics", "setCurrentQuestionTitle", "setCurrentQuestionText",
+      "setTopicSelected", "setTopicInfo", "setMentions", "setMessage",
+      "setCurrentRoom", "setOldestPage", "prependToMessages"
 
-  fetchRoomHistory: (roomId) ->
+  fetchRecentMessages: (roomId) ->
     URLResources.readFromAPI "/rooms/#{roomId}/messages",
-      @actions.fetchRoomHistorySuccess
+      @actions.fetchRecentMessagesSuccess
 
-  fetchRoomHistorySuccess: (response) ->
-    @actions.setMessagesList response
+  fetchRecentMessagesSuccess: (response) ->
+    @actions.setMessagesList response.messages
+    @actions.setOldestPage response.page
 
-  fetchTopicInfo: (currentTopic) ->
-    URLResources.readFromAPI "/topics/#{currentTopic}", @actions.setTopicInfo
+  fetchOldMessages: (roomId, page) ->
+    URLResources.readFromAPI "/rooms/#{roomId}/messages?page=#{page}",
+      @actions.fetchOldMessagesSuccess
 
-  fetchFailure: (error) ->
-    console.error(error)
+  fetchOldMessagesSuccess: (response) ->
+    @actions.prependToMessages response.messages
+    @actions.setOldestPage response.page
+
+  fetchTopicInfo: (topic_id) ->
+    URLResources.readFromAPI "/topics/#{topic_id}", @actions.setTopicInfo
 
   fetchTopics: ->
     URLResources.readFromAPI "/topics", @actions.setTopics
 
   upvoteMessage: (id, room_id) ->
-    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/upvote", "PUT", null, @actions.setMessage
+    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/upvote",
+      "PUT", null, @actions.setMessage
 
   downvoteMessage: (id, room_id) ->
-    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/downvote", "PUT", null, @actions.setMessage
+    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/downvote",
+      "PUT", null, @actions.setMessage
+
+  fetchFailure: (error) ->
+    console.error(error)
 
 
 module.exports = alt.createActions(ChatActions)

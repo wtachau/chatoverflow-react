@@ -42,6 +42,6 @@ RoomList = React.createClass
           Row {className: "topic-header"},
             h1 {className: "current-topic"}, @state.topicInfo.name
           Row {className: "rooms-list"},
-            @state.topicInfo.rooms.map (room) -> RoomInfo { room }
+            @state.topicInfo.rooms.map (room) => RoomInfo { room, topic:@state.topicInfo.id }
 
 module.exports = RoomList

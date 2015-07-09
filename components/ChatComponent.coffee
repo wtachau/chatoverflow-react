@@ -5,7 +5,7 @@ io = require("socket.io-client")
 TopicSidebar = React.createFactory require("./chat/TopicSidebar")
 MessageList = React.createFactory require("./chat/MessageList")
 ChatForm = React.createFactory require("./chat/ChatForm")
-HomeComponent = React.createFactory require("./HomeComponent")
+AskComponent = React.createFactory require("./AskComponent")
 RoomList = React.createFactory require("./chat/RoomList")
 URLResources = require("../common/URLResources")
 ChatStore = require("../stores/ChatStore")
@@ -63,7 +63,7 @@ ChatComponent = React.createClass
     ChatActions.fetchTopics()
     AppActions.fetchUsers()
     if @props.currentRoom
-      ChatActions.fetchRoomHistory @props.currentRoom
+      ChatActions.fetchRecentMessages @props.currentRoom
 
   componentWillReceiveProps: (nextProps) ->
     sameRoom = nextProps.currentRoom is @props.currentRoom
@@ -71,9 +71,11 @@ ChatComponent = React.createClass
     unless sameRoom or nullRoom
       @socket.emit "subscribe",
         {username: @username(), room: nextProps.currentRoom}
+
       @socket.emit "unsubscribe",
         {username: @username(), room: @props.currentRoom}
-      ChatActions.fetchRoomHistory nextProps.currentRoom
+
+      ChatActions.fetchRecentMessages nextProps.currentRoom
       AppActions.setReadMentions @props.currentRoom
 
   isFollowingRoom: (room_id) ->
@@ -93,21 +95,22 @@ ChatComponent = React.createClass
     e.preventDefault()
 
   render: ->
-    mainSection = if @props.currentRoom
-      div {},
-        MessageList
-          messages: @state.chat.messages
-          currentRoom: @props.currentRoom
-          isFollowingRoom: @isFollowingRoom
-          ref: "messageList"
-        ChatForm
-          submitMessage: @submitMessage
-          currentMessage: @state.chat.currentMessage
-          users: @state.app.users
-    else if @props.currentTopic
-      RoomList {currentTopic: @props.currentTopic}
+    mainSection = if @props.currentTopic
+      div {className: "main-section"},
+        RoomList {currentTopic: @props.currentTopic}
+        if @props.currentRoom
+          div {className: "messages-section"},
+            MessageList
+              messages: @state.chat.messages
+              currentRoom: @props.currentRoom
+              isFollowingRoom: @isFollowingRoom
+              ref: "messageList"
+            ChatForm
+              submitMessage: @submitMessage
+              currentMessage: @state.chat.currentMessage
+              users: @state.app.users
     else
-      HomeComponent {}
+      AskComponent {}
 
     div {className: "chat"},
       TopicSidebar
