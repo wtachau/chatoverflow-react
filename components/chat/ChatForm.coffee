@@ -23,8 +23,15 @@ ChatForm = React.createClass
   statics:
     registerStore: ChatStore
 
+  componentWillUnmount: ->
+    console.log "Unmounting chat form"
+    ChatActions.setCurrentRoom null
+
   keyPress: (e) ->
-    if e.key is "Enter"
+    @state.keyPressMap[e.key] = (e.type == "keydown")
+    if @state.keyPressMap["Enter"] and (@state.keyPressMap["Control"] or @state.keyPressMap["Shift"])
+      @state.currentMessage = @state.currentMessage + "\n"
+    else if @state.keyPressMap["Enter"]
       @submit e
 
   submit: (e) ->
@@ -38,15 +45,18 @@ ChatForm = React.createClass
       {id: id, display: username}
 
   inputChange: (e, newValue, newPlainTextValue, mentions) ->
+    component = React.findDOMNode this
+    component.scrollTop = component.scrollHeight
     ChatActions.setCurrentMessage e.target.value
     ChatActions.setMentions mentions
 
   render: ->
     form {className: "chat-form", autoComplete: off},
-      MentionsInput 
+      MentionsInput
         value: @props.currentMessage
         onChange: @inputChange
         displayTransform: @displayMention
+        onKeyUp: @keyPress
         onKeyDown: @keyPress,
         Mention {trigger: "@", data: @formattedUserMentionsData()},
       Button {onClick: @submit, className: "form-button"}, "send"

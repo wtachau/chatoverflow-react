@@ -13,6 +13,8 @@ class ChatStore
     @topicSelected = null
     @topicInfo = null
     @oldestPage = null
+    @currentRoom = null
+    @keyPressMap = []
 
     @bindActions(ChatActions)
 
@@ -22,9 +24,9 @@ class ChatStore
   onSetCurrentMessage: (message) ->
     @currentMessage = message
 
-  onSetCurrentPage: (page) ->
-    @currentPage = page
-    console.log @currentPage
+  onSetCurrentRoom: (room) ->
+    @currentRoom = room
+    @messages = room?.messages
 
   onSetMessage: (message) ->
     for m, i in @messages

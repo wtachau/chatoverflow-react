@@ -1,6 +1,7 @@
 #ignore these
 npm-debug.log
 node_modules/
+.idea/
 .DS_Store
 *.js
 *.svg

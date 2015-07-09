@@ -7,7 +7,7 @@ class ChatActions
     @generateActions "setCurrentMessage", "setMessagesList",
       "setTopics", "setCurrentQuestion", "setTopicSelected",
       "setTopicInfo", "setMentions", "setMessage",
-      "setOldestPage", "prependToMessages"
+      "setOldestPage", "prependToMessages", "setCurrentRoom"
 
   fetchRecentMessages: (roomId) ->
     URLResources.readFromAPI "/rooms/#{roomId}/messages",
@@ -25,11 +25,11 @@ class ChatActions
     @actions.prependToMessages response.messages
     @actions.setOldestPage response.page
 
-  fetchTopicInfo: (currentTopic) ->
-    URLResources.readFromAPI "/topics/#{currentTopic}", @actions.setTopicInfo
+  fetchRoomHistory: (room_id) ->
+    URLResources.readFromAPI "/rooms/#{room_id}", @actions.setCurrentRoom
 
-  fetchFailure: (error) ->
-    console.error(error)
+  fetchTopicInfo: (topic_id) ->
+    URLResources.readFromAPI "/topics/#{topic_id}", @actions.setTopicInfo
 
   fetchTopics: ->
     URLResources.readFromAPI "/topics", @actions.setTopics
@@ -41,6 +41,9 @@ class ChatActions
   downvoteMessage: (id, room_id) ->
     URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/downvote",
       "PUT", null, @actions.setMessage
+
+  fetchFailure: (error) ->
+    console.error(error)
 
 
 module.exports = alt.createActions(ChatActions)

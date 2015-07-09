@@ -33,7 +33,7 @@ module.exports = React.createClass
   render: ->
     if @state.user
       div {},
-        HeaderComponent {}, "testing2"
+        HeaderComponent {}
         ChatComponent
           user: @state.user
           logoutClicked: AppActions.logout

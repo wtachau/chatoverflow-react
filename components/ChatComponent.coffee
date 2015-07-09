@@ -40,13 +40,17 @@ ChatComponent = React.createClass
     @socket = io(URLResources.getChatServerOrigin())
     @socket.on "chat message",
       ({id, user_id, username, room_id, text, created_at}) =>
-        newList = @state.chat.messages
-        newList.push {vote_total: 0, id, user_id, room_id,
-                      username, text, created_at}
-        ChatActions.setMessagesList newList
-        @scrollDownMessages()
-    @socket.on "mention", ({user_id, username, room_id, text}) ->
-      alert "#{username} mentioned you in room #{room_id}: #{text}"
+        if room_id is @props.currentRoom
+          newList = @state.chat.messages
+          newList.push {vote_total: 0, id, user_id, room_id,
+                        username, text, created_at}
+          ChatActions.setMessagesList newList
+          @scrollDownMessages()
+
+    @socket.on "mention", ({user_id, username, room_id, text}) =>
+      unless @isFollowingRoom room_id
+        AppActions.followRoom room_id, @isFollowingRoom
+      AppActions.setUnreadMentions room_id
 
   scrollDownMessages: ->
     component = React.findDOMNode @refs.messageList
@@ -64,13 +68,17 @@ ChatComponent = React.createClass
     unless sameRoom or nullRoom
       @socket.emit "subscribe",
         {username: @username(), room: nextProps.currentRoom}
+
       @socket.emit "unsubscribe",
         {username: @username(), room: @props.currentRoom}
       ChatActions.fetchRecentMessages nextProps.currentRoom
+      AppActions.setReadMentions @props.currentRoom
 
   isFollowingRoom: (room_id) ->
     followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
     parseInt(room_id) in followedRoomIds
+
+  currentTopic: -> @props.currentTopic or @state.chat.currentRoom?.topic_id
 
   submitMessage: (e, message, mentions) ->
     unless message is ""
@@ -83,19 +91,20 @@ ChatComponent = React.createClass
     e.preventDefault()
 
   render: ->
-    mainSection = if @props.currentRoom
-      div {},
-        MessageList
-          messages: @state.chat.messages
-          currentRoom: @props.currentRoom
-          isFollowingRoom: @isFollowingRoom
-          ref: "messageList"
-        ChatForm
-          submitMessage: @submitMessage
-          currentMessage: @state.chat.currentMessage
-          users: @state.app.users
-    else if @props.currentTopic
-      RoomList {currentTopic: @props.currentTopic}
+    mainSection = if @currentTopic()
+      div {className: "main-section"},
+        RoomList {currentTopic: @currentTopic()}
+        if @props.currentRoom
+          div {className: "messages-section"},
+            MessageList
+              messages: @state.chat.messages
+              currentRoom: @props.currentRoom
+              isFollowingRoom: @isFollowingRoom
+              ref: "messageList"
+            ChatForm
+              submitMessage: @submitMessage
+              currentMessage: @state.chat.currentMessage
+              users: @state.app.users
     else
       HomeComponent {}
 
