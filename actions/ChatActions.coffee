@@ -7,7 +7,8 @@ class ChatActions
     @generateActions "setCurrentMessage", "setMessagesList",
       "setTopics", "setCurrentQuestionTitle", "setCurrentQuestionText",
       "setTopicSelected", "setTopicInfo", "setMentions", "setMessage",
-      "setCurrentRoom", "setOldestPage", "prependToMessages"
+      "setCurrentRoom", "setOldestPage", "prependToMessages",
+      "setTopicSearchQuery", "setSearchResults"
 
   fetchRecentMessages: (roomId) ->
     URLResources.readFromAPI "/rooms/#{roomId}/messages",
@@ -30,6 +31,9 @@ class ChatActions
 
   fetchTopics: ->
     URLResources.readFromAPI "/topics", @actions.setTopics
+
+  fetchSearchResults: (query) ->
+    URLResources.readFromAPI "/topics/search/#{query}", @actions.setSearchResults
 
   upvoteMessage: (id, room_id) ->
     URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/upvote",

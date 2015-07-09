@@ -6,6 +6,7 @@ ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Badge = React.createFactory ReactBootstrap.Badge
 Link = React.createFactory Router.Link
 Button = React.createFactory ReactBootstrap.Button
+TopicSearch = React.createFactory require("./TopicSearch.coffee")
 AppActions = require("../../actions/AppActions")
 AppStore = require("../../stores/AppStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
@@ -43,16 +44,13 @@ TopicSidebar = React.createClass
 
   render: ->
     ListGroup {className: "sidebar"},
-      h1 {className: "categories-header"}, "Languages"
-      @props.topics.map ({name, id, rooms}, index) ->
-        Link {to: "/topics/#{id}", key: index},
-          ListGroupItem {className: "topic-name"}, name
       h1 {className: "categories-header"}, "Topics Following"
         @props.user.followed_topics.map ({id, name}) =>
           Link {to: "/topics/#{id}"},
             ListGroupItem {className: "topic-name"},
               name,
               div {className: "exit-x", "data-id": id, onClick: @onCloseTopic}, "x"
+      TopicSearch {isFollowingTopic: @props.isFollowingTopic}
       h1 {className: "categories-header"}, "Rooms Following"
         @props.user.followed_rooms.map ({id, topic_id}) =>
           Link {to: "/topics/#{topic_id}/rooms/#{id}"},
