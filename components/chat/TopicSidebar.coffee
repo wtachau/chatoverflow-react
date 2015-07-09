@@ -30,6 +30,11 @@ TopicSidebar = React.createClass
     AppActions.followRoom room_clicked, @props.isFollowingRoom
     e.preventDefault()
 
+  onCloseTopic: (e) ->
+    topic_clicked = e.target.getAttribute("data-id")
+    AppActions.followTopic topic_clicked, @props.isFollowingTopic
+    e.preventDefault()
+
   badge: (room_id) ->
     if @state.app.unread_mentions[parseInt(room_id)]
       Badge {}, 1
@@ -42,11 +47,17 @@ TopicSidebar = React.createClass
       @props.topics.map ({name, id, rooms}, index) ->
         Link {to: "/topics/#{id}", key: index},
           ListGroupItem {className: "topic-name"}, name
+      h1 {className: "categories-header"}, "Topics Following"
+        @props.user.followed_topics.map ({id, name}) =>
+          Link {to: "/topics/#{id}"},
+            ListGroupItem {className: "topic-name"},
+              name,
+              div {className: "exit-x", "data-id": id, onClick: @onCloseTopic}, "x"
       h1 {className: "categories-header"}, "Rooms Following"
         @props.user.followed_rooms.map ({id, topic_id}) =>
           Link {to: "/topics/#{topic_id}/rooms/#{id}"},
             ListGroupItem {className: "topic-name"},
-              "room #{id}",
+              "Room #{id}",
               @badge(id),
               div {className: "exit-x", "data-id": id, onClick: @onCloseRoom}, "x"
 
