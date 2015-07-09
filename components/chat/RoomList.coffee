@@ -23,7 +23,7 @@ RoomList = React.createClass
   displayName: "RoomList"
 
   propTypes:
-    currentTopic: React.PropTypes.number.isRequired
+    currentTopic: React.PropTypes.string.isRequired
 
   mixins: [ReactStateMagicMixin]
 

@@ -24,7 +24,7 @@ ChatComponent = React.createClass
       name: React.PropTypes.string
     logoutClicked: React.PropTypes.func.isRequired
     currentRoom: React.PropTypes.string
-    currentTopic: React.PropTypes.number.isRequired
+    currentTopic: React.PropTypes.string
 
   mixins: [ReactStateMagicMixin]
 
@@ -36,14 +36,17 @@ ChatComponent = React.createClass
   username: ->
     @props.user.username
 
+  pic_url: ->
+    @props.user.pic_url
+
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
     @socket.on "chat message",
-      ({id, user_id, username, room_id, text, created_at}) =>
+      ({id, user, room_id, text, created_at}) =>
         if room_id is @props.currentRoom
           newList = @state.chat.messages
-          newList.push {vote_total: 0, id, user_id, room_id,
-                        username, text, created_at}
+          newList.push {vote_total: 0, user, id,
+                        room_id, text, created_at}
           ChatActions.setMessagesList newList
           @scrollDownMessages()
 
@@ -86,11 +89,13 @@ ChatComponent = React.createClass
   submitMessage: (e, message, mentions) ->
     unless message is ""
       @socket.emit "chat message",
-       user_id: @props.user.id
-       username: @username()
-       room_id: @props.currentRoom
-       "text": message.trim()
-       mentions: mentions
+        user:
+          user_id: @props.user.id
+          pic_url: @pic_url()
+          username: @username()
+        room_id: @props.currentRoom
+        "text": message.trim()
+        mentions: mentions
     e.preventDefault()
 
   render: ->
