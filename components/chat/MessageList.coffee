@@ -4,6 +4,8 @@ Message = React.createFactory require("./Message")
 PinnedPost = React.createFactory require("./PinnedPost")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
+ChatStore = require("../../stores/ChatStore")
+ChatActions = require("../../actions/ChatActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 { div } = React.DOM
@@ -16,6 +18,7 @@ MessageList = React.createClass
   statics:
     registerStores:
       app: AppStore
+      chat: ChatStore
 
   propTypes:
     messages: React.PropTypes.array.isRequired
@@ -26,6 +29,27 @@ MessageList = React.createClass
     if component
       component.scrollTop = component.scrollHeight
 
+  # If we are receiving new messages, maintain scroll height
+  componentWillReceiveProps: (nextProps) ->
+    noNewMessages = (nextProps.messages.length is @props.messages.length)
+    unless noNewMessages or (@props.messages.length is 0)
+      component = React.findDOMNode this
+      @shouldUpdateScrollHeight = true
+      @oldScrollHeight = component.scrollHeight
+
+  componentDidUpdate: ->
+    component = React.findDOMNode this
+    if @shouldUpdateScrollHeight
+      component.scrollTop = component.scrollHeight - @oldScrollHeight
+      @shouldUpdateScrollHeight = false
+
+  checkWindowScroll: (e) ->
+    target = event.target
+    scrollTop = target.scrollTop
+    if scrollTop is 0
+      ChatActions.fetchOldMessages @props.currentRoom,
+        parseInt(@state.chat.oldestPage) + 1
+
   render: ->
     [first, rest...] = @props.messages
     div {},
@@ -35,7 +59,7 @@ MessageList = React.createClass
             first: first
             currentRoom: @props.currentRoom
             isFollowingRoom: @props.isFollowingRoom
-          div {className: "messages", ref: "messages"},
+          div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},
             rest.map (message, index) =>
               userColorClass = if message.username is @state.app.user.username
                 "usercolor"

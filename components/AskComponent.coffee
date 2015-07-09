@@ -58,7 +58,8 @@ AskComponent = React.createClass
     AppActions.fetchUser()
     ChatActions.setCurrentQuestionText ""
     ChatActions.setCurrentQuestionTitle ""
-    @transitionTo 'room', room_id: response.id
+    
+    @transitionTo 'room', room_id: response.id, topic_id: response.topic_id
 
   onTopicSelected: (eventKey, href, target) ->
     ChatActions.setTopicSelected {eventKey, name: target}
