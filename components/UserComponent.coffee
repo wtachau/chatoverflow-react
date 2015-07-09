@@ -9,6 +9,10 @@ ModalTitle = React.createFactory ReactBootstrap.Modal.Title
 ModalBody = React.createFactory ReactBootstrap.Modal.Body
 ModalFooter = React.createFactory ReactBootstrap.Modal.Footer
 Button = React.createFactory ReactBootstrap.Button
+Thumbnail = React.createFactory ReactBootstrap.Thumbnail
+Grid = React.createFactory ReactBootstrap.Grid
+Row = React.createFactory ReactBootstrap.Row
+Col = React.createFactory ReactBootstrap.Col
 { a, div, img } = React.DOM
 
 UserComponent = React.createClass
@@ -19,24 +23,29 @@ UserComponent = React.createClass
   statics:
     registerStore: AppStore
 
-  showPopup: ->
-    AppActions.showUserPopup true
+  getInitialState: ->
+    showModal: false
 
-  closePopup: ->
-    AppActions.showUserPopup false
+  showPopup: -> @setState showModal: true
+
+  closePopup: -> @setState showModal: false
 
   render: ->
-    div {},
-      a {href: "#", onClick: @showPopup}, @state.user.username
-      Modal {show: @state.showUserPopup, onHide: @closePopup},
+    div {className: "popup-link"},
+      a {href: "#", onClick: @showPopup, className: "categories-header"},
+        @state.user.username
+      Modal {show: @state.showModal, onHide: @closePopup},
         ModalHeader {closeButton: true},
           ModalTitle {}, "User Information"
         ModalBody {},
-          div {}, "Username: #{@state.user.username}"
-          div {}, "Karma: #{@state.user.karma}"
-          div {},
-            "Picture: "
-            img {className: "profile-pic", src: @state.user.pic_url}
+          Grid {},
+            Row {},
+              Col {xs: 6, md: 3},
+                div {className: "user-thumbnail"},
+                  Thumbnail {href: "#", src: @state.user.pic_url}
+              Col {xs: 6, md: 3},
+                div {className: "user-username"}, "#{@state.user.username}"
+                div {className: "user-karma"}, "Karma: #{@state.user.karma}"
         ModalFooter {},
           Button {onClick: @closePopup}, "Close"
 

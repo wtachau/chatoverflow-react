@@ -9,6 +9,7 @@ Button = React.createFactory ReactBootstrap.Button
 AppActions = require("../../actions/AppActions")
 AppStore = require("../../stores/AppStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+UserComponent = React.createFactory require("../UserComponent")
 
 { h1, div } = React.DOM
 
@@ -38,6 +39,7 @@ TopicSidebar = React.createClass
 
   render: ->
     ListGroup {className: "sidebar"},
+      UserComponent {}
       h1 {className: "categories-header"}, "Languages"
       @props.topics.map ({name, id, rooms}, index) ->
         Link {to: "/topics/#{id}", key: index},

@@ -4,7 +4,6 @@ Router = require("react-router")
 Navbar = React.createFactory(ReactBootstrap.Navbar)
 Nav = React.createFactory(ReactBootstrap.Nav)
 Link = React.createFactory Router.Link
-UserComponent = React.createFactory require("./UserComponent")
 { h3 } = React.DOM
 
 HeaderComponent = React.createClass
@@ -15,6 +14,5 @@ HeaderComponent = React.createClass
       Nav {},
         Link to: "/",
           h3 {}, "chatsignal"
-        UserComponent {}
 
 module.exports = HeaderComponent
