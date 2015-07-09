@@ -9,19 +9,19 @@ h1 {
 
   position: relative;
 
-  .welcome-form {
+  .ask-form {
     background: $chat_background_grey;
     width: 100%;
     padding: 1px;
     height: $welcome_chat_height;
 
-    .welcome-input {
+    .ask-title {
       border: 0;
       padding: 5px;
       width: 90%;
     }
 
-    .welcome-form-button {
+    .ask-form-button {
       background: $chat_button_blue;
       border: 0;
       padding: 10px;

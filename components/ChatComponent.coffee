@@ -5,7 +5,7 @@ io = require("socket.io-client")
 TopicSidebar = React.createFactory require("./chat/TopicSidebar")
 MessageList = React.createFactory require("./chat/MessageList")
 ChatForm = React.createFactory require("./chat/ChatForm")
-HomeComponent = React.createFactory require("./HomeComponent")
+AskComponent = React.createFactory require("./AskComponent")
 RoomList = React.createFactory require("./chat/RoomList")
 URLResources = require("../common/URLResources")
 ChatStore = require("../stores/ChatStore")
@@ -71,14 +71,13 @@ ChatComponent = React.createClass
 
       @socket.emit "unsubscribe",
         {username: @username(), room: @props.currentRoom}
+
       ChatActions.fetchRecentMessages nextProps.currentRoom
       AppActions.setReadMentions @props.currentRoom
 
   isFollowingRoom: (room_id) ->
     followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
     parseInt(room_id) in followedRoomIds
-
-  currentTopic: -> @props.currentTopic or @state.chat.currentRoom?.topic_id
 
   submitMessage: (e, message, mentions) ->
     unless message is ""
@@ -91,9 +90,9 @@ ChatComponent = React.createClass
     e.preventDefault()
 
   render: ->
-    mainSection = if @currentTopic()
+    mainSection = if @props.currentTopic
       div {className: "main-section"},
-        RoomList {currentTopic: @currentTopic()}
+        RoomList {currentTopic: @props.currentTopic}
         if @props.currentRoom
           div {className: "messages-section"},
             MessageList
@@ -106,7 +105,7 @@ ChatComponent = React.createClass
               currentMessage: @state.chat.currentMessage
               users: @state.app.users
     else
-      HomeComponent {}
+      AskComponent {}
 
     div {className: "chat"},
       TopicSidebar

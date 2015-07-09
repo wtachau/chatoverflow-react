@@ -6,7 +6,7 @@
   -moz-box-sizing: $value;
   -ms-box-sizing: $value;
   -o-box-sizing: $value;
-  box-sizing: $value; 
+  box-sizing: $value;
 }
 
 @mixin box-shadow($value) {
@@ -15,7 +15,7 @@
   -moz-box-shadow: $value;
   -ms-box-shadow: $value;
   -o-box-shadow: $value;
-  box-shadow: $value; 
+  box-shadow: $value;
 }
 .react-mentions {
   width: 77.5%;

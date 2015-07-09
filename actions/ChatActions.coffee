@@ -5,9 +5,9 @@ AppActions = require("./AppActions")
 class ChatActions
   constructor: ->
     @generateActions "setCurrentMessage", "setMessagesList",
-      "setTopics", "setCurrentQuestion", "setTopicSelected",
-      "setTopicInfo", "setMentions", "setMessage",
-      "setOldestPage", "prependToMessages", "setCurrentRoom"
+      "setTopics", "setCurrentQuestionTitle", "setCurrentQuestionText",
+      "setTopicSelected", "setTopicInfo", "setMentions", "setMessage",
+      "setCurrentRoom", "setOldestPage", "prependToMessages"
 
   fetchRecentMessages: (roomId) ->
     URLResources.readFromAPI "/rooms/#{roomId}/messages",
@@ -24,9 +24,6 @@ class ChatActions
   fetchOldMessagesSuccess: (response) ->
     @actions.prependToMessages response.messages
     @actions.setOldestPage response.page
-
-  fetchRoomHistory: (room_id) ->
-    URLResources.readFromAPI "/rooms/#{room_id}", @actions.setCurrentRoom
 
   fetchTopicInfo: (topic_id) ->
     URLResources.readFromAPI "/topics/#{topic_id}", @actions.setTopicInfo

@@ -26,7 +26,8 @@ MessageList = React.createClass
 
   componentDidUpdate: ->
     component = React.findDOMNode this.refs.messages
-    component.scrollTop = component.scrollHeight
+    if component
+      component.scrollTop = component.scrollHeight
 
   # If we are receiving new messages, maintain scroll height
   componentWillReceiveProps: (nextProps) ->
@@ -60,7 +61,10 @@ MessageList = React.createClass
             isFollowingRoom: @props.isFollowingRoom
           div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},
             rest.map (message, index) =>
-              userColorClass = if message.username is @state.app.user.username then "usercolor" else ""
+              userColorClass = if message.username is @state.app.user.username
+                "usercolor"
+              else
+                ""
               Message { message, key: index, className: userColorClass }
 
 module.exports = MessageList
