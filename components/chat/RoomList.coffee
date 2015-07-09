@@ -37,6 +37,9 @@ RoomList = React.createClass
   componentWillMount: ->
     ChatActions.fetchTopicInfo @props.currentTopic
 
+  refreshRoomList: ->
+    ChatActions.fetchTopicInfo @props.currentTopic
+
   render: ->
     div {className: "rooms"},
       if @state.topicInfo
@@ -45,9 +48,9 @@ RoomList = React.createClass
             h1 {className: "current-topic"}, @state.topicInfo.name
           Row {className: "rooms-list"},
             TabbedArea {defaultActiveKey: 1},
-              TabPane {eventKey: 1, tab: "Most Recent"},
+              TabPane {eventKey: 1, tab: "Most Recent", onClick: @refreshRoomList},
                 @state.topicInfo.rooms_newest.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
-              TabPane {eventKey: 2, tab: "Most Active"},
+              TabPane {eventKey: 2, tab: "Most Active", onClick: @refreshRoomList},
                 @state.topicInfo.rooms_updated_at.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
 
 
