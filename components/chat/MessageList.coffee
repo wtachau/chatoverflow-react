@@ -61,7 +61,6 @@ MessageList = React.createClass
             isFollowingRoom: @props.isFollowingRoom
           div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},
             rest.map (message, index) =>
-              console.log message
               userColorClass = if message.user.username is @state.app.user.username
                 "self-message-bubble"
               else
