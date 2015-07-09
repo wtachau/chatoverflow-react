@@ -47,10 +47,10 @@ RoomList = React.createClass
           Row {className: "topic-header"},
             h1 {className: "current-topic"}, @state.topicInfo.name
           Row {className: "rooms-list"},
-            TabbedArea {defaultActiveKey: 1},
-              TabPane {eventKey: 1, tab: "Most Recent", onClick: @refreshRoomList},
+            TabbedArea {defaultActiveKey: 1, onClick: @refreshRoomList},
+              TabPane {eventKey: 1, tab: "Most Recent"},
                 @state.topicInfo.rooms_newest.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
-              TabPane {eventKey: 2, tab: "Most Active", onClick: @refreshRoomList},
+              TabPane {eventKey: 2, tab: "Most Active"},
                 @state.topicInfo.rooms_updated_at.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
 
 
