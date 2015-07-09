@@ -17,6 +17,7 @@ RoomInfo = React.createClass
 
   propTypes:
     room: React.PropTypes.object.isRequired
+    topic: React.PropTypes.string.isRequired
 
   mixins: [ReactStateMagicMixin]
 
@@ -45,7 +46,7 @@ RoomInfo = React.createClass
       Row {},
         Col {className: "question-info", xs:8},
           div {className: "question-header"},
-            Link {to: "/rooms/#{@props.room.id}"},
+            Link {to: "/topics/#{@props.topic}/rooms/#{@props.room.id}"},
               div {className: "question-title"}, @props.room.title
             div {className: "time-asked"}, timestamp
           div {className: "question-text"}, question

@@ -24,7 +24,6 @@ ChatForm = React.createClass
     registerStore: ChatStore
 
   componentWillUnmount: ->
-    console.log "Unmounting chat form"
     ChatActions.setCurrentRoom null
 
   keyPress: (e) ->

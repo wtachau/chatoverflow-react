@@ -13,6 +13,7 @@ class ChatStore
     @currentQuestionText = ""
     @topicSelected = null
     @topicInfo = null
+    @oldestPage = null
     @currentRoom = null
     @keyPressMap = []
 
@@ -29,7 +30,6 @@ class ChatStore
 
   onSetCurrentRoom: (room) ->
     @currentRoom = room
-    @messages = room?.messages
 
   onSetMessage: (message) ->
     for m, i in @messages
@@ -38,6 +38,9 @@ class ChatStore
 
   onSetMessagesList: (messages) ->
     @messages = messages
+
+  onPrependToMessages: (messages) ->
+    @messages = messages.concat(@messages)
 
   onSetTopics: (topics) ->
     @topics = topics
@@ -50,5 +53,8 @@ class ChatStore
 
   onSetMentions: (mentions) ->
     @mentions = mentions
+
+  onSetOldestPage: (page) ->
+    @oldestPage = page
 
 module.exports = alt.createStore(ChatStore)

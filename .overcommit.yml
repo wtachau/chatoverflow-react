@@ -9,16 +9,16 @@
 # https://github.com/brigade/overcommit#configuration
 
 PreCommit:
-  CoffeeLint:
-    enabled: true
+  # CoffeeLint:
+  #   enabled: true
 
-  ScssLint:
-    enabled: true
+  # ScssLint:
+  #   enabled: true
 
-  JsLint:
-    enabled: true
-    exclude: bundle.js
+  # JsLint:
+  #   enabled: true
+  #   exclude: bundle.js
 
-  TrailingWhitespace:
-    enabled: true
-    exclude:
+  # TrailingWhitespace:
+  #   enabled: true
+  #   exclude:
