@@ -23,7 +23,8 @@
 
     &.bubble {
       border-radius: $bubble_border_radius;
-      width: 88%;
+      max-width: 88%;
+      clear: both;
       &.left {
         float: left;
         background-color: $chat_background_grey;
