@@ -45,8 +45,8 @@ ChatComponent = React.createClass
       ({id, user, room_id, text, created_at}) =>
         if room_id is @props.currentRoom
           newList = @state.chat.messages
-          newList.push {vote_total: 0, user, id,
-                        room_id, text, created_at}
+          newMessage = {vote_total: 0, user, id, room_id, text, created_at, isNewMessage: true}
+          newList.push newMessage
           ChatActions.setMessagesList newList
           @scrollDownMessages()
 
@@ -93,7 +93,6 @@ ChatComponent = React.createClass
         "text": message.trim()
         mentions: mentions
     e.preventDefault()
-    @hasSubmittedReply = true
 
   render: ->
     mainSection = if @props.currentTopic
@@ -106,15 +105,12 @@ ChatComponent = React.createClass
               currentRoom: @props.currentRoom
               isFollowingRoom: @isFollowingRoom
               ref: "messageList"
-              hasSubmittedReply: @hasSubmittedReply
             ChatForm
               submitMessage: @submitMessage
               currentMessage: @state.chat.currentMessage
               users: @state.app.users
     else
       AskComponent {}
-
-    @hasSubmittedReply = false
 
     div {className: "chat"},
       TopicSidebar
