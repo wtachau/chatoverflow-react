@@ -21,27 +21,39 @@ MessageList = React.createClass
       chat: ChatStore
 
   propTypes:
+    originalPost: React.PropTypes.object.isRequired
     messages: React.PropTypes.array.isRequired
     currentRoom: React.PropTypes.string.isRequired
 
-  componentDidUpdate: ->
-    component = React.findDOMNode this.refs.messages
-    if component
-      component.scrollTop = component.scrollHeight
+  messagesComponent: ->
+    React.findDOMNode this.refs.messages
 
   # If we are receiving new messages, maintain scroll height
-  componentWillReceiveProps: (nextProps) ->
+  componentWillUpdate: (nextProps) ->
     noNewMessages = (nextProps.messages.length is @props.messages.length)
     unless noNewMessages or (@props.messages.length is 0)
-      component = React.findDOMNode this
       @shouldUpdateScrollHeight = true
-      @oldScrollHeight = component.scrollHeight
+      @oldScrollHeight = @messagesComponent().scrollHeight
 
   componentDidUpdate: ->
-    component = React.findDOMNode this
-    if @shouldUpdateScrollHeight
-      component.scrollTop = component.scrollHeight - @oldScrollHeight
-      @shouldUpdateScrollHeight = false
+    if @messagesComponent()
+      # If we are scrolled to the bottom already and there's
+      # a new message, then scroll down to see it
+      autoscrollWindow = 160
+      scrollPosition = @messagesComponent().scrollHeight -
+                        @messagesComponent().scrollTop -
+                        @messagesComponent().offsetHeight
+      [..., last] = @props.messages
+      if last.isNewMessage
+        if scrollPosition < autoscrollWindow
+          @messagesComponent().scrollTop = @messagesComponent().scrollHeight
+        last.isNewMessage = false
+
+      # If older messages got loaded above current ones,
+      # scroll down so current ones are still in sight
+      if @shouldUpdateScrollHeight
+        @messagesComponent().scrollTop = @messagesComponent().scrollHeight - @oldScrollHeight
+        @shouldUpdateScrollHeight = false
 
   checkWindowScroll: (e) ->
     target = event.target
@@ -56,7 +68,7 @@ MessageList = React.createClass
       unless @props.messages.length is 0
         div {},
           PinnedPost
-            first: first
+            originalPost: @props.originalPost
             currentRoom: @props.currentRoom
             isFollowingRoom: @props.isFollowingRoom
           div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},

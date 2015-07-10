@@ -7,14 +7,16 @@ class ChatActions
     @generateActions "setCurrentMessage", "setMessagesList",
       "setTopics", "setCurrentQuestionTitle", "setCurrentQuestionText",
       "setTopicSelected", "setTopicInfo", "setMentions", "setMessage",
+      "setCurrentRoom", "setOldestPage", "prependToMessages", "setOriginalPost"
       "setCurrentRoom", "setOldestPage", "prependToMessages",
-      "setSearchResults"
+      "setSearchResults", "setOriginalPost"
 
   fetchRecentMessages: (roomId) ->
     URLResources.readFromAPI "/rooms/#{roomId}/messages",
       @actions.fetchRecentMessagesSuccess
 
   fetchRecentMessagesSuccess: (response) ->
+    @actions.setOriginalPost response.originalPost
     @actions.setMessagesList response.messages
     @actions.setOldestPage response.page
 

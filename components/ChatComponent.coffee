@@ -45,8 +45,7 @@ ChatComponent = React.createClass
       ({id, user, room_id, text, created_at}) =>
         if room_id is @props.currentRoom
           newList = @state.chat.messages
-          newList.push {vote_total: 0, user, id,
-                        room_id, text, created_at}
+          newList.push {vote_total: 0, user, id, room_id, text, created_at, isNewMessage: true}
           ChatActions.setMessagesList newList
           @scrollDownMessages()
 
@@ -107,6 +106,7 @@ ChatComponent = React.createClass
         if @props.currentRoom
           div {className: "messages-section"},
             MessageList
+              originalPost: @state.chat.originalPost
               messages: @state.chat.messages
               currentRoom: @props.currentRoom
               isFollowingRoom: @isFollowingRoom
