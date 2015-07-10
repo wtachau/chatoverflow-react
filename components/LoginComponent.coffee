@@ -12,11 +12,11 @@ LoginComponent = React.createClass
     loginClicked: React.PropTypes.func.isRequired
 
   render: ->
-    Row {},
+    Row {className: "login-body"},
       Col md: 6, mdOffset: 3,
-        div className:{},
+        div {},
           h1 className: "center-block" , "chatsignal"
-        div className:{},
+        div {},
           h3 className: "subtitle",
             i {}, "to the chat mobile!"
         div {className:"register-button", onClick: @props.loginClicked},

@@ -61,10 +61,10 @@ MessageList = React.createClass
             isFollowingRoom: @props.isFollowingRoom
           div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},
             rest.map (message, index) =>
-              userColorClass = if message.username is @state.app.user.username
-                "usercolor"
+              userColorClass = if message.user.username is @state.app.user.username
+                "self-message-bubble"
               else
-                ""
+                "others-message-bubble"
               Message { message, key: index, className: userColorClass }
 
 module.exports = MessageList
