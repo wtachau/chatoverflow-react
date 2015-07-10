@@ -75,6 +75,23 @@ MessageList = React.createClass
                    "middle-bubble"
     bubbleType
 
+  renderBubbleType: (rest, messageGroupCount) ->
+    groupCounter = 0
+    isFirst = true
+    rest.map (message, index) =>
+      if message.user.username is @state.app.user.username
+        side = "right"
+        bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst, true
+      else
+        side = "left"
+        bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst, false
+      isFirst = false
+      messageGroupCount[groupCounter]--
+      if messageGroupCount[groupCounter] is 0
+        groupCounter++
+        isFirst = true
+      Message { message, key: index, bubbleType, side }
+
   render: ->
     [first, rest...] = @props.messages
     messageGroupCount = @countMessageGroups(rest)
@@ -86,20 +103,6 @@ MessageList = React.createClass
             currentRoom: @props.currentRoom
             isFollowingRoom: @props.isFollowingRoom
           div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},
-            groupCounter = 0
-            isFirst = true
-            rest.map (message, index) =>
-              if message.user.username is @state.app.user.username
-                side = "right"
-                bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst, true
-              else
-                side = "left"
-                bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst, false
-              isFirst = false
-              messageGroupCount[groupCounter]--
-              if messageGroupCount[groupCounter] is 0
-                groupCounter++
-                isFirst = true
-              Message { message, key: index, bubbleType, side }
+            @renderBubbleType rest, messageGroupCount
 
 module.exports = MessageList
