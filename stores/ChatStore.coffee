@@ -14,6 +14,7 @@ class ChatStore
     @topicSelected = null
     @topicInfo = null
     @oldestPage = null
+    @originalPost = null
     @currentRoom = null
     @keyPressMap = []
 
@@ -56,5 +57,8 @@ class ChatStore
 
   onSetOldestPage: (page) ->
     @oldestPage = page
+
+  onSetOriginalPost: (post) ->
+    @originalPost = post
 
 module.exports = alt.createStore(ChatStore)

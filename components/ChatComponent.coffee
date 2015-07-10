@@ -101,6 +101,7 @@ ChatComponent = React.createClass
         if @props.currentRoom
           div {className: "messages-section"},
             MessageList
+              originalPost: @state.chat.originalPost
               messages: @state.chat.messages
               currentRoom: @props.currentRoom
               isFollowingRoom: @isFollowingRoom
