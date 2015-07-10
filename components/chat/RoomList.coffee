@@ -6,6 +6,7 @@ Router = require("react-router")
 URLResources = require("../../common/URLResources")
 ChatStore = require("../../stores/ChatStore")
 ChatActions = require("../../actions/ChatActions")
+AppActions = require("../../actions/AppActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 ListGroup = React.createFactory ReactBootstrap.ListGroup
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
@@ -40,6 +41,7 @@ RoomList = React.createClass
   refreshRoomList: ->
     ChatActions.fetchTopicInfo @props.currentTopic
 
+
   render: ->
     div {className: "rooms"},
       if @state.topicInfo
@@ -52,6 +54,5 @@ RoomList = React.createClass
                 @state.topicInfo.rooms_newest.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
               TabPane {eventKey: 2, tab: "Most Active"},
                 @state.topicInfo.rooms_updated_at.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
-
 
 module.exports = RoomList

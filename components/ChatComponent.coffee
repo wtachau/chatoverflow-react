@@ -82,6 +82,10 @@ ChatComponent = React.createClass
     followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
     parseInt(room_id) in followedRoomIds
 
+  isFollowingTopic: (topic_id) ->
+    followedTopicIds = @state.app.user.followed_topics.map ({id}) -> id
+    parseInt(topic_id) in followedTopicIds
+
   submitMessage: (e, message, mentions) ->
     unless message is ""
       @socket.emit "chat message",
@@ -97,7 +101,9 @@ ChatComponent = React.createClass
   render: ->
     mainSection = if @props.currentTopic
       div {className: "main-section"},
-        RoomList {currentTopic: @props.currentTopic}
+        RoomList
+          currentTopic: @props.currentTopic
+          isFollowingTopic: @isFollowingTopic
         if @props.currentRoom
           div {className: "messages-section"},
             MessageList
@@ -117,6 +123,7 @@ ChatComponent = React.createClass
         topics: @state.chat.topics
         user: @state.app.user
         isFollowingRoom: @isFollowingRoom
+        isFollowingTopic: @isFollowingTopic
       div {className: "chat-panel"},
         mainSection
 

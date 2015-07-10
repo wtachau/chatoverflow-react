@@ -12,12 +12,20 @@ class AppActions
   fetchUsers: ->
     URLResources.readFromAPI "/users", @actions.setCurrentUsers
 
-  followRoom: (roomId, alreadyFollowing) ->
-    unless alreadyFollowing roomId
-      URLResources.callAPI "/users/follow/#{roomId}",
+  followRoom: (room_id, alreadyFollowing) ->
+    unless alreadyFollowing room_id
+      URLResources.callAPI "/rooms/#{room_id}/follow",
         "put", null, @actions.setCurrentUser
     else
-      URLResources.callAPI "/users/follow/#{roomId}",
+      URLResources.callAPI "/rooms/#{room_id}/follow",
+        "delete", null, @actions.setCurrentUser
+
+  followTopic: (topic_id, alreadyFollowing) ->
+    unless alreadyFollowing topic_id
+      URLResources.callAPI "/topics/#{topic_id}/follow",
+        "put", null, @actions.setCurrentUser
+    else
+      URLResources.callAPI "/topics/#{topic_id}/follow",
         "delete", null, @actions.setCurrentUser
 
   login: ->
