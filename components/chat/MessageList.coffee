@@ -56,23 +56,23 @@ MessageList = React.createClass
     rest.map (message, index) =>
       if index is 0
         count = 1
-      else if index != 0 and rest[index-1].username != message.username
+      else if index != 0 and rest[index-1].user.username != message.user.username
         messageGroupCount.push count
         count = 1
       else
         count += 1
-    if messageGroupCount[0] is undefined then messageGroupCount.push count
+    messageGroupCount.push count
     messageGroupCount
 
-  selectBubbleType: (count, isFirst, isUserMessage) ->
-    bubbleType = if count is 1 and isFirst
-                   "single-bubble"
-                 else if !(count < 1) and isFirst
-                   "top-bubble"
-                 else if count is 1 and not isFirst
-                   "bottom-bubble"
-                 else
-                   "middle-bubble"
+  selectBubbleType: (count, isFirst) ->
+    bubbleType =  if count is 1 and isFirst
+                    "single-bubble"
+                  else if !(count < 1) and isFirst
+                    "top-bubble"
+                  else if count is 1 and not isFirst
+                    "bottom-bubble"
+                  else
+                    "middle-bubble"
     bubbleType
 
   renderBubbleType: (rest, messageGroupCount) ->
@@ -81,10 +81,10 @@ MessageList = React.createClass
     rest.map (message, index) =>
       if message.user.username is @state.app.user.username
         side = "right"
-        bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst, true
+        bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst
       else
         side = "left"
-        bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst, false
+        bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst
       isFirst = false
       messageGroupCount[groupCounter]--
       if messageGroupCount[groupCounter] is 0
@@ -94,7 +94,7 @@ MessageList = React.createClass
 
   render: ->
     [first, rest...] = @props.messages
-    messageGroupCount = @countMessageGroups(rest)
+    messageGroupCount = @countMessageGroups rest
     div {},
       unless @props.messages.length is 0
         div {},

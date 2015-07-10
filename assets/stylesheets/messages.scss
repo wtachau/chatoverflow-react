@@ -14,6 +14,7 @@
   height: calc(100% - #{$chat_box_height} - #{$pinned_post_height});
   width: 50%;
   vertical-align: top;
+  padding-right: 10px;
 
   .message-row {
 
@@ -51,6 +52,9 @@
         &.bottom-bubble {
           border-radius: $bubble_border_radius;
           border-top-right-radius: 0px;
+        }
+        &.single-bubble {
+          border-radius: $bubble_border_radius;
         }
       }
     }
