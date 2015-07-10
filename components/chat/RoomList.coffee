@@ -6,6 +6,7 @@ Router = require("react-router")
 URLResources = require("../../common/URLResources")
 ChatStore = require("../../stores/ChatStore")
 ChatActions = require("../../actions/ChatActions")
+AppActions = require("../../actions/AppActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 ListGroup = React.createFactory ReactBootstrap.ListGroup
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
@@ -14,6 +15,8 @@ RoomInfo = React.createFactory require("./RoomInfo")
 
 Row = React.createFactory ReactBootstrap.Row
 Col = React.createFactory ReactBootstrap.Col
+TabbedArea = React.createFactory ReactBootstrap.TabbedArea
+TabPane = React.createFactory ReactBootstrap.TabPane
 
 { div, h1 } = React.DOM
 
@@ -35,6 +38,10 @@ RoomList = React.createClass
   componentWillMount: ->
     ChatActions.fetchTopicInfo @props.currentTopic
 
+  refreshRoomList: ->
+    ChatActions.fetchTopicInfo @props.currentTopic
+
+
   render: ->
     div {className: "rooms"},
       if @state.topicInfo
@@ -42,6 +49,10 @@ RoomList = React.createClass
           Row {className: "topic-header"},
             h1 {className: "current-topic"}, @state.topicInfo.name
           Row {className: "rooms-list"},
-            @state.topicInfo.rooms.map (room) => RoomInfo { room, topic:@state.topicInfo.id }
+            TabbedArea {defaultActiveKey: 1, onClick: @refreshRoomList},
+              TabPane {eventKey: 1, tab: "Most Recent"},
+                @state.topicInfo.rooms_newest.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
+              TabPane {eventKey: 2, tab: "Most Active"},
+                @state.topicInfo.rooms_updated_at.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
 
 module.exports = RoomList

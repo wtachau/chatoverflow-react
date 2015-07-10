@@ -15,6 +15,7 @@ require("./assets/stylesheets/pinnedPost.scss")
 require("./assets/stylesheets/header.scss")
 require("./assets/stylesheets/chatPanel.scss")
 require("./assets/stylesheets/user.scss")
+require("./assets/vendor/select.scss")
 
 Router.run routes, Router.HistoryLocation, (Handler) ->
   React.render (React.createElement Handler),
