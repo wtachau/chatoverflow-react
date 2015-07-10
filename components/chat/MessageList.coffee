@@ -65,16 +65,15 @@ MessageList = React.createClass
     messageGroupCount
 
   selectBubbleType: (count, isFirst, isUserMessage) ->
-    messageSide = if isUserMessage then "right-" else "left-"
     bubbleType = if count is 1 and isFirst
-                    "single-bubble"
-                  else if !(count < 1) and isFirst
-                    "top-bubble"
-                  else if count is 1 and not isFirst
-                    "bottom-bubble"
-                  else
-                    "middle-bubble"
-    messageSide + bubbleType
+                   "single-bubble"
+                 else if !(count < 1) and isFirst
+                   "top-bubble"
+                 else if count is 1 and not isFirst
+                   "bottom-bubble"
+                 else
+                   "middle-bubble"
+    bubbleType
 
   render: ->
     [first, rest...] = @props.messages
@@ -87,11 +86,20 @@ MessageList = React.createClass
             currentRoom: @props.currentRoom
             isFollowingRoom: @props.isFollowingRoom
           div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},
+            groupCounter = 0
+            isFirst = true
             rest.map (message, index) =>
-              userColorClass = if message.username is @state.app.user.username
-                "usercolor"
+              if message.user.username is @state.app.user.username
+                side = "right"
+                bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst, true
               else
-                ""
-              Message { message, key: index, className: userColorClass }
+                side = "left"
+                bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst, false
+              isFirst = false
+              messageGroupCount[groupCounter]--
+              if messageGroupCount[groupCounter] is 0
+                groupCounter++
+                isFirst = true
+              Message { message, key: index, bubbleType, side }
 
 module.exports = MessageList

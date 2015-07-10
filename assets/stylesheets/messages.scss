@@ -11,17 +11,48 @@
   position: absolute;
   overflow-y: scroll;
   overflow-x: hidden;
-
-  height: calc(100% - #{$chat_box_height});
+  height: calc(100% - #{$chat_box_height} - #{$pinned_post_height});
   width: 50%;
   vertical-align: top;
 
   .message-row {
 
+    margin: 1px;
     padding: 5px;
 
-    &.usercolor {
-      background-color: $chat_background_grey;
+    &.bubble {
+      border-radius: $bubble_border_radius;
+      width: 88%;
+      &.left {
+        float: left;
+        background-color: $chat_background_grey;
+        &.top-bubble{
+          border-bottom-left-radius: 0px;
+        }
+        &.middle-bubble {
+          border-bottom-left-radius: 5px;
+          border-top-left-radius: 5px;
+        }
+        &.bottom-bubble {
+          border-radius: $bubble_border_radius;
+          border-top-left-radius: 0px;
+        }
+      }
+      &.right {
+        float: right;
+        background-color: $chat_bubble_blue;
+        &.top-bubble{
+          border-bottom-right-radius: 0px;
+        }
+        &.middle-bubble {
+          border-bottom-right-radius: 5px;
+          border-top-right-radius: 5px;
+        }
+        &.bottom-bubble {
+          border-radius: $bubble_border_radius;
+          border-top-right-radius: 0px;
+        }
+      }
     }
 
     .votes {
@@ -41,6 +72,11 @@
       width: $username_width;
       float: left;
       padding: 0px 10px;
+
+      .profile-pic {
+        max-width: 40px;
+        border-radius: 20px;
+      }
     }
 
     .chat-body {
