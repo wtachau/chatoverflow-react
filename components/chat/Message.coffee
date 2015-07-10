@@ -39,11 +39,11 @@ Message = React.createClass
         button
           className: "vote-button upvote btn btn-default"
           onClick: @upvote,
-          "▲"
+          "\u25b2"
         button
           className: "vote-button downvote btn btn-default"
           onClick: @downvote,
-          "▼"
+          "\u25bc"
         div {className: "vote-total"}, @props.message.vote_total
       div {className: "username"}, @props.message.user.username,
         img {className: "profile-pic", src: @props.message.user.pic_url}
