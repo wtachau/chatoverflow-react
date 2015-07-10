@@ -45,8 +45,8 @@ TopicSidebar = React.createClass
   render: ->
     ListGroup {className: "sidebar"},
       h1 {className: "categories-header"}, "Topics Following"
-        @props.user.followed_topics.map ({id, name}) =>
-          Link {to: "/topics/#{id}"},
+        @props.user.followed_topics.map ({id, name}, index) =>
+          Link {to: "/topics/#{id}", key: index},
             ListGroupItem {className: "topic-name"},
               name,
               div {className: "exit-x", "data-id": id, onClick: @onCloseTopic}, "x"

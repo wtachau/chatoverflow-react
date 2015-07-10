@@ -27,15 +27,20 @@ TopicSearch = React.createClass
   followTopic: (e) ->
     topic_id = e.target.getAttribute("data-id")
     AppActions.followTopic topic_id, @props.isFollowingTopic
+    @clearSearch()
     e.preventDefault()
 
   changeSearch: (e) ->
     value = e.target.value.trim()
     ChatActions.setTopicSearchQuery value
     if value is ""
-      ChatActions.setSearchResults []
+      @clearSearch()
     else
       ChatActions.fetchSearchResults value
+
+  clearSearch: ->
+    ChatActions.setTopicSearchQuery ""
+    ChatActions.setSearchResults []
 
   render: ->
     followed_ids = @state.app.user.followed_topics.map ({id}) -> id
@@ -49,8 +54,8 @@ TopicSearch = React.createClass
         placeholder: "Add another topic"
         onChange: @changeSearch
         value: @state.chat.topicSearchQuery
-      searchResults.map ({id, name}) =>
-        a {href: "#", onClick: @followTopic, "data-id": id},
+      searchResults.map ({id, name}, index) =>
+        a {href: "#", onClick: @followTopic, "data-id": id, key: index},
           ListGroupItem {className: "topic-name", "data-id": id}, name
 
 module.exports = TopicSearch
