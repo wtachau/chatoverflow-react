@@ -4,7 +4,8 @@ URLResources = require("../common/URLResources")
 class AppActions
   constructor: ->
     @generateActions "setCurrentUser", "userFetchFailure",
-      "setCurrentUsers", "setUnreadMentions", "setReadMentions", "failure"
+      "setCurrentUsers", "setUnreadMentions", "setReadMentions",
+      "failure"
 
   fetchUser: ->
     URLResources.readFromAPI "/current_user", @actions.setCurrentUser
