@@ -13,6 +13,9 @@ HeaderComponent = React.createClass
     Navbar {},
       Nav {},
         Link to: "app",
-          h3 {}, "chatsignal"
+          h3 {className: "chatsignal-logo"}, "chatsignal"
+      Nav {},
+        Link to: "app",
+          h3 {className: "newthread"}, "+start a new thread"
 
 module.exports = HeaderComponent
