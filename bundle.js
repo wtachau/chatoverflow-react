@@ -89,7 +89,7 @@
 	
 	__webpack_require__(/*! ./assets/stylesheets/chatPanel.scss */ 508);
 	
-	__webpack_require__(/*! ./assets/stylesheets/select.scss */ 510);
+	__webpack_require__(/*! ./assets/vendor/select.scss */ 510);
 	
 	Router.run(routes, Router.HistoryLocation, function(Handler) {
 	  return React.render(React.createElement(Handler), document.getElementById("react-root"));
@@ -63284,23 +63284,23 @@
 
 /***/ },
 /* 510 */
-/*!****************************************!*\
-  !*** ./assets/stylesheets/select.scss ***!
-  \****************************************/
+/*!***********************************!*\
+  !*** ./assets/vendor/select.scss ***!
+  \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !./~/css-loader!./~/sass-loader!./assets/stylesheets/select.scss */ 511);
+	var content = __webpack_require__(/*! !./~/css-loader!./~/sass-loader!./assets/vendor/select.scss */ 511);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ./~/style-loader/addStyles.js */ 5)(content, {});
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
-		module.hot.accept("!!/Users/rossfoley/code/chat-overflow/react/node_modules/css-loader/index.js!/Users/rossfoley/code/chat-overflow/react/node_modules/sass-loader/index.js!/Users/rossfoley/code/chat-overflow/react/assets/stylesheets/select.scss", function() {
-			var newContent = require("!!/Users/rossfoley/code/chat-overflow/react/node_modules/css-loader/index.js!/Users/rossfoley/code/chat-overflow/react/node_modules/sass-loader/index.js!/Users/rossfoley/code/chat-overflow/react/assets/stylesheets/select.scss");
+		module.hot.accept("!!/Users/rossfoley/code/chat-overflow/react/node_modules/css-loader/index.js!/Users/rossfoley/code/chat-overflow/react/node_modules/sass-loader/index.js!/Users/rossfoley/code/chat-overflow/react/assets/vendor/select.scss", function() {
+			var newContent = require("!!/Users/rossfoley/code/chat-overflow/react/node_modules/css-loader/index.js!/Users/rossfoley/code/chat-overflow/react/node_modules/sass-loader/index.js!/Users/rossfoley/code/chat-overflow/react/assets/vendor/select.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -63310,9 +63310,9 @@
 
 /***/ },
 /* 511 */
-/*!***********************************************************************!*\
-  !*** ./~/css-loader!./~/sass-loader!./assets/stylesheets/select.scss ***!
-  \***********************************************************************/
+/*!******************************************************************!*\
+  !*** ./~/css-loader!./~/sass-loader!./assets/vendor/select.scss ***!
+  \******************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(/*! ./~/css-loader/cssToString.js */ 4)();
