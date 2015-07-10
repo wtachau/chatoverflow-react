@@ -51,6 +51,8 @@ MessageList = React.createClass
         parseInt(@state.chat.oldestPage) + 1
 
   countMessageGroups: (rest) ->
+    # Groups messages together by username
+    # Number of messages in groups end up in messageGroupCount
     messageGroupCount = []
     count = 0
     rest.map (message, index) =>
@@ -76,19 +78,21 @@ MessageList = React.createClass
     bubbleType
 
   renderBubbleType: (rest, messageGroupCount) ->
-    groupCounter = 0
+    groupIndex = 0
     isFirst = true
     rest.map (message, index) =>
       if message.user.username is @state.app.user.username
         side = "right"
-        bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst
+        bubbleType = @selectBubbleType messageGroupCount[groupIndex], isFirst
       else
         side = "left"
-        bubbleType = @selectBubbleType messageGroupCount[groupCounter], isFirst
+        bubbleType = @selectBubbleType messageGroupCount[groupIndex], isFirst
       isFirst = false
-      messageGroupCount[groupCounter]--
-      if messageGroupCount[groupCounter] is 0
-        groupCounter++
+      # decrements number of messages left in group there are
+      messageGroupCount[groupIndex]--
+      # iterates forward to the next group of messages
+      if messageGroupCount[groupIndex] is 0
+        groupIndex++
         isFirst = true
       Message { message, key: index, bubbleType, side }
 
