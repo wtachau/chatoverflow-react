@@ -35,6 +35,7 @@
     "react-marked": "Originate/react-marked",
     "react-mentions": "Originate/react-mentions",
     "react-router": "^0.13.3",
+    "react-select": "^0.5.4",
     "reqwest": "^1.1.5",
     "sass-loader": "^1.0.2",
     "scss-lint": "0.0.0",

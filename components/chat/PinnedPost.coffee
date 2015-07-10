@@ -7,6 +7,7 @@ AppActions = require("../../actions/AppActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 Row = React.createFactory ReactBootstrap.Row
+Button = React.createFactory ReactBootstrap.Button
 { div, button, img } = React.DOM
 
 PinnedPost = React.createClass
@@ -37,6 +38,6 @@ PinnedPost = React.createClass
       div {className: "chat-body"},
         div {className: "text"}, Marked @props.originalPost.text
         div {className: "timestamp"}, timestamp
-        button {onClick: @followRoom}, @buttonText()
+        Button {onClick: @followRoom}, @buttonText()
 
 module.exports = PinnedPost
