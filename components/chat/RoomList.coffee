@@ -15,7 +15,8 @@ RoomInfo = React.createFactory require("./RoomInfo")
 
 Row = React.createFactory ReactBootstrap.Row
 Col = React.createFactory ReactBootstrap.Col
-Button = React.createFactory ReactBootstrap.Button
+TabbedArea = React.createFactory ReactBootstrap.TabbedArea
+TabPane = React.createFactory ReactBootstrap.TabPane
 
 { div, h1 } = React.DOM
 
@@ -37,12 +38,9 @@ RoomList = React.createClass
   componentWillMount: ->
     ChatActions.fetchTopicInfo @props.currentTopic
 
-  followTopic: ->
-    AppActions.followTopic @state.topicInfo.id, @props.isFollowingTopic
+  refreshRoomList: ->
+    ChatActions.fetchTopicInfo @props.currentTopic
 
-  buttonText: ->
-    isFollowing = @props.isFollowingTopic @state.topicInfo.id
-    if isFollowing then "Unfollow Topic" else "Follow Topic"
 
   render: ->
     div {className: "rooms"},
@@ -50,8 +48,11 @@ RoomList = React.createClass
         div {className: "room-list-page"},
           Row {className: "topic-header"},
             h1 {className: "current-topic"}, @state.topicInfo.name
-            Button {onClick: @followTopic}, @buttonText()
           Row {className: "rooms-list"},
-            @state.topicInfo.rooms.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
+            TabbedArea {defaultActiveKey: 1, onClick: @refreshRoomList},
+              TabPane {eventKey: 1, tab: "Most Recent"},
+                @state.topicInfo.rooms_newest.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
+              TabPane {eventKey: 2, tab: "Most Active"},
+                @state.topicInfo.rooms_updated_at.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
 
 module.exports = RoomList
