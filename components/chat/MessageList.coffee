@@ -52,6 +52,17 @@ MessageList = React.createClass
 
   render: ->
     [first, rest...] = @props.messages
+    messageGroupCount = []
+    count = 0
+    rest.map (message, index) =>
+      if index is 0
+        count = 1
+      else if rest.message[index-1].username is not message.username
+        messageGroupCount.push count
+        count = 1
+      else
+        count += 1
+    if messageGroupCount[0] is undefined then messageGroupCount.push count
     div {},
       unless @props.messages.length is 0
         div {},
