@@ -15,7 +15,6 @@ class ChatStore
     @topicInfo = null
     @oldestPage = null
     @currentRoom = null
-    @topicSearchQuery = ""
     @searchResults = []
     @keyPressMap = []
 
@@ -32,9 +31,6 @@ class ChatStore
 
   onSetCurrentRoom: (room) ->
     @currentRoom = room
-
-  onSetTopicSearchQuery: (query) ->
-    @topicSearchQuery = query
 
   onSetSearchResults: (results) ->
     @searchResults = results

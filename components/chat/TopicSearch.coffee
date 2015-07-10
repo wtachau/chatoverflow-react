@@ -11,6 +11,7 @@ AppStore = require("../../stores/AppStore")
 ChatActions = require("../../actions/ChatActions")
 ChatStore = require("../../stores/ChatStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+Select = React.createFactory require("react-select")
 
 { h1, div, a } = React.DOM
 
@@ -24,38 +25,30 @@ TopicSearch = React.createClass
       app: AppStore
       chat: ChatStore
 
-  followTopic: (e) ->
-    topic_id = e.target.getAttribute("data-id")
-    AppActions.followTopic topic_id, @props.isFollowingTopic
-    @clearSearch()
-    e.preventDefault()
+  fetchSearchResults: (input, callback) ->
+    followed_ids = @state.app.user.followed_topics.map ({id}) -> id
+    ChatActions.fetchSearchResults input, (response) =>
+      ChatActions.setSearchResults response
+      searchResults = response.filter((result) =>
+        result.id not in followed_ids
+      ).map ({name}) => {value: name, label: name}
+      callback null, options: searchResults
 
-  changeSearch: (e) ->
-    value = e.target.value.trim()
-    ChatActions.setTopicSearchQuery value
-    if value is ""
-      @clearSearch()
-    else
-      ChatActions.fetchSearchResults value
-
-  clearSearch: ->
-    ChatActions.setTopicSearchQuery ""
-    ChatActions.setSearchResults []
+  selectOnChange: (value) ->
+    topic = @state.chat.searchResults.filter ({name}) => name is value
+    AppActions.followTopic topic[0].id, @props.isFollowingTopic
 
   render: ->
-    followed_ids = @state.app.user.followed_topics.map ({id}) -> id
-    searchResults = @state.chat.searchResults.filter (result) =>
-      result.id not in followed_ids
-
     div {id: "topic-search"},
-      Input
-        type: "text"
-        id: "topic-search-field"
+      Select
+        name: "topic-search-field"
+        value: ""
+        asyncOptions: @fetchSearchResults
+        autoload: false
+        onChange: @selectOnChange
+        multi: false
         placeholder: "Add another topic"
-        onChange: @changeSearch
-        value: @state.chat.topicSearchQuery
-      searchResults.map ({id, name}, index) =>
-        a {href: "#", onClick: @followTopic, "data-id": id, key: index},
-          ListGroupItem {className: "topic-name", "data-id": id}, name
+        clearable: true
+        ignoreCase: true
 
 module.exports = TopicSearch
