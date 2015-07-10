@@ -33,7 +33,7 @@ UserComponent = React.createClass
   render: ->
     div {className: "popup-link"},
       a {href: "#", onClick: @showPopup, className: "categories-header"},
-        @state.user.username
+        img {src:@state.user.pic_url}
       Modal {show: @state.showModal, onHide: @closePopup},
         ModalHeader {closeButton: true},
           ModalTitle {}, "User Information"
@@ -47,7 +47,7 @@ UserComponent = React.createClass
                 div {className: "user-username"}, "#{@state.user.username}"
                 div {className: "user-karma"}, "Karma: #{@state.user.karma}"
         ModalFooter {},
-          Button {onClick: @closePopup}, "Close"
+          Button {onClick: AppActions.logout, bsStyle: "danger"}, "Log out"
 
 
 module.exports = UserComponent
