@@ -17,6 +17,7 @@ ChatForm = React.createClass
   propTypes:
     submitMessage: React.PropTypes.func.isRequired
     currentMessage: React.PropTypes.string.isRequired
+    users: React.PropTypes.array.isRequired
 
   mixins: [ReactStateMagicMixin]
 

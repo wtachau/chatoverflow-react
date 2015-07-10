@@ -18,7 +18,7 @@ Select = React.createFactory require("react-select")
 TopicSearch = React.createClass
   displayName: "TopicSearch"
 
-  mixins: [ReactStateMagicMixin]
+  mixins: [ReactStateMagicMixin, Router.Navigation]
 
   statics:
     registerStores:
@@ -27,16 +27,21 @@ TopicSearch = React.createClass
 
   fetchSearchResults: (input, callback) ->
     followed_ids = @state.app.user.followed_topics.map ({id}) -> id
-    ChatActions.fetchSearchResults input, (response) =>
-      ChatActions.setSearchResults response
-      searchResults = response.filter((result) =>
-        result.id not in followed_ids
-      ).map ({name}) => {value: name, label: name}
-      callback null, options: searchResults
+    query = input.trim()
+    if query is ""
+      callback null, options: []
+    else
+      ChatActions.fetchSearchResults input, (response) =>
+        ChatActions.setSearchResults response
+        searchResults = response.filter((result) =>
+          result.id not in followed_ids
+        ).map ({name}) => {value: name, label: name}
+        callback null, options: searchResults
 
   selectOnChange: (value) ->
     topic = @state.chat.searchResults.filter ({name}) => name is value
     AppActions.followTopic topic[0].id, @props.isFollowingTopic
+    @transitionTo "topic", topic_id: topic[0].id
 
   render: ->
     div {id: "topic-search"},
