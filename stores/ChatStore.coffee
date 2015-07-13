@@ -42,15 +42,12 @@ class ChatStore
         @messages[i] = message
 
   onSetMessagesList: (messages) ->
-    console.log "Changing messages to:"
-    console.log messages
     @messages = messages
 
   onPushNewMessage: (message) ->
     @messages.push message
 
   onSetRecentMessages: (response) ->
-    console.log response
     @originalPost =  response.originalPost
     @messages = response.messages
     @oldestPage = response.page
