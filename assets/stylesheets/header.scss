@@ -30,6 +30,7 @@ nav {
     }
 
     &.newthread {
+      padding-right: 50px;
       right: 10px;
       font-family: $navbar_start_new_thread;
     }
