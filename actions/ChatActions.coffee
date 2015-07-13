@@ -7,13 +7,16 @@ class ChatActions
     @generateActions "setCurrentMessage", "setMessagesList",
       "setTopics", "setCurrentQuestionTitle", "setCurrentQuestionText",
       "setTopicSelected", "setTopicInfo", "setMentions", "setMessage",
-      "setCurrentRoom", "setOldestPage", "prependToMessages"
+      "setCurrentRoom", "setOldestPage", "prependToMessages", "setOriginalPost"
+      "setCurrentRoom", "setOldestPage", "prependToMessages",
+      "setSearchResults", "setOriginalPost"
 
   fetchRecentMessages: (roomId) ->
     URLResources.readFromAPI "/rooms/#{roomId}/messages",
       @actions.fetchRecentMessagesSuccess
 
   fetchRecentMessagesSuccess: (response) ->
+    @actions.setOriginalPost response.originalPost
     @actions.setMessagesList response.messages
     @actions.setOldestPage response.page
 
@@ -30,6 +33,9 @@ class ChatActions
 
   fetchTopics: ->
     URLResources.readFromAPI "/topics", @actions.setTopics
+
+  fetchSearchResults: (query, callback = @actions.setSearchResults) ->
+    URLResources.readFromAPI "/topics/search/#{query}", callback
 
   upvoteMessage: (id, room_id) ->
     URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/upvote",

@@ -14,7 +14,9 @@ class ChatStore
     @topicSelected = null
     @topicInfo = null
     @oldestPage = null
+    @originalPost = null
     @currentRoom = null
+    @searchResults = []
     @keyPressMap = []
 
     @bindActions(ChatActions)
@@ -30,6 +32,9 @@ class ChatStore
 
   onSetCurrentRoom: (room) ->
     @currentRoom = room
+
+  onSetSearchResults: (results) ->
+    @searchResults = results
 
   onSetMessage: (message) ->
     for m, i in @messages
@@ -56,5 +61,8 @@ class ChatStore
 
   onSetOldestPage: (page) ->
     @oldestPage = page
+
+  onSetOriginalPost: (post) ->
+    @originalPost = post
 
 module.exports = alt.createStore(ChatStore)

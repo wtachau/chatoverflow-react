@@ -12,6 +12,9 @@ nav {
     border: none;
     border-radius: 0px;
     z-index: 1;
+    .nav.navbar-nav {
+      width: 100%;
+    }
   }
   h3 {
     &:hover{

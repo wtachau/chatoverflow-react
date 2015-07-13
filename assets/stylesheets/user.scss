@@ -1,0 +1,24 @@
+@import "colors";
+@import "sizes";
+@import "fonts";
+
+$header_padding: 10px;
+
+.popup-link {
+  margin-top: calc(#{$header_padding} / 2);
+  margin-bottom: -10px;
+  img {
+    width: calc(#{$header_height} - #{$header_padding});
+    border-radius: calc(#{$header_height} / 2);
+  }
+  position: absolute;
+  right: $header_padding;
+}
+
+.user-username {
+  font-size: 32px;
+}
+
+.user-karma {
+  font-size: 24px;
+}

@@ -7,6 +7,7 @@ AppActions = require("../../actions/AppActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 Row = React.createFactory ReactBootstrap.Row
+Button = React.createFactory ReactBootstrap.Button
 { div, button, img } = React.DOM
 
 PinnedPost = React.createClass
@@ -19,7 +20,7 @@ PinnedPost = React.createClass
       app: AppStore
 
   propTypes:
-    first: React.PropTypes.object.isRequired
+    originalPost: React.PropTypes.object.isRequired
     currentRoom: React.PropTypes.string.isRequired
 
   followRoom: ->
@@ -30,13 +31,13 @@ PinnedPost = React.createClass
     if isFollowing then 'Unfollow Room' else "Follow Room"
 
   render: ->
-    timestamp = moment(@props.first.created_at).format("h:mm A")
+    timestamp = moment(@props.originalPost.created_at).format("h:mm A")
     Row {className: "pinned-post"},
-      div {className: "username"}, @props.first.user.username,
-        img {className: "profile-pic", src: @props.first.user.pic_url}
+      div {className: "username"}, @props.originalPost.user.username,
+        img {className: "profile-pic", src: @props.originalPost.user.pic_url}
       div {className: "chat-body"},
-        div {className: "text"}, Marked @props.first.text
+        div {className: "text"}, Marked @props.originalPost.text
         div {className: "timestamp"}, timestamp
-        button {onClick: @followRoom}, @buttonText()
+        Button {onClick: @followRoom}, @buttonText()
 
 module.exports = PinnedPost
