@@ -30,14 +30,11 @@ RoomComponent = React.createClass
   pic_url: -> @state.app.user.pic_url
 
   componentWillMount: ->
-    console.log "componentWillMount"
     @socket = io(URLResources.getChatServerOrigin())
     @socket.on "chat message",
       ({id, user, room_id, text, created_at}) =>
         if room_id is @getParams().room_id
-          newList = @state.chat.messages
-          newList.push {vote_total: 0, user, id, room_id, text, created_at, isNewMessage: true}
-          ChatActions.setMessagesList newList
+          ChatActions.pushNewMessage {vote_total: 0, user, id, room_id, text, created_at, isNewMessage: true}
           @scrollDownMessages()
 
     @socket.on "mention", ({user_id, username, room_id, text}) =>
@@ -50,22 +47,24 @@ RoomComponent = React.createClass
 
   scrollDownMessages: ->
     component = React.findDOMNode @refs.messageList
-    component.scrollTop = component.scrollHeight
+    if component
+      component.scrollTop = component.scrollHeight
 
   componentWillReceiveProps: (newProps) ->
-    console.log "componentWillReceiveProps"
-    console.log newProps
-    console.log "Room ID: #{@getParams().room_id}"
-    @socket.emit "subscribe",
-      {username: @username(), room: @getParams().room_id}
-    ChatActions.fetchRecentMessages @getParams().room_id
-    if @state.app.unread_mentions[parseInt(@getParams().room_id)]
-      AppActions.setReadMentions @getParams().room_id
+    unless @props.params.room_id is newProps.params.room_id
+      @socket.emit "subscribe",
+        {username: @username(), room: @getParams().room_id}
+      ChatActions.fetchRecentMessages @getParams().room_id
+      if @state.app.unread_mentions[parseInt(@getParams().room_id)]
+        AppActions.setReadMentions @getParams().room_id
 
   componentDidMount: ->
-    console.log "componentDidMount"
     ChatActions.fetchRecentMessages @getParams().room_id
     AppActions.setReadMentions @getParams().room_id
+
+  componentWillUnmount: ->
+    @socket.removeAllListeners "chat message"
+    @socket.removeAllListeners "mention"
 
   isFollowingRoom: (room_id) ->
     followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
