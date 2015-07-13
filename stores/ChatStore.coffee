@@ -44,6 +44,11 @@ class ChatStore
   onSetMessagesList: (messages) ->
     @messages = messages
 
+  onSetRecentMessages: (response) ->
+    @originalPost =  response.originalPost
+    @messages = response.messages
+    @oldestPage = response.page
+
   onPrependToMessages: (messages) ->
     @messages = messages.concat(@messages)
 

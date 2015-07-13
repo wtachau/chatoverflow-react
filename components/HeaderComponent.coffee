@@ -16,7 +16,7 @@ HeaderComponent = React.createClass
         Link to: "app",
           h3 {className: "chatsignal-logo"}, "chatsignal"
       Nav {},
-        Link to: "app",
-          h3 {className: "newthread"}, "+start a new thread"
+        Link to: "ask",
+          h3 {className: "newthread"}, "+ New Thread"
 
 module.exports = HeaderComponent
