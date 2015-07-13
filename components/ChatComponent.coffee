@@ -13,20 +13,12 @@ AppStore = require("../stores/AppStore")
 ChatActions = require("../actions/ChatActions")
 AppActions = require("../actions/AppActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
+Router = require("react-router")
 
 ChatComponent = React.createClass
   displayName: "ChatComponent"
 
-  propTypes:
-    user: React.PropTypes.shape
-      username: React.PropTypes.string.isRequired
-      id: React.PropTypes.number.isRequired
-      name: React.PropTypes.string
-    logoutClicked: React.PropTypes.func.isRequired
-    currentRoom: React.PropTypes.string
-    currentTopic: React.PropTypes.string
-
-  mixins: [ReactStateMagicMixin]
+  mixins: [Router.State, ReactStateMagicMixin]
 
   statics:
     registerStores:
@@ -34,16 +26,16 @@ ChatComponent = React.createClass
       app: AppStore
 
   username: ->
-    @props.user.username
+    @state.app.user.username
 
   pic_url: ->
-    @props.user.pic_url
+    @state.app.user.pic_url
 
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
     @socket.on "chat message",
       ({id, user, room_id, text, created_at}) =>
-        if room_id is @props.currentRoom
+        if room_id is @getParams().room_id
           newList = @state.chat.messages
           newList.push {vote_total: 0, user, id, room_id, text, created_at, isNewMessage: true}
           ChatActions.setMessagesList newList
@@ -61,21 +53,21 @@ ChatComponent = React.createClass
   componentDidMount: ->
     ChatActions.fetchTopics()
     AppActions.fetchUsers()
-    if @props.currentRoom
-      ChatActions.fetchRecentMessages @props.currentRoom
+    if @getParams().room_id
+      ChatActions.fetchRecentMessages @getParams().room_id
 
   componentWillReceiveProps: (nextProps) ->
-    sameRoom = nextProps.currentRoom is @props.currentRoom
+    sameRoom = nextProps.currentRoom is @getParams().room_id
     nullRoom = nextProps.currentRoom is null
     unless sameRoom or nullRoom
       @socket.emit "subscribe",
         {username: @username(), room: nextProps.currentRoom}
 
       @socket.emit "unsubscribe",
-        {username: @username(), room: @props.currentRoom}
+        {username: @username(), room: @getParams().room_id}
 
       ChatActions.fetchRecentMessages nextProps.currentRoom
-      AppActions.setReadMentions @props.currentRoom
+      AppActions.setReadMentions @getParams().room_id
 
   isFollowingRoom: (room_id) ->
     followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
@@ -89,26 +81,27 @@ ChatComponent = React.createClass
     unless message is ""
       @socket.emit "chat message",
         user:
-          user_id: @props.user.id
+          user_id: @state.app.user.id
           pic_url: @pic_url()
           username: @username()
-        room_id: @props.currentRoom
+        room_id: @getParams().room_id
         "text": message.trim()
         mentions: mentions
     e.preventDefault()
 
   render: ->
-    mainSection = if @props.currentTopic
+    console.log @getParams()
+    mainSection = if @getParams().topic_id
       div {className: "main-section"},
         RoomList
-          currentTopic: @props.currentTopic
+          currentTopic: @getParams().topic_id
           isFollowingTopic: @isFollowingTopic
-        if @props.currentRoom
+        if @getParams().room_id
           div {className: "messages-section"},
             MessageList
               originalPost: @state.chat.originalPost
               messages: @state.chat.messages
-              currentRoom: @props.currentRoom
+              currentRoom: @getParams().room_id
               isFollowingRoom: @isFollowingRoom
               ref: "messageList"
             ChatForm

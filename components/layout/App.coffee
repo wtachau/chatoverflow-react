@@ -1,6 +1,7 @@
 React = require("react")
 Uri = require("jsuri")
 Router = require("react-router")
+RouteHandler = React.createFactory Router.RouteHandler
 LoginComponent = React.createFactory require("../LoginComponent")
 ChatComponent = React.createFactory require("../ChatComponent")
 HeaderComponent = React.createFactory require("../HeaderComponent")
@@ -34,10 +35,11 @@ module.exports = React.createClass
     if @state.user
       div {},
         HeaderComponent {}
-        ChatComponent
-          user: @state.user
-          logoutClicked: AppActions.logout
-          currentRoom: @getParams().room_id
-          currentTopic: @getParams().topic_id
+        RouteHandler {}
+#        ChatComponent
+#          user: @state.user
+#          logoutClicked: AppActions.logout
+#          currentRoom: @getParams().room_id
+#          currentTopic: @getParams().topic_id
     else
       LoginComponent loginClicked: AppActions.login

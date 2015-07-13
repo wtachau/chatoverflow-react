@@ -42,6 +42,9 @@ AskComponent = React.createClass
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
 
+  componentDidMount: ->
+    ChatActions.fetchTopics()
+
   # Send a new question to the node server
   submitQuestion: (e) ->
     console.log "here"
