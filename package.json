@@ -50,6 +50,7 @@
     "jest-cli": "^0.4.15"
   },
   "jest": {
+    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react"],
     "scriptPreprocessor": "preprocessor.js",
     "testFileExtensions": ["coffee", "litcoffee", "coffee.md", "js"],
     "moduleFileExtensions": ["coffee", "litcoffee", "coffee.md", "js"]
