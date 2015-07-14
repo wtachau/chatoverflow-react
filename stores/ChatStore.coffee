@@ -14,7 +14,9 @@ class ChatStore
     @topicSelected = null
     @topicInfo = null
     @oldestPage = null
+    @originalPost = null
     @currentRoom = null
+    @searchResults = []
     @keyPressMap = []
 
     @bindActions(ChatActions)
@@ -31,6 +33,9 @@ class ChatStore
   onSetCurrentRoom: (room) ->
     @currentRoom = room
 
+  onSetSearchResults: (results) ->
+    @searchResults = results
+
   onSetMessage: (message) ->
     for m, i in @messages
       if m.id is message.id
@@ -38,6 +43,14 @@ class ChatStore
 
   onSetMessagesList: (messages) ->
     @messages = messages
+
+  onPushNewMessage: (message) ->
+    @messages.push message
+
+  onSetRecentMessages: (response) ->
+    @originalPost =  response.originalPost
+    @messages = response.messages
+    @oldestPage = response.page
 
   onPrependToMessages: (messages) ->
     @messages = messages.concat(@messages)
@@ -56,5 +69,8 @@ class ChatStore
 
   onSetOldestPage: (page) ->
     @oldestPage = page
+
+  onSetOriginalPost: (post) ->
+    @originalPost = post
 
 module.exports = alt.createStore(ChatStore)

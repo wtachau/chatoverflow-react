@@ -34,17 +34,17 @@ Message = React.createClass
 
   render: ->
     timestamp = moment(@props.message.created_at).format("h:mm A")
-    Row {className: "bubble message-row #{@props.side}"},
+    Row {className: "bubble message-row #{@props.side} #{@props.bubbleType}"},
       div {className: "votes"},
         button
           className: "vote-button upvote btn"
           onClick: @upvote,
-          "▲"
+          "\u25b2"
         div {}, @props.message.vote_total
         button
           className: "vote-button downvote btn"
           onClick: @downvote,
-          "▼"
+          "\u25bc"
       div {className: "chat-body"},
         div {className: "text"}, Marked @props.message.text
         @decorateText @props.message.text
