@@ -14,7 +14,6 @@
   height: calc(100% - #{$chat_box_height} - #{$pinned_post_height});
   width: 50%;
   vertical-align: top;
-  padding-right: 10px;
 
   .message-row {
 
@@ -61,14 +60,20 @@
     }
 
     .votes {
+      text-align: center;
       width: $votes_width;
       float: right;
       .vote-button {
+        background-color: transparent;
+        border-color: transparent;
         height: 20px;
         padding: 0px 5px;
-      }
-      .vote-total {
-        padding-left: 15px;
+        outline: 0;
+        transform:scale(2,1); /* W3C */
+        -webkit-transform:scale(2,1); /* Safari and Chrome */
+        -moz-transform:scale(2,1); /* Firefox */
+        -ms-transform:scale(2,1); /* IE 9 */
+        -o-transform:scale(2,1); /* Opera */
       }
     }
 
@@ -87,7 +92,7 @@
     .chat-body {
       float: left;
       position: relative;
-      width: calc(100% - #{$username_width} - #{$votes_width});
+      width: 100%;
 
       .text {
         padding-right: 75px;
@@ -113,4 +118,29 @@
 .image {
   max-width: 500px;
   height: "auto";
+}
+
+.message-group {
+  width: 100%;
+  overflow: auto;
+  display: block;
+  padding-bottom: 10px;
+  &.left {
+    float: left;
+  }
+  &.right {
+    float: right;
+    background-color: aliceblue;
+  }
+}
+
+.profile-pic {
+  max-width: 40px;
+  border-radius: 20px;
+  float: left;
+}
+
+.no-margin {
+  margin-right: 0;
+  margin-left: 0;
 }
