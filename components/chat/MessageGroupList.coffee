@@ -54,7 +54,7 @@ MessageGroupList = React.createClass
       @props.messageGroups.map (group, index) =>
         isUser = if group[0].user.username is @state.app.user.username then "right" else "left"
         div {className: "message-group #{isUser}"},
-          Row {className: "no-margin"},
+          Row {className: "no-margin margin-top"},
             div {},
               Col md: 1,
                 img {className: "profile-pic", src: group[0].user.pic_url}

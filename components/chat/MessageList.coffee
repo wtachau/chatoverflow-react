@@ -71,7 +71,8 @@ MessageList = React.createClass
         messageGroups.push group
         group = []
       group.push message
-    messageGroups.push group
+    unless group.length is 0
+      messageGroups.push group
     messageGroups
 
   render: ->
