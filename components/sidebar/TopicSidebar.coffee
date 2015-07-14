@@ -6,12 +6,14 @@ ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Badge = React.createFactory ReactBootstrap.Badge
 Link = React.createFactory Router.Link
 Button = React.createFactory ReactBootstrap.Button
-TopicSearch = React.createFactory require("./TopicSearch.coffee")
+TopicSearch = React.createFactory require("./TopicSearch")
+TopicListItem = React.createFactory require("./TopicListItem")
+RoomListItem = React.createFactory require("./RoomListItem")
 AppActions = require("../../actions/AppActions")
 AppStore = require("../../stores/AppStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
-{ h1, div } = React.DOM
+{ h1, div, span } = React.DOM
 
 TopicSidebar = React.createClass
   displayName: "TopicSidebar"
@@ -40,23 +42,18 @@ TopicSidebar = React.createClass
     if @state.app.unread_mentions[parseInt(room_id)]
       Badge {}, 1
     else
-      ""
+      span {}, ""
 
   render: ->
     ListGroup {className: "sidebar"},
       h1 {className: "categories-header"}, "Topics Following"
-        @state.app.user.followed_topics.map ({id, name}, index) =>
-          Link {to: "/topics/#{id}", key: index},
-            ListGroupItem {className: "topic-name"},
-              name,
-              div {className: "exit-x", "data-id": id, onClick: @onCloseTopic}, "x"
+      @props.user.followed_topics.map ({id, name}, index) =>
+        TopicListItem {id, name, index, onClose: @onCloseTopic}
+
       TopicSearch {isFollowingTopic: @props.isFollowingTopic}
+
       h1 {className: "categories-header"}, "Rooms Following"
-        @state.app.user.followed_rooms.map ({id, topic_id}, index) =>
-          Link {to: "/topics/#{topic_id}/rooms/#{id}", key: index},
-            ListGroupItem {className: "topic-name"},
-              "Room #{id}",
-              @badge(id),
-              div {className: "exit-x", "data-id": id, onClick: @onCloseRoom}, "x"
+      @props.user.followed_rooms.map ({id, topic_id}, index) =>
+        RoomListItem {id, topic_id, name, index, onClose: @onCloseRoom, badge: @badge(id)}
 
 module.exports = TopicSidebar
