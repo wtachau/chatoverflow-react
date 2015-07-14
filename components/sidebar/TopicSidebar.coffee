@@ -1,21 +1,19 @@
 React = require("react")
 ReactBootstrap = require("react-bootstrap")
-Router = require("react-router")
 ListGroup = React.createFactory ReactBootstrap.ListGroup
-ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Badge = React.createFactory ReactBootstrap.Badge
-Link = React.createFactory Router.Link
-Button = React.createFactory ReactBootstrap.Button
 TopicSearch = React.createFactory require("./TopicSearch")
+TopicList = React.createFactory require("./TopicList")
 TopicListItem = React.createFactory require("./TopicListItem")
+RoomList = React.createFactory require("./RoomList")
 RoomListItem = React.createFactory require("./RoomListItem")
 AppActions = require("../../actions/AppActions")
 AppStore = require("../../stores/AppStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
-{ h1, div, span } = React.DOM
+{ span } = React.DOM
 
-TopicSidebar = React.createClass
+module.exports = React.createClass
   displayName: "TopicSidebar"
 
   mixins: [ReactStateMagicMixin]
@@ -25,8 +23,9 @@ TopicSidebar = React.createClass
       app: AppStore
 
   propTypes:
-    topics: React.PropTypes.array.isRequired
     user: React.PropTypes.object.isRequired
+    isFollowingRoom: React.PropTypes.func.isRequired
+    isFollowingTopic: React.PropTypes.func.isRequired
 
   onCloseRoom: (e) ->
     room_clicked = e.target.getAttribute("data-id")
@@ -46,14 +45,15 @@ TopicSidebar = React.createClass
 
   render: ->
     ListGroup {className: "sidebar"},
-      h1 {className: "categories-header"}, "Topics Following"
-      @props.user.followed_topics.map ({id, name}, index) =>
-        TopicListItem {id, name, index, onClose: @onCloseTopic}
+      TopicList
+        topics: @props.user.followed_topics
+        onClose: @onCloseTopic
 
-      TopicSearch {isFollowingTopic: @props.isFollowingTopic}
+      TopicSearch
+        isFollowingTopic: @props.isFollowingTopic
 
-      h1 {className: "categories-header"}, "Rooms Following"
-      @props.user.followed_rooms.map ({id, topic_id}, index) =>
-        RoomListItem {id, topic_id, name, index, onClose: @onCloseRoom, badge: @badge(id)}
+      RoomList
+        rooms: @props.user.followed_rooms
+        onClose: @onCloseRoom
+        badge: @badge
 
-module.exports = TopicSidebar
