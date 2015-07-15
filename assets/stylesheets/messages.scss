@@ -73,7 +73,7 @@
       float: left;
       position: relative;
       width: 100%;
-      padding-bottom: 0px;
+      padding-bottom: 5px;
 
       .text {
         padding-right: 75px;
@@ -121,12 +121,15 @@
   width: 100%;
   overflow: auto;
   display: block;
+  border-bottom-width: thin;
+  border-bottom-color: $message_border_grey;
+  border-bottom-style: solid;
   &.left {
     float: left;
   }
   &.right {
     float: right;
-    background-color: aliceblue;
+    background-color: $message_background_purple;
   }
 }
 
@@ -146,6 +149,12 @@
 
 .margin-left {
   margin-left: 9px;
+}
+
+.message {
+  width: 100%;
+  overflow: auto;
+  display: block;
 }
 
 .float-left {

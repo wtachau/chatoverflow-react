@@ -54,8 +54,8 @@ MessageGroupList = React.createClass
   render: ->
     div {},
       @props.messageGroups.map (group, index) =>
-        isUser = if group[0].user.username is @state.app.user.username then "right" else "left"
-        div {className: "message-group #{isUser}"},
+        side = if group[0].user.username is @state.app.user.username then "right" else "left"
+        div {className: "message-group #{side}"},
           Row {className: "no-margin margin-top"},
             div {},
               Col md: 1,
@@ -65,7 +65,7 @@ MessageGroupList = React.createClass
           Row {className: "no-margin"},
             properties = @getMessageProperties group
             group.map (message, index) =>
-              div {className: "message-group"},
+              div {className: "message"},
                 Col md: 1,
                   VoteButton {message}
                 Col md: 11, className: "float-left",
