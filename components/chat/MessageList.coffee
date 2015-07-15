@@ -28,32 +28,35 @@ MessageList = React.createClass
   messagesComponent: ->
     React.findDOMNode this.refs.messages
 
-  # If we are receiving new messages, maintain scroll height
+  componentDidMount: ->
+    @componentMounted = true
+
   componentWillUpdate: (nextProps) ->
-    noNewMessages = (nextProps.messages.length is @props.messages.length)
-    unless noNewMessages or (@props.messages.length is 0)
-      @shouldUpdateScrollHeight = true
-      @oldScrollHeight = @messagesComponent().scrollHeight
+    messagesComp = @messagesComponent()
+    if messagesComp
+      @recievedOldMessages = nextProps.messages.length != @props.messages.length
+      if @recievedOldMessages
+        @preLoadScrollHeight = messagesComp.scrollHeight
 
   componentDidUpdate: ->
-    if @messagesComponent()
-      # If we are scrolled to the bottom already and there's
-      # a new message, then scroll down to see it
-      autoscrollWindow = 160
-      scrollPosition = @messagesComponent().scrollHeight -
-                        @messagesComponent().scrollTop -
-                        @messagesComponent().offsetHeight
-      [..., last] = @props.messages
-      if last.isNewMessage
-        if scrollPosition < autoscrollWindow
-          @messagesComponent().scrollTop = @messagesComponent().scrollHeight
-        last.isNewMessage = false
+    messagesComp = @messagesComponent()
+    if @componentMounted and messagesComp
+      @componentMounted = false
+      messagesComp.scrollTop = messagesComp.scrollHeight
 
-      # If older messages got loaded above current ones,
-      # scroll down so current ones are still in sight
-      if @shouldUpdateScrollHeight
-        @messagesComponent().scrollTop = @messagesComponent().scrollHeight - @oldScrollHeight
-        @shouldUpdateScrollHeight = false
+    if @recievedOldMessages
+      @recievedOldMessages = false
+      messagesComp.scrollTop = messagesComp.scrollHeight - @preLoadScrollHeight
+    else
+      [..., last] = @props.messages
+
+      if last and last.isNewMessage
+        last.isNewMessage = false
+        scrollPosition = messagesComp.scrollHeight - messagesComp.scrollTop -
+          messagesComp.offsetHeight
+
+        if scrollPosition < 160
+          messagesComp.scrollTop = messagesComp.scrollHeight
 
   checkWindowScroll: (e) ->
     target = event.target
@@ -109,6 +112,7 @@ MessageList = React.createClass
       Message { message, key: index, bubbleType, side }
 
   render: ->
+    # First and rest are now invalid
     [first, rest...] = @props.messages
     messageGroupCount = @countMessageGroups rest
     div {},
