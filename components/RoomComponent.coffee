@@ -2,7 +2,7 @@ React = require("react")
 io = require("socket.io-client")
 
 { div } = React.DOM
-TopicSidebar = React.createFactory require("./chat/TopicSidebar")
+TopicSidebar = React.createFactory require("./sidebar/TopicSidebar")
 MessageList = React.createFactory require("./chat/MessageList")
 ChatForm = React.createFactory require("./chat/ChatForm")
 AskComponent = React.createFactory require("./AskComponent")

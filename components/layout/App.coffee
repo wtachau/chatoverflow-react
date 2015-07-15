@@ -9,7 +9,7 @@ URLResources = require("../../common/URLResources")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
-TopicSidebar = React.createFactory require("../chat/TopicSidebar")
+TopicSidebar = React.createFactory require("../sidebar/TopicSidebar")
 { div } = React.DOM
 
 module.exports = React.createClass
