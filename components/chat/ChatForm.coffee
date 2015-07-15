@@ -61,6 +61,5 @@ ChatForm = React.createClass
         onKeyUp: @keyPress
         onKeyDown: @keyPress,
         Mention {trigger: "@", data: @formattedUserMentionsData()},
-      Button {onClick: @submit, className: "form-button"}, "send"
 
 module.exports = ChatForm
