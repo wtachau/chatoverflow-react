@@ -19,7 +19,7 @@ module.exports = React.createClass
   render: ->
     Link {to: "/topics/#{@props.topic_id}/rooms/#{@props.id}", key: @props.index},
       ListGroupItem {className: "topic-name"},
-        "Room #{@props.id}",
+        "Thread #{@props.id}",
         @props.badge,
         div {className: "exit-x", "data-id": @props.id, onClick: @props.onClose},
           "x"
