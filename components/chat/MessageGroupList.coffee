@@ -1,6 +1,7 @@
 React = require("react")
 
 Message = React.createFactory require("./Message")
+VoteButton = React.createFactory require("./VoteButton")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
 ChatStore = require("../../stores/ChatStore")
@@ -38,16 +39,17 @@ MessageGroupList = React.createClass
     bubbleType
 
   getMessageProperties: (group) ->
+    properties = {}
     group.map (message, index) =>
       if message.user.username is @state.app.user.username
-        isUser = true
-        side = "right"
-        bubbleType = @selectBubbleType index, group.length
+        properties.isUser = true
+        properties.side = "right"
+        properties.bubbleType = @selectBubbleType index, group.length
       else
-        isUser = false
-        side = "left"
-        bubbleType = @selectBubbleType index, group.length
-      Message { message, key: index, bubbleType, side, isUser }
+        properties.isUser = false
+        properties.side = "left"
+        properties.bubbleType = @selectBubbleType index, group.length
+      @properties
 
   render: ->
     div {},
@@ -59,8 +61,19 @@ MessageGroupList = React.createClass
               Col md: 1,
                 img {className: "profile-pic", src: group[0].user.pic_url}
               Col md: 8,
-                div {}, group[0].user.username
-          Col md: 11, mdOffset: 1,
-            @getMessageProperties group
+                div {className: "margin-left"}, group[0].user.username
+          Row {className: "no-margin"},
+            properties = @getMessageProperties group
+            group.map (message, index) =>
+              div {className: "message-group"},
+                Col md: 1,
+                  VoteButton {message}
+                Col md: 11, className: "float-left",
+                  Message
+                    message: message
+                    key: index
+                    bubbleType: properties.bubbleType
+                    side: properties.side
+                    isUser: properties.isUser
 
 module.exports = MessageGroupList
