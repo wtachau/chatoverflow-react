@@ -71,12 +71,12 @@ AskComponent = React.createClass
     dropdownTitle = if @state.chat.topicSelected
       @state.chat.topicSelected.name
     else
-      "Select a topic"
+      "Select a room"
 
     div {className: "home"},
       Row {},
         Col md: 8, mdOffset: 2,
-          h1 {}, "Select a Topic"
+          h1 {}, "Select a Room"
       Row {},
         Col md: 4, mdOffset: 2,
         DropdownButton title: dropdownTitle,
