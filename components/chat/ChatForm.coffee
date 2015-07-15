@@ -6,7 +6,6 @@ ChatStore = require("../../stores/ChatStore")
 URLResources = require("../../common/URLResources")
 
 {form} = React.DOM
-Button = React.createFactory ReactBootstrap.Button
 MentionsInput = React.createFactory mentions.MentionsInput
 Mention = React.createFactory mentions.Mention
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
