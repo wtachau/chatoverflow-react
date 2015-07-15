@@ -4,6 +4,7 @@
 .pinned-post {
 
   background-color: $pinned_post_background_grey;
+  height: $pinned_post_height;
   max-height: $pinned_post_height;
   overflow: auto;
   width: 100%;

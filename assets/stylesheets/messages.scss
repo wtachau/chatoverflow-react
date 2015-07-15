@@ -14,20 +14,18 @@
   height: calc(100% - #{$chat_box_height} - #{$pinned_post_height});
   width: 50%;
   vertical-align: top;
-  padding-right: 10px;
 
   .message-row {
 
     margin: 1px;
-    padding: 5px;
+    padding-left: 8px;
 
     &.bubble {
       border-radius: $bubble_border_radius;
-      max-width: 88%;
+      width: 100%;
       clear: both;
       &.left {
         float: left;
-        background-color: $chat_background_grey;
         &.top-bubble{
           border-bottom-left-radius: 0px;
         }
@@ -42,7 +40,6 @@
       }
       &.right {
         float: right;
-        background-color: $chat_bubble_blue;
         &.top-bubble{
           border-bottom-right-radius: 0px;
         }
@@ -57,18 +54,6 @@
         &.single-bubble {
           border-radius: $bubble_border_radius;
         }
-      }
-    }
-
-    .votes {
-      width: $votes_width;
-      float: right;
-      .vote-button {
-        height: 20px;
-        padding: 0px 5px;
-      }
-      .vote-total {
-        padding-left: 15px;
       }
     }
 
@@ -87,7 +72,8 @@
     .chat-body {
       float: left;
       position: relative;
-      width: calc(100% - #{$username_width} - #{$votes_width});
+      width: 100%;
+      padding-bottom: 5px;
 
       .text {
         padding-right: 75px;
@@ -110,7 +96,67 @@
   }
 }
 
+.votes {
+  text-align: center;
+  .vote-button {
+    background-color: transparent;
+    border-color: transparent;
+    height: 20px;
+    padding: 0px 5px;
+    outline: 0;
+    transform:scale(2,1); /* W3C */
+    -webkit-transform:scale(2,1); /* Safari and Chrome */
+    -moz-transform:scale(2,1); /* Firefox */
+    -ms-transform:scale(2,1); /* IE 9 */
+    -o-transform:scale(2,1); /* Opera */
+  }
+}
+
 .image {
   max-width: 500px;
   height: "auto";
+}
+
+.message-group {
+  width: 100%;
+  overflow: auto;
+  display: block;
+  border-bottom-width: thin;
+  border-bottom-color: $message_border_grey;
+  border-bottom-style: solid;
+  &.left {
+    float: left;
+  }
+  &.right {
+    float: right;
+    background-color: $message_background_purple;
+  }
+}
+
+.profile-pic {
+  max-width: 40px;
+  border-radius: 20px;
+  float: left;
+}
+
+.no-margin {
+  margin-right: 0;
+  margin-left: 0;
+  &.margin-top {
+    margin-top: 9px;
+  }
+}
+
+.margin-left {
+  margin-left: 9px;
+}
+
+.message {
+  width: 100%;
+  overflow: auto;
+  display: block;
+}
+
+.float-left {
+  float: left;
 }

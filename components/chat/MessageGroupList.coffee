@@ -1,13 +1,18 @@
 React = require("react")
 
 Message = React.createFactory require("./Message")
+VoteButton = React.createFactory require("./VoteButton")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
 ChatStore = require("../../stores/ChatStore")
 ChatActions = require("../../actions/ChatActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+ReactBootstrap = require("react-bootstrap")
 
-{ div } = React.DOM
+{ div, img } = React.DOM
+
+Row = React.createFactory ReactBootstrap.Row
+Col = React.createFactory ReactBootstrap.Col
 
 MessageGroupList = React.createClass
   displayName: "MessageGroup"
@@ -33,19 +38,42 @@ MessageGroupList = React.createClass
                     "middle-bubble"
     bubbleType
 
-  renderMessage: (group) ->
+  getMessageProperties: (group) ->
+    properties = {}
     group.map (message, index) =>
       if message.user.username is @state.app.user.username
-        side = "right"
-        bubbleType = @selectBubbleType index, group.length
+        properties.isUser = true
+        properties.side = "right"
+        properties.bubbleType = @selectBubbleType index, group.length
       else
-        side = "left"
-        bubbleType = @selectBubbleType index, group.length
-      Message { message, key: index, bubbleType, side }
+        properties.isUser = false
+        properties.side = "left"
+        properties.bubbleType = @selectBubbleType index, group.length
+      @properties
 
   render: ->
     div {},
       @props.messageGroups.map (group, index) =>
-        @renderMessage group
+        side = if group[0].user.username is @state.app.user.username then "right" else "left"
+        div {className: "message-group #{side}"},
+          Row {className: "no-margin margin-top"},
+            div {},
+              Col md: 1,
+                img {className: "profile-pic", src: group[0].user.pic_url}
+              Col md: 8,
+                div {className: "margin-left"}, group[0].user.username
+          Row {className: "no-margin"},
+            properties = @getMessageProperties group
+            group.map (message, index) =>
+              div {className: "message"},
+                Col md: 1,
+                  VoteButton {message}
+                Col md: 11, className: "float-left",
+                  Message
+                    message: message
+                    key: index
+                    bubbleType: properties.bubbleType
+                    side: properties.side
+                    isUser: properties.isUser
 
 module.exports = MessageGroupList
