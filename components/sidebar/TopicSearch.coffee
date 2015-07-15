@@ -52,7 +52,7 @@ TopicSearch = React.createClass
         autoload: false
         onChange: @selectOnChange
         multi: false
-        placeholder: "Add another topic"
+        placeholder: "Add another room"
         clearable: true
         ignoreCase: true
 

@@ -28,7 +28,7 @@ PinnedPost = React.createClass
 
   buttonText: ->
     isFollowing = @props.isFollowingRoom @props.currentRoom
-    if isFollowing then 'Unfollow Room' else "Follow Room"
+    if isFollowing then 'Unfollow Thread' else "Follow Thread"
 
   render: ->
     timestamp = moment(@props.originalPost.created_at).format("h:mm A")
