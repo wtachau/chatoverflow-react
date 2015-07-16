@@ -40,23 +40,30 @@ MessageList = React.createClass
 
   componentDidUpdate: ->
     messagesComp = @messagesComponent()
-    if @componentMounted and messagesComp
-      @componentMounted = false
-      messagesComp.scrollTop = messagesComp.scrollHeight
+    if messagesComp
+      if @componentMounted
+        @componentMounted = false
+        @initialMessagesUpdate(messagesComp)
+      else if @recievedOldMessages
+        @recievedOldMessages = false
+        @onOldMessagesRecieved(messagesComp)
+      else
+        [..., last] = @props.messages
+        if last and last.isNewMessage
+          last.isNewMessage = false
+          if @getScrollPosition(messagesComp) < 160
+            messagesComp.scrollTop = messagesComp.scrollHeight
 
-    if @recievedOldMessages
-      @recievedOldMessages = false
-      messagesComp.scrollTop = messagesComp.scrollHeight - @preLoadScrollHeight
-    else
-      [..., last] = @props.messages
+  initialMessagesUpdate: (messagesComponent) ->
+    messagesComponent.scrollTop = messagesComponent.scrollHeight
 
-      if last and last.isNewMessage
-        last.isNewMessage = false
-        scrollPosition = messagesComp.scrollHeight - messagesComp.scrollTop -
-          messagesComp.offsetHeight
+  onOldMessagesRecieved: (messagesComponent) ->
+    messagesComponent.scrollTop = messagesComponent.scrollHeight - 
+      @preLoadScrollHeight
 
-        if scrollPosition < 160
-          messagesComp.scrollTop = messagesComp.scrollHeight
+  getScrollPosition: (messagesComponent) ->
+    messagesComponent.scrollHeight - messagesComponent.scrollTop -
+      messagesComponent.offsetHeight
 
   checkWindowScroll: (e) ->
     target = event.target
