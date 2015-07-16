@@ -41,8 +41,8 @@ RoomList = React.createClass
   refreshRoomList: ->
     ChatActions.fetchTopicInfo @props.currentTopic
 
-
   render: ->
+    currentRoom = if @state.currentRoom then "highlight-room" else ""
     div {className: "rooms"},
       if @state.topicInfo
         div {className: "room-list-page"},

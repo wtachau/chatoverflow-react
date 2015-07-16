@@ -54,17 +54,20 @@ RoomComponent = React.createClass
     unless @props.params.room_id is newProps.params.room_id
       @socket.emit "subscribe",
         {username: @username(), room: @getParams().room_id}
+      ChatActions.setCurrentRoom @getParams().room_id
       ChatActions.fetchRecentMessages @getParams().room_id
       if @state.app.unread_mentions[parseInt(@getParams().room_id)]
         AppActions.setReadMentions @getParams().room_id
 
   componentDidMount: ->
+    ChatActions.setCurrentRoom @getParams().room_id
     ChatActions.fetchRecentMessages @getParams().room_id
     AppActions.setReadMentions @getParams().room_id
 
   componentWillUnmount: ->
     @socket.removeAllListeners "chat message"
     @socket.removeAllListeners "mention"
+    ChatActions.setCurrentRoom null
 
   isFollowingRoom: (room_id) ->
     followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id

@@ -28,6 +28,10 @@
     bottom: 0;
     overflow: scroll;
 
+    .highlight-room {
+      background-color: $highlight_room_background_purple;
+    }
+
     .room-info {
       overflow: hidden;
 
