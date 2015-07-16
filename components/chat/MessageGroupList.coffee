@@ -2,6 +2,7 @@ React = require("react")
 
 Message = React.createFactory require("./Message")
 VoteButton = React.createFactory require("./VoteButton")
+UserComponent = React.createFactory require("../UserComponent")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
 ChatStore = require("../../stores/ChatStore")
@@ -54,12 +55,15 @@ MessageGroupList = React.createClass
   render: ->
     div {},
       @props.messageGroups.map (group, index) =>
+        console.log group
         side = if group[0].user.username is @state.app.user.username then "right" else "left"
         div {className: "message-group #{side}"},
           Row {className: "no-margin margin-top"},
             div {},
               Col md: 1,
-                img {className: "profile-pic", src: group[0].user.pic_url}
+                UserComponent
+                  user: group[0].user
+                  includeLogout: false
               Col md: 8,
                 div {className: "margin-left"}, group[0].user.username
           Row {className: "no-margin"},
