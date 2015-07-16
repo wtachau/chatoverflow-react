@@ -29,7 +29,7 @@ MessageList = React.createClass
     React.findDOMNode this.refs.messages
 
   componentDidMount: ->
-    @componentMounted = true
+    @hasJustMounted = true
 
   componentWillUpdate: (nextProps) ->
     messagesComp = @messagesComponent()
@@ -41,8 +41,8 @@ MessageList = React.createClass
   componentDidUpdate: ->
     messagesComp = @messagesComponent()
     if messagesComp
-      if @componentMounted
-        @componentMounted = false
+      if @hasJustMounted
+        @hasJustMounted = false
         @initialMessagesUpdate messagesComp
       else if @recievedOldMessages
         @recievedOldMessages = false
