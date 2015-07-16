@@ -43,15 +43,15 @@ MessageList = React.createClass
     if messagesComp
       if @componentMounted
         @componentMounted = false
-        @initialMessagesUpdate(messagesComp)
+        @initialMessagesUpdate messagesComp
       else if @recievedOldMessages
         @recievedOldMessages = false
-        @onOldMessagesRecieved(messagesComp)
+        @onOldMessagesRecieved messagesComp
       else
         [..., last] = @props.messages
         if last and last.isNewMessage
           last.isNewMessage = false
-          if @getScrollPosition(messagesComp) < 160
+          if (@getScrollPosition messagesComp) < @state.chat.autoScrollWindow
             messagesComp.scrollTop = messagesComp.scrollHeight
 
   initialMessagesUpdate: (messagesComponent) ->
