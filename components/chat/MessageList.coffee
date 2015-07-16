@@ -119,9 +119,7 @@ MessageList = React.createClass
       Message { message, key: index, bubbleType, side }
 
   render: ->
-    # First and rest are now invalid
-    [first, rest...] = @props.messages
-    messageGroupCount = @countMessageGroups rest
+    messageGroupCount = @countMessageGroups @props.messages
     div {},
       unless @props.messages.length is 0
         div {},
@@ -130,6 +128,6 @@ MessageList = React.createClass
             currentRoom: @props.currentRoom
             isFollowingRoom: @props.isFollowingRoom
           div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},
-            @renderBubbleType rest, messageGroupCount
+            @renderBubbleType @props.messages, messageGroupCount
 
 module.exports = MessageList
