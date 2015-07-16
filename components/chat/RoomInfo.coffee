@@ -40,21 +40,21 @@ RoomInfo = React.createClass
 
     roomProperties = if @state.currentRoom is @props.room.id then "highlight-room" else ""
     ListGroupItem {className: "room-info #{roomProperties}"},
-      div {className: "answers"},
-        div {className: "answer-total"}, answersTotal
-        div {className: "answer-text"},
-          if answersTotal is 1 then "answer" else "answers"
-      Row {},
-        Col {className: "question-info", xs:8},
-          div {className: "question-header"},
-            Link {to: "/topics/#{@props.topic}/rooms/#{@props.room.id}"},
+      Link {to: "/topics/#{@props.topic}/rooms/#{@props.room.id}"},
+        div {className: "answers"},
+          div {className: "answer-total"}, answersTotal
+          div {className: "answer-text"},
+            if answersTotal is 1 then "answer" else "answers"
+        Row {},
+          Col {className: "question-info", xs:8},
+            div {className: "question-header"},
               div {className: "question-title"}, @props.room.title
-            div {className: "time-asked"}, timestamp
-          div {className: "question-text"}, question
-          div {className: "recent-answers"},
-            "Recent Answers:"
-            ul {className: "recent-answers-list"},
-              recentAnswers.map ({username, text}) ->
-                li {className: "recent-answer"}, "#{username} answered: #{text}"
+              div {className: "time-asked"}, timestamp
+            div {className: "question-text"}, question
+            div {className: "recent-answers"},
+              "Recent Answers:"
+              ul {className: "recent-answers-list"},
+                recentAnswers.map ({username, text}) ->
+                  li {className: "recent-answer"}, "#{username} answered: #{text}"
 
 module.exports = RoomInfo
