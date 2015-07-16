@@ -28,32 +28,42 @@ MessageList = React.createClass
   messagesComponent: ->
     React.findDOMNode this.refs.messages
 
-  # If we are receiving new messages, maintain scroll height
+  componentDidMount: ->
+    @hasJustMounted = true
+
   componentWillUpdate: (nextProps) ->
-    noNewMessages = (nextProps.messages.length is @props.messages.length)
-    unless noNewMessages or (@props.messages.length is 0)
-      @shouldUpdateScrollHeight = true
-      @oldScrollHeight = @messagesComponent().scrollHeight
+    messagesComp = @messagesComponent()
+    if messagesComp
+      @recievedOldMessages = nextProps.messages.length != @props.messages.length
+      if @recievedOldMessages
+        @preLoadScrollHeight = messagesComp.scrollHeight
 
   componentDidUpdate: ->
-    if @messagesComponent()
-      # If we are scrolled to the bottom already and there's
-      # a new message, then scroll down to see it
-      autoscrollWindow = 160
-      scrollPosition = @messagesComponent().scrollHeight -
-                        @messagesComponent().scrollTop -
-                        @messagesComponent().offsetHeight
-      [..., last] = @props.messages
-      if last.isNewMessage
-        if scrollPosition < autoscrollWindow
-          @messagesComponent().scrollTop = @messagesComponent().scrollHeight
-        last.isNewMessage = false
+    messagesComp = @messagesComponent()
+    if messagesComp
+      if @hasJustMounted
+        @hasJustMounted = false
+        @initialMessagesUpdate messagesComp
+      else if @recievedOldMessages
+        @recievedOldMessages = false
+        @onOldMessagesRecieved messagesComp
+      else
+        [..., last] = @props.messages
+        if last and last.isNewMessage
+          last.isNewMessage = false
+          if (@getScrollPosition messagesComp) < @state.chat.autoScrollWindow
+            messagesComp.scrollTop = messagesComp.scrollHeight
 
-      # If older messages got loaded above current ones,
-      # scroll down so current ones are still in sight
-      if @shouldUpdateScrollHeight
-        @messagesComponent().scrollTop = @messagesComponent().scrollHeight - @oldScrollHeight
-        @shouldUpdateScrollHeight = false
+  initialMessagesUpdate: (messagesComponent) ->
+    messagesComponent.scrollTop = messagesComponent.scrollHeight
+
+  onOldMessagesRecieved: (messagesComponent) ->
+    messagesComponent.scrollTop = messagesComponent.scrollHeight - 
+      @preLoadScrollHeight
+
+  getScrollPosition: (messagesComponent) ->
+    messagesComponent.scrollHeight - messagesComponent.scrollTop -
+      messagesComponent.offsetHeight
 
   checkWindowScroll: (e) ->
     target = event.target
@@ -109,8 +119,7 @@ MessageList = React.createClass
       Message { message, key: index, bubbleType, side }
 
   render: ->
-    [first, rest...] = @props.messages
-    messageGroupCount = @countMessageGroups rest
+    messageGroupCount = @countMessageGroups @props.messages
     div {},
       unless @props.messages.length is 0
         div {},
@@ -119,6 +128,6 @@ MessageList = React.createClass
             currentRoom: @props.currentRoom
             isFollowingRoom: @props.isFollowingRoom
           div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},
-            @renderBubbleType rest, messageGroupCount
+            @renderBubbleType @props.messages, messageGroupCount
 
 module.exports = MessageList
