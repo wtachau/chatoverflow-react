@@ -12,11 +12,9 @@ describe 'TopicSidebar', ->
     user =
       followed_topics: [{name: "test", id: 1}]
       followed_rooms: []
-    isFollowingRoom = jest.genMockFunction()
-    isFollowingTopic = jest.genMockFunction()
 
     # Initialize the topic sidebar
-    sidebar = TopicSidebar {user, isFollowingTopic, isFollowingRoom}
+    sidebar = TopicSidebar {user}
     topicSidebar = TestUtils.renderIntoDocument(sidebar)
 
     # Find the list of topics rendered
