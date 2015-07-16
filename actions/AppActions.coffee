@@ -30,6 +30,9 @@ class AppActions
       URLResources.callAPI "/topics/#{topic_id}/follow",
         "delete", null, @actions.setCurrentUser
 
+  createTopic: (name, callback) ->
+    URLResources.callAPI "/topics", "post", {name}, callback
+
   login: ->
     window.location.assign("#{ URLResources.getLogicServerOrigin() }/login")
 
