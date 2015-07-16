@@ -13,5 +13,5 @@ module.exports = React.createClass
   render: ->
     div {},
       h1 {className: "categories-header"}, "Followed Threads"
-      @props.rooms.map ({id, topic_id}, index) =>
+      @props.rooms?.map ({id, topic_id}, index) =>
         RoomListItem {id, topic_id, name, index, onClose: @props.onClose, badge: @props.badge(id)}

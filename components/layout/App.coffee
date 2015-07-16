@@ -37,7 +37,8 @@ module.exports = React.createClass
   render: ->
     if @state.user
       div {},
-        HeaderComponent {}
+        HeaderComponent
+          user: @state.user
         div {className: "chat"},
           TopicSidebar
             user: @state.user

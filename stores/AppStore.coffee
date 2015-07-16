@@ -5,7 +5,7 @@ class AppStore
   displayName: 'AppStore'
 
   constructor: () ->
-    @user = null
+    @user = {}
     @users = []
     @error = null
     @unread_mentions = {}

@@ -23,6 +23,10 @@ UserComponent = React.createClass
   statics:
     registerStore: AppStore
 
+  propTypes:
+    user: React.PropTypes.object.isRequired
+    includeLogout: React.PropTypes.bool.isRequired
+
   getInitialState: ->
     showModal: false
 
@@ -32,8 +36,8 @@ UserComponent = React.createClass
 
   render: ->
     div {className: "popup-link"},
-      a {href: "#", onClick: @showPopup, className: "categories-header"},
-        img {src:@state.user.pic_url}
+      a {href: "#", onClick: @showPopup},
+        img {src:@props.user.pic_url}
       Modal {show: @state.showModal, onHide: @closePopup},
         ModalHeader {closeButton: true},
           ModalTitle {}, "User Information"
@@ -42,12 +46,13 @@ UserComponent = React.createClass
             Row {},
               Col {xs: 6, md: 3},
                 div {className: "user-thumbnail"},
-                  Thumbnail {href: "#", src: @state.user.pic_url}
+                  Thumbnail {href: "#", src: @props.user.pic_url}
               Col {xs: 6, md: 3},
-                div {className: "user-username"}, "#{@state.user.username}"
-                div {className: "user-karma"}, "Karma: #{@state.user.karma}"
-        ModalFooter {},
-          Button {onClick: AppActions.logout, bsStyle: "danger"}, "Log out"
+                div {className: "user-username"}, "#{@props.user.username}"
+                div {className: "user-karma"}, "Karma: #{@props.user.karma}"
+        if @props.includeLogout
+          ModalFooter {},
+            Button {onClick: AppActions.logout, bsStyle: "danger"}, "Log out"
 
 
 module.exports = UserComponent
