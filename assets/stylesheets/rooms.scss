@@ -2,13 +2,11 @@
 @import "sizes";
 
 .rooms {
-  width: 48%;
-  margin-right: 2%;
+  width: 50%;
   float: left;
 
   .current-topic {
-    color: $chat_sidebar_hover_periwinkle;
-    background-color: $chat_background_grey;
+    color: white;
   }
 
   .row {
@@ -16,17 +14,18 @@
     overflow: scroll;
     &.topic-header {
       height: $topic-height;
-      margin-left: 4%;
     }
   }
 
   .rooms-list {
     position: absolute;
     top: $topic_height;
-    right: 52%;
-    left: 2%;
+    right: 50%;
+    left: 0;
     bottom: 0;
     overflow: scroll;
+    background-color: white;
+    padding: 10px;
 
     .highlight-room {
       background-color: $highlight_room_background_purple;

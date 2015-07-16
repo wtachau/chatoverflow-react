@@ -8,6 +8,7 @@ ChatForm = React.createFactory require("./chat/ChatForm")
 AskComponent = React.createFactory require("./AskComponent")
 RoomList = React.createFactory require("./chat/RoomList")
 URLResources = require("../common/URLResources")
+FollowResources = require("../common/FollowResources")
 ChatStore = require("../stores/ChatStore")
 AppStore = require("../stores/AppStore")
 ChatActions = require("../actions/ChatActions")
@@ -38,8 +39,8 @@ RoomComponent = React.createClass
           @scrollDownMessages()
 
     @socket.on "mention", ({user_id, username, room_id, text}) =>
-      unless @isFollowingRoom room_id
-        AppActions.followRoom room_id, @isFollowingRoom
+      unless FollowResources.isFollowingRoom room_id, @state.app.user
+        AppActions.followRoom room_id, @state.app.user
       AppActions.setUnreadMentions room_id
 
     @socket.emit "subscribe",
@@ -69,14 +70,6 @@ RoomComponent = React.createClass
     @socket.removeAllListeners "mention"
     ChatActions.setCurrentRoom null
 
-  isFollowingRoom: (room_id) ->
-    followedRoomIds = @state.app.user.followed_rooms.map ({id}) -> id
-    parseInt(room_id) in followedRoomIds
-
-  isFollowingTopic: (topic_id) ->
-    followedTopicIds = @state.app.user.followed_topics.map ({id}) -> id
-    parseInt(topic_id) in followedTopicIds
-
   submitMessage: (e, message, mentions) ->
     unless message is ""
       @socket.emit "chat message",
@@ -85,7 +78,7 @@ RoomComponent = React.createClass
           pic_url: @pic_url()
           username: @username()
         room_id: @getParams().room_id
-        "text": message.trim()
+        text: message.trim()
         mentions: mentions
     e.preventDefault()
 
@@ -95,7 +88,6 @@ RoomComponent = React.createClass
         originalPost: @state.chat.originalPost
         messages: @state.chat.messages
         currentRoom: @getParams().room_id
-        isFollowingRoom: @isFollowingRoom
         ref: "messageList"
       ChatForm
         submitMessage: @submitMessage

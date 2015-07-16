@@ -22,3 +22,25 @@ $header_padding: 10px;
 .user-karma {
   font-size: 24px;
 }
+
+.active-users {
+  width: 50%;
+  float: left;
+  overflow: hidden;
+
+  .active-users-header {
+    background-color: $chat_background_purple;
+    color: white;
+  }
+
+  .active-user {
+    width: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+
+    .active-user-username {
+      line-height: 40px;
+      margin-left: 50px;
+    }
+  }
+}

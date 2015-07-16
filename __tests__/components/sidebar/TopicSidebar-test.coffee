@@ -8,8 +8,6 @@ describe 'TopicSidebar', ->
     sidebar = TestUtils.renderIntoDocument(
       TopicSidebar
         user: user
-        isFollowingTopic: (a) -> true
-        isFollowingRoom: (a) -> true
     )
 
     expect(sidebar.props.user).toBe user

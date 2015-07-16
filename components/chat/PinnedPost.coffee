@@ -5,6 +5,7 @@ moment = require("moment")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+FollowResources = require("../../common/FollowResources")
 
 Row = React.createFactory ReactBootstrap.Row
 Button = React.createFactory ReactBootstrap.Button
@@ -24,10 +25,10 @@ PinnedPost = React.createClass
     currentRoom: React.PropTypes.string.isRequired
 
   followRoom: ->
-    AppActions.followRoom @props.currentRoom, @props.isFollowingRoom
+    AppActions.followRoom @props.currentRoom, @state.app.user
 
   buttonText: ->
-    isFollowing = @props.isFollowingRoom @props.currentRoom
+    isFollowing = FollowResources.isFollowingRoom @props.currentRoom, @state.app.user
     if isFollowing then 'Unfollow Thread' else "Follow Thread"
 
   render: ->

@@ -18,6 +18,7 @@ class ChatStore
     @currentRoom = null
     @searchResults = []
     @keyPressMap = []
+    @autoScrollWindow = 160
 
     @bindActions(ChatActions)
 
