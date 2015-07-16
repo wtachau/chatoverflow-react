@@ -27,6 +27,10 @@
     background-color: white;
     padding: 10px;
 
+    .highlight-room {
+      background-color: $highlight_room_background_purple;
+    }
+
     .room-info {
       overflow: hidden;
 

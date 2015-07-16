@@ -7,8 +7,7 @@ class ChatActions
     @generateActions "setCurrentMessage", "setMessagesList",
       "setTopics", "setCurrentQuestionTitle", "setCurrentQuestionText",
       "setTopicSelected", "setTopicInfo", "setMentions", "setMessage",
-      "setCurrentRoom", "setOldestPage", "prependToMessages", "setOriginalPost"
-      "setCurrentRoom", "setOldestPage", "prependToMessages",
+      "setCurrentRoom", "setOldestPage", "prependToMessages", "setOriginalPost",
       "setSearchResults", "setOriginalPost", "setRecentMessages",
       "pushNewMessage"
 
