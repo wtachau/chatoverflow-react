@@ -13,7 +13,8 @@
     "testRoutes": "npm run devbuild && node dev.js",
     "stagingbuild": "env UV_THREADPOOL_SIZE=100 webpack -p --config webpack.staging.config.js --profile --progress --colors",
     "pushToStaging": "npm run stagingbuild && aws s3 sync . s3://chatoverflow",
-    "prodbuild": "env UV_THREADPOOL_SIZE=100 webpack -p --config webpack.prod.config.js --profile --progress --colors"
+    "prodbuild": "env UV_THREADPOOL_SIZE=100 webpack -p --config webpack.prod.config.js --profile --progress --colors",
+    "test": "jest"
   },
   "author": "Originate",
   "license": "ISC",
@@ -44,5 +45,14 @@
     "url-loader": "^0.5.6",
     "webpack": "^1.6.0",
     "webpack-dev-server": "^1.7.0"
+  },
+  "devDependencies": {
+    "jest-cli": "^0.4.15"
+  },
+  "jest": {
+    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react"],
+    "scriptPreprocessor": "preprocessor.js",
+    "testFileExtensions": ["coffee", "litcoffee", "coffee.md", "js"],
+    "moduleFileExtensions": ["coffee", "litcoffee", "coffee.md", "js"]
   }
 }

@@ -1,13 +1,15 @@
 React = require("react")
 Uri = require("jsuri")
 Router = require("react-router")
+RouteHandler = React.createFactory Router.RouteHandler
 LoginComponent = React.createFactory require("../LoginComponent")
-ChatComponent = React.createFactory require("../ChatComponent")
+ChatComponent = React.createFactory require("../TopicComponent")
 HeaderComponent = React.createFactory require("../HeaderComponent")
 URLResources = require("../../common/URLResources")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+TopicSidebar = React.createFactory require("../sidebar/TopicSidebar")
 { div } = React.DOM
 
 module.exports = React.createClass
@@ -26,6 +28,8 @@ module.exports = React.createClass
   componentDidMount: ->
     if sessionStorage.getItem('jwt')
       AppActions.fetchUser()
+      AppActions.fetchUsers()
+
     newurl = "#{window.location.protocol}//\
               #{window.location.host}#{window.location.pathname}"
     window.history.pushState path: newurl, '', newurl
@@ -34,10 +38,10 @@ module.exports = React.createClass
     if @state.user
       div {},
         HeaderComponent {}
-        ChatComponent
-          user: @state.user
-          logoutClicked: AppActions.logout
-          currentRoom: @getParams().room_id
-          currentTopic: @getParams().topic_id
+        div {className: "chat"},
+          TopicSidebar
+            user: @state.user
+          div {className: "chat-panel"},
+            RouteHandler {}
     else
       LoginComponent loginClicked: AppActions.login

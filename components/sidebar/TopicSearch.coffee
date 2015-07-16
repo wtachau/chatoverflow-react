@@ -25,6 +25,9 @@ TopicSearch = React.createClass
       app: AppStore
       chat: ChatStore
 
+  propTypes:
+    user: React.PropTypes.object.isRequired
+
   fetchSearchResults: (input, callback) ->
     followed_ids = @state.app.user.followed_topics.map ({id}) -> id
     query = input.trim()
@@ -40,7 +43,7 @@ TopicSearch = React.createClass
 
   selectOnChange: (value) ->
     topic = @state.chat.searchResults.filter ({name}) => name is value
-    AppActions.followTopic topic[0].id, @props.isFollowingTopic
+    AppActions.followTopic topic[0].id, @props.user
     @transitionTo "topic", topic_id: topic[0].id
 
   render: ->
@@ -52,7 +55,7 @@ TopicSearch = React.createClass
         autoload: false
         onChange: @selectOnChange
         multi: false
-        placeholder: "Add another topic"
+        placeholder: "Add another room"
         clearable: true
         ignoreCase: true
 

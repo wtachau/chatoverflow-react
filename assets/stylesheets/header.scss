@@ -1,5 +1,6 @@
 @import "colors";
 @import "sizes";
+@import "fonts";
 
 nav {
 
@@ -22,6 +23,18 @@ nav {
     color: white;
     position: absolute;
     top: -8px;
-    left: 10px;
+
+    &.chatsignal-logo {
+      left: 10px;
+      font-family: $navbar_chatsignal_home; 
+    }
+
+    &.newthread {
+      padding-right: 50px;
+      right: 10px;
+      font-family: $navbar_start_new_thread;
+    }
+
   }
+
 }

@@ -16,3 +16,4 @@ bundle.js.map
 !webpack.staging.config.js
 !dev.js
 !assets/vendor/*.js
+!preprocessor.js

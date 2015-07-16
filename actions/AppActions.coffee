@@ -1,5 +1,6 @@
 alt = require("../alt")
 URLResources = require("../common/URLResources")
+FollowResources = require("../common/FollowResources")
 
 class AppActions
   constructor: ->
@@ -13,16 +14,16 @@ class AppActions
   fetchUsers: ->
     URLResources.readFromAPI "/users", @actions.setCurrentUsers
 
-  followRoom: (room_id, alreadyFollowing) ->
-    unless alreadyFollowing room_id
+  followRoom: (room_id, user) ->
+    unless FollowResources.isFollowingRoom room_id, user
       URLResources.callAPI "/rooms/#{room_id}/follow",
         "put", null, @actions.setCurrentUser
     else
       URLResources.callAPI "/rooms/#{room_id}/follow",
         "delete", null, @actions.setCurrentUser
 
-  followTopic: (topic_id, alreadyFollowing) ->
-    unless alreadyFollowing topic_id
+  followTopic: (topic_id, user) ->
+    unless FollowResources.isFollowingTopic topic_id, user
       URLResources.callAPI "/topics/#{topic_id}/follow",
         "put", null, @actions.setCurrentUser
     else
