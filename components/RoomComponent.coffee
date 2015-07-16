@@ -57,7 +57,7 @@ RoomComponent = React.createClass
         {username: @username(), room: @getParams().room_id}
       ChatActions.setCurrentRoom @getParams().room_id
       ChatActions.fetchRecentMessages @getParams().room_id
-      if @state.app.unread_mentions[parseInt(@getParams().room_id)]
+      if @state.app.unread_mentions[parseInt @getParams().room_id]
         AppActions.setReadMentions @getParams().room_id
 
   componentDidMount: ->

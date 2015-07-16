@@ -4,6 +4,8 @@
 .rooms {
   width: 50%;
   float: left;
+  height: 100%;
+  border-right: $border_faint_grey solid;
 
   .current-topic {
     color: white;
@@ -14,6 +16,7 @@
     overflow: scroll;
     &.topic-header {
       height: $topic-height;
+      background-color: $chat_background_purple;
     }
   }
 
@@ -24,7 +27,6 @@
     left: 0;
     bottom: 0;
     overflow: scroll;
-    background-color: white;
     padding: 10px;
 
     .highlight-room {
