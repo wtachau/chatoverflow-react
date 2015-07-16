@@ -38,7 +38,7 @@ RoomInfo = React.createClass
     # By using the two slices, the original questions won't be in the list
     recentAnswers = @props.room.messages.slice(-4).slice(1)
 
-    roomProperties = if parseInt(@state.currentRoom) is @props.room.id then "highlight-room" else ""
+    roomProperties = if @state.currentRoom is @props.room.id then "highlight-room" else ""
     ListGroupItem {className: "room-info #{roomProperties}"},
       div {className: "answers"},
         div {className: "answer-total"}, answersTotal
