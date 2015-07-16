@@ -47,7 +47,6 @@ AskComponent = React.createClass
 
   # Send a new question to the node server
   submitQuestion: (e) ->
-    console.log "here"
     unless @state.chat.currentQuestionText.trim() is ""
       URLResources.callAPI "/rooms", "post",
         {topic_id: @state.chat.topicSelected.eventKey,

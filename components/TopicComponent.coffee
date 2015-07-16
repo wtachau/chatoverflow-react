@@ -15,15 +15,10 @@ TopicComponent = React.createClass
   statics:
     registerStore: AppStore
 
-  isFollowingTopic: (topic_id) ->
-    followedTopicIds = @state.user.followed_topics.map ({id}) -> id
-    parseInt(topic_id) in followedTopicIds
-
   render: ->
     div {className: "main-section"},
       RoomList
         currentTopic: @getParams().topic_id
-        isFollowingTopic: @isFollowingTopic
       RouteHandler {}
 
 module.exports = TopicComponent

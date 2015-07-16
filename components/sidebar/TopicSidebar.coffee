@@ -24,17 +24,15 @@ module.exports = React.createClass
 
   propTypes:
     user: React.PropTypes.object.isRequired
-    isFollowingRoom: React.PropTypes.func.isRequired
-    isFollowingTopic: React.PropTypes.func.isRequired
 
   onCloseRoom: (e) ->
     room_clicked = e.target.getAttribute("data-id")
-    AppActions.followRoom room_clicked, @props.isFollowingRoom
+    AppActions.followRoom room_clicked, @props.user
     e.preventDefault()
 
   onCloseTopic: (e) ->
     topic_clicked = e.target.getAttribute("data-id")
-    AppActions.followTopic topic_clicked, @props.isFollowingTopic
+    AppActions.followTopic topic_clicked, @props.user
     e.preventDefault()
 
   badge: (room_id) ->
@@ -50,7 +48,7 @@ module.exports = React.createClass
         onClose: @onCloseTopic
 
       TopicSearch
-        isFollowingTopic: @props.isFollowingTopic
+        user: @props.user
 
       RoomList
         rooms: @props.user.followed_rooms
