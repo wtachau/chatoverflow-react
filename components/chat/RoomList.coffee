@@ -47,7 +47,7 @@ RoomList = React.createClass
       if @state.topicInfo
         div {className: "room-list-page"},
           Row {className: "topic-header"},
-            h1 {className: "current-topic"}, @state.topicInfo.name
+            div {className: "current-topic"}, @state.topicInfo.name
           Row {className: "rooms-list"},
             TabbedArea {defaultActiveKey: 1, onClick: @refreshRoomList},
               TabPane {eventKey: 1, tab: "Most Recent"},
