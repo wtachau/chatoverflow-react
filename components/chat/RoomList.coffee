@@ -35,7 +35,7 @@ RoomList = React.createClass
     unless nextProps.currentTopic is @props.currentTopic
       ChatActions.fetchTopicInfo nextProps.currentTopic
 
-  componentWillMount: ->
+  componentDidMount: ->
     ChatActions.fetchTopicInfo @props.currentTopic
 
   refreshRoomList: ->
