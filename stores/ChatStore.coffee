@@ -19,6 +19,7 @@ class ChatStore
     @searchResults = []
     @keyPressMap = []
     @autoScrollWindow = 160
+    @isFinishedLoadingMessages = true
 
     @bindActions(ChatActions)
 
@@ -49,12 +50,17 @@ class ChatStore
     @messages.push message
 
   onSetRecentMessages: (response) ->
+    @isFinishedLoadingMessages = true
     @originalPost =  response.originalPost
     @messages = response.messages
     @oldestPage = response.page
 
   onPrependToMessages: (messages) ->
-    @messages = messages.concat(@messages)
+    unless messages.length is 0
+      @messages = messages.concat @messages
+      @isFinishedLoadingMessages = false
+    else
+      @isFinishedLoadingMessages = true
 
   onSetTopics: (topics) ->
     @topics = topics

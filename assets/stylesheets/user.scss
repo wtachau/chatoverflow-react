@@ -4,19 +4,27 @@
 
 $header_padding: 10px;
 
-.popup-link {
+.nav .popup-link {
   margin-top: calc(#{$header_padding} / 2);
   margin-bottom: -10px;
-  img {
-    width: calc(#{$header_height} - #{$header_padding});
-    border-radius: calc(#{$header_height} / 2);
-  }
   position: absolute;
   right: $header_padding;
+}
+.popup-link img {
+  width: calc(#{$header_height} - #{$header_padding});
+  border-radius: calc(#{$header_height} / 2);
+}
+
+.pinned-post .popup-link {
+  float: left;
 }
 
 .user-username {
   font-size: 32px;
+}
+
+.user-modal {
+  display: block;
 }
 
 .user-karma {
@@ -25,7 +33,7 @@ $header_padding: 10px;
 
 .active-users {
   width: 50%;
-  float: left;
+  float: right;
   overflow: hidden;
 
   .active-users-header {

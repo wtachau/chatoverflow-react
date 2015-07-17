@@ -12,7 +12,7 @@
     "devbuild": "env UV_THREADPOOL_SIZE=100 webpack -d --config webpack.dev.config.js --profile --progress --colors",
     "testRoutes": "npm run devbuild && node dev.js",
     "stagingbuild": "env UV_THREADPOOL_SIZE=100 webpack -p --config webpack.staging.config.js --profile --progress --colors",
-    "pushToStaging": "npm run stagingbuild && aws s3 sync . s3://chatoverflow",
+    "pushToStaging": "npm run stagingbuild && aws s3 sync . s3://chatsignal.io --region us-west-1 --acl public-read",
     "prodbuild": "env UV_THREADPOOL_SIZE=100 webpack -p --config webpack.prod.config.js --profile --progress --colors",
     "test": "jest"
   },
@@ -33,6 +33,7 @@
     "moment": "^2.10.3",
     "react": "^0.13.3",
     "react-bootstrap": "^0.23.5",
+    "react-bootstrap-modal": "^1.2.1",
     "react-marked": "Originate/react-marked",
     "react-mentions": "Originate/react-mentions",
     "react-router": "^0.13.3",
@@ -50,9 +51,21 @@
     "jest-cli": "^0.4.15"
   },
   "jest": {
-    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react"],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ],
     "scriptPreprocessor": "preprocessor.js",
-    "testFileExtensions": ["coffee", "litcoffee", "coffee.md", "js"],
-    "moduleFileExtensions": ["coffee", "litcoffee", "coffee.md", "js"]
+    "testFileExtensions": [
+      "coffee",
+      "litcoffee",
+      "coffee.md",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "coffee",
+      "litcoffee",
+      "coffee.md",
+      "js"
+    ]
   }
 }

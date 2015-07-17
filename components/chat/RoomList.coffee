@@ -18,7 +18,7 @@ Col = React.createFactory ReactBootstrap.Col
 TabbedArea = React.createFactory ReactBootstrap.TabbedArea
 TabPane = React.createFactory ReactBootstrap.TabPane
 
-{ div, h1 } = React.DOM
+{ div } = React.DOM
 
 RoomList = React.createClass
   displayName: "RoomList"
@@ -35,7 +35,7 @@ RoomList = React.createClass
     unless nextProps.currentTopic is @props.currentTopic
       ChatActions.fetchTopicInfo nextProps.currentTopic
 
-  componentWillMount: ->
+  componentDidMount: ->
     ChatActions.fetchTopicInfo @props.currentTopic
 
   refreshRoomList: ->
@@ -47,12 +47,14 @@ RoomList = React.createClass
       if @state.topicInfo
         div {className: "room-list-page"},
           Row {className: "topic-header"},
-            h1 {className: "current-topic"}, @state.topicInfo.name
+            div {className: "current-topic"}, @state.topicInfo.name
           Row {className: "rooms-list"},
             TabbedArea {defaultActiveKey: 1, onClick: @refreshRoomList},
-              TabPane {eventKey: 1, tab: "Most Recent"},
-                @state.topicInfo.rooms_newest.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
-              TabPane {eventKey: 2, tab: "Most Active"},
-                @state.topicInfo.rooms_updated_at.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
+              TabPane {className: "tab", eventKey: 1, tab: "Most Recent"},
+                div {},
+                  @state.topicInfo.rooms_newest.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
+              TabPane {className: "tab", eventKey: 2, tab: "Most Active"},
+                div {},
+                  @state.topicInfo.rooms_updated_at.map (room) => RoomInfo { room, topic: @state.topicInfo.id }
 
 module.exports = RoomList

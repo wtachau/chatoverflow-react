@@ -4,9 +4,11 @@ ListGroup = React.createFactory ReactBootstrap.ListGroup
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 ChatStore = require("../stores/ChatStore")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
-{ div, h1, img} = React.DOM
+UserComponent = React.createFactory require("./UserComponent")
+{ div, h1, img } = React.DOM
 
 Row = React.createFactory ReactBootstrap.Row
+
 
 ActiveUsersComponent = React.createClass
   displayName: "ActiveUsersComponent"
@@ -21,10 +23,10 @@ ActiveUsersComponent = React.createClass
       Row {className: "active-users-header"},
         h1 {className: "current-topic"}, "Active Users"
       ListGroup {},
-        @state.topicInfo?.followers.map ({username, pic_url}, index) ->
+        @state.topicInfo?.followers.map (user, index) ->
           ListGroupItem {className: "active-user", key: index},
-            img {src: pic_url, className: "profile-pic"},
-            div {className: "active-user-username"}, username
+            UserComponent {user}
+            div {className: "active-user-username"}, user.username
 
 module.exports = ActiveUsersComponent
 
