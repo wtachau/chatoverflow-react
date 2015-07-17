@@ -8,7 +8,7 @@ ChatStore = require("../../stores/ChatStore")
 ChatActions = require("../../actions/ChatActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
-{ div } = React.DOM
+{ div, img } = React.DOM
 
 MessageList = React.createClass
   displayName: "MessageList"
@@ -28,25 +28,25 @@ MessageList = React.createClass
   messagesComponent: ->
     React.findDOMNode this.refs.messages
 
-  componentDidMount: ->
-    @hasJustMounted = true
-
   componentWillUpdate: (nextProps) ->
     messagesComp = @messagesComponent()
     if messagesComp
-      @recievedOldMessages = nextProps.messages.length != @props.messages.length
-      if @recievedOldMessages
-        @preLoadScrollHeight = messagesComp.scrollHeight
+      if nextProps.currentRoom != @props.currentRoom
+         @isNewThread = true
+      else
+        @hasNewMessages = nextProps.messages.length != @props.messages.length
+        if @hasNewMessages
+          @preLoadScrollHeight = messagesComp.scrollHeight
 
   componentDidUpdate: ->
     messagesComp = @messagesComponent()
     if messagesComp
-      if @hasJustMounted
-        @hasJustMounted = false
+      if @isNewThread
+        @isNewThread = false
         @initialMessagesUpdate messagesComp
-      else if @recievedOldMessages
-        @recievedOldMessages = false
-        @onOldMessagesRecieved messagesComp
+      else if @hasNewMessages
+        @hasNewMessages = false
+        @onOldMessagesReceived messagesComp
       else
         [..., last] = @props.messages
         if last and last.isNewMessage
@@ -55,9 +55,10 @@ MessageList = React.createClass
             messagesComp.scrollTop = messagesComp.scrollHeight
 
   initialMessagesUpdate: (messagesComponent) ->
+    @state.chat.isFinishedLoadingMessages = false
     messagesComponent.scrollTop = messagesComponent.scrollHeight
 
-  onOldMessagesRecieved: (messagesComponent) ->
+  onOldMessagesReceived: (messagesComponent) ->
     messagesComponent.scrollTop = messagesComponent.scrollHeight - 
       @preLoadScrollHeight
 
@@ -73,7 +74,7 @@ MessageList = React.createClass
         parseInt(@state.chat.oldestPage) + 1
 
   createGroups: (rest) ->
-    # groups messages together by username
+  # groups messages together by username
     messageGroups = []
     group = []
     rest.map (message, index) =>
@@ -94,6 +95,8 @@ MessageList = React.createClass
             originalPost: @props.originalPost
             currentRoom: @props.currentRoom
           div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},
-            MessageGroupList { messageGroups }
+            if (not @state.chat.isFinishedLoadingMessages or @messagesComponent.scrollHeight)
+              img {className: "loading-icon", src: "../../../assets/images/loading.gif"}
+            MessageGroupList { messageGroups, shouldUpdateScrollHeight: @shouldUpdateScrollHeight }
 
 module.exports = MessageList
