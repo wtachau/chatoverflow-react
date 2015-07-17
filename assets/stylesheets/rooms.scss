@@ -14,6 +14,11 @@
     overflow: scroll;
     &.topic-header {
       height: $topic-height;
+      .current-topic {
+        font-size: 27px;
+        margin: 15px 0px 0px 20px;
+        text-transform: lowercase;
+      }
     }
   }
 
@@ -25,7 +30,44 @@
     bottom: 0;
     overflow: scroll;
     background-color: white;
-    padding: 10px;
+
+    nav {
+      height: initial;
+    }
+
+    .nav-tabs {
+      background-color: $chat_background_purple;
+      border-bottom: none;
+      li {
+        border-radius: 10px 10px 0px 0px;
+        margin-left: 2px;
+        background-color: $purple;
+        a {
+          color: white;
+          padding: 5px 15px;
+        }
+        &.active {
+          background-color: $white;
+          a {
+            color: inherit;
+          }
+        }
+      }
+    }
+    /* Bootstrap override */
+    .nav-tabs > li.active > a, 
+    .nav-tabs > li.active > a:hover, 
+    .nav-tabs > li.active > a:focus {
+      background-color: transparent;
+      border: none;
+    }
+    .nav-tabs > li > a {
+      border: none;
+    }
+    .nav > li > a:hover, .nav > li > a:focus {
+      background-color: transparent;
+    }
+    /* End Bootstrap override */
 
     .highlight-room {
       background-color: $highlight_room_background_purple;
@@ -33,6 +75,10 @@
 
     .room-info {
       overflow: hidden;
+
+      &.list-group-item {
+        border: none;
+      }
 
       a {
         color: inherit;
