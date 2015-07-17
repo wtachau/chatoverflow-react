@@ -42,9 +42,14 @@ TopicSearch = React.createClass
         callback null, options: searchResults
 
   selectOnChange: (value) ->
-    topic = @state.chat.searchResults.filter ({name}) => name is value
-    AppActions.followTopic topic[0].id, @props.user
-    @transitionTo "topic", topic_id: topic[0].id
+    topics = @state.chat.searchResults.filter ({name}) => name is value
+    if topics.length is 0
+      AppActions.createTopic value, (topic) =>
+        @state.app.user.followed_topics.push topic
+        @transitionTo "topic", topic_id: topic.id
+    else
+      AppActions.followTopic topics[0].id, @props.user
+      @transitionTo "topic", topic_id: topic[0].id
 
   render: ->
     div {className: "topic-search"},
@@ -55,7 +60,9 @@ TopicSearch = React.createClass
         autoload: false
         onChange: @selectOnChange
         multi: false
+        allowCreate: true
         placeholder: "+ Add another"
+        addLabelText: 'Create "{label}" room'
         searchPromptText: ""
         noResultsText: 'No results found'
         clearable: true
