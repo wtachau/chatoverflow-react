@@ -6,6 +6,7 @@ AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 FollowResources = require("../../common/FollowResources")
+UserComponent = React.createFactory require("../UserComponent")
 
 Row = React.createFactory ReactBootstrap.Row
 Button = React.createFactory ReactBootstrap.Button
@@ -35,7 +36,7 @@ PinnedPost = React.createClass
     timestamp = moment(@props.originalPost.created_at).format("h:mm A")
     Row {className: "pinned-post"},
       div {className: "username"}, @props.originalPost.user.username,
-        img {className: "profile-pic", src: @props.originalPost.user.pic_url}
+        UserComponent {user: @props.originalPost.user}
       div {className: "chat-body"},
         div {className: "text"}, Marked @props.originalPost.text
         div {className: "timestamp"}, timestamp

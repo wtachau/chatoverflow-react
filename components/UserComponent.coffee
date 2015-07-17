@@ -1,11 +1,12 @@
 React = require("react")
 ReactBootstrap = require("react-bootstrap")
 AppActions = require("../actions/AppActions")
-Modal = React.createFactory ReactBootstrap.Modal
-ModalHeader = React.createFactory ReactBootstrap.Modal.Header
-ModalTitle = React.createFactory ReactBootstrap.Modal.Title
-ModalBody = React.createFactory ReactBootstrap.Modal.Body
-ModalFooter = React.createFactory ReactBootstrap.Modal.Footer
+BootstrapModal = require("react-bootstrap-modal")
+Modal = React.createFactory BootstrapModal
+ModalHeader = React.createFactory BootstrapModal.Header
+ModalTitle = React.createFactory BootstrapModal.Title
+ModalBody = React.createFactory BootstrapModal.Body
+ModalFooter = React.createFactory BootstrapModal.Footer
 Button = React.createFactory ReactBootstrap.Button
 Thumbnail = React.createFactory ReactBootstrap.Thumbnail
 Grid = React.createFactory ReactBootstrap.Grid
@@ -18,7 +19,7 @@ UserComponent = React.createClass
 
   propTypes:
     user: React.PropTypes.object.isRequired
-    includeLogout: React.PropTypes.bool.isRequired
+    includeLogout: React.PropTypes.bool
 
   getInitialState: ->
     showModal: false
@@ -31,7 +32,7 @@ UserComponent = React.createClass
     div {className: "popup-link"},
       a {href: "#", onClick: @showPopup},
         img {src:@props.user.pic_url, className: "profile-pic"}
-      Modal {show: @state.showModal, onHide: @closePopup},
+      Modal {show: @state.showModal, onHide: @closePopup, className: "user-modal"},
         ModalHeader {closeButton: true},
           ModalTitle {}, "User Information"
         ModalBody {},

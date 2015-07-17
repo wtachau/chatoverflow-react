@@ -61,9 +61,7 @@ MessageGroupList = React.createClass
           Row {className: "no-margin margin-top"},
             div {},
               Col md: 1,
-                UserComponent
-                  user: group[0].user
-                  includeLogout: false
+                UserComponent {user: group[0].user}
               Col md: 8,
                 div {className: "margin-left"}, group[0].user.username
           Row {className: "no-margin"},
