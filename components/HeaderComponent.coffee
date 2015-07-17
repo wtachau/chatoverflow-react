@@ -18,6 +18,8 @@ HeaderComponent = React.createClass
       Nav {},
         Link to: "ask",
           div {className: "newthread"}, "+ New Thread"
-        UserComponent {}
+        UserComponent
+          user: @props.user
+          includeLogout: true
 
 module.exports = HeaderComponent

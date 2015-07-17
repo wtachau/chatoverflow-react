@@ -1,13 +1,12 @@
 React = require("react")
 ReactBootstrap = require("react-bootstrap")
-AppStore = require("../stores/AppStore")
 AppActions = require("../actions/AppActions")
-ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
-Modal = React.createFactory ReactBootstrap.Modal
-ModalHeader = React.createFactory ReactBootstrap.Modal.Header
-ModalTitle = React.createFactory ReactBootstrap.Modal.Title
-ModalBody = React.createFactory ReactBootstrap.Modal.Body
-ModalFooter = React.createFactory ReactBootstrap.Modal.Footer
+BootstrapModal = require("react-bootstrap-modal")
+Modal = React.createFactory BootstrapModal
+ModalHeader = React.createFactory BootstrapModal.Header
+ModalTitle = React.createFactory BootstrapModal.Title
+ModalBody = React.createFactory BootstrapModal.Body
+ModalFooter = React.createFactory BootstrapModal.Footer
 Button = React.createFactory ReactBootstrap.Button
 Thumbnail = React.createFactory ReactBootstrap.Thumbnail
 Grid = React.createFactory ReactBootstrap.Grid
@@ -18,10 +17,9 @@ Col = React.createFactory ReactBootstrap.Col
 UserComponent = React.createClass
   displayName: "UserComponent"
 
-  mixins: [ReactStateMagicMixin]
-
-  statics:
-    registerStore: AppStore
+  propTypes:
+    user: React.PropTypes.object.isRequired
+    includeLogout: React.PropTypes.bool
 
   getInitialState: ->
     showModal: false
@@ -32,9 +30,9 @@ UserComponent = React.createClass
 
   render: ->
     div {className: "popup-link"},
-      a {href: "#", onClick: @showPopup, className: "categories-header"},
-        img {src:@state.user.pic_url}
-      Modal {show: @state.showModal, onHide: @closePopup},
+      a {href: "#", onClick: @showPopup},
+        img {src:@props.user.pic_url, className: "profile-pic"}
+      Modal {show: @state.showModal, onHide: @closePopup, className: "user-modal"},
         ModalHeader {closeButton: true},
           ModalTitle {}, "User Information"
         ModalBody {},
@@ -42,12 +40,13 @@ UserComponent = React.createClass
             Row {},
               Col {xs: 6, md: 3},
                 div {className: "user-thumbnail"},
-                  Thumbnail {href: "#", src: @state.user.pic_url}
+                  Thumbnail {href: "#", src: @props.user.pic_url}
               Col {xs: 6, md: 3},
-                div {className: "user-username"}, "#{@state.user.username}"
-                div {className: "user-karma"}, "Karma: #{@state.user.karma}"
-        ModalFooter {},
-          Button {onClick: AppActions.logout, bsStyle: "danger"}, "Log out"
+                div {className: "user-username"}, "#{@props.user.username}"
+                div {className: "user-karma"}, "Karma: #{@props.user.karma or 0}"
+        if @props.includeLogout
+          ModalFooter {},
+            Button {onClick: AppActions.logout, bsStyle: "danger"}, "Log out"
 
 
 module.exports = UserComponent
