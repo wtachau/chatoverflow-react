@@ -55,7 +55,6 @@ MessageGroupList = React.createClass
   render: ->
     div {},
       @props.messageGroups.map (group, index) =>
-        console.log group
         side = if group[0].user.username is @state.app.user.username then "right" else "left"
         div {className: "message-group #{side}"},
           Row {className: "no-margin margin-top"},
