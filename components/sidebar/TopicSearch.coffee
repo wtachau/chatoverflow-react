@@ -52,7 +52,7 @@ TopicSearch = React.createClass
       @transitionTo "topic", topic_id: topic[0].id
 
   render: ->
-    div {id: "topic-search"},
+    div {className: "topic-search"},
       Select
         name: "topic-search-field"
         value: ""
@@ -61,7 +61,10 @@ TopicSearch = React.createClass
         onChange: @selectOnChange
         multi: false
         allowCreate: true
-        placeholder: "Add Another Room"
+        placeholder: "+ Add another"
+        addLabelText: 'Create "{label}" room'
+        searchPromptText: ""
+        noResultsText: 'No results found'
         clearable: true
         ignoreCase: true
 

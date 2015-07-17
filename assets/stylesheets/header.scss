@@ -28,13 +28,19 @@ nav {
       left: 10px;
       font-family: $navbar_chatsignal_home; 
     }
-
-    &.newthread {
-      padding-right: 50px;
-      right: 10px;
-      font-family: $navbar_start_new_thread;
-    }
-
+  }
+  .newthread {
+    font-family: $navbar_start_new_thread;
+    right: 60px;
+    background-color: $chat_background_purple;
+    padding: 10px;
+    position: absolute;
+    color: white;
+    border-radius: 20px;
+    margin-top: 10px;
+    width: 125px;
+    line-height: 10px;
+    text-align: center;
   }
 
 }

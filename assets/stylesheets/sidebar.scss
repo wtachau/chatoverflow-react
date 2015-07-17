@@ -9,7 +9,7 @@
   padding-top: 2px;
   height: 100vh;
   position: fixed;
-  color: $chat_sidebar_hover_periwinkle;
+  color: $chat_background_purple;
   background-color: $chat_sidebar_background;
 
 
@@ -32,7 +32,7 @@
     color: $white;
     background-color: $chat_sidebar_background;
     &:hover {
-      background-color: $chat_sidebar_hover_periwinkle;
+      background-color: $chat_background_purple;
       .exit-x {
         display: inherit;
       }
@@ -50,9 +50,40 @@
     }
   }
 
+  .topic-search {
+    .Select-control {
+      margin-top: 5px;
+      padding: 4px;
+    }
+    .Select-control, .Select-menu-outer {
+      width: 80%;
+      left: 25px;
+      background-color: $chat_sidebar_background;
+      color: white;
+      line-height: 8px;
+      border: none;
+    }
+    .Select-menu-outer {
+      position: relative;
+      padding: 0px;
+      .Select-option.is-focused {
+        background-color: grey;
+      }
+    }
+    .Select-placeholder {
+      padding: 8px 52px 8px 5px;
+      &:focus {
+        outline: none;
+      }
+    }
+    .Select-arrow {
+      top: 10px;
+    }
+  }
+
   .active {
     >span {
-      background-color: $chat_sidebar_hover_periwinkle;
+      background-color: $chat_background_purple;
     }
   }
 
