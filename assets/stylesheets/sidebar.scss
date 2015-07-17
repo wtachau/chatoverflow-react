@@ -23,31 +23,37 @@
     padding-left: 10px;
   }
 
-  .topic-name {
-    text-transform: lowercase;
-    font-family: $sidebar_list_item_font;
-    font-size: medium;
-    padding: 3px;
-    padding-left: 30px;
-    color: $white;
-    background-color: $chat_sidebar_background;
-    &:hover {
-      background-color: $chat_background_purple;
-      .exit-x {
-        display: inherit;
-      }
-    }
-    border: 0px;
-    border-radius: 0px;
+  a {
 
-    .exit-x {
-      display: none;
-      float: right;
-      padding-right: 8px;
+    text-decoration: none;
+
+    .topic-name {
+      text-transform: lowercase;
+      font-family: $sidebar_list_item_font;
+      font-size: medium;
+      padding: 3px;
+      padding-left: 30px;
+      color: $white;
+      background-color: $chat_sidebar_background;
       &:hover {
-        text-decoration: none;
+        background-color: $chat_background_purple;
+        .exit-x {
+          display: inherit;
+        }
+      }
+      border: 0px;
+      border-radius: 0px;
+
+      .exit-x {
+        display: none;
+        float: right;
+        padding-right: 8px;
+        &:hover {
+          text-decoration: none;
+        }
       }
     }
+    
   }
 
   .topic-search {
