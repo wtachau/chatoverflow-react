@@ -12,19 +12,12 @@ VoteButton = React.createClass
   upvote: ->
     ChatActions.upvoteMessage @props.message.id, @props.message.room_id
 
-  downvote: ->
-    ChatActions.downvoteMessage @props.message.id, @props.message.room_id
-
   render: ->
     div {className: "votes"},
       button
         className: "vote-button upvote btn"
         onClick: @upvote,
-        "\u25b2"
-      div {}, @props.message.vote_total
-      button
-        className: "vote-button downvote btn"
-        onClick: @downvote,
-        "\u25bc"
+        "\u2605"
+      div {className: "vote-total"}, @props.message.vote_total
 
 module.exports = VoteButton
