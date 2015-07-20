@@ -47,7 +47,8 @@ AskComponent = React.createClass
 
   # Send a new question to the node server
   submitQuestion: (e) ->
-    unless @state.chat.currentQuestionText.trim() is ""
+    unless (@state.chat.currentQuestionText.trim() is "") or
+    (@state.chat.currentQuestionTitle.trim() is "")
       URLResources.callAPI "/rooms", "post",
         {topic_id: @state.chat.topicSelected.eventKey,
         title: @state.chat.currentQuestionTitle.trim(),
@@ -72,27 +73,24 @@ AskComponent = React.createClass
     else if @state.chat.topicSelectedByPrev
       @state.chat.topics[@state.chat.topicSelectedByPrev - 1]?.name
     else
-      "Select a room"
+      "Select a Topic"
 
     div {className: "home"},
       Row {},
-        Col md: 8, mdOffset: 2,
-          h1 {}, "Select a Room"
-      Row {},
-        Col md: 4, mdOffset: 2,
-        DropdownButton title: dropdownTitle,
-          @state.chat.topics.map ({id, name}, index) =>
-            MenuItem
-              eventKey: id
-              target: name
-              onSelect: @onTopicSelected,
-              key: index
-              name
+        Col md: 12,
+          h1 {className: "question-header"}, 
+            "What is your "
+            DropdownButton title: dropdownTitle,
+              @state.chat.topics.map ({id, name}, index) =>
+                MenuItem
+                  eventKey: id
+                  target: name
+                  onSelect: @onTopicSelected,
+                  key: index
+                  name
+            " question?"
       if @state.chat.topicSelected or @state.chat.topicSelectedByPrev
         div {},
-          Row {},
-            Col md: 12,
-              h1 {}, "What's your #{dropdownTitle} question?"
           Row {},
             Col md: 8, mdOffset: 2,
               form {className: "ask-form", autoComplete: off},
@@ -102,12 +100,14 @@ AskComponent = React.createClass
                   autoComplete: off
                   value: @state.chat.currentQuestionTitle
                   onChange: @questionTitleChange
+                  placeholder: "Title for your question"
                 Input
                   type: "textarea"
                   className: "ask-question"
                   value: @state.chat.currentQuestionText
                   onChange: @questionTextChange
                   onKeyDown: @keyPress
+                  placeholder: "Describe your question"
                 Button
                   className: "ask-form-button"
                   onClick: @submitQuestion

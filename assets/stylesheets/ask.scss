@@ -9,26 +9,23 @@ h1 {
 
   position: relative;
 
+  .question-header {
+    padding: 20px
+  }
+
   .ask-form {
-    background: $chat_background_grey;
     width: 100%;
     padding: 1px;
     height: $welcome_chat_height;
-
-    .ask-title {
-      border: 0;
-      padding: 5px;
-      width: 90%;
-    }
 
     .ask-form-button {
       background: $chat_button_blue;
       border: 0;
       padding: 10px;
       position: relative;
-      left: 90%;
-      top: -50px;
-      width: 10%;
+      left: 50%;
+      top: 0px;
+      width: 50%;
     }
   }
 }
