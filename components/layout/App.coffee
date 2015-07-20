@@ -15,7 +15,7 @@ TopicSidebar = React.createFactory require("../sidebar/TopicSidebar")
 module.exports = React.createClass
   displayName: "App"
 
-  mixins: [ Router.State, ReactStateMagicMixin ]
+  mixins: [ Router.State, Router.Navigation, ReactStateMagicMixin ]
 
   statics:
     registerStore: AppStore
@@ -25,10 +25,17 @@ module.exports = React.createClass
     if jwt
       sessionStorage.setItem('jwt', jwt)
 
+    unless sessionStorage.getItem('jwt')
+      sessionStorage.setItem('preLoginPath', window.location.pathname)
+
   componentDidMount: ->
     if sessionStorage.getItem('jwt')
       AppActions.fetchUser()
       AppActions.fetchUsers()
+
+      if sessionStorage.getItem('preLoginPath')
+        @transitionTo sessionStorage.getItem('preLoginPath')
+        sessionStorage.setItem('preLoginPath', null)
 
     newurl = "#{window.location.protocol}//\
               #{window.location.host}#{window.location.pathname}"
