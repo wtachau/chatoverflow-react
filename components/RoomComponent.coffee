@@ -58,15 +58,18 @@ RoomComponent = React.createClass
       ChatActions.setCurrentRoom parseInt @getParams().room_id
       ChatActions.fetchRecentMessages @getParams().room_id
       if @state.app.unread_mentions[parseInt @getParams().room_id]
-        AppActions.setReadMentions @getParams().room_id
-
+        AppActions.setReadMentions @getParams().room_id    
+    unless @props.params.room_id is newProps.params.room_id
+      ChatActions.setTopicSelectedByPrev newProps.params.topic_id
+  
   componentDidMount: ->
     setTimeout =>
       ChatActions.setCurrentRoom parseInt @getParams().room_id
       ChatActions.fetchRecentMessages @getParams().room_id
+      ChatActions.setTopicSelectedByPrev @props.params.topic_id
       if @state.app.unread_mentions[parseInt @getParams().room_id]
         AppActions.setReadMentions @getParams().room_id
-
+        
   componentWillUnmount: ->
     @socket.removeAllListeners "chat message"
     @socket.removeAllListeners "mention"

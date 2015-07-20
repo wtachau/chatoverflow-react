@@ -7,6 +7,9 @@ RouteHandler = React.createFactory Router.RouteHandler
 RoomList = React.createFactory require("./chat/RoomList")
 { div } = React.DOM
 
+ChatStore = require("../stores/ChatStore")
+ChatActions = require("../actions/ChatActions")
+
 TopicComponent = React.createClass
   displayName: "TopicComponent"
 
@@ -14,6 +17,12 @@ TopicComponent = React.createClass
 
   statics:
     registerStore: AppStore
+
+  componentWillReceiveProps: (newProps) ->
+    ChatActions.setTopicSelectedByPrev newProps.params.topic_id
+
+  componentDidMount: ->
+    ChatActions.setTopicSelectedByPrev @props.params.topic_id
 
   render: ->
     div {className: "main-section"},

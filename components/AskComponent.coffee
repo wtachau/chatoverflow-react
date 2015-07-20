@@ -69,6 +69,8 @@ AskComponent = React.createClass
   render: ->
     dropdownTitle = if @state.chat.topicSelected
       @state.chat.topicSelected.name
+    else if @state.chat.topicSelectedByPrev
+      @state.chat.topics[@state.chat.topicSelectedByPrev - 1]?.name
     else
       "Select a room"
 
@@ -86,11 +88,11 @@ AskComponent = React.createClass
               onSelect: @onTopicSelected,
               key: index
               name
-      if @state.chat.topicSelected
+      if @state.chat.topicSelected or @state.chat.topicSelectedByPrev
         div {},
           Row {},
             Col md: 12,
-              h1 {}, "What's your #{@state.chat.topicSelected.name} question?"
+              h1 {}, "What's your #{dropdownTitle} question?"
           Row {},
             Col md: 8, mdOffset: 2,
               form {className: "ask-form", autoComplete: off},
