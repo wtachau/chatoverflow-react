@@ -68,7 +68,7 @@ MessageGroupList = React.createClass
             properties = @getMessageProperties group
             group.map (message, index) =>
               div {className: "message"},
-                Col md: 1,
+                Col md: 1, className: "vote-column",
                   VoteButton {message}
                 Col md: 11, className: "float-left",
                   Message
