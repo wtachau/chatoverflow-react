@@ -28,18 +28,26 @@ PinnedPost = React.createClass
   followRoom: ->
     AppActions.followRoom @props.currentRoom, @state.app.user
 
-  buttonText: ->
+  buttonComponent: ->
     isFollowing = FollowResources.isFollowingRoom @props.currentRoom, @state.app.user
-    if isFollowing then 'Unfollow Thread' else "Follow Thread"
+    followText = "Unfollow"
+    followImgSrc = "../../../assets/images/check.png"
+    unless isFollowing
+      followText = "Follow"
+      followImgSrc = "../../../assets/images/plus.png"
+    div {className: "follow-button"},
+      img {src: followImgSrc}
+      div {}, followText
 
   render: ->
     timestamp = moment(@props.originalPost.created_at).format("h:mm A")
     Row {className: "pinned-post"},
-      div {className: "username"}, @props.originalPost.user.username,
+      div {className: "username"},
         UserComponent {user: @props.originalPost.user}
+        div {className: "username-text"},
+          @props.originalPost.user.username
       div {className: "chat-body"},
         div {className: "text"}, Marked @props.originalPost.text
-        div {className: "timestamp"}, timestamp
-        Button {onClick: @followRoom}, @buttonText()
+        div {onClick: @followRoom}, @buttonComponent()
 
 module.exports = PinnedPost
