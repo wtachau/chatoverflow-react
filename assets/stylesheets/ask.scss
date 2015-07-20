@@ -19,8 +19,10 @@ h1 {
     height: $welcome_chat_height;
 
     .ask-form-button {
-      background: $chat_button_blue;
-      border: 0;
+      background: $chat_button_purple;
+      color: $white;
+      font-size: 18px;
+      border-width: 1px;
       padding: 10px;
       position: relative;
       left: 50%;

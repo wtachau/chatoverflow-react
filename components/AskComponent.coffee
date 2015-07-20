@@ -102,14 +102,14 @@ AskComponent = React.createClass
                   autoComplete: off
                   value: @state.chat.currentQuestionTitle
                   onChange: @questionTitleChange
-                  placeholder: "Title for your question"
+                  placeholder: "Title for your question (required)"
                 Input
                   type: "textarea"
                   className: "ask-question"
                   value: @state.chat.currentQuestionText
                   onChange: @questionTextChange
                   onKeyDown: @keyPress
-                  placeholder: "Describe your question"
+                  placeholder: "Describe your question (required)"
                 Button
                   className: "ask-form-button"
                   onClick: @submitQuestion
