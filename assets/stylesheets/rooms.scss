@@ -4,6 +4,7 @@
 .rooms {
   width: 50%;
   float: left;
+  height: 100%;
 
   .current-topic {
     color: white;
@@ -13,7 +14,8 @@
     margin: 0;
     overflow: scroll;
     &.topic-header {
-      height: $topic-height;
+      height: calc(#{$topic_height} + 30px);
+      background-color: $chat_background_purple;
       .current-topic {
         font-size: 27px;
         margin: 15px 0px 0px 20px;
@@ -24,12 +26,27 @@
 
   .rooms-list {
     position: absolute;
-    top: $topic_height;
+    top: calc(#{$topic_height} + 30px);
     right: 50%;
     left: 0;
     bottom: 0;
     overflow: scroll;
     background-color: white;
+
+    >div {
+      >div {
+        position: relative;
+      }
+    }
+
+    >div{
+      >nav{
+        position: fixed;
+        left: 200px;
+        z-index: 1;
+        top: calc(#{$topic_height} + #{$header_height} + 1px);
+      }
+    }
 
     nav {
       height: initial;

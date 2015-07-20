@@ -18,7 +18,7 @@ Col = React.createFactory ReactBootstrap.Col
 TabbedArea = React.createFactory ReactBootstrap.TabbedArea
 TabPane = React.createFactory ReactBootstrap.TabPane
 
-{ div, h1 } = React.DOM
+{ div } = React.DOM
 
 RoomList = React.createClass
   displayName: "RoomList"
