@@ -12,6 +12,12 @@ class AppStore
 
     @bindActions(AppActions)
 
+  onPushUserVote: (vote) ->
+    @user.votes.push vote
+
+  onRemoveUserVote: (index) ->
+    @user.votes.splice(index, 1)
+
   onSetCurrentUser: (user) ->
     @user = user
 
