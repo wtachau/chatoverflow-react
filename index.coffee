@@ -2,6 +2,7 @@ React = require("react")
 Router = require("react-router")
 routes = require("./config/routes")
 App = require("./components/layout/App")
+ga = require("react-ga")
 
 require("./assets/vendor/bootstrap/stylesheets/_bootstrap.scss")
 require("./assets/stylesheets/ask.scss")
@@ -17,6 +18,8 @@ require("./assets/stylesheets/chatPanel.scss")
 require("./assets/stylesheets/user.scss")
 require("./assets/vendor/select.scss")
 
-Router.run routes, Router.HistoryLocation, (Handler) ->
+ga.initialize(process.env.GA_TRACKING_ID)
+Router.run routes, Router.HistoryLocation, (Handler, state) ->
+  ga.pageview(state.pathname)
   React.render (React.createElement Handler),
   document.getElementById("react-root")
