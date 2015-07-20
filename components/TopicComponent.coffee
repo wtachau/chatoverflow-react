@@ -29,8 +29,9 @@ TopicComponent = React.createClass
 
   render: ->
     div {className: "main-section"},
+      RouteHandler {}
       RoomList
         currentTopic: @getParams().topic_id
-      RouteHandler {}
+        
 
 module.exports = TopicComponent

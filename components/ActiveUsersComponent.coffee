@@ -1,7 +1,6 @@
 React = require("react")
 ReactBootstrap = require("react-bootstrap")
 ListGroup = React.createFactory ReactBootstrap.ListGroup
-ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 ChatStore = require("../stores/ChatStore")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 UserComponent = React.createFactory require("./UserComponent")
@@ -20,12 +19,11 @@ ActiveUsersComponent = React.createClass
 
   render: ->
     div {className: "active-users"},
-      Row {className: "active-users-header"},
-        h1 {className: "current-topic"}, "Active Users"
-      ListGroup {},
-        @state.topicInfo?.followers.map (user, index) ->
-          ListGroupItem {className: "active-user", key: index},
-            UserComponent {user}
+      @state.topicInfo?.followers.map (user, index) ->
+        div {className: "active-user", key: index},
+          UserComponent {user}
+          div {className: "user-details"},
+            div {className: "active-user-name"}, user.name
             div {className: "active-user-username"}, user.username
 
 module.exports = ActiveUsersComponent
