@@ -16,10 +16,13 @@ TopicComponent = React.createClass
   mixins: [Router.State, ReactStateMagicMixin]
 
   statics:
-    registerStore: AppStore
+    registerStores:
+      app: AppStore
+      chat: ChatStore
 
   componentWillReceiveProps: (newProps) ->
-    ChatActions.setTopicSelectedByPrev newProps.params.topic_id
+    unless newProps.params.topic_id is @state.chat.topicSelectedByPrev
+      ChatActions.setTopicSelectedByPrev newProps.params.topic_id
 
   componentDidMount: ->
     ChatActions.setTopicSelectedByPrev @props.params.topic_id
