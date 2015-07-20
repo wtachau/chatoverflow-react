@@ -47,10 +47,12 @@ AskComponent = React.createClass
 
   # Send a new question to the node server
   submitQuestion: (e) ->
+    unless @state.chat.topicSelectedByPrev
+      @state.chat.topicSelectedByPrev = @state.chat.topicSelected.eventKey
     unless (@state.chat.currentQuestionText.trim() is "") or
     (@state.chat.currentQuestionTitle.trim() is "")
       URLResources.callAPI "/rooms", "post",
-        {topic_id: @state.chat.topicSelected.eventKey,
+        {topic_id: @state.chat.topicSelectedByPrev,
         title: @state.chat.currentQuestionTitle.trim(),
         text: @state.chat.currentQuestionText.trim()},
         @onSubmitQuestion
