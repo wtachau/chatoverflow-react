@@ -19,6 +19,7 @@ class ChatStore
     @searchResults = []
     @keyPressMap = []
     @autoScrollWindow = 160
+    @topicSelectedByPrev = null
     @isFinishedLoadingMessages = true
 
     @bindActions(ChatActions)
@@ -67,7 +68,7 @@ class ChatStore
 
   onSetTopicSelected: (topicSelected) ->
     @topicSelected = topicSelected
-
+    
   onSetTopicInfo: (topicInfo) ->
     @topicInfo = topicInfo
 
@@ -79,5 +80,8 @@ class ChatStore
 
   onSetOriginalPost: (post) ->
     @originalPost = post
+
+  onSetTopicSelectedByPrev: (topicSelectedByPrev) ->
+    @topicSelectedByPrev = topicSelectedByPrev
 
 module.exports = alt.createStore(ChatStore)

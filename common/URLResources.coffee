@@ -27,7 +27,6 @@ URLResources =
     @callAPI(url, "get", null, successFunction)
 
   logError: (error) ->
-    console.log "ERROR: #{error}"
     AppActions.failure error
 
 module.exports = URLResources

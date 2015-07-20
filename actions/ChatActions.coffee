@@ -9,7 +9,7 @@ class ChatActions
       "setTopicSelected", "setTopicInfo", "setMentions", "setMessage",
       "setCurrentRoom", "setOldestPage", "prependToMessages", "setOriginalPost",
       "setSearchResults", "setOriginalPost", "setRecentMessages",
-      "pushNewMessage"
+      "pushNewMessage", "setTopicSelectedByPrev"
 
   fetchRecentMessages: (roomId) ->
     URLResources.readFromAPI "/rooms/#{roomId}/messages",

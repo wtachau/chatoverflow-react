@@ -26,7 +26,7 @@ VoteButton = React.createClass
     {color: "", index: -1}
 
   render: ->
-    @color = @buttonColor()
+    @color = if @props.votes then @buttonColor() else ""
     div {className: "votes"},
       button
         className: "vote-button upvote btn #{@color.color}"

@@ -15,10 +15,6 @@ $header_padding: 10px;
   border-radius: calc(#{$header_height} / 2);
 }
 
-.pinned-post .popup-link {
-  float: left;
-}
-
 .user-username {
   font-size: 32px;
 }
@@ -37,7 +33,7 @@ $header_padding: 10px;
   overflow: hidden;
 
   .active-users-header {
-    height: 80px;
+    height: 90px;
     background-color: $chat_background_purple;
     color: white;
   }

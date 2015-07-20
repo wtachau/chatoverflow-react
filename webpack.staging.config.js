@@ -4,7 +4,8 @@ var webpack = require('webpack');
 config.plugins.push(
   new webpack.DefinePlugin({
     "process.env": {
-      "NODE_ENV": JSON.stringify("staging")
+      "NODE_ENV": JSON.stringify("staging"),
+      "GA_TRACKING_ID": JSON.stringify("UA-65362200-1")
     }
   })
 );

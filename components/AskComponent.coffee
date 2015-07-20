@@ -47,9 +47,12 @@ AskComponent = React.createClass
 
   # Send a new question to the node server
   submitQuestion: (e) ->
-    unless @state.chat.currentQuestionText.trim() is ""
+    unless @state.chat.topicSelectedByPrev
+      @state.chat.topicSelectedByPrev = @state.chat.topicSelected.eventKey
+    unless (@state.chat.currentQuestionText.trim() is "") or
+    (@state.chat.currentQuestionTitle.trim() is "")
       URLResources.callAPI "/rooms", "post",
-        {topic_id: @state.chat.topicSelected.eventKey,
+        {topic_id: @state.chat.topicSelectedByPrev,
         title: @state.chat.currentQuestionTitle.trim(),
         text: @state.chat.currentQuestionText.trim()},
         @onSubmitQuestion
@@ -69,28 +72,27 @@ AskComponent = React.createClass
   render: ->
     dropdownTitle = if @state.chat.topicSelected
       @state.chat.topicSelected.name
+    else if @state.chat.topicSelectedByPrev
+      @state.chat.topics[@state.chat.topicSelectedByPrev - 1]?.name
     else
-      "Select a room"
+      "Select a Topic"
 
     div {className: "home"},
       Row {},
-        Col md: 8, mdOffset: 2,
-          h1 {}, "Select a Room"
-      Row {},
-        Col md: 4, mdOffset: 2,
-        DropdownButton title: dropdownTitle,
-          @state.chat.topics.map ({id, name}, index) =>
-            MenuItem
-              eventKey: id
-              target: name
-              onSelect: @onTopicSelected,
-              key: index
-              name
-      if @state.chat.topicSelected
+        Col md: 12,
+          h1 {className: "question-header"}, 
+            "What is your "
+            DropdownButton title: dropdownTitle,
+              @state.chat.topics.map ({id, name}, index) =>
+                MenuItem
+                  eventKey: id
+                  target: name
+                  onSelect: @onTopicSelected,
+                  key: index
+                  name
+            " question?"
+      if @state.chat.topicSelected or @state.chat.topicSelectedByPrev
         div {},
-          Row {},
-            Col md: 12,
-              h1 {}, "What's your #{@state.chat.topicSelected.name} question?"
           Row {},
             Col md: 8, mdOffset: 2,
               form {className: "ask-form", autoComplete: off},
@@ -100,12 +102,14 @@ AskComponent = React.createClass
                   autoComplete: off
                   value: @state.chat.currentQuestionTitle
                   onChange: @questionTitleChange
+                  placeholder: "Title for your question (required)"
                 Input
                   type: "textarea"
                   className: "ask-question"
                   value: @state.chat.currentQuestionText
                   onChange: @questionTextChange
                   onKeyDown: @keyPress
+                  placeholder: "Describe your question (required)"
                 Button
                   className: "ask-form-button"
                   onClick: @submitQuestion
