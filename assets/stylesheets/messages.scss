@@ -100,16 +100,18 @@
 .votes {
   text-align: center;
   .vote-button {
+    float: left;
     background-color: transparent;
     border-color: transparent;
     height: 20px;
-    padding: 0px 5px;
+    padding: 2px 5px;
     outline: 0;
-    transform:scale(2,1); /* W3C */
-    -webkit-transform:scale(2,1); /* Safari and Chrome */
-    -moz-transform:scale(2,1); /* Firefox */
-    -ms-transform:scale(2,1); /* IE 9 */
-    -o-transform:scale(2,1); /* Opera */
+    &.gold {
+      color: $star_gold;
+    }
+  }
+  .vote-total {
+    padding-top: 3px;
   }
 }
 
@@ -160,6 +162,10 @@
 
 .float-left {
   float: left;
+}
+
+.vote-column {
+  padding-left: 10px;
 }
 
 .loading-icon {
