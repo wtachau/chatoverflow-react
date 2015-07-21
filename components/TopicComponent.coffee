@@ -32,6 +32,5 @@ TopicComponent = React.createClass
       RouteHandler {}
       RoomList
         currentTopic: @getParams().topic_id
-        
 
 module.exports = TopicComponent
