@@ -8,7 +8,7 @@ ChatStore = require("../../stores/ChatStore")
 ChatActions = require("../../actions/ChatActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
-{ div, img } = React.DOM
+{ div, img, audio } = React.DOM
 
 MessageList = React.createClass
   displayName: "MessageList"
@@ -50,6 +50,7 @@ MessageList = React.createClass
       else
         [..., last] = @props.messages
         if last and last.isNewMessage
+          @refs.plingsound.getDOMNode().play()
           last.isNewMessage = false
           if (@getScrollPosition messagesComp) < @state.chat.autoScrollWindow
             messagesComp.scrollTop = messagesComp.scrollHeight
@@ -98,5 +99,6 @@ MessageList = React.createClass
             if (not @state.chat.isFinishedLoadingMessages or @messagesComponent.scrollHeight)
               img {className: "loading-icon", src: "../../../assets/images/loading.gif"}
             MessageGroupList { messageGroups, shouldUpdateScrollHeight: @shouldUpdateScrollHeight }
+          audio {ref: "plingsound", src: "../../../assets/sounds/pling.wav"}
 
 module.exports = MessageList
