@@ -59,7 +59,7 @@ MessageGroupList = React.createClass
           Col md: 1,
             if side is "left"
               UserComponent {user: group[0].user}
-          Col md:11,
+          Col md: 11,
             if side is "left"
               Row {className: "username row-no-margin"},
                 group[0].user.username
