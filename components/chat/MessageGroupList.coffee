@@ -29,19 +29,20 @@ MessageGroupList = React.createClass
     messageGroups: React.PropTypes.array.isRequired
 
   selectBubbleType: (index, length) ->
-    bubbleType =  if length is 1
-                    "single-bubble"
-                  else if index is 0
-                    "top-bubble"
-                  else if index is length - 1
-                    "bottom-bubble"
-                  else
-                    "middle-bubble"
-    bubbleType
+    console.log index
+    console.log length
+    if length is 1
+      "single-bubble"
+    else if index is 0
+      "top-bubble"
+    else if index is length - 1
+      "bottom-bubble"
+    else
+      "middle-bubble"
 
   getMessageProperties: (group) ->
-    properties = {}
     group.map (message, index) =>
+      properties = {}
       if message.user.username is @state.app.user.username
         properties.isUser = true
         properties.side = "right"
@@ -50,11 +51,12 @@ MessageGroupList = React.createClass
         properties.isUser = false
         properties.side = "left"
         properties.bubbleType = @selectBubbleType index, group.length
-      @properties
+      properties
 
   render: ->
     div {},
       @props.messageGroups.map (group, index) =>
+        properties = @getMessageProperties group
         side = if group[0].user.username is @state.app.user.username then "right" else "left"
         div {className: "message-group #{side}"},
           Row {className: "no-margin margin-top"},
@@ -64,7 +66,6 @@ MessageGroupList = React.createClass
               Col md: 8,
                 div {className: "margin-left"}, group[0].user.username
           Row {className: "no-margin"},
-            properties = @getMessageProperties group
             group.map (message, index) =>
               div {className: "message"},
                 Col md: 1,
@@ -73,8 +74,8 @@ MessageGroupList = React.createClass
                   Message
                     message: message
                     key: index
-                    bubbleType: properties.bubbleType
-                    side: properties.side
-                    isUser: properties.isUser
+                    bubbleType: properties[index].bubbleType
+                    side: properties[index].side
+                    isUser: properties[index].isUser
 
 module.exports = MessageGroupList
