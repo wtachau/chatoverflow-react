@@ -32,12 +32,8 @@ class ChatActions
   fetchSearchResults: (query, callback = @actions.setSearchResults) ->
     URLResources.readFromAPI "/topics/search/#{query}", callback
 
-  upvoteMessage: (id, room_id) ->
-    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/upvote",
-      "PUT", null, @actions.setMessage
-
-  downvoteMessage: (id, room_id) ->
-    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/downvote",
+  starMessage: (id, room_id) ->
+    URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/vote",
       "PUT", null, @actions.setMessage
 
   fetchFailure: (error) ->

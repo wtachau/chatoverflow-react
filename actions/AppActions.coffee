@@ -6,7 +6,7 @@ class AppActions
   constructor: ->
     @generateActions "setCurrentUser", "userFetchFailure",
       "setCurrentUsers", "setUnreadMentions", "setReadMentions",
-      "failure"
+      "pushUserVote", "removeUserVote", "failure"
 
   fetchUser: ->
     URLResources.readFromAPI "/current_user", @actions.setCurrentUser
