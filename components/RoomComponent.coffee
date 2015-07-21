@@ -1,7 +1,7 @@
 React = require("react")
 io = require("socket.io-client")
 
-{ div } = React.DOM
+{ div, audio, source } = React.DOM
 TopicSidebar = React.createFactory require("./sidebar/TopicSidebar")
 MessageList = React.createFactory require("./chat/MessageList")
 ChatForm = React.createFactory require("./chat/ChatForm")
@@ -41,6 +41,7 @@ RoomComponent = React.createClass
     @socket.on "mention", ({user_id, username, room_id, text}) =>
       unless FollowResources.isFollowingRoom room_id, @state.app.user
         AppActions.followRoom room_id, @state.app.user
+      @refs.plingsound.getDOMNode().play()
       AppActions.setUnreadMentions room_id
 
     @socket.emit "subscribe",
@@ -95,5 +96,8 @@ RoomComponent = React.createClass
         submitMessage: @submitMessage
         currentMessage: @state.chat.currentMessage
         users: @state.app.users
+      audio {ref: "plingsound"},
+        source {src: "../../../assets/sounds/pling.wav", type: "audio/wav"}
+        source {src: "../../../assets/sounds/pling.mp3", type: "audio/mp3"}
 
 module.exports = RoomComponent
