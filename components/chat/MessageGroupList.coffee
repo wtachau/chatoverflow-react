@@ -55,23 +55,23 @@ MessageGroupList = React.createClass
       @props.messageGroups.map (group, index) =>
         properties = @getMessageProperties group
         side = if group[0].user.username is @state.app.user.username then "right" else "left"
-        div {className: "message-group #{side}"},
-          if side is "left"
-            Row {className: "row-no-margin margin-top"},
-              div {},
-                Col md: 1,
-                  UserComponent {user: group[0].user}
-                Col md: 8,
-                  div {className: "margin-left"}, group[0].user.username
-          Row {className: "row-no-margin"},
-            group.map (message, index) =>
-              div {className: "message"},
-                Message
-                  message: message
-                  votes: @state.app.user.votes
-                  key: index
-                  bubbleType: properties[index].bubbleType
-                  side: properties[index].side
-                  isUser: properties[index].isUser
+        Row {className: "message-group #{side} row-no-margin"},
+          Col md: 1,
+            if side is "left"
+              UserComponent {user: group[0].user}
+          Col md:11,
+            if side is "left"
+              Row {className: "username row-no-margin"},
+                group[0].user.username
+            Row {className: "row-no-margin"},
+              group.map (message, index) =>
+                div {className: "message"},
+                  Message
+                    message: message
+                    votes: @state.app.user.votes
+                    key: index
+                    bubbleType: properties[index].bubbleType
+                    side: properties[index].side
+                    isUser: properties[index].isUser
 
 module.exports = MessageGroupList

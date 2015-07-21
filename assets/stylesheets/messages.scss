@@ -19,6 +19,8 @@
     width: 100%;
     overflow: auto;
     display: block;
+    padding-bottom: 10px;
+
     &.left {
       float: left;
     }
@@ -26,21 +28,28 @@
       float: right;
     }
 
+    .username {
+      margin-left: 11px;
+      color: $message_user_grey;
+      font-size: 12px;
+    }
+
     .timestamp {
       float: right;
+      font-size: 11px;
+      color: gray;
     }
 
     .message-row {
 
       margin: 1px;
-      padding-left: 8px;
 
       &.bubble {
         border-radius: $bubble_border_radius;
         max-width: 90%;
         &.left {
           float: left;
-          background-color: $other_users_background_blue;
+          background-color: $messages_background_others;
           &.top-bubble{
             border-bottom-left-radius: 0px;
           }
@@ -55,7 +64,7 @@
         }
         &.right {
           float: right;
-          background-color: $message_background_purple;
+          background-color: $messages_background_us;
           &.top-bubble{
             border-bottom-right-radius: 0px;
           }
@@ -86,14 +95,12 @@
       }
 
       .chat-body {
-        float: left;
-        position: relative;
-        width: 100%;
-        padding-bottom: 5px;
-
         .text {
-          padding-right: 75px;
+          padding: 5px 15px;
           white-space: pre-wrap;
+          p {
+            margin: inherit;
+          }
         }
 
         img, video {
