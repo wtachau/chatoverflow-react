@@ -5,6 +5,7 @@ App = require("./components/layout/App")
 ga = require("react-ga")
 
 require("./assets/vendor/bootstrap/stylesheets/_bootstrap.scss")
+require("./assets/stylesheets/general.scss")
 require("./assets/stylesheets/ask.scss")
 require("./assets/stylesheets/chat.scss")
 require("./assets/stylesheets/login.scss")

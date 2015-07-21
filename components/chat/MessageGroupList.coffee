@@ -1,7 +1,6 @@
 React = require("react")
 
 Message = React.createFactory require("./Message")
-VoteButton = React.createFactory require("./VoteButton")
 UserComponent = React.createFactory require("../UserComponent")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
@@ -57,23 +56,22 @@ MessageGroupList = React.createClass
         properties = @getMessageProperties group
         side = if group[0].user.username is @state.app.user.username then "right" else "left"
         div {className: "message-group #{side}"},
-          Row {className: "no-margin margin-top"},
-            div {},
-              Col md: 1,
-                UserComponent {user: group[0].user}
-              Col md: 8,
-                div {className: "margin-left"}, group[0].user.username
-          Row {className: "no-margin"},
+          if side is "left"
+            Row {className: "row-no-margin margin-top"},
+              div {},
+                Col md: 1,
+                  UserComponent {user: group[0].user}
+                Col md: 8,
+                  div {className: "margin-left"}, group[0].user.username
+          Row {className: "row-no-margin"},
             group.map (message, index) =>
               div {className: "message"},
-                Col md: 1, className: "vote-column",
-                  VoteButton {message, votes: @state.app.user.votes}
-                Col md: 11, className: "float-left",
-                  Message
-                    message: message
-                    key: index
-                    bubbleType: properties[index].bubbleType
-                    side: properties[index].side
-                    isUser: properties[index].isUser
+                Message
+                  message: message
+                  votes: @state.app.user.votes
+                  key: index
+                  bubbleType: properties[index].bubbleType
+                  side: properties[index].side
+                  isUser: properties[index].isUser
 
 module.exports = MessageGroupList

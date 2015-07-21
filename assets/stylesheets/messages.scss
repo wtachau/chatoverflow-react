@@ -26,6 +26,10 @@
       float: right;
     }
 
+    .timestamp {
+      float: right;
+    }
+
     .message-row {
 
       margin: 1px;
@@ -96,14 +100,6 @@
           max-width: 500px;
           padding-top: 5px;
         }
-
-        .timestamp {
-          position: absolute;
-          top: 2px;
-          right: 20px;
-          color: gray;
-          font-size: 12px;
-        }
       }
     }
   }
@@ -138,14 +134,6 @@
   float: left;
 }
 
-.no-margin {
-  margin-right: 0;
-  margin-left: 0;
-  &.margin-top {
-    margin-top: 9px;
-  }
-}
-
 .margin-left {
   margin-left: 9px;
 }
@@ -158,10 +146,6 @@
 
 .float-left {
   float: left;
-}
-
-.vote-column {
-  padding-left: 10px;
 }
 
 .loading-icon {
