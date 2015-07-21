@@ -47,12 +47,10 @@ AskComponent = React.createClass
 
   # Send a new question to the node server
   submitQuestion: (e) ->
-    unless @state.chat.topicSelectedByPrev
-      @state.chat.topicSelectedByPrev = @state.chat.topicSelected.eventKey
     unless (@state.chat.currentQuestionText.trim() is "") or
     (@state.chat.currentQuestionTitle.trim() is "")
       URLResources.callAPI "/rooms", "post",
-        {topic_id: @state.chat.topicSelectedByPrev,
+        {topic_id: @state.chat.topicSelected,
         title: @state.chat.currentQuestionTitle.trim(),
         text: @state.chat.currentQuestionText.trim()},
         @onSubmitQuestion
@@ -67,13 +65,11 @@ AskComponent = React.createClass
     @transitionTo 'room', room_id: response.id, topic_id: response.topic_id
 
   onTopicSelected: (eventKey, href, target) ->
-    ChatActions.setTopicSelected {eventKey, name: target}
+    ChatActions.setTopicSelected eventKey
 
   render: ->
     dropdownTitle = if @state.chat.topicSelected
-      @state.chat.topicSelected.name
-    else if @state.chat.topicSelectedByPrev
-      @state.chat.topics[@state.chat.topicSelectedByPrev - 1]?.name
+      @state.chat.topics[@state.chat.topicSelected - 1]?.name
     else
       "Select a Topic"
 
@@ -91,7 +87,7 @@ AskComponent = React.createClass
                   key: index
                   name
             " question?"
-      if @state.chat.topicSelected or @state.chat.topicSelectedByPrev
+      if @state.chat.topicSelected
         div {},
           Row {},
             Col md: 8, mdOffset: 2,

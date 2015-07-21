@@ -19,8 +19,10 @@ class ChatStore
     @searchResults = []
     @keyPressMap = []
     @autoScrollWindow = 160
-    @topicSelectedByPrev = null
     @isFinishedLoadingMessages = true
+    @startNewThread = null
+    @followedTopics = []
+    @followedTopicsRooms = []
 
     @bindActions(ChatActions)
 
@@ -81,7 +83,11 @@ class ChatStore
   onSetOriginalPost: (post) ->
     @originalPost = post
 
-  onSetTopicSelectedByPrev: (topicSelectedByPrev) ->
-    @topicSelectedByPrev = topicSelectedByPrev
+  onSetFollowedTopics: (followedTopics) ->
+    @followedTopics = followedTopics
+    @followedTopicsRooms = []
+    for topic in @followedTopics
+      for room in topic.rooms
+        @followedTopicsRooms.push room
 
 module.exports = alt.createStore(ChatStore)

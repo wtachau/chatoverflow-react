@@ -21,11 +21,12 @@ TopicComponent = React.createClass
       chat: ChatStore
 
   componentWillReceiveProps: (newProps) ->
-    unless newProps.params.topic_id is @state.chat.topicSelectedByPrev
-      ChatActions.setTopicSelectedByPrev newProps.params.topic_id
+    unless newProps.params.topic_id is @state.chat.topicSelected
+      ChatActions.setTopicSelected newProps.params.topic_id
 
   componentDidMount: ->
-    ChatActions.setTopicSelectedByPrev @props.params.topic_id
+    unless @props.params.topic_id is @state.chat.topicSelected
+      ChatActions.setTopicSelected @props.params.topic_id
 
   render: ->
     div {className: "main-section"},

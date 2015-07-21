@@ -9,7 +9,7 @@ class ChatActions
       "setTopicSelected", "setTopicInfo", "setMentions", "setMessage",
       "setCurrentRoom", "setOldestPage", "prependToMessages", "setOriginalPost",
       "setSearchResults", "setOriginalPost", "setRecentMessages",
-      "pushNewMessage", "setTopicSelectedByPrev"
+      "pushNewMessage", "setFollowedTopics"
 
   fetchRecentMessages: (roomId) ->
     URLResources.readFromAPI "/rooms/#{roomId}/messages",
@@ -43,5 +43,8 @@ class ChatActions
   fetchFailure: (error) ->
     console.error(error)
 
+  fetchFollowedTopics: ->
+    URLResources.readFromAPI "/users/followed_topics",
+      @actions.setFollowedTopics
 
 module.exports = alt.createActions(ChatActions)

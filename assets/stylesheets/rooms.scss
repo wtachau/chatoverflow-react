@@ -150,3 +150,65 @@
     }
   }
 }
+
+#news-feed {
+  width: 100%;
+  float: none;
+
+  .rooms-list {
+    position: absolute;
+    top: 120px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    padding-bottom: 120px;
+  }
+
+  .topic-header {
+    height: calc(#{$topic_height} + 30px);
+    background-color: $chat_background_purple;
+    font-size: 27px;
+    padding-top: 28px;
+    padding-left: 10px;
+    color: white;
+    .current-topic {
+        font-size: 27px;
+        margin: 15px 0px 0px 20px;
+        text-transform: lowercase;
+    }
+  }
+
+  .nav-tabs {
+    background-color: $chat_background_purple;
+    border-bottom: none;
+    li {
+      border-radius: 10px 10px 0px 0px;
+      margin-left: 2px;
+      background-color: $purple;
+      a {
+        color: white;
+        padding: 5px 15px;
+      }
+      &.active {
+        background-color: $white;
+        a {
+          color: inherit;
+        }
+      }
+    }
+  }
+  /* Bootstrap override */
+  .nav-tabs > li.active > a, 
+  .nav-tabs > li.active > a:hover, 
+  .nav-tabs > li.active > a:focus {
+    background-color: transparent;
+    border: none;
+  }
+  .nav-tabs > li > a {
+    border: none;
+  }
+  .nav > li > a:hover, .nav > li > a:focus {
+    background-color: transparent;
+  }
+}

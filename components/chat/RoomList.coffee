@@ -1,7 +1,5 @@
 React = require("react")
-
 ReactBootstrap = require("react-bootstrap")
-
 Router = require("react-router")
 URLResources = require("../../common/URLResources")
 ChatStore = require("../../stores/ChatStore")
