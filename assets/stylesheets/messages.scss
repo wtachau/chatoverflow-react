@@ -15,83 +15,95 @@
   width: 50%;
   vertical-align: top;
 
-  .message-row {
+  .message-group {
+    width: 100%;
+    overflow: auto;
+    display: block;
+    &.left {
+      float: left;
+    }
+    &.right {
+      float: right;
+    }
 
-    margin: 1px;
-    padding-left: 8px;
+    .message-row {
 
-    &.bubble {
-      border-radius: $bubble_border_radius;
-      width: 100%;
-      clear: both;
-      &.left {
+      margin: 1px;
+      padding-left: 8px;
+
+      &.bubble {
+        border-radius: $bubble_border_radius;
+        max-width: 90%;
+        &.left {
+          float: left;
+          background-color: $other_users_background_blue;
+          &.top-bubble{
+            border-bottom-left-radius: 0px;
+          }
+          &.middle-bubble {
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+          }
+          &.bottom-bubble {
+            border-radius: $bubble_border_radius;
+            border-top-left-radius: 0px;
+          }
+        }
+        &.right {
+          float: right;
+          background-color: $message_background_purple;
+          &.top-bubble{
+            border-bottom-right-radius: 0px;
+          }
+          &.middle-bubble {
+            border-bottom-right-radius: 5px;
+            border-top-right-radius: 5px;
+          }
+          &.bottom-bubble {
+            border-radius: $bubble_border_radius;
+            border-top-right-radius: 0px;
+          }
+          &.single-bubble {
+            border-radius: $bubble_border_radius;
+          }
+        }
+      }
+
+      .username {
+        text-align: right;
+        width: $username_width;
         float: left;
-        &.top-bubble{
-          border-bottom-left-radius: 0px;
-        }
-        &.middle-bubble {
-          border-bottom-left-radius: 5px;
-          border-top-left-radius: 5px;
-        }
-        &.bottom-bubble {
-          border-radius: $bubble_border_radius;
-          border-top-left-radius: 0px;
+        padding: 0px 10px;
+
+        .profile-pic {
+          max-width: 40px;
+          border-radius: 20px;
         }
       }
-      &.right {
-        float: right;
-        background-color: purple;
-        &.top-bubble{
-          border-bottom-right-radius: 0px;
+
+      .chat-body {
+        float: left;
+        position: relative;
+        width: 100%;
+        padding-bottom: 5px;
+
+        .text {
+          padding-right: 75px;
+          white-space: pre-wrap;
         }
-        &.middle-bubble {
-          border-bottom-right-radius: 5px;
-          border-top-right-radius: 5px;
+
+        img, video {
+          max-width: 500px;
+          padding-top: 5px;
         }
-        &.bottom-bubble {
-          border-radius: $bubble_border_radius;
-          border-top-right-radius: 0px;
+
+        .timestamp {
+          position: absolute;
+          top: 2px;
+          right: 20px;
+          color: gray;
+          font-size: 12px;
         }
-        &.single-bubble {
-          border-radius: $bubble_border_radius;
-        }
-      }
-    }
-
-    .username {
-      text-align: right;
-      width: $username_width;
-      float: left;
-      padding: 0px 10px;
-
-      .profile-pic {
-        max-width: 40px;
-        border-radius: 20px;
-      }
-    }
-
-    .chat-body {
-      float: left;
-      position: relative;
-      width: 100%;
-      padding-bottom: 5px;
-
-      .text {
-        padding-right: 75px;
-        white-space: pre-wrap;
-      }
-
-      img, video {
-        max-width: 500px;
-        padding-top: 5px;
-      }
-
-      .timestamp {
-        position: absolute;
-        top: 2px;
-        right: 20px;
-        color: gray;
-        font-size: 12px;
       }
     }
   }
@@ -118,22 +130,6 @@
 .image {
   max-width: 500px;
   height: "auto";
-}
-
-.message-group {
-  width: 100%;
-  overflow: auto;
-  display: block;
-  border-bottom-width: thin;
-  border-bottom-color: $message_border_grey;
-  border-bottom-style: solid;
-  &.left {
-    float: left;
-  }
-  &.right {
-    float: right;
-    background-color: $message_background_purple;
-  }
 }
 
 .profile-pic {

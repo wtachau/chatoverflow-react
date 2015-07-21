@@ -29,8 +29,6 @@ MessageGroupList = React.createClass
     messageGroups: React.PropTypes.array.isRequired
 
   selectBubbleType: (index, length) ->
-    console.log index
-    console.log length
     if length is 1
       "single-bubble"
     else if index is 0
