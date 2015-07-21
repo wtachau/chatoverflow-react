@@ -2,149 +2,150 @@
 @import "sizes";
 
 .rooms {
-  width: 50%;
-  float: left;
+  width: auto;
+  overflow: hidden;
   height: 100%;
 
-  .current-topic {
-    color: white;
-  }
+  .room-list-page {
+    height: 100%;
 
-  .row {
-    margin: 0;
-    overflow: scroll;
-    &.topic-header {
-      height: calc(#{$topic_height} + 30px);
+    .row {
+      margin: 0;
+      overflow: scroll; 
+    }
+
+    .topic-header {
+      height: calc(#{$topic_height} + #{$rooms_tab_height});
       background-color: $chat_background_purple;
       .current-topic {
+        color: white;
         font-size: 27px;
         margin: 15px 0px 0px 20px;
         text-transform: lowercase;
       }
     }
-  }
 
-  .rooms-list {
-    position: absolute;
-    top: calc(#{$topic_height} + 30px);
-    right: 50%;
-    left: 0;
-    bottom: 0;
-    overflow: scroll;
-    background-color: white;
+    .rooms-list-container {
 
-    >div {
-      >div {
-        position: relative;
-      }
-    }
+      width: 100%;
+      height: calc(100% - #{$topic_height} - #{$rooms_tab_height});
 
-    >div{
-      >nav{
-        position: fixed;
-        left: 200px;
-        z-index: 1;
-        top: calc(#{$topic_height} + #{$header_height} + 1px);
-      }
-    }
-
-    nav {
-      height: initial;
-    }
-
-    .nav-tabs {
-      background-color: $chat_background_purple;
-      border-bottom: none;
-      li {
-        border-radius: 10px 10px 0px 0px;
-        margin-left: 2px;
-        background-color: $purple;
-        a {
-          color: white;
-          padding: 5px 15px;
+      .rooms-list {
+        height: 100%;
+        background-color: white;
+        border-right: 1px solid lightgray;
+  
+        .tab-content {
+          position: relative;
         }
-        &.active {
-          background-color: $white;
+
+        >div{
+          >nav{
+            position: fixed;
+            left: 200px;
+            z-index: 1;
+            top: calc(#{$topic_height} + #{$header_height} + 1px);
+            height: initial;
+          }
+        }
+
+        .nav-tabs {
+          background-color: $chat_background_purple;
+          border-bottom: none;
+          li {
+            border-radius: 10px 10px 0px 0px;
+            margin-left: 2px;
+            background-color: $purple;
+            a {
+              color: white;
+              padding: 5px 15px;
+            }
+            &.active {
+              background-color: $white;
+              a {
+                color: inherit;
+              }
+            }
+          }
+        }
+        /* Bootstrap override */
+        .nav-tabs > li.active > a, 
+        .nav-tabs > li.active > a:hover, 
+        .nav-tabs > li.active > a:focus {
+          background-color: transparent;
+          border: none;
+        }
+        .nav-tabs > li > a {
+          border: none;
+        }
+        .nav > li > a:hover, .nav > li > a:focus {
+          background-color: transparent;
+        }
+        /* End Bootstrap override */
+
+        .highlight-room {
+          background-color: $highlight_room_background_purple;
+        }
+
+        .room-info {
+          overflow: hidden;
+
+          &.list-group-item {
+            border: inherit;
+            border-bottom: 1px solid lightgray;
+            margin-bottom: inherit;
+          }
+
           a {
             color: inherit;
           }
+
+          .answers {
+            float: left;
+            width: 75px;
+            text-align: center;
+            background-color: $answers_light_grey;
+            color: $answers_dark_grey;
+            margin-right: 40px;
+            padding: 5px 10px;
+
+            .answer-total {
+              font-weight: bold;
+              font-size: 20px;
+            }
+
+            .answer-text {
+              font-size: 12px;
+            }
+          }
+
+          .question-info {
+            float: left;
+
+            .question-header {
+              margin-bottom: 5px;
+            }
+
+            .question-title {
+              font-size: 18px;
+              color: $questions_purple;
+              float: left;
+              padding-right: 10px;
+            }
+            .question-text {
+              font-size: 16px;
+            }
+          }
+
+          .time-asked {
+            font-size: 12px;
+            padding-top: 8px;
+          }
+
+          .recent-answers {
+            margin-top: 10px;
+          }
         }
-      }
-    }
-    /* Bootstrap override */
-    .nav-tabs > li.active > a, 
-    .nav-tabs > li.active > a:hover, 
-    .nav-tabs > li.active > a:focus {
-      background-color: transparent;
-      border: none;
-    }
-    .nav-tabs > li > a {
-      border: none;
-    }
-    .nav > li > a:hover, .nav > li > a:focus {
-      background-color: transparent;
-    }
-    /* End Bootstrap override */
-
-    .highlight-room {
-      background-color: $highlight_room_background_purple;
-    }
-
-    .room-info {
-      overflow: hidden;
-
-      &.list-group-item {
-        border: none;
-      }
-
-      a {
-        color: inherit;
-      }
-
-      .answers {
-        float: left;
-        width: 75px;
-        text-align: center;
-        background-color: $answers_light_grey;
-        color: $answers_dark_grey;
-        margin-right: 40px;
-        padding: 5px 10px;
-
-        .answer-total {
-          font-weight: bold;
-          font-size: 20px;
-        }
-
-        .answer-text {
-          font-size: 12px;
-        }
-      }
-
-      .question-info {
-        float: left;
-
-        .question-header {
-          margin-bottom: 5px;
-        }
-
-        .question-title {
-          font-size: 18px;
-          color: $questions_purple;
-          float: left;
-          padding-right: 10px;
-        }
-        .question-text {
-          font-size: 16px;
-        }
-      }
-
-      .time-asked {
-        font-size: 12px;
-        padding-top: 8px;
-      }
-
-      .recent-answers {
-        margin-top: 10px;
       }
     }
   }
