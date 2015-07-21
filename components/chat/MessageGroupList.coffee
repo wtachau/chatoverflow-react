@@ -73,5 +73,6 @@ MessageGroupList = React.createClass
                     bubbleType: properties[index].bubbleType
                     side: properties[index].side
                     isUser: properties[index].isUser
+                    isFirst: index is 0
 
 module.exports = MessageGroupList

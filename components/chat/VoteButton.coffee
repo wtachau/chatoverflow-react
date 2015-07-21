@@ -27,11 +27,13 @@ VoteButton = React.createClass
 
   render: ->
     @color = if @props.votes then @buttonColor() else ""
+    displayClass = if @props.message.vote_total > 0 then "display" else ""
     div {className: "votes"},
       button
-        className: "vote-button upvote btn #{@color.color}"
+        className: "vote-button upvote btn #{@color.color} #{displayClass}"
         onClick: @vote,
         "\u2605"
-      div {className: "vote-total"}, @props.message.vote_total
+      if @props.message.vote_total > 0
+        div {className: "vote-total"}, @props.message.vote_total
 
 module.exports = VoteButton

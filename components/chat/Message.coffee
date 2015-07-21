@@ -30,14 +30,16 @@ Message = React.createClass
   render: ->
     timestamp = moment(@props.message.created_at).format("h:mm A")
     Row {className: "row-no-margin"},
-      Col {xs: 8, className: "col-no-padding"},
+      div {className: "message-column messages-body"},
         div {className: "bubble message-row #{@props.side} #{@props.bubbleType}"},
           div {className: "chat-body"},
             div {className: "text"}, Marked @props.message.text
             @decorateText @props.message.text
-      Col {xs: 2, className: "vote-column col-no-padding"},
-        VoteButton {message: @props.message, votes: @props.votes}
-      Col {xs: 2, className: "col-no-padding"},
-        div {className: "timestamp"}, timestamp
+      div {className: "message-column votes"},
+        if @props.isFirst
+          VoteButton {message: @props.message, votes: @props.votes}
+      div {className: "message-column time"},
+        if @props.isFirst
+          div {className: "timestamp"}, timestamp
 
 module.exports = Message
