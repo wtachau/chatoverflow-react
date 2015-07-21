@@ -15,11 +15,13 @@ Message = React.createClass
     votes: React.PropTypes.number.isRequired
 
   decorateText: (text) ->
-    if text.match ///((^https?:\/\/.*\.(?:png|jpg|gif)$)){1}///
-      return img {src: text}
-    else if text.match ///((^https?:\/\/.*\.(?:gifv)$)){1}///
+    imgMatch = text.match ///((https?:\/\/.*\.(?:png|jpg|gif))){1}///
+    videoMatch = text.match ///((https?:\/\/.*\.(?:gifv))){1}///
+    if imgMatch
+      return img {src: imgMatch[0]}
+    else if videoMatch
       return video
-        src: (text.replace "gifv", "mp4")
+        src: (videoMatch[0].replace "gifv", "mp4")
         type: "video/mp4"
         preload: "auto"
         autoPlay: "autoplay"
