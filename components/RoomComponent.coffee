@@ -1,7 +1,7 @@
 React = require("react")
 io = require("socket.io-client")
 
-{ div, audio } = React.DOM
+{ div, audio, source } = React.DOM
 TopicSidebar = React.createFactory require("./sidebar/TopicSidebar")
 MessageList = React.createFactory require("./chat/MessageList")
 ChatForm = React.createFactory require("./chat/ChatForm")
@@ -96,6 +96,8 @@ RoomComponent = React.createClass
         submitMessage: @submitMessage
         currentMessage: @state.chat.currentMessage
         users: @state.app.users
-      audio {ref: "plingsound", src: "../../../assets/sounds/pling.wav"}
+      audio {ref: "plingsound"},
+        source {src: "../../../assets/sounds/pling.wav", type: "audio/wav"}
+        source {src: "../../../assets/sounds/pling.mp3", type: "audio/mp3"}
 
 module.exports = RoomComponent
