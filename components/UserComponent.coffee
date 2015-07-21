@@ -31,7 +31,7 @@ UserComponent = React.createClass
   render: ->
     div {className: "popup-link"},
       a {href: "#", onClick: @showPopup},
-        img {src:@props.user.pic_url, className: "profile-pic"}
+        img {src: @props.user.pic_url, className: "profile-pic"}
       Modal {show: @state.showModal, onHide: @closePopup, className: "user-modal"},
         ModalHeader {closeButton: true},
           ModalTitle {}, "User Information"

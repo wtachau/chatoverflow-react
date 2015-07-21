@@ -26,25 +26,17 @@ RoomComponent = React.createClass
       chat: ChatStore
       app: AppStore
 
-  username: -> @state.app.user.username
-
   pic_url: -> @state.app.user.pic_url
 
   componentWillMount: ->
-    @socket = io(URLResources.getChatServerOrigin())
-    @socket.on "chat message",
+    @props.socket.on "chat message",
       ({id, user, room_id, text, created_at}) =>
         if room_id is @getParams().room_id
           ChatActions.pushNewMessage {vote_total: 0, user, id, room_id, text, created_at, isNewMessage: true}
           @scrollDownMessages()
 
-    @socket.on "mention", ({user_id, username, room_id, text}) =>
-      unless FollowResources.isFollowingRoom room_id, @state.app.user
-        AppActions.followRoom room_id, @state.app.user
-      AppActions.setUnreadMentions room_id
-
-    @socket.emit "subscribe",
-      {username: @username(), room: @getParams().room_id}
+    @props.socket.emit "subscribe room",
+      {room: @getParams().room_id}
 
   scrollDownMessages: ->
     component = React.findDOMNode @refs.messageList
@@ -53,8 +45,8 @@ RoomComponent = React.createClass
 
   componentWillReceiveProps: (newProps) ->
     unless @props.params.room_id is newProps.params.room_id
-      @socket.emit "subscribe",
-        {username: @username(), room: @getParams().room_id}
+      @props.socket.emit "subscribe",
+        {username: @state.app.user.username, room: @getParams().room_id}
       ChatActions.setCurrentRoom parseInt @getParams().room_id
       ChatActions.fetchRecentMessages @getParams().room_id
       if @state.app.unread_mentions[parseInt @getParams().room_id]
@@ -68,17 +60,16 @@ RoomComponent = React.createClass
         AppActions.setReadMentions @getParams().room_id
         
   componentWillUnmount: ->
-    @socket.removeAllListeners "chat message"
-    @socket.removeAllListeners "mention"
+    @props.socket.removeAllListeners "chat message"
     ChatActions.setCurrentRoom null
 
   submitMessage: (e, message, mentions) ->
     unless message is ""
-      @socket.emit "chat message",
+      @props.socket.emit "chat message",
         user:
           user_id: @state.app.user.id
           pic_url: @pic_url()
-          username: @username()
+          username: @state.app.user.username
         room_id: @getParams().room_id
         text: message.trim()
         mentions: mentions
