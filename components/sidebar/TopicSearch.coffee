@@ -49,7 +49,7 @@ TopicSearch = React.createClass
         @transitionTo "topic", topic_id: topic.id
     else
       AppActions.followTopic topics[0].id, @props.user
-      @transitionTo "topic", topic_id: topic[0].id
+      @transitionTo "topic", topic_id: topics[0].id
 
   render: ->
     div {className: "topic-search"},
