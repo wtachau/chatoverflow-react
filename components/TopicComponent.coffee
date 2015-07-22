@@ -24,13 +24,14 @@ TopicComponent = React.createClass
       app: AppStore
       chat: ChatStore
 
-  componentWillReceiveProps: (newProps) ->
-    unless newProps.params.topic_id is @state.chat.topicSelected
-      ChatActions.setTopicSelected newProps.params.topic_id
+  componentWillReceiveProps: (newProps) -> @updateTopicSelected(newProps)
+  componentDidMount: -> @updateTopicSelected(@props)
 
-  componentDidMount: ->
-    unless @props.params.topic_id is @state.chat.topicSelected
-      ChatActions.setTopicSelected @props.params.topic_id
+  updateTopicSelected: (props) ->
+    setTimeout =>
+      unless props.params.topic_id is @state.chat.topicSelected
+        ChatActions.setTopicSelected props.params.topic_id
+
 
   render: ->
     div {className: "main-section"},
