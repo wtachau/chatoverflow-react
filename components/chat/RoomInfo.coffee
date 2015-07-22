@@ -9,7 +9,7 @@ ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Row = React.createFactory ReactBootstrap.Row
 Col = React.createFactory ReactBootstrap.Col
 Link = React.createFactory Router.Link
-{ div, ul, li } = React.DOM
+{ div, ul, li, img } = React.DOM
 moment = require("moment")
 
 RoomInfo = React.createClass
@@ -35,9 +35,6 @@ RoomInfo = React.createClass
 
     answersTotal = @props.room.messages.length - 1
 
-    # By using the two slices, the original questions won't be in the list
-    recentAnswers = @props.room.messages.slice(-4).slice(1)
-
     roomProperties = if @state.currentRoom is @props.room.id then "highlight-room" else ""
     ListGroupItem {className: "room-info #{roomProperties}"},
       Link {to: "/topics/#{@props.topic}/rooms/#{@props.room.id}"},
@@ -47,14 +44,14 @@ RoomInfo = React.createClass
             if answersTotal is 1 then "answer" else "answers"
         Row {},
           Col {className: "question-info", xs:8},
+            if @props.room.topic_title
+              div {className: "topic-title"}, @props.room.topic_title
             div {className: "question-header"},
               div {className: "question-title"}, @props.room.title
-              div {className: "time-asked"}, timestamp
             div {className: "question-text"}, question
-            div {className: "recent-answers"},
-              "Recent Answers:"
-              ul {className: "recent-answers-list"},
-                recentAnswers.map ({username, text}) ->
-                  li {className: "recent-answer"}, "#{username} answered: #{text}"
+            div {className: "time-asked"}, timestamp
+            div {className: "followers"},
+              @props.room.followers.map (user, index) =>
+                img {src: user.pic_url, className: "room-user-image"}
 
 module.exports = RoomInfo

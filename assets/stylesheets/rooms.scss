@@ -122,18 +122,27 @@
           .question-info {
             float: left;
 
+            .topic-title {
+              color: $questions_purple;
+              font-weight: bold;
+            }
+
             .question-header {
               margin-bottom: 5px;
             }
 
             .question-title {
-              font-size: 18px;
-              color: $questions_purple;
-              float: left;
+              font-size: 16px;
               padding-right: 10px;
+              font-weight: 500;
+              color: $devils_grey;
+              margin-top: 5px;
             }
             .question-text {
-              font-size: 16px;
+              font-size: 15px;
+              font-weight: 200;
+              color: $devils_grey;
+              margin-top: 10px;
             }
           }
 
@@ -142,7 +151,9 @@
             padding-top: 8px;
           }
 
-          .recent-answers {
+          .room-user-image {
+            width: 50px;
+            padding: 5px;
             margin-top: 10px;
           }
         }

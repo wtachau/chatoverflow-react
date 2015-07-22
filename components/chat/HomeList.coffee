@@ -18,6 +18,6 @@ HomeList = React.createClass
           div {className: "current-topic"}, name
         Row {className: "rooms-list"},
           @props.roomsSorted?.map (room) =>
-            RoomInfo { room, topic: room.topic_id }
+            RoomInfo { room, topic: room.topic_id, title: room.topic_title }
 
 module.exports = HomeList
