@@ -1,7 +1,11 @@
 React = require("react")
+io = require("socket.io-client")
+
 AppStore = require("../stores/AppStore")
 AppActions = require("../actions/AppActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
+URLResources = require("../common/URLResources")
+FollowResources = require("../common/FollowResources")
 Router = require("react-router")
 RouteHandler = React.createFactory Router.RouteHandler
 RoomList = React.createFactory require("./chat/RoomList")
@@ -30,7 +34,7 @@ TopicComponent = React.createClass
 
   render: ->
     div {className: "main-section"},
-      RouteHandler {}
+      RouteHandler {socket: @props.socket}
       RoomList
         currentTopic: @getParams().topic_id
 

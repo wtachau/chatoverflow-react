@@ -3,8 +3,8 @@ Uri = require("jsuri")
 Router = require("react-router")
 RouteHandler = React.createFactory Router.RouteHandler
 LoginComponent = React.createFactory require("../LoginComponent")
-ChatComponent = React.createFactory require("../TopicComponent")
 HeaderComponent = React.createFactory require("../HeaderComponent")
+MainComponent = React.createFactory require("../MainComponent")
 URLResources = require("../../common/URLResources")
 AppStore = require("../../stores/AppStore")
 AppActions = require("../../actions/AppActions")
@@ -43,13 +43,6 @@ module.exports = React.createClass
 
   render: ->
     if @state.user
-      div {},
-        HeaderComponent
-          user: @state.user
-        div {className: "chat"},
-          TopicSidebar
-            user: @state.user
-          div {className: "chat-panel"},
-            RouteHandler {}
+      MainComponent {}
     else
       LoginComponent loginClicked: AppActions.login

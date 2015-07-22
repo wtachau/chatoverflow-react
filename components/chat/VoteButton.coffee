@@ -21,8 +21,7 @@ VoteButton = React.createClass
 
   buttonColor: ->
     for votes, index in @props.votes
-      if votes.message_id is @props.message.id
-        return {color: "gold", index: index}
+      return {color: "gold", index: index} if votes.message_id is @props.message.id
     {color: "", index: -1}
 
   render: ->
