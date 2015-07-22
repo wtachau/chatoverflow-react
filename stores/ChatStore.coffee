@@ -88,6 +88,7 @@ class ChatStore
     @followedTopicsRooms = []
     for topic in @followedTopics
       for room in topic.rooms
+        room['topic_title'] = topic.name
         @followedTopicsRooms.push room
 
 module.exports = alt.createStore(ChatStore)
