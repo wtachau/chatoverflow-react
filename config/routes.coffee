@@ -12,7 +12,7 @@ DefaultRoute = React.createFactory Router.DefaultRoute
 
 routes =
   Route {name: "app", path: "/", handler: App},
-    Route {name: "main", path: "/main", handler: MainComponent}
+    Route {name: "main", handler: MainComponent}
       Route {name: "topic", path: "/topics/:topic_id", handler: TopicComponent},
         Route {name: "room", path: "rooms/:room_id", handler: RoomComponent}
         DefaultRoute {name: "active_users", handler: ActiveUsersComponent}
