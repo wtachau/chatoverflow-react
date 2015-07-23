@@ -29,8 +29,8 @@ class ChatActions
   fetchTopics: ->
     URLResources.readFromAPI "/topics", @actions.setTopics
 
-  fetchSearchResults: (query, callback = @actions.setSearchResults) ->
-    URLResources.readFromAPI "/topics/search/#{query}", callback
+  fetchSearchResults: (query) ->
+    URLResources.readFromAPI "/topics/search/#{query}", @actions.setSearchResults
 
   starMessage: (id, room_id) ->
     URLResources.callAPI "/rooms/#{room_id}/messages/#{id}/vote",
