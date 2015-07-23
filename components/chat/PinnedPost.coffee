@@ -43,7 +43,9 @@ PinnedPost = React.createClass
     timestamp = moment(@props.originalPost.created_at).format("h:mm A")
     Row {className: "pinned-post"},
       div {className: "username"},
-        UserComponent {user: @props.originalPost.user}
+        for user in @state.app.users
+          if user.username is @props.originalPost.user.username
+            UserComponent {user}
         div {className: "username-text"},
           @props.originalPost.user.username
       div {className: "chat-body"},

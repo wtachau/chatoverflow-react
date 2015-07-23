@@ -1,7 +1,10 @@
 React = require("react")
 ReactBootstrap = require("react-bootstrap")
 AppActions = require("../actions/AppActions")
+AppStore = require("../stores/AppStore")
 BootstrapModal = require("react-bootstrap-modal")
+ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
+
 Modal = React.createFactory BootstrapModal
 ModalHeader = React.createFactory BootstrapModal.Header
 ModalTitle = React.createFactory BootstrapModal.Title
@@ -21,10 +24,17 @@ UserComponent = React.createClass
     user: React.PropTypes.object.isRequired
     includeLogout: React.PropTypes.bool
 
+  mixins: [ReactStateMagicMixin]
+
+  statics:
+    registerStore: AppStore
+
   getInitialState: ->
     showModal: false
 
-  showPopup: -> @setState showModal: true
+  showPopup: ->
+    if @props.user.username is @state.user.username then AppActions.fetchUser() else AppActions.fetchUsers()
+    @setState showModal: true
 
   closePopup: -> @setState showModal: false
 
