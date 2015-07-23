@@ -49,16 +49,26 @@ RoomComponent = React.createClass
         {username: @state.app.user.username, room: @getParams().room_id}
       ChatActions.setCurrentRoom parseInt @getParams().room_id
       ChatActions.fetchRecentMessages @getParams().room_id
-      if @state.app.unread_mentions[parseInt @getParams().room_id]
-        AppActions.setReadMentions @getParams().room_id    
+      @readMention()
 
   componentDidMount: ->
     setTimeout =>
       ChatActions.setCurrentRoom parseInt @getParams().room_id
       ChatActions.fetchRecentMessages @getParams().room_id
-      if @state.app.unread_mentions[parseInt @getParams().room_id]
-        AppActions.setReadMentions @getParams().room_id
-        
+      @readMention()
+
+  readMention: ->
+    if @state.app.unread_mentions[parseInt @getParams().room_id]
+      AppActions.setReadMentions @getParams().room_id
+      titleMentions = document.title.match /(\d+)/
+      if titleMentions
+        if parseInt(titleMentions[0]) > 1
+          document.title.replace /(\d+)/, (match) ->
+            parseInt(match) - 1
+        else
+          document.title = document.title.slice(0, -4)
+
+
   componentWillUnmount: ->
     @props.socket.removeAllListeners "chat message"
     ChatActions.setCurrentRoom null
