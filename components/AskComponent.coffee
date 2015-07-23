@@ -43,8 +43,20 @@ AskComponent = React.createClass
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
 
+  componentWillUpdate: (nextProps, nextState) ->
+    if @state.chat.topics.length == 0 and nextState.chat.topics.length > 0
+      @setRandomTopic()
+
   componentDidMount: ->
     ChatActions.fetchTopics()
+
+  setRandomTopic: ->
+    setTimeout =>
+      if @state.chat.topics.length > 0
+        numberTopics = @state.chat.topics.length
+        randomIndex = Math.round(numberTopics * Math.random())
+        randomTopic = @state.chat.topics[randomIndex]
+        ChatActions.setTopicSelected randomTopic.id
 
   # Send a new question to the node server
   submitQuestion: (e) ->
@@ -69,10 +81,12 @@ AskComponent = React.createClass
     ChatActions.setTopicSelected eventKey
 
   render: ->
+    dropdownTitle = ""
     dropdownTitle = if @state.chat.topicSelected
-      @state.chat.topics[@state.chat.topicSelected - 1]?.name
-    else
-      "Select a Topic"
+      if @state.chat.topics
+        for topic in @state.chat.topics
+          if topic.id is parseInt(@state.chat.topicSelected)
+            dropdownTitle = topic.name
 
     div {className: "home"},
       Row {},
