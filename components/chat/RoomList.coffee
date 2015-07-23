@@ -35,6 +35,7 @@ RoomList = React.createClass
 
   componentDidMount: ->
     ChatActions.fetchTopicInfo @props.currentTopic
+    setInterval @refreshRoomList, 5000
 
   refreshRoomList: ->
     ChatActions.fetchTopicInfo @props.currentTopic
