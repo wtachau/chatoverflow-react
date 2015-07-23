@@ -37,6 +37,7 @@ AskComponent = React.createClass
   keyPress: (e) ->
     if e.key is "Enter"
       @submitQuestion e
+      e.preventDefault()
 
   # Initialize socket.io connection
   componentWillMount: ->
@@ -98,6 +99,7 @@ AskComponent = React.createClass
                   autoComplete: off
                   value: @state.chat.currentQuestionTitle
                   onChange: @questionTitleChange
+                  onKeyDown: @keyPress
                   placeholder: "Title for your question (required)"
                 Input
                   type: "textarea"
