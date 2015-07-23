@@ -35,15 +35,25 @@
       padding-left: 30px;
       color: $white;
       background-color: $chat_sidebar_background;
+      border: 0px;
+      border-radius: 0px;
+      height: 25px;
+      .thread-title {
+        float: left;
+        width: 130px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .thread-badge {
+        float: left;
+      }
       &:hover {
         background-color: $chat_background_purple;
         .exit-x {
           display: inherit;
         }
       }
-      border: 0px;
-      border-radius: 0px;
-
       .exit-x {
         display: none;
         float: right;
