@@ -17,7 +17,7 @@ RoomInfo = React.createClass
 
   propTypes:
     room: React.PropTypes.object.isRequired
-    topic: React.PropTypes.string.isRequired
+    topic: React.PropTypes.number.isRequired
 
   mixins: [ReactStateMagicMixin]
 
@@ -52,6 +52,6 @@ RoomInfo = React.createClass
             div {className: "time-asked"}, timestamp
             div {className: "followers"},
               @props.room.followers.map (user, index) =>
-                img {src: user.pic_url, className: "room-user-image"}
+                img {src: user.pic_url, className: "room-user-image", key: index}
 
 module.exports = RoomInfo

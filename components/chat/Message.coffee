@@ -12,7 +12,7 @@ Message = React.createClass
 
   propTypes:
     message: React.PropTypes.object.isRequired
-    votes: React.PropTypes.number.isRequired
+    votes: React.PropTypes.array.isRequired
 
   decorateText: (text) ->
     imgMatch = text.match ///((https?:\/\/.*\.(?:png|jpg|gif))){1}///

@@ -12,12 +12,11 @@ module.exports = React.createClass
     id: React.PropTypes.number.isRequired
     topic_id: React.PropTypes.number.isRequired
     title: React.PropTypes.string.isRequired
-    index: React.PropTypes.number.isRequired
     onClose: React.PropTypes.func.isRequired
     badge: React.PropTypes.element.isRequired
 
   render: ->
-    Link {to: "/topics/#{@props.topic_id}/rooms/#{@props.id}", key: @props.index},
+    Link {to: "/topics/#{@props.topic_id}/rooms/#{@props.id}"},
       div {className: "topic-name"},
         div {className: "thread-title"}, @props.title
         div {className: "thread-badge"}, @props.badge

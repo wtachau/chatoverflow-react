@@ -11,11 +11,10 @@ module.exports = React.createClass
   propTypes:
     id: React.PropTypes.number.isRequired
     name: React.PropTypes.string.isRequired
-    index: React.PropTypes.number.isRequired
     onClose: React.PropTypes.func.isRequired
 
   render: ->
-    Link {to: "/topics/#{@props.id}", key: @props.index},
+    Link {to: "/topics/#{@props.id}"},
       ListGroupItem {className: "topic-name"},
         @props.name,
         div {className: "exit-x", "data-id": @props.id, onClick: @props.onClose},

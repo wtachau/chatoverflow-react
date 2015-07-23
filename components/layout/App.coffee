@@ -33,8 +33,9 @@ module.exports = React.createClass
       AppActions.fetchUser()
       AppActions.fetchUsers()
 
-      unless sessionStorage.getItem('preLoginPath') is ''
-        @transitionTo sessionStorage.getItem('preLoginPath')
+      preLoginPath = sessionStorage.getItem('preLoginPath')
+      if preLoginPath and preLoginPath isnt ''
+        @transitionTo preLoginPath
         sessionStorage.setItem('preLoginPath', '')
 
     newurl = "#{window.location.protocol}//\
