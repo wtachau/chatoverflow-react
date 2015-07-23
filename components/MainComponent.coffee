@@ -37,6 +37,12 @@ MainComponent = React.createClass
         AppActions.followRoom room_id, @state.app.user
       @refs.plingsound.getDOMNode().play()
       AppActions.setUnreadMentions room_id
+      if document.title.match /(\d+)/
+        document.title = document.title.replace /(\d+)/, (match) ->
+          parseInt(match) + 1
+      else
+        document.title += " (1)"
+
 
     @socket.emit "subscribe mention",
       {username: @state.app.user.username}
