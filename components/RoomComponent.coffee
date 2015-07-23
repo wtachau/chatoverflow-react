@@ -68,7 +68,6 @@ RoomComponent = React.createClass
         else
           document.title = document.title.slice(0, -4)
 
-
   componentWillUnmount: ->
     @props.socket.removeAllListeners "chat message"
     ChatActions.setCurrentRoom null
