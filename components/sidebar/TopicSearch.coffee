@@ -28,36 +28,31 @@ TopicSearch = React.createClass
   propTypes:
     user: React.PropTypes.object.isRequired
 
-  fetchSearchResults: (input, callback) ->
-    followed_ids = @state.app.user.followed_topics.map ({id}) -> id
-    query = input.trim()
-    if query is ""
-      callback null, options: []
-    else
-      ChatActions.fetchSearchResults input, (response) =>
-        ChatActions.setSearchResults response
-        searchResults = response.filter((result) =>
-          result.id not in followed_ids
-        ).map ({name}) => {value: name, label: name}
-        callback null, options: searchResults
+  componentDidMount: ->
+    ChatActions.fetchSearchResults()
 
-  selectOnChange: (value) ->
-    topics = @state.chat.searchResults.filter ({name}) => name is value
+  selectOnChange: (selectedValue) ->
+    topics = @state.chat.searchResults.filter ({name}) => name is selectedValue
     if topics.length is 0
-      AppActions.createTopic value, (topic) =>
+      AppActions.createTopic selectedValue, (topic) =>
         @state.app.user.followed_topics.push topic
         @transitionTo "topic", topic_id: topic.id
     else
       AppActions.followTopic topics[0].id, @props.user
       @transitionTo "topic", topic_id: topics[0].id
 
+  formattedOptions: ->
+    followed_ids = @state.app.user.followed_topics.map ({id}) -> id
+    @state.chat.searchResults.filter((result) =>
+      result.id not in followed_ids
+    ).map ({name}) => {value: name, label: name}
+
   render: ->
     div {className: "topic-search"},
       Select
         name: "topic-search-field"
         value: ""
-        asyncOptions: @fetchSearchResults
-        autoload: false
+        options: @formattedOptions()
         onChange: @selectOnChange
         multi: false
         allowCreate: true
