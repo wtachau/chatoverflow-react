@@ -23,8 +23,12 @@ class ChatStore
     @startNewThread = null
     @followedTopics = []
     @followedTopicsRooms = []
+    @intervalID = -1
 
     @bindActions(ChatActions)
+
+  onSetIntervalID: (intervalID) ->
+    @intervalID = intervalID
 
   onSetCurrentQuestionTitle: (questionTitle) ->
     @currentQuestionTitle = questionTitle

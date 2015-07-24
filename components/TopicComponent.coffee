@@ -23,6 +23,12 @@ TopicComponent = React.createClass
     registerStores:
       app: AppStore
       chat: ChatStore
+    willTransitionTo: (transition, params, query) ->
+      ChatActions.setIntervalID setInterval(->
+        ChatActions.fetchTopicInfo params.topic_id
+      , 5000)
+    willTransitionFrom: (transition, component) ->
+      window.clearInterval(component.state.chat.intervalID)
 
   componentWillReceiveProps: (newProps) -> @updateTopicSelected(newProps)
   componentDidMount: -> @updateTopicSelected(@props)
