@@ -9,7 +9,7 @@ HomeList = React.createClass
   displayName: "HomeList"
 
   propTypes:
-    roomsSorted: React.PropTypes.object.isRequired
+    roomsSorted: React.PropTypes.array.isRequired
 
   render: ->
     div {className: "room-list-page"},
@@ -17,7 +17,7 @@ HomeList = React.createClass
         Row {},
           div {className: "current-topic"}, name
         Row {className: "rooms-list"},
-          @props.roomsSorted?.map (room) =>
-            RoomInfo { room, topic: room.topic_id, title: room.topic_title }
+          @props.roomsSorted?.map (room, index) =>
+            RoomInfo { room, topic: room.topic_id, title: room.topic_title, key: index }
 
 module.exports = HomeList

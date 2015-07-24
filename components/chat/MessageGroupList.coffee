@@ -15,7 +15,7 @@ Row = React.createFactory ReactBootstrap.Row
 Col = React.createFactory ReactBootstrap.Col
 
 MessageGroupList = React.createClass
-  displayName: "MessageGroup"
+  displayName: "MessageGroupList"
 
   mixins: [ReactStateMagicMixin]
 
@@ -55,7 +55,7 @@ MessageGroupList = React.createClass
       @props.messageGroups.map (group, index) =>
         properties = @getMessageProperties group
         side = if group[0].user.username is @state.app.user.username then "right" else "left"
-        Row {className: "message-group #{side} row-no-margin"},
+        Row {className: "message-group #{side} row-no-margin", key: index},
           Col md: 1,
             if side is "left"
               UserComponent {user: group[0].user}
@@ -65,7 +65,7 @@ MessageGroupList = React.createClass
                 group[0].user.username
             Row {className: "row-no-margin"},
               group.map (message, index) =>
-                div {className: "message"},
+                div {className: "message", key: index},
                   Message
                     message: message
                     votes: @state.app.user.votes

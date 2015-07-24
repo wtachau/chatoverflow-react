@@ -87,7 +87,7 @@ RoomComponent = React.createClass
   render: ->
     div {className: "messages-section"},
       MessageList
-        originalPost: @state.chat.originalPost
+        originalPost: @state.chat.originalPost or {}
         messages: @state.chat.messages
         currentRoom: @getParams().room_id
         ref: "messageList"

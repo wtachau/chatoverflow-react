@@ -13,4 +13,4 @@ module.exports = React.createClass
     div {},
       h1 {className: "categories-header"}, "Followed Rooms"
       @props.topics?.map ({id, name}, index) =>
-        TopicListItem {id, name, index, onClose: @props.onClose}
+        TopicListItem {id, name, key: index, onClose: @props.onClose}
