@@ -45,8 +45,7 @@ RoomComponent = React.createClass
 
   componentWillReceiveProps: (newProps) ->
     unless @props.params.room_id is newProps.params.room_id
-      @props.socket.emit "subscribe",
-        {username: @state.app.user.username, room: @getParams().room_id}
+      @props.socket.emit "subscribe room", room: @getParams().room_id
       ChatActions.setCurrentRoom parseInt @getParams().room_id
       ChatActions.fetchRecentMessages @getParams().room_id
       @readMention()
