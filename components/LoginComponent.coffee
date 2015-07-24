@@ -20,6 +20,8 @@ LoginComponent = React.createClass
           h3 className: "subtitle",
             i {}, "to the chat mobile!"
         div {className:"register-button", onClick: @props.loginClicked},
-          Button bsSize: 'large', "login"
+          Button bsSize: 'large',
+            i {className: "fa fa-github"}
+            div {className: "login-text"}, "login with github"
 
 module.exports = LoginComponent
