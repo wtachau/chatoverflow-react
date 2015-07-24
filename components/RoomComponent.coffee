@@ -57,8 +57,9 @@ RoomComponent = React.createClass
       @readMention()
 
   readMention: ->
-    if @state.app.unread_mentions[parseInt @getParams().room_id]
-      AppActions.setReadMentions @getParams().room_id
+    room_id = parseInt @getParams().room_id
+    if @state.app.unread_mentions[room_id]
+      AppActions.setReadMentions room_id
       titleMentions = document.title.match /(\d+)/
       if titleMentions
         if parseInt(titleMentions[0]) > 1
