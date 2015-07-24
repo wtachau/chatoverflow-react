@@ -1,7 +1,10 @@
 React = require("react")
 ReactBootstrap = require("react-bootstrap")
 AppActions = require("../actions/AppActions")
+AppStore = require("../stores/AppStore")
 BootstrapModal = require("react-bootstrap-modal")
+ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
+
 Modal = React.createFactory BootstrapModal
 ModalHeader = React.createFactory BootstrapModal.Header
 ModalTitle = React.createFactory BootstrapModal.Title
@@ -21,10 +24,17 @@ UserComponent = React.createClass
     user: React.PropTypes.object.isRequired
     includeLogout: React.PropTypes.bool
 
+  mixins: [ReactStateMagicMixin]
+
+  statics:
+    registerStore: AppStore
+
   getInitialState: ->
     showModal: false
 
-  showPopup: -> @setState showModal: true
+  showPopup: ->
+    AppActions.fetchUsers()
+    @setState showModal: true
 
   closePopup: -> @setState showModal: false
 
@@ -43,7 +53,10 @@ UserComponent = React.createClass
                   Thumbnail {href: "#", src: @props.user.pic_url}
               Col {xs: 6, md: 3},
                 div {className: "user-username"}, "#{@props.user.username}"
-                div {className: "user-karma"}, "Karma: #{@props.user.karma or 0}"
+                if @state.users
+                  for user in @state.users
+                    if user.username is @props.user.username
+                      div {className: "user-karma"}, "Karma: #{user.karma or 0}"
         if @props.includeLogout
           ModalFooter {},
             Button {onClick: AppActions.logout, bsStyle: "danger"}, "Log out"
