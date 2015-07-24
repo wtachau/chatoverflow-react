@@ -33,7 +33,7 @@ UserComponent = React.createClass
     showModal: false
 
   showPopup: ->
-    if @props.user.username is @state.user.username then AppActions.fetchUser() else AppActions.fetchUsers()
+    AppActions.fetchUsers()
     @setState showModal: true
 
   closePopup: -> @setState showModal: false
