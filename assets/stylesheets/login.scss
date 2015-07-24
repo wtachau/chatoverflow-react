@@ -25,11 +25,13 @@
   .register-button {
     text-align: center;
     margin-top: 20px;
-  }
-
-  .login-button {
-    right: 35px;
-    position: absolute;
-    top: 35px;
+    i.fa {
+      float: left;
+      font-size: 30px;
+    }
+    .login-text {
+      float: left;
+      margin: 3px 0px 0px 8px;
+    }
   }
 }

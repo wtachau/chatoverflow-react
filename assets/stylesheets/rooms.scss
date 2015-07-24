@@ -188,6 +188,21 @@
         margin: 15px 0px 0px 20px;
         text-transform: lowercase;
     }
+    .home-header {
+      font-size: 30px;
+      text-align: center;
+      border: 2px solid white;
+      width: 30%;
+      margin: auto;
+      padding: 8px 5px 12px 5px;
+      margin-top: -10px;
+      border-radius: 15px;
+      cursor: pointer;
+      color: white;
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 
   .nav-tabs {

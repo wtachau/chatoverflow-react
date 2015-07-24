@@ -1,5 +1,7 @@
 React = require("react")
 ReactBootstrap = require("react-bootstrap")
+Router = require("react-router")
+Link = React.createFactory Router.Link
 ChatStore = require("../stores/ChatStore")
 ChatActions = require("../actions/ChatActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
@@ -28,7 +30,9 @@ HomeComponent = React.createClass
     roomsSortByCreatedAt.sort CompareDateResources.compareDateCreatedAt
     roomsSortByNewestMessage.sort CompareDateResources.compareLatestMessage
     div {className: "rooms", id: "news-feed"},
-      div {className: "current-topic topic-header"}, "home 家"
+      div {className: "current-topic topic-header"},
+        Link to: "ask",
+          div {className: "home-header"}, ">> ask a question"
       TabbedArea {eventKey: 1, defaultActiveKey: 1},
         TabPane {eventKey: 1, tab: "Most Recent"},
           HomeList {roomsSorted: roomsSortByCreatedAt}
