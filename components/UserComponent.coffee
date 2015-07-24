@@ -53,7 +53,10 @@ UserComponent = React.createClass
                   Thumbnail {href: "#", src: @props.user.pic_url}
               Col {xs: 6, md: 3},
                 div {className: "user-username"}, "#{@props.user.username}"
-                div {className: "user-karma"}, "Karma: #{@props.user.karma or 0}"
+                if @state.users
+                  for user in @state.users
+                    if user.username is @props.user.username
+                      div {className: "user-karma"}, "Karma: #{user.karma or 0}"
         if @props.includeLogout
           ModalFooter {},
             Button {onClick: AppActions.logout, bsStyle: "danger"}, "Log out"
