@@ -1,14 +1,15 @@
-React = require "react"
-mentions = require "react-mentions"
-ReactBootstrap = require "react-bootstrap"
-ThreadActions = require("../../actions/ThreadActions")
-RoomStore = require("../../stores/RoomStore")
-URLResources = require("../../common/URLResources")
+React                = require "react"
+mentions             = require "react-mentions"
+ReactBootstrap       = require "react-bootstrap"
+ThreadActions        = require("../../actions/ThreadActions")
+RoomStore            = require("../../stores/RoomStore")
+URLResources         = require("../../common/URLResources")
+ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+
+MentionsInput = React.createFactory mentions.MentionsInput
+Mention       = React.createFactory mentions.Mention
 
 {form} = React.DOM
-MentionsInput = React.createFactory mentions.MentionsInput
-Mention = React.createFactory mentions.Mention
-ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 ChatForm = React.createClass
   displayName: "ChatForm"

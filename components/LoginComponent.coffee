@@ -1,8 +1,10 @@
-React = require("react")
+React          = require("react")
 ReactBootstrap = require("react-bootstrap")
-Row = React.createFactory(ReactBootstrap.Row)
-Col = React.createFactory(ReactBootstrap.Col)
+
+Row    = React.createFactory(ReactBootstrap.Row)
+Col    = React.createFactory(ReactBootstrap.Col)
 Button = React.createFactory(ReactBootstrap.Button)
+
 { div, h1, h3, button, i } = React.DOM
 
 LoginComponent = React.createClass

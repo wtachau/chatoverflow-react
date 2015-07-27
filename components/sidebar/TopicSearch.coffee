@@ -1,17 +1,18 @@
-React = require("react")
-ReactBootstrap = require("react-bootstrap")
-Router = require("react-router")
-ListGroup = React.createFactory ReactBootstrap.ListGroup
-ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
-Link = React.createFactory Router.Link
-Button = React.createFactory ReactBootstrap.Button
-Input = React.createFactory ReactBootstrap.Input
-UserActions = require("../../actions/UserActions")
-UserStore = require("../../stores/UserStore")
-RoomActions = require("../../actions/RoomActions")
-RoomStore = require("../../stores/RoomStore")
+React                = require("react")
+ReactBootstrap       = require("react-bootstrap")
+Router               = require("react-router")
+UserActions          = require("../../actions/UserActions")
+UserStore            = require("../../stores/UserStore")
+RoomActions          = require("../../actions/RoomActions")
+RoomStore            = require("../../stores/RoomStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
-Select = React.createFactory require("react-select")
+
+Select        = React.createFactory require("react-select")
+ListGroup     = React.createFactory ReactBootstrap.ListGroup
+ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
+Link          = React.createFactory Router.Link
+Button        = React.createFactory ReactBootstrap.Button
+Input         = React.createFactory ReactBootstrap.Input
 
 { h1, div, a } = React.DOM
 

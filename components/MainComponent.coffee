@@ -1,21 +1,20 @@
-React = require("react")
-io = require("socket.io-client")
-Router = require("react-router")
-
-URLResources = require("../common/URLResources")
-FollowResources = require("../common/FollowResources")
-UserStore = require("../stores/UserStore")
-UserActions = require("../actions/UserActions")
-RoomStore = require("../stores/RoomStore")
-RoomActions = require("../actions/RoomActions")
-MentionActions = require("../actions/MentionActions")
+React                = require("react")
+io                   = require("socket.io-client")
+Router               = require("react-router")
+URLResources         = require("../common/URLResources")
+FollowResources      = require("../common/FollowResources")
+UserStore            = require("../stores/UserStore")
+UserActions          = require("../actions/UserActions")
+RoomStore            = require("../stores/RoomStore")
+RoomActions          = require("../actions/RoomActions")
+MentionActions       = require("../actions/MentionActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 
-RouteHandler = React.createFactory Router.RouteHandler
-RoomList = React.createFactory require("./chat/RoomList")
+RoomList        = React.createFactory require("./chat/RoomList")
 HeaderComponent = React.createFactory require("./HeaderComponent")
-MainComponent = React.createFactory require("./MainComponent")
-TopicSidebar = React.createFactory require("./sidebar/TopicSidebar")
+MainComponent   = React.createFactory require("./MainComponent")
+TopicSidebar    = React.createFactory require("./sidebar/TopicSidebar")
+RouteHandler    = React.createFactory Router.RouteHandler
 
 { div, audio, source } = React.DOM
 
