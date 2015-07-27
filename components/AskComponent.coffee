@@ -28,20 +28,20 @@ AskComponent = React.createClass
       chat: ChatStore
       user: UserStore
 
+  getInitialState: ->
+    questionTitle: ""
+    questionText: ""
+
   questionTitleChange: (e) ->
-    ChatActions.setCurrentQuestionTitle e.target.value
+    @setState questionTitle: e.target.value
 
   questionTextChange: (e) ->
-    ChatActions.setCurrentQuestionText e.target.value
+    @setState questionText: e.target.value
 
   keyPress: (e) ->
     if e.key is "Enter"
       @submitQuestion e
       e.preventDefault()
-
-  # Initialize socket.io connection
-  componentWillMount: ->
-    @socket = io(URLResources.getChatServerOrigin())
 
   componentWillUpdate: (nextProps, nextState) ->
     if @state.chat.topics.length == 0 and nextState.chat.topics.length > 0
@@ -60,21 +60,21 @@ AskComponent = React.createClass
 
   # Send a new question to the node server
   submitQuestion: (e) ->
-    unless (@state.chat.currentQuestionText.trim() is "") or
-    (@state.chat.currentQuestionTitle.trim() is "")
+    unless (@state.questionText.trim() is "") or
+    (@state.questionTitle.trim() is "")
       URLResources.callAPI "/rooms", "post",
         {topic_id: @state.chat.topicSelected,
-        title: @state.chat.currentQuestionTitle.trim(),
-        text: @state.chat.currentQuestionText.trim()},
+        title: @state.questionTitle.trim(),
+        text: @state.questionText.trim()},
         @onSubmitQuestion
       e.preventDefault()
 
   # After a new question is created, reset parameters
   onSubmitQuestion: (response) ->
     UserActions.fetchUser()
-    ChatActions.setCurrentQuestionText ""
-    ChatActions.setCurrentQuestionTitle ""
-    
+    @setState questionTitle: ""
+    @setState questionText: ""
+
     @transitionTo 'room', room_id: response.id, topic_id: response.topic_id
 
   onTopicSelected: (eventKey, href, target) ->
@@ -111,14 +111,14 @@ AskComponent = React.createClass
                   type: "text"
                   className: "ask-title"
                   autoComplete: off
-                  value: @state.chat.currentQuestionTitle
+                  value: @state.questionTitle
                   onChange: @questionTitleChange
                   onKeyDown: @keyPress
                   placeholder: "Title for your question (required)"
                 Input
                   type: "textarea"
                   className: "ask-question"
-                  value: @state.chat.currentQuestionText
+                  value: @state.questionText
                   onChange: @questionTextChange
                   onKeyDown: @keyPress
                   placeholder: "Describe your question (required)"

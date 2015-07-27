@@ -1,27 +1,20 @@
 alt = require("../alt")
 ChatActions = require("../actions/ChatActions")
 
-class ChatStore
-  displayName: "ChatStore"
+class ThreadStore
+  displayName: "ThreadStore"
 
   constructor: ->
     @currentMessage = ""
     @messages = []
-    @topics = []
     @mentions = []
-    @topicSelected = null
-    @topicInfo = null
     @oldestPage = null
     @originalPost = null
     @currentRoom = null
-    @searchResults = []
     @keyPressMap = []
     @autoScrollWindow = 160
     @isFinishedLoadingMessages = true
     @startNewThread = null
-    @followedTopics = []
-    @followedTopicsRooms = []
-    @intervalID = -1
 
     @bindActions(ChatActions)
 
