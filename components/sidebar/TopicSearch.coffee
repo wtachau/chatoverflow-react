@@ -14,7 +14,7 @@ Link          = React.createFactory Router.Link
 Button        = React.createFactory ReactBootstrap.Button
 Input         = React.createFactory ReactBootstrap.Input
 
-{ h1, div, a } = React.DOM
+{div} = React.DOM
 
 TopicSearch = React.createClass
   displayName: "TopicSearch"
