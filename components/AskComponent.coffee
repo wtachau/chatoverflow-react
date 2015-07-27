@@ -44,7 +44,7 @@ AskComponent = React.createClass
       e.preventDefault()
 
   componentWillUpdate: (nextProps, nextState) ->
-    if @state.room.topics.length == 0 and nextState.chat.topics.length > 0
+    if @state.room.topics.length == 0 and nextState.room.topics.length > 0
       @setRandomTopic()
 
   componentDidMount: ->
