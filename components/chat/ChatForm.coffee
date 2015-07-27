@@ -56,8 +56,10 @@ ChatForm = React.createClass
   displayMention: (id, display, type) -> "@" + display
 
   formattedUserMentionsData: () ->
-    @props.users.map ({username, id}) ->
+    mentions = @props.users.map ({username, id}) ->
       {id: id + 1, display: username}
+    mentions.unshift display: "here", id: 1
+    mentions
 
   inputChange: (e, newValue, newPlainTextValue, mentions) ->
     component = React.findDOMNode this
@@ -66,8 +68,6 @@ ChatForm = React.createClass
     @setState mentions: mentions
 
   render: ->
-    mentionsData = @formattedUserMentionsData()
-    mentionsData.push {display: "here", id: 1}
     form {className: "chat-form", autoComplete: off},
       MentionsInput
         value: @state.message
@@ -76,6 +76,6 @@ ChatForm = React.createClass
         onKeyUp: @keyPress
         onKeyDown: @keyPress,
         markup: "@[__display__](#)"
-        Mention {trigger: "@", data: mentionsData},
+        Mention {trigger: "@", data: @formattedUserMentionsData()},
 
 module.exports = ChatForm
