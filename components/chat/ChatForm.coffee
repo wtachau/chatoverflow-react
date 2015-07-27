@@ -63,7 +63,7 @@ ChatForm = React.createClass
 
   render: ->
     mentionsData = @formattedUserMentionsData()
-    mentionsData.push {display: "here", id: 1}
+    mentionsData.unshift {display: "here", id: 1}
     form {className: "chat-form", autoComplete: off},
       MentionsInput
         value: @props.currentMessage
