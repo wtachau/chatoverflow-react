@@ -1,14 +1,15 @@
 React = require("react")
-
 MessageGroupList = React.createFactory require("./MessageGroupList")
 PinnedPost = React.createFactory require("./PinnedPost")
 UserStore = require("../../stores/UserStore")
 UserActions = require("../../actions/UserActions")
-ChatStore = require("../../stores/ChatStore")
-ChatActions = require("../../actions/ChatActions")
+ThreadStore = require("../../stores/ThreadStore")
+ThreadActions = require("../../actions/ThreadActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 { div, img } = React.DOM
+
+AutoScrollWindow = 160
 
 MessageList = React.createClass
   displayName: "MessageList"
@@ -18,7 +19,7 @@ MessageList = React.createClass
   statics:
     registerStores:
       user: UserStore
-      chat: ChatStore
+      thread: ThreadStore
 
   propTypes:
     originalPost: React.PropTypes.object.isRequired
@@ -51,11 +52,11 @@ MessageList = React.createClass
         [..., last] = @props.messages
         if last and last.isNewMessage
           last.isNewMessage = false
-          if (@getScrollPosition messagesComp) < @state.chat.autoScrollWindow
+          if (@getScrollPosition messagesComp) < AutoScrollWindow
             messagesComp.scrollTop = messagesComp.scrollHeight
 
   initialMessagesUpdate: (messagesComponent) ->
-    @state.chat.isFinishedLoadingMessages = false
+    @state.thread.isFinishedLoadingMessages = false
     messagesComponent.scrollTop = messagesComponent.scrollHeight
 
   onOldMessagesReceived: (messagesComponent) ->
@@ -70,8 +71,8 @@ MessageList = React.createClass
     target = event.target
     scrollTop = target.scrollTop
     if scrollTop is 0
-      ChatActions.fetchOldMessages @props.currentRoom,
-        parseInt(@state.chat.oldestPage) + 1
+      ThreadActions.fetchOldMessages @props.currentRoom,
+        parseInt(@state.thread.oldestPage) + 1
 
   createGroups: (rest) ->
   # groups messages together by username
@@ -95,7 +96,7 @@ MessageList = React.createClass
             originalPost: @props.originalPost
             currentRoom: @props.currentRoom
           div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},
-            if (not @state.chat.isFinishedLoadingMessages or @messagesComponent.scrollHeight)
+            if (not @state.thread.isFinishedLoadingMessages or @messagesComponent.scrollHeight)
               img {className: "loading-icon", src: "../../../assets/images/loading.gif"}
             MessageGroupList { messageGroups, shouldUpdateScrollHeight: @shouldUpdateScrollHeight }
 

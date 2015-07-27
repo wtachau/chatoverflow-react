@@ -1,34 +1,18 @@
 alt = require("../alt")
-ChatActions = require("../actions/ChatActions")
+ThreadActions = require("../actions/ThreadActions")
 
 class ThreadStore
   displayName: "ThreadStore"
 
   constructor: ->
-    @currentMessage = ""
     @messages = []
-    @mentions = []
     @oldestPage = null
     @originalPost = null
     @currentRoom = null
-    @keyPressMap = []
-    @autoScrollWindow = 160
     @isFinishedLoadingMessages = true
     @startNewThread = null
 
-    @bindActions(ChatActions)
-
-  onSetIntervalID: (intervalID) ->
-    @intervalID = intervalID
-
-  onSetCurrentMessage: (message) ->
-    @currentMessage = message
-
-  onSetCurrentRoom: (room) ->
-    @currentRoom = room
-
-  onSetSearchResults: (results) ->
-    @searchResults = results
+    @bindActions(ThreadActions)
 
   onSetMessage: (message) ->
     for m, i in @messages
@@ -54,30 +38,13 @@ class ThreadStore
     else
       @isFinishedLoadingMessages = true
 
-  onSetTopics: (topics) ->
-    @topics = topics
-
-  onSetTopicSelected: (topicSelected) ->
-    @topicSelected = topicSelected
-    
-  onSetTopicInfo: (topicInfo) ->
-    @topicInfo = topicInfo
-
-  onSetMentions: (mentions) ->
-    @mentions = mentions
-
   onSetOldestPage: (page) ->
     @oldestPage = page
 
   onSetOriginalPost: (post) ->
     @originalPost = post
 
-  onSetFollowedTopics: (followedTopics) ->
-    @followedTopics = followedTopics
-    @followedTopicsRooms = []
-    for topic in @followedTopics
-      for room in topic.rooms
-        room['topic_title'] = topic.name
-        @followedTopicsRooms.push room
+  onSetCurrentRoom: (room) ->
+    @currentRoom = room
 
-module.exports = alt.createStore(ChatStore)
+module.exports = alt.createStore(ThreadStore)

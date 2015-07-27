@@ -8,8 +8,8 @@ Button = React.createFactory ReactBootstrap.Button
 Input = React.createFactory ReactBootstrap.Input
 UserActions = require("../../actions/UserActions")
 UserStore = require("../../stores/UserStore")
-ChatActions = require("../../actions/ChatActions")
-ChatStore = require("../../stores/ChatStore")
+RoomActions = require("../../actions/RoomActions")
+RoomStore = require("../../stores/RoomStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 Select = React.createFactory require("react-select")
 
@@ -23,16 +23,16 @@ TopicSearch = React.createClass
   statics:
     registerStores:
       user: UserStore
-      chat: ChatStore
+      room: RoomStore
 
   propTypes:
     user: React.PropTypes.object.isRequired
 
   componentDidMount: ->
-    ChatActions.fetchSearchResults()
+    RoomActions.fetchSearchResults()
 
   selectOnChange: (selectedValue) ->
-    topics = @state.chat.searchResults.filter ({name}) => name is selectedValue
+    topics = @state.room.searchResults.filter ({name}) => name is selectedValue
     if topics.length is 0
       UserActions.createTopic selectedValue, (topic) =>
         @state.user.user.followed_topics.push topic
@@ -43,7 +43,7 @@ TopicSearch = React.createClass
 
   formattedOptions: ->
     followed_ids = @state.user.user.followed_topics.map ({id}) -> id
-    @state.chat.searchResults.filter((result) =>
+    @state.room.searchResults.filter((result) =>
       result.id not in followed_ids
     ).map ({name}) => {value: name, label: name}
 

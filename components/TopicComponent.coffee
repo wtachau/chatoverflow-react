@@ -1,6 +1,5 @@
 React = require("react")
 io = require("socket.io-client")
-
 UserStore = require("../stores/UserStore")
 UserActions = require("../actions/UserActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
@@ -11,8 +10,8 @@ RouteHandler = React.createFactory Router.RouteHandler
 RoomList = React.createFactory require("./chat/RoomList")
 { div } = React.DOM
 
-ChatStore = require("../stores/ChatStore")
-ChatActions = require("../actions/ChatActions")
+RoomStore = require("../stores/RoomStore")
+RoomActions = require("../actions/RoomActions")
 
 TopicComponent = React.createClass
   displayName: "TopicComponent"
@@ -22,22 +21,21 @@ TopicComponent = React.createClass
   statics:
     registerStores:
       user: UserStore
-      chat: ChatStore
+      room: RoomStore
     willTransitionTo: (transition, params, query) ->
-      ChatActions.setIntervalID setInterval(->
-        ChatActions.fetchTopicInfo params.topic_id
+      RoomActions.setIntervalID setInterval(->
+        RoomActions.fetchTopicInfo params.topic_id
       , 5000)
     willTransitionFrom: (transition, component) ->
-      window.clearInterval(component.state.chat.intervalID)
+      window.clearInterval(component.state.room.intervalID)
 
   componentWillReceiveProps: (newProps) -> @updateTopicSelected(newProps)
   componentDidMount: -> @updateTopicSelected(@props)
 
   updateTopicSelected: (props) ->
     setTimeout =>
-      unless props.params.topic_id is @state.chat.topicSelected
-        ChatActions.setTopicSelected props.params.topic_id
-
+      unless props.params.topic_id is @state.room.topicSelected
+        RoomActions.setTopicSelected props.params.topic_id
 
   render: ->
     div {className: "main-section"},

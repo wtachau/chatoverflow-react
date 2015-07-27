@@ -6,8 +6,8 @@ URLResources = require("../common/URLResources")
 FollowResources = require("../common/FollowResources")
 UserStore = require("../stores/UserStore")
 UserActions = require("../actions/UserActions")
-ChatStore = require("../stores/ChatStore")
-ChatActions = require("../actions/ChatActions")
+RoomStore = require("../stores/RoomStore")
+RoomActions = require("../actions/RoomActions")
 MentionActions = require("../actions/MentionActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 
@@ -28,7 +28,7 @@ MainComponent = React.createClass
   statics:
     registerStores:
       user: UserStore
-      chat: ChatStore
+      room: RoomStore
 
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
@@ -43,7 +43,6 @@ MainComponent = React.createClass
           parseInt(match) + 1
       else
         document.title += " (1)"
-
 
     @socket.emit "subscribe mention",
       {username: @state.user.user.username}
