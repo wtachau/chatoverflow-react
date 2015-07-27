@@ -1,5 +1,4 @@
 FollowResources =
-
   isFollowingRoom: (room_id, user) ->
     followedRoomIds = user.followed_rooms.map ({id}) -> id
     parseInt(room_id) in followedRoomIds

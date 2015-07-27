@@ -6,10 +6,10 @@ ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Link = React.createFactory Router.Link
 Button = React.createFactory ReactBootstrap.Button
 Input = React.createFactory ReactBootstrap.Input
-AppActions = require("../../actions/AppActions")
-AppStore = require("../../stores/AppStore")
-ChatActions = require("../../actions/ChatActions")
-ChatStore = require("../../stores/ChatStore")
+UserActions = require("../../actions/UserActions")
+UserStore = require("../../stores/UserStore")
+RoomActions = require("../../actions/RoomActions")
+RoomStore = require("../../stores/RoomStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 Select = React.createFactory require("react-select")
 
@@ -22,28 +22,28 @@ TopicSearch = React.createClass
 
   statics:
     registerStores:
-      app: AppStore
-      chat: ChatStore
+      user: UserStore
+      room: RoomStore
 
   propTypes:
     user: React.PropTypes.object.isRequired
 
   componentDidMount: ->
-    ChatActions.fetchSearchResults()
+    RoomActions.fetchSearchResults()
 
   selectOnChange: (selectedValue) ->
-    topics = @state.chat.searchResults.filter ({name}) => name is selectedValue
+    topics = @state.room.searchResults.filter ({name}) => name is selectedValue
     if topics.length is 0
-      AppActions.createTopic selectedValue, (topic) =>
-        @state.app.user.followed_topics.push topic
+      UserActions.createTopic selectedValue, (topic) =>
+        @state.user.user.followed_topics.push topic
         @transitionTo "topic", topic_id: topic.id
     else
-      AppActions.followTopic topics[0].id, @props.user
+      UserActions.followTopic topics[0].id, @props.user
       @transitionTo "topic", topic_id: topics[0].id
 
   formattedOptions: ->
-    followed_ids = @state.app.user.followed_topics.map ({id}) -> id
-    @state.chat.searchResults.filter((result) =>
+    followed_ids = @state.user.user.followed_topics.map ({id}) -> id
+    @state.room.searchResults.filter((result) =>
       result.id not in followed_ids
     ).map ({name}) => {value: name, label: name}
 

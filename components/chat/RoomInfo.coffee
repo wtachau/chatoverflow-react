@@ -2,8 +2,7 @@ React = require("react")
 ReactBootstrap = require("react-bootstrap")
 Router = require("react-router")
 URLResources = require("../../common/URLResources")
-ChatStore = require("../../stores/ChatStore")
-ChatActions = require("../../actions/ChatActions")
+ThreadStore = require("../../stores/ThreadStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Row = React.createFactory ReactBootstrap.Row
@@ -22,7 +21,7 @@ RoomInfo = React.createClass
   mixins: [ReactStateMagicMixin]
 
   statics:
-    registerStore: ChatStore
+    registerStore: ThreadStore
 
   render: ->
     message = @props.room.messages[0]

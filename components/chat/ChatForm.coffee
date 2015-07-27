@@ -1,8 +1,8 @@
 React = require "react"
 mentions = require "react-mentions"
 ReactBootstrap = require "react-bootstrap"
-ChatActions = require("../../actions/ChatActions")
-ChatStore = require("../../stores/ChatStore")
+ThreadActions = require("../../actions/ThreadActions")
+RoomStore = require("../../stores/RoomStore")
 URLResources = require("../../common/URLResources")
 
 {form} = React.DOM
@@ -15,29 +15,33 @@ ChatForm = React.createClass
 
   propTypes:
     submitMessage: React.PropTypes.func.isRequired
-    currentMessage: React.PropTypes.string.isRequired
     users: React.PropTypes.array.isRequired
 
   mixins: [ReactStateMagicMixin]
 
   statics:
-    registerStore: ChatStore
+    registerStore: RoomStore
+    
+  getInitialState: ->
+    message: ""
+    mentions: []
+    keyPressMap: {}
 
   componentWillUnmount: ->
-    ChatActions.setCurrentRoom null
+    ThreadActions.setCurrentRoom null
 
   keyPress: (e) ->
     @state.keyPressMap[e.key] = (e.type == "keydown")
     controlOrShift = @state.keyPressMap["Control"] or
                       @state.keyPressMap["Shift"]
     if @state.keyPressMap["Enter"] and controlOrShift
-      @state.currentMessage = @state.currentMessage + "\n"
+      @setState message: @state.message + "\n"
     else if @state.keyPressMap["Enter"]
       @submit e
 
   submit: (e) ->
-    @props.submitMessage e, @props.currentMessage.trim(), @state.mentions
-    ChatActions.setCurrentMessage ""
+    @props.submitMessage e, @state.message.trim(), @state.mentions
+    @setState message: ""
 
   displayMention: (id, display, type) -> "@" + display
 
@@ -48,13 +52,13 @@ ChatForm = React.createClass
   inputChange: (e, newValue, newPlainTextValue, mentions) ->
     component = React.findDOMNode this
     component.scrollTop = component.scrollHeight
-    ChatActions.setCurrentMessage e.target.value
-    ChatActions.setMentions mentions
+    @setState message: e.target.value
+    @setState mentions: mentions
 
   render: ->
     form {className: "chat-form", autoComplete: off},
       MentionsInput
-        value: @props.currentMessage
+        value: @state.message
         onChange: @inputChange
         displayTransform: @displayMention
         onKeyUp: @keyPress

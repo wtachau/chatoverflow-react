@@ -2,8 +2,8 @@ React = require("react")
 ReactBootstrap = require("react-bootstrap")
 Router = require("react-router")
 Link = React.createFactory Router.Link
-ChatStore = require("../stores/ChatStore")
-ChatActions = require("../actions/ChatActions")
+RoomStore = require("../stores/RoomStore")
+RoomActions = require("../actions/RoomActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 HomeList = React.createFactory require("./chat/HomeList")
 TabbedArea = React.createFactory ReactBootstrap.TabbedArea
@@ -17,12 +17,12 @@ HomeComponent = React.createClass
   mixins: [ReactStateMagicMixin]
 
   statics:
-    registerStore: ChatStore
+    registerStore: RoomStore
 
   componentDidMount: ->
     setTimeout =>
-      ChatActions.fetchFollowedTopics()
-      ChatActions.setTopicSelected null
+      RoomActions.fetchFollowedTopics()
+      RoomActions.setTopicSelected null
 
   render: ->
     roomsSortByCreatedAt = @state.followedTopicsRooms.slice(0)

@@ -2,9 +2,9 @@ React = require("react")
 ReactBootstrap = require("react-bootstrap")
 Router = require("react-router")
 URLResources = require("../../common/URLResources")
-ChatStore = require("../../stores/ChatStore")
-ChatActions = require("../../actions/ChatActions")
-AppActions = require("../../actions/AppActions")
+RoomStore = require("../../stores/RoomStore")
+RoomActions = require("../../actions/RoomActions")
+UserActions = require("../../actions/UserActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 ListGroup = React.createFactory ReactBootstrap.ListGroup
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
@@ -27,20 +27,19 @@ RoomList = React.createClass
   mixins: [ReactStateMagicMixin]
 
   statics:
-    registerStore: ChatStore
+    registerStore: RoomStore
 
   componentWillReceiveProps: (nextProps) ->
     unless nextProps.currentTopic is @props.currentTopic
-      ChatActions.fetchTopicInfo nextProps.currentTopic
+      RoomActions.fetchTopicInfo nextProps.currentTopic
 
   componentDidMount: ->
-    ChatActions.fetchTopicInfo @props.currentTopic
+    RoomActions.fetchTopicInfo @props.currentTopic
 
   refreshRoomList: ->
-    ChatActions.fetchTopicInfo @props.currentTopic
+    RoomActions.fetchTopicInfo @props.currentTopic
 
   render: ->
-    currentRoom = if @state.currentRoom then "highlight-room" else ""
     div {className: "rooms"},
       if @state.topicInfo
         div {className: "room-list-page"},

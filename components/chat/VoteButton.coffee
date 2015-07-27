@@ -1,6 +1,6 @@
 React = require("react")
-ChatActions = require("../../actions/ChatActions")
-AppActions = require("../../actions/AppActions")
+ThreadActions = require("../../actions/ThreadActions")
+UserActions = require("../../actions/UserActions")
 
 { div, button } = React.DOM
 
@@ -12,11 +12,11 @@ VoteButton = React.createClass
     votes: React.PropTypes.array.isRequired
 
   vote: ->
-    ChatActions.starMessage @props.message.id, @props.message.room_id
+    ThreadActions.starMessage @props.message.id, @props.message.room_id
     if @color.index is -1
-      AppActions.pushUserVote {message_id: @props.message.id}
+      UserActions.pushUserVote {message_id: @props.message.id}
     else
-      AppActions.removeUserVote @color.index
+      UserActions.removeUserVote @color.index
       @color.color = {color: "", index: -1}
 
   buttonColor: ->

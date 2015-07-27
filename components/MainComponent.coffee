@@ -4,10 +4,11 @@ Router = require("react-router")
 
 URLResources = require("../common/URLResources")
 FollowResources = require("../common/FollowResources")
-AppStore = require("../stores/AppStore")
-AppActions = require("../actions/AppActions")
-ChatStore = require("../stores/ChatStore")
-ChatActions = require("../actions/ChatActions")
+UserStore = require("../stores/UserStore")
+UserActions = require("../actions/UserActions")
+RoomStore = require("../stores/RoomStore")
+RoomActions = require("../actions/RoomActions")
+MentionActions = require("../actions/MentionActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 
 RouteHandler = React.createFactory Router.RouteHandler
@@ -26,34 +27,33 @@ MainComponent = React.createClass
 
   statics:
     registerStores:
-      app: AppStore
-      chat: ChatStore
+      user: UserStore
+      room: RoomStore
 
   componentWillMount: ->
     @socket = io(URLResources.getChatServerOrigin())
 
     @socket.on "mention", ({user_id, username, room_id, text}) =>
-      unless FollowResources.isFollowingRoom room_id, @state.app.user
-        AppActions.followRoom room_id, @state.app.user
+      unless FollowResources.isFollowingRoom room_id, @state.user.user
+        UserActions.followRoom room_id, @state.user.user
       @refs.plingsound.getDOMNode().play()
-      AppActions.setUnreadMentions room_id
+      MentionActions.setUnreadMentions room_id
       if document.title.match /(\d+)/
         document.title = document.title.replace /(\d+)/, (match) ->
           parseInt(match) + 1
       else
         document.title += " (1)"
 
-
     @socket.emit "subscribe mention",
-      {username: @state.app.user.username}
+      {username: @state.user.user.username}
 
   render: ->
     div {},
       HeaderComponent
-        user: @state.app.user
+        user: @state.user.user
       div {className: "chat"},
         TopicSidebar
-          user: @state.app.user
+          user: @state.user.user
         div {className: "chat-panel"},
           RouteHandler {socket: @socket}
       audio {ref: "plingsound"},

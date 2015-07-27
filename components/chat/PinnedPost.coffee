@@ -2,8 +2,8 @@ React = require("react")
 Marked = require("react-marked")
 ReactBootstrap = require("react-bootstrap")
 moment = require("moment")
-AppStore = require("../../stores/AppStore")
-AppActions = require("../../actions/AppActions")
+UserStore = require("../../stores/UserStore")
+UserActions = require("../../actions/UserActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 FollowResources = require("../../common/FollowResources")
 UserComponent = React.createFactory require("../UserComponent")
@@ -19,17 +19,17 @@ PinnedPost = React.createClass
 
   statics:
     registerStores:
-      app: AppStore
+      user: UserStore
 
   propTypes:
     originalPost: React.PropTypes.object.isRequired
     currentRoom: React.PropTypes.string.isRequired
 
   followRoom: ->
-    AppActions.followRoom @props.currentRoom, @state.app.user
+    UserActions.followRoom @props.currentRoom, @state.user.user
 
   buttonComponent: ->
-    isFollowing = FollowResources.isFollowingRoom @props.currentRoom, @state.app.user
+    isFollowing = FollowResources.isFollowingRoom @props.currentRoom, @state.user.user
     followText = "Unfollow"
     followImgSrc = "../../../assets/images/check.png"
     unless isFollowing

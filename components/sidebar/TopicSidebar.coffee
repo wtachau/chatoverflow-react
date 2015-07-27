@@ -7,8 +7,9 @@ TopicList = React.createFactory require("./TopicList")
 TopicListItem = React.createFactory require("./TopicListItem")
 RoomList = React.createFactory require("./RoomList")
 RoomListItem = React.createFactory require("./RoomListItem")
-AppActions = require("../../actions/AppActions")
-AppStore = require("../../stores/AppStore")
+UserActions = require("../../actions/UserActions")
+UserStore = require("../../stores/UserStore")
+MentionStore = require("../../stores/MentionStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 { span } = React.DOM
@@ -20,23 +21,24 @@ module.exports = React.createClass
 
   statics:
     registerStores:
-      app: AppStore
+      user: UserStore
+      mention: MentionStore
 
   propTypes:
     user: React.PropTypes.object.isRequired
 
   onCloseRoom: (e) ->
     room_clicked = e.target.getAttribute("data-id")
-    AppActions.followRoom room_clicked, @props.user
+    UserActions.followRoom room_clicked, @props.user
     e.preventDefault()
 
   onCloseTopic: (e) ->
     topic_clicked = e.target.getAttribute("data-id")
-    AppActions.followTopic topic_clicked, @props.user
+    UserActions.followTopic topic_clicked, @props.user
     e.preventDefault()
 
   badge: (room_id) ->
-    if @state.app.unread_mentions[parseInt(room_id)]
+    if @state.mention.unread[parseInt(room_id)]
       Badge {}, 1
     else
       span {}, ""

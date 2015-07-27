@@ -1,9 +1,9 @@
 React = require("react")
 io = require("socket.io-client")
-ChatStore = require("../stores/ChatStore")
-AppStore = require("../stores/AppStore")
-ChatActions = require("../actions/ChatActions")
-AppActions = require("../actions/AppActions")
+RoomStore = require("../stores/RoomStore")
+UserStore = require("../stores/UserStore")
+RoomActions = require("../actions/RoomActions")
+UserActions = require("../actions/UserActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 Router = require("react-router")
 
@@ -25,67 +25,67 @@ AskComponent = React.createClass
 
   statics:
     registerStores:
-      chat: ChatStore
-      app: AppStore
+      room: RoomStore
+      user: UserStore
+
+  getInitialState: ->
+    questionTitle: ""
+    questionText: ""
 
   questionTitleChange: (e) ->
-    ChatActions.setCurrentQuestionTitle e.target.value
+    @setState questionTitle: e.target.value
 
   questionTextChange: (e) ->
-    ChatActions.setCurrentQuestionText e.target.value
+    @setState questionText: e.target.value
 
   keyPress: (e) ->
     if e.key is "Enter"
       @submitQuestion e
       e.preventDefault()
 
-  # Initialize socket.io connection
-  componentWillMount: ->
-    @socket = io(URLResources.getChatServerOrigin())
-
   componentWillUpdate: (nextProps, nextState) ->
-    if @state.chat.topics.length == 0 and nextState.chat.topics.length > 0
+    if @state.room.topics.length == 0 and nextState.chat.topics.length > 0
       @setRandomTopic()
 
   componentDidMount: ->
-    ChatActions.fetchTopics()
+    RoomActions.fetchTopics()
 
   setRandomTopic: ->
     setTimeout =>
-      if @state.chat.topics.length > 0
-        numberTopics = @state.chat.topics.length
+      if @state.room.topics.length > 0
+        numberTopics = @state.room.topics.length
         randomIndex = Math.round(numberTopics * Math.random())
-        randomTopic = @state.chat.topics[randomIndex]
-        ChatActions.setTopicSelected randomTopic.id
+        randomTopic = @state.room.topics[randomIndex]
+        RoomActions.setTopicSelected randomTopic.id
 
   # Send a new question to the node server
   submitQuestion: (e) ->
-    unless (@state.chat.currentQuestionText.trim() is "") or
-    (@state.chat.currentQuestionTitle.trim() is "")
+    unless (@state.questionText.trim() is "") or
+    (@state.questionTitle.trim() is "")
       URLResources.callAPI "/rooms", "post",
-        {topic_id: @state.chat.topicSelected,
-        title: @state.chat.currentQuestionTitle.trim(),
-        text: @state.chat.currentQuestionText.trim()},
+        {topic_id: @state.room.topicSelected,
+        title: @state.questionTitle.trim(),
+        text: @state.questionText.trim()},
         @onSubmitQuestion
       e.preventDefault()
 
   # After a new question is created, reset parameters
   onSubmitQuestion: (response) ->
-    AppActions.fetchUser()
-    ChatActions.setCurrentQuestionText ""
-    ChatActions.setCurrentQuestionTitle ""
-    
+    UserActions.fetchUser()
+    @setState questionTitle: ""
+    @setState questionText: ""
+
     @transitionTo 'room', room_id: response.id, topic_id: response.topic_id
 
   onTopicSelected: (eventKey, href, target) ->
-    ChatActions.setTopicSelected eventKey
+    RoomActions.setTopicSelected eventKey
 
   render: ->
     dropdownTitle = ""
-    dropdownTitle = if @state.chat.topicSelected
-      if @state.chat.topics
-        for topic in @state.chat.topics
-          if topic.id is parseInt(@state.chat.topicSelected)
+    dropdownTitle = if @state.room.topicSelected
+      if @state.room.topics
+        for topic in @state.room.topics
+          if topic.id is parseInt(@state.room.topicSelected)
             dropdownTitle = topic.name
 
     div {className: "home"},
@@ -94,7 +94,7 @@ AskComponent = React.createClass
           h1 {className: "question-header"}, 
             "What is your "
             DropdownButton title: dropdownTitle,
-              @state.chat.topics.map ({id, name}, index) =>
+              @state.room.topics.map ({id, name}, index) =>
                 MenuItem
                   eventKey: id
                   target: name
@@ -102,7 +102,7 @@ AskComponent = React.createClass
                   key: index
                   name
             " question?"
-      if @state.chat.topicSelected
+      if @state.room.topicSelected
         div {},
           Row {},
             Col md: 8, mdOffset: 2,
@@ -111,14 +111,14 @@ AskComponent = React.createClass
                   type: "text"
                   className: "ask-title"
                   autoComplete: off
-                  value: @state.chat.currentQuestionTitle
+                  value: @state.questionTitle
                   onChange: @questionTitleChange
                   onKeyDown: @keyPress
                   placeholder: "Title for your question (required)"
                 Input
                   type: "textarea"
                   className: "ask-question"
-                  value: @state.chat.currentQuestionText
+                  value: @state.questionText
                   onChange: @questionTextChange
                   onKeyDown: @keyPress
                   placeholder: "Describe your question (required)"

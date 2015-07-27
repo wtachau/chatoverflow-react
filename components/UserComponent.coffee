@@ -1,7 +1,7 @@
 React = require("react")
 ReactBootstrap = require("react-bootstrap")
-AppActions = require("../actions/AppActions")
-AppStore = require("../stores/AppStore")
+UserActions = require("../actions/UserActions")
+UserStore = require("../stores/UserStore")
 BootstrapModal = require("react-bootstrap-modal")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 
@@ -27,13 +27,13 @@ UserComponent = React.createClass
   mixins: [ReactStateMagicMixin]
 
   statics:
-    registerStore: AppStore
+    registerStore: UserStore
 
   getInitialState: ->
     showModal: false
 
   showPopup: ->
-    AppActions.fetchUsers()
+    UserActions.fetchUsers()
     @setState showModal: true
 
   closePopup: -> @setState showModal: false
@@ -59,7 +59,7 @@ UserComponent = React.createClass
                       div {className: "user-karma"}, "Karma: #{user.karma or 0}"
         if @props.includeLogout
           ModalFooter {},
-            Button {onClick: AppActions.logout, bsStyle: "danger"}, "Log out"
+            Button {onClick: UserActions.logout, bsStyle: "danger"}, "Log out"
 
 
 module.exports = UserComponent

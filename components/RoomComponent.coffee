@@ -9,10 +9,14 @@ AskComponent = React.createFactory require("./AskComponent")
 RoomList = React.createFactory require("./chat/RoomList")
 URLResources = require("../common/URLResources")
 FollowResources = require("../common/FollowResources")
-ChatStore = require("../stores/ChatStore")
-AppStore = require("../stores/AppStore")
-ChatActions = require("../actions/ChatActions")
-AppActions = require("../actions/AppActions")
+RoomStore = require("../stores/RoomStore")
+UserStore = require("../stores/UserStore")
+MentionStore = require("../stores/MentionStore")
+ThreadStore = require("../stores/ThreadStore")
+RoomActions = require("../actions/RoomActions")
+ThreadActions = require("../actions/ThreadActions")
+UserActions = require("../actions/UserActions")
+MentionActions = require("../actions/MentionActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 Router = require("react-router")
 
@@ -23,16 +27,18 @@ RoomComponent = React.createClass
 
   statics:
     registerStores:
-      chat: ChatStore
-      app: AppStore
+      room: RoomStore
+      user: UserStore
+      mention: MentionStore
+      thread: ThreadStore
 
-  pic_url: -> @state.app.user.pic_url
+  pic_url: -> @state.user.user.pic_url
 
   componentWillMount: ->
     @props.socket.on "chat message",
       ({id, user, room_id, text, created_at}) =>
         if room_id is @getParams().room_id
-          ChatActions.pushNewMessage {vote_total: 0, user, id, room_id, text, created_at, isNewMessage: true}
+          ThreadActions.pushNewMessage {vote_total: 0, user, id, room_id, text, created_at, isNewMessage: true}
           @scrollDownMessages()
 
     @props.socket.emit "subscribe room",
@@ -46,20 +52,20 @@ RoomComponent = React.createClass
   componentWillReceiveProps: (newProps) ->
     unless @props.params.room_id is newProps.params.room_id
       @props.socket.emit "subscribe room", room: @getParams().room_id
-      ChatActions.setCurrentRoom parseInt @getParams().room_id
-      ChatActions.fetchRecentMessages @getParams().room_id
+      ThreadActions.setCurrentRoom parseInt @getParams().room_id
+      ThreadActions.fetchRecentMessages @getParams().room_id
       @readMention()
 
   componentDidMount: ->
     setTimeout =>
-      ChatActions.setCurrentRoom parseInt @getParams().room_id
-      ChatActions.fetchRecentMessages @getParams().room_id
+      ThreadActions.setCurrentRoom parseInt @getParams().room_id
+      ThreadActions.fetchRecentMessages @getParams().room_id
       @readMention()
 
   readMention: ->
     room_id = parseInt @getParams().room_id
-    if @state.app.unread_mentions[room_id]
-      AppActions.setReadMentions room_id
+    if @state.mention.unread[room_id]
+      MentionActions.setReadMentions room_id
       titleMentions = document.title.match /(\d+)/
       if titleMentions
         if parseInt(titleMentions[0]) > 1
@@ -70,15 +76,15 @@ RoomComponent = React.createClass
 
   componentWillUnmount: ->
     @props.socket.removeAllListeners "chat message"
-    ChatActions.setCurrentRoom null
+    ThreadActions.setCurrentRoom null
 
   submitMessage: (e, message, mentions) ->
     unless message is ""
       @props.socket.emit "chat message",
         user:
-          user_id: @state.app.user.id
+          user_id: @state.user.user.id
           pic_url: @pic_url()
-          username: @state.app.user.username
+          username: @state.user.user.username
         room_id: @getParams().room_id
         text: message.trim()
         mentions: mentions
@@ -87,13 +93,12 @@ RoomComponent = React.createClass
   render: ->
     div {className: "messages-section"},
       MessageList
-        originalPost: @state.chat.originalPost or {}
-        messages: @state.chat.messages
+        originalPost: @state.thread.originalPost or {}
+        messages: @state.thread.messages
         currentRoom: @getParams().room_id
         ref: "messageList"
       ChatForm
         submitMessage: @submitMessage
-        currentMessage: @state.chat.currentMessage
-        users: @state.app.users
+        users: @state.user.users
 
 module.exports = RoomComponent

@@ -1,7 +1,7 @@
 React = require("react")
 ReactBootstrap = require("react-bootstrap")
 ListGroup = React.createFactory ReactBootstrap.ListGroup
-ChatStore = require("../stores/ChatStore")
+RoomStore = require("../stores/RoomStore")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 UserComponent = React.createFactory require("./UserComponent")
 { div, h1, img } = React.DOM
@@ -15,7 +15,7 @@ ActiveUsersComponent = React.createClass
   mixins: [ReactStateMagicMixin]
 
   statics:
-    registerStore: ChatStore
+    registerStore: RoomStore
 
   render: ->
     div {className: "active-users"},
