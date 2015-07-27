@@ -40,14 +40,26 @@ ChatForm = React.createClass
       @submit e
 
   submit: (e) ->
+    for mention in @state.mentions
+      if mention.display is "here"
+        for user in @props.users
+          @state.mentions.push
+            display: user.username
+            id: user.username
+            index: mention.index
+            plainTextIndex: mention.plainTextIndex
+            type: null
+        break
     @props.submitMessage e, @state.message.trim(), @state.mentions
     @setState message: ""
 
   displayMention: (id, display, type) -> "@" + display
 
   formattedUserMentionsData: () ->
-    @props.users.map ({username, id}) ->
-      {id: id, display: username}
+    mentions = @props.users.map ({username, id}) ->
+      {id: id + 1, display: username}
+    mentions.unshift display: "here", id: 1
+    mentions
 
   inputChange: (e, newValue, newPlainTextValue, mentions) ->
     component = React.findDOMNode this
