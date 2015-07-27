@@ -1,24 +1,22 @@
-CompareDateResources =
-  compareDateCreatedAt: (room1, room2) ->
+Comparators =
+  byCreateDate: (room1, room2) ->
     room1 = new Date room1.created_at
     room2 = new Date room2.created_at
     if room1 > room2 
       -1 
+    else if room1 < room2 
+      1 
     else 
-      if room1 < room2 
-        1 
-      else 
-        0
+      0
 
-  compareLatestMessage: (room1, room2) -> 
+  byLatestMessage: (room1, room2) -> 
     room1 = new Date room1.messages[room1.messages.length - 1]?.created_at
     room2 = new Date room2.messages[room2.messages.length - 1]?.created_at
     if room1 > room2 
       -1 
+    else if room1 < room2 
+      1 
     else 
-      if room1 < room2 
-        1 
-      else 
-        0
+      0
 
-module.exports = CompareDateResources
+module.exports = Comparators
