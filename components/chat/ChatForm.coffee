@@ -40,6 +40,16 @@ ChatForm = React.createClass
       @submit e
 
   submit: (e) ->
+    for mention in @state.mentions
+      if mention.display is "here"
+        for user in @props.users
+          @state.mentions.push
+            display: user.username
+            id: user.username
+            index: mention.index
+            plainTextIndex: mention.plainTextIndex
+            type: null
+        break
     @props.submitMessage e, @state.message.trim(), @state.mentions
     @setState message: ""
 
@@ -47,7 +57,7 @@ ChatForm = React.createClass
 
   formattedUserMentionsData: () ->
     @props.users.map ({username, id}) ->
-      {id: id, display: username}
+      {id: id + 1, display: username}
 
   inputChange: (e, newValue, newPlainTextValue, mentions) ->
     component = React.findDOMNode this
@@ -56,6 +66,8 @@ ChatForm = React.createClass
     @setState mentions: mentions
 
   render: ->
+    mentionsData = @formattedUserMentionsData()
+    mentionsData.push {display: "here", id: 1}
     form {className: "chat-form", autoComplete: off},
       MentionsInput
         value: @state.message
@@ -64,6 +76,6 @@ ChatForm = React.createClass
         onKeyUp: @keyPress
         onKeyDown: @keyPress,
         markup: "@[__display__](#)"
-        Mention {trigger: "@", data: @formattedUserMentionsData()},
+        Mention {trigger: "@", data: mentionsData},
 
 module.exports = ChatForm
