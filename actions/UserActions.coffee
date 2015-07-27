@@ -2,11 +2,10 @@ alt = require("../alt")
 URLResources = require("../common/URLResources")
 FollowResources = require("../common/FollowResources")
 
-class AppActions
+class UserActions
   constructor: ->
     @generateActions "setCurrentUser", "userFetchFailure",
-      "setCurrentUsers", "setUnreadMentions", "setReadMentions",
-      "pushUserVote", "removeUserVote", "failure"
+      "setCurrentUsers", "pushUserVote", "removeUserVote"
 
   fetchUser: ->
     URLResources.readFromAPI "/current_user", @actions.setCurrentUser
@@ -40,4 +39,4 @@ class AppActions
     @actions.setCurrentUser null
     sessionStorage.setItem("jwt", "")
 
-module.exports = alt.createActions(AppActions)
+module.exports = alt.createActions(UserActions)

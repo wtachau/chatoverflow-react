@@ -1,6 +1,6 @@
 alt = require("../alt")
 URLResources = require("../common/URLResources")
-AppActions = require("./AppActions")
+UserActions = require("./UserActions")
 
 class ChatActions
   constructor: ->

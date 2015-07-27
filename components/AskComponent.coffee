@@ -1,9 +1,9 @@
 React = require("react")
 io = require("socket.io-client")
 ChatStore = require("../stores/ChatStore")
-AppStore = require("../stores/AppStore")
+UserStore = require("../stores/UserStore")
 ChatActions = require("../actions/ChatActions")
-AppActions = require("../actions/AppActions")
+UserActions = require("../actions/UserActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 Router = require("react-router")
 
@@ -26,7 +26,7 @@ AskComponent = React.createClass
   statics:
     registerStores:
       chat: ChatStore
-      app: AppStore
+      user: UserStore
 
   questionTitleChange: (e) ->
     ChatActions.setCurrentQuestionTitle e.target.value
@@ -71,7 +71,7 @@ AskComponent = React.createClass
 
   # After a new question is created, reset parameters
   onSubmitQuestion: (response) ->
-    AppActions.fetchUser()
+    UserActions.fetchUser()
     ChatActions.setCurrentQuestionText ""
     ChatActions.setCurrentQuestionTitle ""
     

@@ -10,9 +10,11 @@ RoomList = React.createFactory require("./chat/RoomList")
 URLResources = require("../common/URLResources")
 FollowResources = require("../common/FollowResources")
 ChatStore = require("../stores/ChatStore")
-AppStore = require("../stores/AppStore")
+UserStore = require("../stores/UserStore")
+MentionStore = require("../stores/MentionStore")
 ChatActions = require("../actions/ChatActions")
-AppActions = require("../actions/AppActions")
+UserActions = require("../actions/UserActions")
+MentionActions = require("../actions/MentionActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 Router = require("react-router")
 
@@ -24,9 +26,10 @@ RoomComponent = React.createClass
   statics:
     registerStores:
       chat: ChatStore
-      app: AppStore
+      user: UserStore
+      mention: MentionStore
 
-  pic_url: -> @state.app.user.pic_url
+  pic_url: -> @state.user.user.pic_url
 
   componentWillMount: ->
     @props.socket.on "chat message",
@@ -58,8 +61,8 @@ RoomComponent = React.createClass
 
   readMention: ->
     room_id = parseInt @getParams().room_id
-    if @state.app.unread_mentions[room_id]
-      AppActions.setReadMentions room_id
+    if @state.mention.unread[room_id]
+      MentionActions.setReadMentions room_id
       titleMentions = document.title.match /(\d+)/
       if titleMentions
         if parseInt(titleMentions[0]) > 1
@@ -76,9 +79,9 @@ RoomComponent = React.createClass
     unless message is ""
       @props.socket.emit "chat message",
         user:
-          user_id: @state.app.user.id
+          user_id: @state.user.user.id
           pic_url: @pic_url()
-          username: @state.app.user.username
+          username: @state.user.user.username
         room_id: @getParams().room_id
         text: message.trim()
         mentions: mentions
@@ -94,6 +97,6 @@ RoomComponent = React.createClass
       ChatForm
         submitMessage: @submitMessage
         currentMessage: @state.chat.currentMessage
-        users: @state.app.users
+        users: @state.user.users
 
 module.exports = RoomComponent

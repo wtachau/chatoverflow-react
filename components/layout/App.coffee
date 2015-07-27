@@ -6,8 +6,8 @@ LoginComponent = React.createFactory require("../LoginComponent")
 HeaderComponent = React.createFactory require("../HeaderComponent")
 MainComponent = React.createFactory require("../MainComponent")
 URLResources = require("../../common/URLResources")
-AppStore = require("../../stores/AppStore")
-AppActions = require("../../actions/AppActions")
+UserStore = require("../../stores/UserStore")
+UserActions = require("../../actions/UserActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 TopicSidebar = React.createFactory require("../sidebar/TopicSidebar")
 { div } = React.DOM
@@ -18,7 +18,7 @@ module.exports = React.createClass
   mixins: [ Router.State, Router.Navigation, ReactStateMagicMixin ]
 
   statics:
-    registerStore: AppStore
+    registerStore: UserStore
 
   componentWillMount: ->
     jwt = new Uri(location.search).getQueryParamValue("jwt")
@@ -30,8 +30,8 @@ module.exports = React.createClass
 
   componentDidMount: ->
     if sessionStorage.getItem('jwt')
-      AppActions.fetchUser()
-      AppActions.fetchUsers()
+      UserActions.fetchUser()
+      UserActions.fetchUsers()
 
       preLoginPath = sessionStorage.getItem('preLoginPath')
       if preLoginPath and preLoginPath isnt ''
@@ -46,4 +46,4 @@ module.exports = React.createClass
     if @state.user
       MainComponent {}
     else
-      LoginComponent loginClicked: AppActions.login
+      LoginComponent loginClicked: UserActions.login

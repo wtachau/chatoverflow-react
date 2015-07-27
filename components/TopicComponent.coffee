@@ -1,8 +1,8 @@
 React = require("react")
 io = require("socket.io-client")
 
-AppStore = require("../stores/AppStore")
-AppActions = require("../actions/AppActions")
+UserStore = require("../stores/UserStore")
+UserActions = require("../actions/UserActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 URLResources = require("../common/URLResources")
 FollowResources = require("../common/FollowResources")
@@ -21,7 +21,7 @@ TopicComponent = React.createClass
 
   statics:
     registerStores:
-      app: AppStore
+      user: UserStore
       chat: ChatStore
     willTransitionTo: (transition, params, query) ->
       ChatActions.setIntervalID setInterval(->

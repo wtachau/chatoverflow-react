@@ -1,6 +1,3 @@
-Reqwest = require("reqwest")
-AppActions = require ("../actions/AppActions")
-
 CompareDateResources =
   compareDateCreatedAt: (room1, room2) ->
     room1 = new Date room1.created_at

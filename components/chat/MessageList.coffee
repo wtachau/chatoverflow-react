@@ -2,8 +2,8 @@ React = require("react")
 
 MessageGroupList = React.createFactory require("./MessageGroupList")
 PinnedPost = React.createFactory require("./PinnedPost")
-AppStore = require("../../stores/AppStore")
-AppActions = require("../../actions/AppActions")
+UserStore = require("../../stores/UserStore")
+UserActions = require("../../actions/UserActions")
 ChatStore = require("../../stores/ChatStore")
 ChatActions = require("../../actions/ChatActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
@@ -17,7 +17,7 @@ MessageList = React.createClass
 
   statics:
     registerStores:
-      app: AppStore
+      user: UserStore
       chat: ChatStore
 
   propTypes:

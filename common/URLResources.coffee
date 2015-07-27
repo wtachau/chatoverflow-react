@@ -1,5 +1,4 @@
 Reqwest = require("reqwest")
-AppActions = require ("../actions/AppActions")
 
 URLResources =
   getChatServerOrigin: ->
@@ -27,6 +26,6 @@ URLResources =
     @callAPI(url, "get", null, successFunction)
 
   logError: (error) ->
-    AppActions.failure error
+    console.error error
 
 module.exports = URLResources

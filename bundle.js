@@ -24085,7 +24085,7 @@
   \**************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, AppStore, HeaderComponent, LoginComponent, MainComponent, React, ReactStateMagicMixin, RouteHandler, Router, TopicSidebar, URLResources, Uri, div;
+	var UserActions, UserStore, HeaderComponent, LoginComponent, MainComponent, React, ReactStateMagicMixin, RouteHandler, Router, TopicSidebar, URLResources, Uri, div;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
@@ -24103,9 +24103,9 @@
 	
 	URLResources = __webpack_require__(/*! ../../common/URLResources */ 298);
 	
-	AppStore = __webpack_require__(/*! ../../stores/AppStore */ 390);
+	UserStore = __webpack_require__(/*! ../../stores/UserStore */ 390);
 	
-	AppActions = __webpack_require__(/*! ../../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../../actions/UserActions */ 282);
 	
 	ReactStateMagicMixin = __webpack_require__(/*! ../../assets/vendor/ReactStateMagicMixin */ 391);
 	
@@ -24117,7 +24117,7 @@
 	  displayName: "App",
 	  mixins: [Router.State, Router.Navigation, ReactStateMagicMixin],
 	  statics: {
-	    registerStore: AppStore
+	    registerStore: UserStore
 	  },
 	  componentWillMount: function() {
 	    var jwt;
@@ -24132,8 +24132,8 @@
 	  componentDidMount: function() {
 	    var newurl;
 	    if (sessionStorage.getItem('jwt')) {
-	      AppActions.fetchUser();
-	      AppActions.fetchUsers();
+	      UserActions.fetchUser();
+	      UserActions.fetchUsers();
 	      if (sessionStorage.getItem('preLoginPath') !== '') {
 	        this.transitionTo(sessionStorage.getItem('preLoginPath'));
 	        sessionStorage.setItem('preLoginPath', '');
@@ -24149,7 +24149,7 @@
 	      return MainComponent({});
 	    } else {
 	      return LoginComponent({
-	        loginClicked: AppActions.login
+	        loginClicked: UserActions.login
 	      });
 	    }
 	  }
@@ -34134,13 +34134,13 @@
   \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, BootstrapModal, Button, Col, Grid, Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle, React, ReactBootstrap, Row, Thumbnail, UserComponent, a, div, img, ref;
+	var UserActions, BootstrapModal, Button, Col, Grid, Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle, React, ReactBootstrap, Row, Thumbnail, UserComponent, a, div, img, ref;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
 	ReactBootstrap = __webpack_require__(/*! react-bootstrap */ 200);
 	
-	AppActions = __webpack_require__(/*! ../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../actions/UserActions */ 282);
 	
 	BootstrapModal = __webpack_require__(/*! react-bootstrap-modal */ 301);
 	
@@ -34218,7 +34218,7 @@
 	    }, "" + this.props.user.username), div({
 	      className: "user-karma"
 	    }, "Karma: " + (this.props.user.karma || 0)))))), this.props.includeLogout ? ModalFooter({}, Button({
-	      onClick: AppActions.logout,
+	      onClick: UserActions.logout,
 	      bsStyle: "danger"
 	    }, "Log out")) : void 0));
 	  }
@@ -34230,11 +34230,11 @@
 /***/ },
 /* 282 */
 /*!***********************************!*\
-  !*** ./actions/AppActions.coffee ***!
+  !*** ./actions/UserActions.coffee ***!
   \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, FollowResources, URLResources, alt;
+	var UserActions, FollowResources, URLResources, alt;
 	
 	alt = __webpack_require__(/*! ../alt */ 283);
 	
@@ -34242,20 +34242,20 @@
 	
 	FollowResources = __webpack_require__(/*! ../common/FollowResources */ 300);
 	
-	AppActions = (function() {
-	  function AppActions() {
+	UserActions = (function() {
+	  function UserActions() {
 	    this.generateActions("setCurrentUser", "userFetchFailure", "setCurrentUsers", "setUnreadMentions", "setReadMentions", "pushUserVote", "removeUserVote", "failure");
 	  }
 	
-	  AppActions.prototype.fetchUser = function() {
+	  UserActions.prototype.fetchUser = function() {
 	    return URLResources.readFromAPI("/current_user", this.actions.setCurrentUser);
 	  };
 	
-	  AppActions.prototype.fetchUsers = function() {
+	  UserActions.prototype.fetchUsers = function() {
 	    return URLResources.readFromAPI("/users", this.actions.setCurrentUsers);
 	  };
 	
-	  AppActions.prototype.followRoom = function(room_id, user) {
+	  UserActions.prototype.followRoom = function(room_id, user) {
 	    if (!FollowResources.isFollowingRoom(room_id, user)) {
 	      return URLResources.callAPI("/rooms/" + room_id + "/follow", "put", null, this.actions.setCurrentUser);
 	    } else {
@@ -34263,7 +34263,7 @@
 	    }
 	  };
 	
-	  AppActions.prototype.followTopic = function(topic_id, user) {
+	  UserActions.prototype.followTopic = function(topic_id, user) {
 	    if (!FollowResources.isFollowingTopic(topic_id, user)) {
 	      return URLResources.callAPI("/topics/" + topic_id + "/follow", "put", null, this.actions.setCurrentUser);
 	    } else {
@@ -34271,26 +34271,26 @@
 	    }
 	  };
 	
-	  AppActions.prototype.createTopic = function(name, callback) {
+	  UserActions.prototype.createTopic = function(name, callback) {
 	    return URLResources.callAPI("/topics", "post", {
 	      name: name
 	    }, callback);
 	  };
 	
-	  AppActions.prototype.login = function() {
+	  UserActions.prototype.login = function() {
 	    return window.location.assign((URLResources.getLogicServerOrigin()) + "/login");
 	  };
 	
-	  AppActions.prototype.logout = function() {
+	  UserActions.prototype.logout = function() {
 	    this.actions.setCurrentUser(null);
 	    return sessionStorage.setItem("jwt", "");
 	  };
 	
-	  return AppActions;
+	  return UserActions;
 	
 	})();
 	
-	module.exports = alt.createActions(AppActions);
+	module.exports = alt.createActions(UserActions);
 
 
 /***/ },
@@ -36253,11 +36253,11 @@
   \************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, Reqwest, URLResources;
+	var UserActions, Reqwest, URLResources;
 	
 	Reqwest = __webpack_require__(/*! reqwest */ 299);
 	
-	AppActions = __webpack_require__(/*! ../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../actions/UserActions */ 282);
 	
 	URLResources = {
 	  getChatServerOrigin: function() {
@@ -36294,7 +36294,7 @@
 	    return this.callAPI(url, "get", null, successFunction);
 	  },
 	  logError: function(error) {
-	    return AppActions.failure(error);
+	    return UserActions.failure(error);
 	  }
 	};
 	
@@ -38769,7 +38769,7 @@
   \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, AppStore, ChatActions, ChatStore, FollowResources, HeaderComponent, MainComponent, React, ReactStateMagicMixin, RoomList, RouteHandler, Router, TopicSidebar, URLResources, audio, div, io, ref, source;
+	var UserActions, UserStore, ChatActions, ChatStore, FollowResources, HeaderComponent, MainComponent, React, ReactStateMagicMixin, RoomList, RouteHandler, Router, TopicSidebar, URLResources, audio, div, io, ref, source;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
@@ -38781,9 +38781,9 @@
 	
 	FollowResources = __webpack_require__(/*! ../common/FollowResources */ 300);
 	
-	AppStore = __webpack_require__(/*! ../stores/AppStore */ 390);
+	UserStore = __webpack_require__(/*! ../stores/UserStore */ 390);
 	
-	AppActions = __webpack_require__(/*! ../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../actions/UserActions */ 282);
 	
 	ChatStore = __webpack_require__(/*! ../stores/ChatStore */ 336);
 	
@@ -38808,7 +38808,7 @@
 	  mixins: [Router.State, ReactStateMagicMixin],
 	  statics: {
 	    registerStores: {
-	      app: AppStore,
+	      user: UserStore,
 	      chat: ChatStore
 	    }
 	  },
@@ -38819,10 +38819,10 @@
 	        var room_id, text, user_id, username;
 	        user_id = arg.user_id, username = arg.username, room_id = arg.room_id, text = arg.text;
 	        if (!FollowResources.isFollowingRoom(room_id, _this.state.app.user)) {
-	          AppActions.followRoom(room_id, _this.state.app.user);
+	          UserActions.followRoom(room_id, _this.state.app.user);
 	        }
 	        _this.refs.plingsound.getDOMNode().play();
-	        return AppActions.setUnreadMentions(room_id);
+	        return UserActions.setUnreadMentions(room_id);
 	      };
 	    })(this));
 	    return this.socket.emit("subscribe mention", {
@@ -39013,13 +39013,13 @@
   \************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, ChatActions, URLResources, alt;
+	var UserActions, ChatActions, URLResources, alt;
 	
 	alt = __webpack_require__(/*! ../alt */ 283);
 	
 	URLResources = __webpack_require__(/*! ../common/URLResources */ 298);
 	
-	AppActions = __webpack_require__(/*! ./AppActions */ 282);
+	UserActions = __webpack_require__(/*! ./UserActions */ 282);
 	
 	ChatActions = (function() {
 	  function ChatActions() {
@@ -46444,60 +46444,60 @@
 /***/ },
 /* 390 */
 /*!********************************!*\
-  !*** ./stores/AppStore.coffee ***!
+  !*** ./stores/UserStore.coffee ***!
   \********************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, AppStore, alt;
+	var UserActions, UserStore, alt;
 	
 	alt = __webpack_require__(/*! ../alt */ 283);
 	
-	AppActions = __webpack_require__(/*! ../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../actions/UserActions */ 282);
 	
-	AppStore = (function() {
-	  AppStore.prototype.displayName = 'AppStore';
+	UserStore = (function() {
+	  UserStore.prototype.displayName = 'UserStore';
 	
-	  function AppStore() {
+	  function UserStore() {
 	    this.user = null;
 	    this.users = [];
 	    this.error = null;
 	    this.unread_mentions = {};
-	    this.bindActions(AppActions);
+	    this.bindActions(UserActions);
 	  }
 	
-	  AppStore.prototype.onPushUserVote = function(vote) {
+	  UserStore.prototype.onPushUserVote = function(vote) {
 	    return this.user.votes.push(vote);
 	  };
 	
-	  AppStore.prototype.onRemoveUserVote = function(index) {
+	  UserStore.prototype.onRemoveUserVote = function(index) {
 	    return this.user.votes.splice(index, 1);
 	  };
 	
-	  AppStore.prototype.onSetCurrentUser = function(user) {
+	  UserStore.prototype.onSetCurrentUser = function(user) {
 	    return this.user = user;
 	  };
 	
-	  AppStore.prototype.onSetCurrentUsers = function(users) {
+	  UserStore.prototype.onSetCurrentUsers = function(users) {
 	    return this.users = users;
 	  };
 	
-	  AppStore.prototype.onSetUnreadMentions = function(room_id) {
+	  UserStore.prototype.onSetUnreadMentions = function(room_id) {
 	    return this.unread_mentions[parseInt(room_id)] = true;
 	  };
 	
-	  AppStore.prototype.onSetReadMentions = function(room_id) {
+	  UserStore.prototype.onSetReadMentions = function(room_id) {
 	    return this.unread_mentions[parseInt(room_id)] = false;
 	  };
 	
-	  AppStore.prototype.onFailure = function(error) {
+	  UserStore.prototype.onFailure = function(error) {
 	    return this.error = error;
 	  };
 	
-	  return AppStore;
+	  return UserStore;
 	
 	})();
 	
-	module.exports = alt.createStore(AppStore, 'AppStore');
+	module.exports = alt.createStore(UserStore, 'UserStore');
 
 
 /***/ },
@@ -46629,7 +46629,7 @@
   \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, ChatActions, ChatStore, Col, Link, ListGroup, ListGroupItem, React, ReactBootstrap, ReactStateMagicMixin, RoomInfo, RoomList, Router, Row, TabPane, TabbedArea, URLResources, div;
+	var UserActions, ChatActions, ChatStore, Col, Link, ListGroup, ListGroupItem, React, ReactBootstrap, ReactStateMagicMixin, RoomInfo, RoomList, Router, Row, TabPane, TabbedArea, URLResources, div;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
@@ -46643,7 +46643,7 @@
 	
 	ChatActions = __webpack_require__(/*! ../../actions/ChatActions */ 337);
 	
-	AppActions = __webpack_require__(/*! ../../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../../actions/UserActions */ 282);
 	
 	ReactStateMagicMixin = __webpack_require__(/*! ../../assets/vendor/ReactStateMagicMixin */ 391);
 	
@@ -58257,7 +58257,7 @@
   \************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, AppStore, Badge, ListGroup, React, ReactBootstrap, ReactStateMagicMixin, RoomList, RoomListItem, TopicList, TopicListItem, TopicSearch, span;
+	var UserActions, UserStore, Badge, ListGroup, React, ReactBootstrap, ReactStateMagicMixin, RoomList, RoomListItem, TopicList, TopicListItem, TopicSearch, span;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
@@ -58277,9 +58277,9 @@
 	
 	RoomListItem = React.createFactory(__webpack_require__(/*! ./RoomListItem */ 482));
 	
-	AppActions = __webpack_require__(/*! ../../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../../actions/UserActions */ 282);
 	
-	AppStore = __webpack_require__(/*! ../../stores/AppStore */ 390);
+	UserStore = __webpack_require__(/*! ../../stores/UserStore */ 390);
 	
 	ReactStateMagicMixin = __webpack_require__(/*! ../../assets/vendor/ReactStateMagicMixin */ 391);
 	
@@ -58290,7 +58290,7 @@
 	  mixins: [ReactStateMagicMixin],
 	  statics: {
 	    registerStores: {
-	      app: AppStore
+	      user: UserStore
 	    }
 	  },
 	  propTypes: {
@@ -58299,13 +58299,13 @@
 	  onCloseRoom: function(e) {
 	    var room_clicked;
 	    room_clicked = e.target.getAttribute("data-id");
-	    AppActions.followRoom(room_clicked, this.props.user);
+	    UserActions.followRoom(room_clicked, this.props.user);
 	    return e.preventDefault();
 	  },
 	  onCloseTopic: function(e) {
 	    var topic_clicked;
 	    topic_clicked = e.target.getAttribute("data-id");
-	    AppActions.followTopic(topic_clicked, this.props.user);
+	    UserActions.followTopic(topic_clicked, this.props.user);
 	    return e.preventDefault();
 	  },
 	  badge: function(room_id) {
@@ -58429,7 +58429,7 @@
   \***********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, AppStore, Button, ChatActions, ChatStore, Input, Link, ListGroup, ListGroupItem, React, ReactBootstrap, ReactStateMagicMixin, Router, Select, TopicSearch, a, div, h1, ref,
+	var UserActions, UserStore, Button, ChatActions, ChatStore, Input, Link, ListGroup, ListGroupItem, React, ReactBootstrap, ReactStateMagicMixin, Router, Select, TopicSearch, a, div, h1, ref,
 	  indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 	
 	React = __webpack_require__(/*! react */ 2);
@@ -58448,9 +58448,9 @@
 	
 	Input = React.createFactory(ReactBootstrap.Input);
 	
-	AppActions = __webpack_require__(/*! ../../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../../actions/UserActions */ 282);
 	
-	AppStore = __webpack_require__(/*! ../../stores/AppStore */ 390);
+	UserStore = __webpack_require__(/*! ../../stores/UserStore */ 390);
 	
 	ChatActions = __webpack_require__(/*! ../../actions/ChatActions */ 337);
 	
@@ -58467,7 +58467,7 @@
 	  mixins: [ReactStateMagicMixin, Router.Navigation],
 	  statics: {
 	    registerStores: {
-	      app: AppStore,
+	      user: UserStore,
 	      chat: ChatStore
 	    }
 	  },
@@ -58519,7 +58519,7 @@
 	      };
 	    })(this));
 	    if (topics.length === 0) {
-	      return AppActions.createTopic(value, (function(_this) {
+	      return UserActions.createTopic(value, (function(_this) {
 	        return function(topic) {
 	          _this.state.app.user.followed_topics.push(topic);
 	          return _this.transitionTo("topic", {
@@ -58528,7 +58528,7 @@
 	        };
 	      })(this));
 	    } else {
-	      AppActions.followTopic(topics[0].id, this.props.user);
+	      UserActions.followTopic(topics[0].id, this.props.user);
 	      return this.transitionTo("topic", {
 	        topic_id: topics[0].id
 	      });
@@ -59719,7 +59719,7 @@
   \****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, AppStore, AskComponent, Button, ChatActions, ChatStore, Col, DropdownButton, Input, MenuItem, React, ReactBootstrap, ReactStateMagicMixin, Router, Row, URLResources, div, form, h1, io, ref;
+	var UserActions, UserStore, AskComponent, Button, ChatActions, ChatStore, Col, DropdownButton, Input, MenuItem, React, ReactBootstrap, ReactStateMagicMixin, Router, Row, URLResources, div, form, h1, io, ref;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
@@ -59727,11 +59727,11 @@
 	
 	ChatStore = __webpack_require__(/*! ../stores/ChatStore */ 336);
 	
-	AppStore = __webpack_require__(/*! ../stores/AppStore */ 390);
+	UserStore = __webpack_require__(/*! ../stores/UserStore */ 390);
 	
 	ChatActions = __webpack_require__(/*! ../actions/ChatActions */ 337);
 	
-	AppActions = __webpack_require__(/*! ../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../actions/UserActions */ 282);
 	
 	ReactStateMagicMixin = __webpack_require__(/*! ../assets/vendor/ReactStateMagicMixin */ 391);
 	
@@ -59761,7 +59761,7 @@
 	  statics: {
 	    registerStores: {
 	      chat: ChatStore,
-	      app: AppStore
+	      user: UserStore
 	    }
 	  },
 	  questionTitleChange: function(e) {
@@ -59792,7 +59792,7 @@
 	    }
 	  },
 	  onSubmitQuestion: function(response) {
-	    AppActions.fetchUser();
+	    UserActions.fetchUser();
 	    ChatActions.setCurrentQuestionText("");
 	    ChatActions.setCurrentQuestionTitle("");
 	    return this.transitionTo('room', {
@@ -59862,15 +59862,15 @@
   \******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, AppStore, ChatActions, ChatStore, FollowResources, React, ReactStateMagicMixin, RoomList, RouteHandler, Router, TopicComponent, URLResources, div, io;
+	var UserActions, UserStore, ChatActions, ChatStore, FollowResources, React, ReactStateMagicMixin, RoomList, RouteHandler, Router, TopicComponent, URLResources, div, io;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
 	io = __webpack_require__(/*! socket.io-client */ 338);
 	
-	AppStore = __webpack_require__(/*! ../stores/AppStore */ 390);
+	UserStore = __webpack_require__(/*! ../stores/UserStore */ 390);
 	
-	AppActions = __webpack_require__(/*! ../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../actions/UserActions */ 282);
 	
 	ReactStateMagicMixin = __webpack_require__(/*! ../assets/vendor/ReactStateMagicMixin */ 391);
 	
@@ -59895,7 +59895,7 @@
 	  mixins: [Router.State, ReactStateMagicMixin],
 	  statics: {
 	    registerStores: {
-	      app: AppStore,
+	      user: UserStore,
 	      chat: ChatStore
 	    }
 	  },
@@ -59935,7 +59935,7 @@
   \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, AppStore, AskComponent, ChatActions, ChatForm, ChatStore, FollowResources, MessageList, React, ReactStateMagicMixin, RoomComponent, RoomList, Router, TopicSidebar, URLResources, div, io;
+	var UserActions, UserStore, AskComponent, ChatActions, ChatForm, ChatStore, FollowResources, MessageList, React, ReactStateMagicMixin, RoomComponent, RoomList, Router, TopicSidebar, URLResources, div, io;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
@@ -59959,11 +59959,11 @@
 	
 	ChatStore = __webpack_require__(/*! ../stores/ChatStore */ 336);
 	
-	AppStore = __webpack_require__(/*! ../stores/AppStore */ 390);
+	UserStore = __webpack_require__(/*! ../stores/UserStore */ 390);
 	
 	ChatActions = __webpack_require__(/*! ../actions/ChatActions */ 337);
 	
-	AppActions = __webpack_require__(/*! ../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../actions/UserActions */ 282);
 	
 	ReactStateMagicMixin = __webpack_require__(/*! ../assets/vendor/ReactStateMagicMixin */ 391);
 	
@@ -59975,7 +59975,7 @@
 	  statics: {
 	    registerStores: {
 	      chat: ChatStore,
-	      app: AppStore
+	      user: UserStore
 	    }
 	  },
 	  pic_url: function() {
@@ -60020,7 +60020,7 @@
 	      ChatActions.setCurrentRoom(parseInt(this.getParams().room_id));
 	      ChatActions.fetchRecentMessages(this.getParams().room_id);
 	      if (this.state.app.unread_mentions[parseInt(this.getParams().room_id)]) {
-	        return AppActions.setReadMentions(this.getParams().room_id);
+	        return UserActions.setReadMentions(this.getParams().room_id);
 	      }
 	    }
 	  },
@@ -60030,7 +60030,7 @@
 	        ChatActions.setCurrentRoom(parseInt(_this.getParams().room_id));
 	        ChatActions.fetchRecentMessages(_this.getParams().room_id);
 	        if (_this.state.app.unread_mentions[parseInt(_this.getParams().room_id)]) {
-	          return AppActions.setReadMentions(_this.getParams().room_id);
+	          return UserActions.setReadMentions(_this.getParams().room_id);
 	        }
 	      };
 	    })(this));
@@ -60080,7 +60080,7 @@
   \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, AppStore, ChatActions, ChatStore, MessageGroupList, MessageList, PinnedPost, React, ReactStateMagicMixin, div, img, ref;
+	var UserActions, UserStore, ChatActions, ChatStore, MessageGroupList, MessageList, PinnedPost, React, ReactStateMagicMixin, div, img, ref;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
@@ -60088,9 +60088,9 @@
 	
 	PinnedPost = React.createFactory(__webpack_require__(/*! ./PinnedPost */ 498));
 	
-	AppStore = __webpack_require__(/*! ../../stores/AppStore */ 390);
+	UserStore = __webpack_require__(/*! ../../stores/UserStore */ 390);
 	
-	AppActions = __webpack_require__(/*! ../../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../../actions/UserActions */ 282);
 	
 	ChatStore = __webpack_require__(/*! ../../stores/ChatStore */ 336);
 	
@@ -60105,7 +60105,7 @@
 	  mixins: [ReactStateMagicMixin],
 	  statics: {
 	    registerStores: {
-	      app: AppStore,
+	      user: UserStore,
 	      chat: ChatStore
 	    }
 	  },
@@ -60218,7 +60218,7 @@
   \*************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, AppStore, ChatActions, ChatStore, Col, Message, MessageGroupList, React, ReactBootstrap, ReactStateMagicMixin, Row, UserComponent, div, img, ref;
+	var UserActions, UserStore, ChatActions, ChatStore, Col, Message, MessageGroupList, React, ReactBootstrap, ReactStateMagicMixin, Row, UserComponent, div, img, ref;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
@@ -60226,9 +60226,9 @@
 	
 	UserComponent = React.createFactory(__webpack_require__(/*! ../UserComponent */ 281));
 	
-	AppStore = __webpack_require__(/*! ../../stores/AppStore */ 390);
+	UserStore = __webpack_require__(/*! ../../stores/UserStore */ 390);
 	
-	AppActions = __webpack_require__(/*! ../../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../../actions/UserActions */ 282);
 	
 	ChatStore = __webpack_require__(/*! ../../stores/ChatStore */ 336);
 	
@@ -60249,7 +60249,7 @@
 	  mixins: [ReactStateMagicMixin],
 	  statics: {
 	    registerStores: {
-	      app: AppStore,
+	      user: UserStore,
 	      chat: ChatStore
 	    }
 	  },
@@ -61665,13 +61665,13 @@
   \*******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, ChatActions, React, VoteButton, button, div, ref;
+	var UserActions, ChatActions, React, VoteButton, button, div, ref;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
 	ChatActions = __webpack_require__(/*! ../../actions/ChatActions */ 337);
 	
-	AppActions = __webpack_require__(/*! ../../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../../actions/UserActions */ 282);
 	
 	ref = React.DOM, div = ref.div, button = ref.button;
 	
@@ -61684,11 +61684,11 @@
 	  vote: function() {
 	    ChatActions.starMessage(this.props.message.id, this.props.message.room_id);
 	    if (this.color.index === -1) {
-	      return AppActions.pushUserVote({
+	      return UserActions.pushUserVote({
 	        message_id: this.props.message.id
 	      });
 	    } else {
-	      AppActions.removeUserVote(this.color.index);
+	      UserActions.removeUserVote(this.color.index);
 	      return this.color.color = {
 	        color: "",
 	        index: -1
@@ -61737,7 +61737,7 @@
   \*******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, AppStore, Button, FollowResources, Marked, PinnedPost, React, ReactBootstrap, ReactStateMagicMixin, Row, UserComponent, button, div, img, moment, ref;
+	var UserActions, UserStore, Button, FollowResources, Marked, PinnedPost, React, ReactBootstrap, ReactStateMagicMixin, Row, UserComponent, button, div, img, moment, ref;
 	
 	React = __webpack_require__(/*! react */ 2);
 	
@@ -61747,9 +61747,9 @@
 	
 	moment = __webpack_require__(/*! moment */ 395);
 	
-	AppStore = __webpack_require__(/*! ../../stores/AppStore */ 390);
+	UserStore = __webpack_require__(/*! ../../stores/UserStore */ 390);
 	
-	AppActions = __webpack_require__(/*! ../../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../../actions/UserActions */ 282);
 	
 	ReactStateMagicMixin = __webpack_require__(/*! ../../assets/vendor/ReactStateMagicMixin */ 391);
 	
@@ -61768,7 +61768,7 @@
 	  mixins: [ReactStateMagicMixin],
 	  statics: {
 	    registerStores: {
-	      app: AppStore
+	      user: UserStore
 	    }
 	  },
 	  propTypes: {
@@ -61776,7 +61776,7 @@
 	    currentRoom: React.PropTypes.string.isRequired
 	  },
 	  followRoom: function() {
-	    return AppActions.followRoom(this.props.currentRoom, this.state.app.user);
+	    return UserActions.followRoom(this.props.currentRoom, this.state.app.user);
 	  },
 	  buttonComponent: function() {
 	    var followImgSrc, followText, isFollowing;
@@ -65284,11 +65284,11 @@
   \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var AppActions, CompareDateResources, Reqwest;
+	var UserActions, CompareDateResources, Reqwest;
 	
 	Reqwest = __webpack_require__(/*! reqwest */ 299);
 	
-	AppActions = __webpack_require__(/*! ../actions/AppActions */ 282);
+	UserActions = __webpack_require__(/*! ../actions/UserActions */ 282);
 	
 	CompareDateResources = {
 	  compareDateCreatedAt: function(room1, room2) {

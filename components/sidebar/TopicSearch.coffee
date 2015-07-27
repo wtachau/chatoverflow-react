@@ -6,8 +6,8 @@ ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
 Link = React.createFactory Router.Link
 Button = React.createFactory ReactBootstrap.Button
 Input = React.createFactory ReactBootstrap.Input
-AppActions = require("../../actions/AppActions")
-AppStore = require("../../stores/AppStore")
+UserActions = require("../../actions/UserActions")
+UserStore = require("../../stores/UserStore")
 ChatActions = require("../../actions/ChatActions")
 ChatStore = require("../../stores/ChatStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
@@ -22,7 +22,7 @@ TopicSearch = React.createClass
 
   statics:
     registerStores:
-      app: AppStore
+      user: UserStore
       chat: ChatStore
 
   propTypes:
@@ -34,15 +34,15 @@ TopicSearch = React.createClass
   selectOnChange: (selectedValue) ->
     topics = @state.chat.searchResults.filter ({name}) => name is selectedValue
     if topics.length is 0
-      AppActions.createTopic selectedValue, (topic) =>
-        @state.app.user.followed_topics.push topic
+      UserActions.createTopic selectedValue, (topic) =>
+        @state.user.user.followed_topics.push topic
         @transitionTo "topic", topic_id: topic.id
     else
-      AppActions.followTopic topics[0].id, @props.user
+      UserActions.followTopic topics[0].id, @props.user
       @transitionTo "topic", topic_id: topics[0].id
 
   formattedOptions: ->
-    followed_ids = @state.app.user.followed_topics.map ({id}) -> id
+    followed_ids = @state.user.user.followed_topics.map ({id}) -> id
     @state.chat.searchResults.filter((result) =>
       result.id not in followed_ids
     ).map ({name}) => {value: name, label: name}

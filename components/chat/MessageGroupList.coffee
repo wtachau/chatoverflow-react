@@ -2,8 +2,8 @@ React = require("react")
 
 Message = React.createFactory require("./Message")
 UserComponent = React.createFactory require("../UserComponent")
-AppStore = require("../../stores/AppStore")
-AppActions = require("../../actions/AppActions")
+UserStore = require("../../stores/UserStore")
+UserActions = require("../../actions/UserActions")
 ChatStore = require("../../stores/ChatStore")
 ChatActions = require("../../actions/ChatActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
@@ -21,7 +21,7 @@ MessageGroupList = React.createClass
 
   statics:
     registerStores:
-      app: AppStore
+      user: UserStore
       chat: ChatStore
 
   propTypes:
@@ -40,7 +40,7 @@ MessageGroupList = React.createClass
   getMessageProperties: (group) ->
     group.map (message, index) =>
       properties = {}
-      if message.user.username is @state.app.user.username
+      if message.user.username is @state.user.user.username
         properties.isUser = true
         properties.side = "right"
         properties.bubbleType = @selectBubbleType index, group.length
@@ -54,7 +54,7 @@ MessageGroupList = React.createClass
     div {},
       @props.messageGroups.map (group, index) =>
         properties = @getMessageProperties group
-        side = if group[0].user.username is @state.app.user.username then "right" else "left"
+        side = if group[0].user.username is @state.user.user.username then "right" else "left"
         Row {className: "message-group #{side} row-no-margin", key: index},
           Col md: 1,
             if side is "left"
@@ -68,7 +68,7 @@ MessageGroupList = React.createClass
                 div {className: "message", key: index},
                   Message
                     message: message
-                    votes: @state.app.user.votes
+                    votes: @state.user.user.votes
                     key: index
                     bubbleType: properties[index].bubbleType
                     side: properties[index].side
