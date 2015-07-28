@@ -1,0 +1,71 @@
+@import "colors";
+@import "sizes";
+@import "fonts";
+
+.landing-body {
+  height: 100%;
+  overflow-y: scroll;
+  position: absolute;
+  font-family: $landing_page_font;
+
+  .purple {
+    background-color: $purple;
+    color: $white;    
+  }
+
+  .main {
+    padding-top: 50px;
+    padding-bottom: 200px;
+
+    .github-icon {
+      margin-right: 10px;
+    }
+
+    .blank {
+      margin: 100px 0px;
+    }
+
+    h1 {
+      text-align: left;
+    }
+
+    .btn {
+      margin-top: 10px;
+      margin-right: 10px;
+      border-radius: 0px;
+    }
+  }
+
+  .second {
+    padding-top: 20px;
+    padding-bottom: 80px;
+
+    .subtitle {
+      margin: 15px 0px;
+    }
+  }
+
+  .descriptions {
+    padding-top: 60px;
+    padding-bottom: 80px;
+
+    p {
+      font-size: 18px;
+      margin: 20px 0px;
+    }
+  }
+
+  .bottomLogin {
+    padding-top: 60px;
+    padding-bottom: 80px; 
+    
+    h3 {
+      text-align: center;
+    }
+
+    .register-button {
+      margin-top: 15px;
+      text-align: center;
+    }
+  }
+}
