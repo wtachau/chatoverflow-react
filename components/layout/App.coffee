@@ -2,7 +2,7 @@ React = require("react")
 Uri = require("jsuri")
 Router = require("react-router")
 RouteHandler = React.createFactory Router.RouteHandler
-LoginComponent = React.createFactory require("../LoginComponent")
+LandingComponent = React.createFactory require("../LandingComponent")
 HeaderComponent = React.createFactory require("../HeaderComponent")
 MainComponent = React.createFactory require("../MainComponent")
 URLResources = require("../../common/URLResources")
@@ -46,4 +46,4 @@ module.exports = React.createClass
     if @state.user
       MainComponent {}
     else
-      LoginComponent loginClicked: UserActions.login
+      LandingComponent loginClicked: UserActions.login
