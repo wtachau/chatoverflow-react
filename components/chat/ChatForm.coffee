@@ -15,15 +15,16 @@ ChatForm = React.createClass
 
   propTypes:
     submitMessage: React.PropTypes.func.isRequired
+    setMessage: React.PropTypes.func.isRequired
+    message: React.PropTypes.string.isRequired
     users: React.PropTypes.array.isRequired
 
   mixins: [ReactStateMagicMixin]
 
   statics:
     registerStore: RoomStore
-    
+
   getInitialState: ->
-    message: ""
     mentions: []
     keyPressMap: {}
 
@@ -35,7 +36,7 @@ ChatForm = React.createClass
     controlOrShift = @state.keyPressMap["Control"] or
                       @state.keyPressMap["Shift"]
     if @state.keyPressMap["Enter"] and controlOrShift
-      @setState message: @state.message + "\n"
+      @props.setMessage(@props.message + "\n")
     else if @state.keyPressMap["Enter"]
       @submit e
 
@@ -50,8 +51,8 @@ ChatForm = React.createClass
             plainTextIndex: mention.plainTextIndex
             type: null
         break
-    @props.submitMessage e, @state.message.trim(), @state.mentions
-    @setState message: ""
+    @props.submitMessage e, @props.message.trim(), @state.mentions
+    @props.setMessage ""
 
   displayMention: (id, display, type) -> "@" + display
 
@@ -64,13 +65,13 @@ ChatForm = React.createClass
   inputChange: (e, newValue, newPlainTextValue, mentions) ->
     component = React.findDOMNode this
     component.scrollTop = component.scrollHeight
-    @setState message: e.target.value
+    @props.setMessage e.target.value
     @setState mentions: mentions
 
   render: ->
     form {className: "chat-form", autoComplete: off},
       MentionsInput
-        value: @state.message
+        value: @props.message
         onChange: @inputChange
         displayTransform: @displayMention
         onKeyUp: @keyPress
