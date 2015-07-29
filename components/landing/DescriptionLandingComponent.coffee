@@ -8,10 +8,11 @@ DescriptionLandingComponent = React.createClass
   displayName: "DescriptionLandingComponent"
 
   propTypes:
+    id: React.PropTypes.string.isRequired
     title: React.PropTypes.string.isRequired
 
   render: ->
-    div {className: "container description"},
+    div {className: "container description", id: @props.id},
       Row {},
         Col md: 6,
           h3 {}, @props.title
