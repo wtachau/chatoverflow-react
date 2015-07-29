@@ -16,6 +16,11 @@ TopicLandingComponent = React.createClass
       Row {},
         Col md: 12,
           h4 {className: "subtitle"}, "For Developers"
+          # div {className: "topic-list"},
+          #   img {src: placeHolder, className: "topic-list topic-item"}
+          #   img {src: placeHolder, className: "topic-list topic-item"}
+          #   img {src: placeHolder, className: "topic-list topic-item"}
+          #   img {src: placeHolder, className: "topic-list topic-item"}
           Col md: 1,
             img {src: placeHolder, width: "100px"}
           Col md: 1, mdOffset: 1,
