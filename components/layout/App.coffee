@@ -6,11 +6,11 @@ UserStore            = require("../../stores/UserStore")
 UserActions          = require("../../actions/UserActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
-TopicSidebar    = React.createFactory require("../sidebar/TopicSidebar")
-LoginComponent  = React.createFactory require("../LoginComponent")
-HeaderComponent = React.createFactory require("../HeaderComponent")
-MainComponent   = React.createFactory require("../MainComponent")
-RouteHandler    = React.createFactory Router.RouteHandler
+TopicSidebar     = React.createFactory require("../sidebar/TopicSidebar")
+LandingComponent = React.createFactory require("../LandingComponent")
+HeaderComponent  = React.createFactory require("../HeaderComponent")
+MainComponent    = React.createFactory require("../MainComponent")
+RouteHandler     = React.createFactory Router.RouteHandler
 
 { div } = React.DOM
 
@@ -48,4 +48,4 @@ module.exports = React.createClass
     if @state.user
       MainComponent {}
     else
-      LoginComponent loginClicked: UserActions.login
+      LandingComponent onLoginClick: UserActions.login
