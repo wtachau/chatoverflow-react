@@ -1,4 +1,4 @@
-alt = require("../alt")
+alt          = require("../alt")
 URLResources = require("../common/URLResources")
 
 class RoomActions

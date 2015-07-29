@@ -1,11 +1,12 @@
-React = require("react")
-Message = React.createFactory require("./Message")
-UserComponent = React.createFactory require("../UserComponent")
-UserStore = require("../../stores/UserStore")
+React                = require("react")
+UserStore            = require("../../stores/UserStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
-ReactBootstrap = require("react-bootstrap")
-Row = React.createFactory ReactBootstrap.Row
-Col = React.createFactory ReactBootstrap.Col
+ReactBootstrap       = require("react-bootstrap")
+
+Message       = React.createFactory require("./Message")
+UserComponent = React.createFactory require("../UserComponent")
+Row           = React.createFactory ReactBootstrap.Row
+Col           = React.createFactory ReactBootstrap.Col
 
 { div, img } = React.DOM
 

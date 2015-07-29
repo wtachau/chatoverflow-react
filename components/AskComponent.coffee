@@ -1,22 +1,23 @@
-React = require("react")
-io = require("socket.io-client")
-RoomStore = require("../stores/RoomStore")
-UserStore = require("../stores/UserStore")
-RoomActions = require("../actions/RoomActions")
-UserActions = require("../actions/UserActions")
+React                = require("react")
+io                   = require("socket.io-client")
+RoomStore            = require("../stores/RoomStore")
+UserStore            = require("../stores/UserStore")
+RoomActions          = require("../actions/RoomActions")
+UserActions          = require("../actions/UserActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
-Router = require("react-router")
+Router               = require("react-router")
+ReactBootstrap       = require("react-bootstrap")
+URLResources         = require("../common/URLResources")
 
-ReactBootstrap = require("react-bootstrap")
-URLResources = require("../common/URLResources")
+Row            = React.createFactory ReactBootstrap.Row
+Col            = React.createFactory ReactBootstrap.Col
+Input          = React.createFactory ReactBootstrap.Input
+Button         = React.createFactory ReactBootstrap.Button
+DropdownButton = React.createFactory ReactBootstrap.DropdownButton
+MenuItem       = React.createFactory ReactBootstrap.MenuItem
+
 { h1, form, div } = React.DOM
 
-Row = React.createFactory ReactBootstrap.Row
-Col = React.createFactory ReactBootstrap.Col
-Input = React.createFactory ReactBootstrap.Input
-Button = React.createFactory ReactBootstrap.Button
-DropdownButton = React.createFactory ReactBootstrap.DropdownButton
-MenuItem = React.createFactory ReactBootstrap.MenuItem
 
 AskComponent = React.createClass
   displayName: "AskComponent"

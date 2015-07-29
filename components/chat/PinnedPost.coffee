@@ -1,15 +1,16 @@
-React = require("react")
-Marked = require("react-marked")
-ReactBootstrap = require("react-bootstrap")
-moment = require("moment")
-UserStore = require("../../stores/UserStore")
-UserActions = require("../../actions/UserActions")
+React                = require("react")
+Marked               = require("react-marked")
+ReactBootstrap       = require("react-bootstrap")
+moment               = require("moment")
+UserStore            = require("../../stores/UserStore")
+UserActions          = require("../../actions/UserActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
-FollowResources = require("../../common/FollowResources")
-UserComponent = React.createFactory require("../UserComponent")
+FollowResources      = require("../../common/FollowResources")
 
-Row = React.createFactory ReactBootstrap.Row
-Button = React.createFactory ReactBootstrap.Button
+UserComponent = React.createFactory require("../UserComponent")
+Row           = React.createFactory ReactBootstrap.Row
+Button        = React.createFactory ReactBootstrap.Button
+
 { div, button, img } = React.DOM
 
 PinnedPost = React.createClass

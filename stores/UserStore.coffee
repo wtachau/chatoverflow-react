@@ -1,4 +1,4 @@
-alt = require("../alt")
+alt         = require("../alt")
 UserActions = require("../actions/UserActions")
 
 class UserStore

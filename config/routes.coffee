@@ -1,13 +1,14 @@
-React = require("react")
-Router = require("react-router")
-App = require("../components/layout/App")
-AskComponent = require("../components/AskComponent")
-TopicComponent = require("../components/TopicComponent")
-RoomComponent = require("../components/RoomComponent")
-HomeComponent = require("../components/HomeComponent")
-MainComponent = require("../components/MainComponent")
+React                = require("react")
+Router               = require("react-router")
+App                  = require("../components/layout/App")
+AskComponent         = require("../components/AskComponent")
+TopicComponent       = require("../components/TopicComponent")
+RoomComponent        = require("../components/RoomComponent")
+HomeComponent        = require("../components/HomeComponent")
+MainComponent        = require("../components/MainComponent")
 ActiveUsersComponent = require("../components/ActiveUsersComponent")
-Route = React.createFactory Router.Route
+
+Route        = React.createFactory Router.Route
 DefaultRoute = React.createFactory Router.DefaultRoute
 
 routes =

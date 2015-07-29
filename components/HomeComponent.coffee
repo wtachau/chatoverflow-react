@@ -1,14 +1,16 @@
-React = require("react")
-ReactBootstrap = require("react-bootstrap")
-Router = require("react-router")
-Link = React.createFactory Router.Link
-RoomStore = require("../stores/RoomStore")
-RoomActions = require("../actions/RoomActions")
+React                = require("react")
+ReactBootstrap       = require("react-bootstrap")
+Router               = require("react-router")
+RoomStore            = require("../stores/RoomStore")
+RoomActions          = require("../actions/RoomActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
-HomeList = React.createFactory require("./chat/HomeList")
-TabbedArea = React.createFactory ReactBootstrap.TabbedArea
-TabPane = React.createFactory ReactBootstrap.TabPane
 CompareDateResources = require("../common/CompareDateResources")
+
+HomeList   = React.createFactory require("./chat/HomeList")
+Link       = React.createFactory Router.Link
+TabbedArea = React.createFactory ReactBootstrap.TabbedArea
+TabPane    = React.createFactory ReactBootstrap.TabPane
+
 { div, h1 } = React.DOM
 
 HomeComponent = React.createClass

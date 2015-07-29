@@ -1,20 +1,20 @@
-React = require("react")
-ReactBootstrap = require("react-bootstrap")
-Router = require("react-router")
-URLResources = require("../../common/URLResources")
-RoomStore = require("../../stores/RoomStore")
-RoomActions = require("../../actions/RoomActions")
-UserActions = require("../../actions/UserActions")
+React                = require("react")
+ReactBootstrap       = require("react-bootstrap")
+Router               = require("react-router")
+URLResources         = require("../../common/URLResources")
+RoomStore            = require("../../stores/RoomStore")
+RoomActions          = require("../../actions/RoomActions")
+UserActions          = require("../../actions/UserActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
-ListGroup = React.createFactory ReactBootstrap.ListGroup
-ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
-Link = React.createFactory Router.Link
-RoomInfo = React.createFactory require("./RoomInfo")
 
-Row = React.createFactory ReactBootstrap.Row
-Col = React.createFactory ReactBootstrap.Col
-TabbedArea = React.createFactory ReactBootstrap.TabbedArea
-TabPane = React.createFactory ReactBootstrap.TabPane
+RoomInfo      = React.createFactory require("./RoomInfo")
+ListGroup     = React.createFactory ReactBootstrap.ListGroup
+ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
+Link          = React.createFactory Router.Link
+Row           = React.createFactory ReactBootstrap.Row
+Col           = React.createFactory ReactBootstrap.Col
+TabbedArea    = React.createFactory ReactBootstrap.TabbedArea
+TabPane       = React.createFactory ReactBootstrap.TabPane
 
 { div } = React.DOM
 

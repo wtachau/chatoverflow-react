@@ -1,15 +1,18 @@
-React = require("react")
-ReactBootstrap = require("react-bootstrap")
-Router = require("react-router")
-URLResources = require("../../common/URLResources")
-ThreadStore = require("../../stores/ThreadStore")
+React                = require("react")
+ReactBootstrap       = require("react-bootstrap")
+Router               = require("react-router")
+URLResources         = require("../../common/URLResources")
+ThreadStore          = require("../../stores/ThreadStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+moment               = require("moment")
+
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
-Row = React.createFactory ReactBootstrap.Row
-Col = React.createFactory ReactBootstrap.Col
-Link = React.createFactory Router.Link
+Row           = React.createFactory ReactBootstrap.Row
+Col           = React.createFactory ReactBootstrap.Col
+Link          = React.createFactory Router.Link
+
 { div, ul, li, img } = React.DOM
-moment = require("moment")
+
 
 RoomInfo = React.createClass
   displayName: "RoomInfo"

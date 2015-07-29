@@ -1,5 +1,7 @@
 React = require("react")
+
 TopicListItem = React.createFactory require("./TopicListItem")
+
 { h1, div } = React.DOM
 
 module.exports = React.createClass

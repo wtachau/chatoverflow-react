@@ -1,8 +1,8 @@
-React = require("react")
+React  = require("react")
 Router = require("react-router")
 routes = require("./config/routes")
-App = require("./components/layout/App")
-ga = require("react-ga")
+App    = require("./components/layout/App")
+ga     = require("react-ga")
 
 require("./assets/vendor/bootstrap/stylesheets/_bootstrap.scss")
 require("./assets/stylesheets/general.scss")

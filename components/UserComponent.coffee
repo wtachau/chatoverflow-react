@@ -1,20 +1,21 @@
-React = require("react")
-ReactBootstrap = require("react-bootstrap")
-UserActions = require("../actions/UserActions")
-UserStore = require("../stores/UserStore")
-BootstrapModal = require("react-bootstrap-modal")
+React                = require("react")
+ReactBootstrap       = require("react-bootstrap")
+UserActions          = require("../actions/UserActions")
+UserStore            = require("../stores/UserStore")
+BootstrapModal       = require("react-bootstrap-modal")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 
-Modal = React.createFactory BootstrapModal
+Modal       = React.createFactory BootstrapModal
 ModalHeader = React.createFactory BootstrapModal.Header
-ModalTitle = React.createFactory BootstrapModal.Title
-ModalBody = React.createFactory BootstrapModal.Body
+ModalTitle  = React.createFactory BootstrapModal.Title
+ModalBody   = React.createFactory BootstrapModal.Body
 ModalFooter = React.createFactory BootstrapModal.Footer
-Button = React.createFactory ReactBootstrap.Button
-Thumbnail = React.createFactory ReactBootstrap.Thumbnail
-Grid = React.createFactory ReactBootstrap.Grid
-Row = React.createFactory ReactBootstrap.Row
-Col = React.createFactory ReactBootstrap.Col
+Button      = React.createFactory ReactBootstrap.Button
+Thumbnail   = React.createFactory ReactBootstrap.Thumbnail
+Grid        = React.createFactory ReactBootstrap.Grid
+Row         = React.createFactory ReactBootstrap.Row
+Col         = React.createFactory ReactBootstrap.Col
+
 { a, div, img } = React.DOM
 
 UserComponent = React.createClass
