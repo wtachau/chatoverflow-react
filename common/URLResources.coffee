@@ -4,12 +4,14 @@ URLResources =
   getChatServerOrigin: ->
     switch process.env.NODE_ENV
       when "development" then "http://127.0.0.1:3001"
-      when "staging" then "http://chat-overflow-node-staging.herokuapp.com"
+      when "staging" then "http://chatsignal-node-staging.herokuapp.com"
+      when "production" then "http://chatsignal-node-production.herokuapp.com"
 
   getLogicServerOrigin: ->
     switch process.env.NODE_ENV
       when "development" then "http://127.0.0.1:3000"
-      when "staging" then "http://chat-overflow-rails-staging.herokuapp.com"
+      when "staging" then "http://chatsignal-rails-staging.herokuapp.com"
+      when "production" then "http://chatsignal-rails-production.herokuapp.com"
 
   callAPI:(url, method, data, successFunction) ->
     Reqwest
