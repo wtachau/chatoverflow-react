@@ -38,5 +38,5 @@ HomeComponent = React.createClass
           HomeList {roomsSorted: roomsByCreatedAt}
         TabPane {eventKey: 2, tab: "Most Active"},
           HomeList {roomsSorted: roomsByNewestMessage}
-        
+
 module.exports = HomeComponent

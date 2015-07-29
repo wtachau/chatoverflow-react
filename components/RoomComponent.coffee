@@ -32,6 +32,14 @@ RoomComponent = React.createClass
       user: UserStore
       mention: MentionStore
       thread: ThreadStore
+    willTransitionFrom: (transition, component) ->
+      component.setMessage ""
+
+  getInitialState: ->
+    message: ""
+
+  setMessage: (message) ->
+    @setState message: message
 
   pic_url: -> @state.user.user.pic_url
 
@@ -52,6 +60,7 @@ RoomComponent = React.createClass
 
   componentWillReceiveProps: (newProps) ->
     unless @props.params.room_id is newProps.params.room_id
+      @setState message: ""
       @props.socket.emit "subscribe room", room: @getParams().room_id
       ThreadActions.setCurrentRoom parseInt @getParams().room_id
       ThreadActions.fetchRecentMessages @getParams().room_id
@@ -100,6 +109,8 @@ RoomComponent = React.createClass
         ref: "messageList"
       ChatForm
         submitMessage: @submitMessage
+        setMessage: @setMessage
+        message: @state.message
         users: @state.user.users
 
 module.exports = RoomComponent

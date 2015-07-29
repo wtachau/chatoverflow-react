@@ -11,7 +11,7 @@
 
     .row {
       margin: 0;
-      overflow: scroll; 
+      overflow: scroll;
     }
 
     .topic-header {
@@ -34,7 +34,7 @@
         height: 100%;
         background-color: white;
         border-right: 1px solid lightgray;
-  
+
         .tab-content {
           position: relative;
         }
@@ -69,8 +69,8 @@
           }
         }
         /* Bootstrap override */
-        .nav-tabs > li.active > a, 
-        .nav-tabs > li.active > a:hover, 
+        .nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:hover,
         .nav-tabs > li.active > a:focus {
           background-color: transparent;
           border: none;
@@ -225,8 +225,8 @@
     }
   }
   /* Bootstrap override */
-  .nav-tabs > li.active > a, 
-  .nav-tabs > li.active > a:hover, 
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
   .nav-tabs > li.active > a:focus {
     background-color: transparent;
     border: none;

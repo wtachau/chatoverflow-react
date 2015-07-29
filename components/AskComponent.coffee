@@ -92,7 +92,7 @@ AskComponent = React.createClass
     div {className: "home"},
       Row {},
         Col md: 12,
-          h1 {className: "question-header"}, 
+          h1 {className: "question-header"},
             "What is your "
             DropdownButton title: dropdownTitle,
               @state.room.topics.map ({id, name}, index) =>
