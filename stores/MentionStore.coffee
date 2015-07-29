@@ -1,4 +1,4 @@
-alt = require("../alt")
+alt            = require("../alt")
 MentionActions = require("../actions/MentionActions")
 
 class MentionStore
