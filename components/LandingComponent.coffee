@@ -21,11 +21,13 @@ LandingComponent = React.createClass
       div {className: "purple"},
         DescriptionLandingComponent
           title: "Real problems, real time",
-          id: "real-time"
+          id: "real-time",
+          image_src: "../assets/images/realtime.jpg"
       div {},
         DescriptionLandingComponent
           title: "Problemsolve with experts",
-          id: "problem-solve"
+          id: "problem-solve",
+          image_src: "../assets/images/expert.png"
       div {className: "purple"},
         LoginLandingComponent {onLoginClick: @props.onLoginClick}
 

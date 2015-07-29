@@ -10,6 +10,7 @@ DescriptionLandingComponent = React.createClass
   propTypes:
     id: React.PropTypes.string.isRequired
     title: React.PropTypes.string.isRequired
+    image_src: React.PropTypes.string.isRequired
 
   render: ->
     div {className: "container description", id: @props.id},
@@ -25,6 +26,6 @@ DescriptionLandingComponent = React.createClass
             pharetra vulputate, felis tellus mollis orci, sed rhoncus
             sapien nunc eget odio."
         Col md: 4, mdOffset: 2,
-          img {src: "../assets/images/placeHolder.png", width: "286px"}
+          img {src: @props.image_src, width: "375px"}
 
 module.exports = DescriptionLandingComponent
