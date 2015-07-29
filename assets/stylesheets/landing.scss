@@ -10,7 +10,7 @@
   font-family: $landing_page_font;
 
   .container {
-    width: 950px;
+    max-width: 950px;
     margin: 0 auto;
   }
 
@@ -75,13 +75,24 @@
     }
   }
 
-  .topic-list {
-    display: flex;
-    flex-wrap: wrap;
+  .topic {
+    float: left;
+    margin-right: 80px;
+    margin-bottom: 50px;
+    padding: 10px;
+    border: 1px solid $landing_topic_shadow;
+    box-shadow: 2px 2px 10px $landing_topic_shadow;
   }
-    .topic-item {
-      flex-direction: column;
-      flex: 1 0 15.625em;
-      margin: 0.8em;
-    }
+
+  .topic-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  .topic-title {
+    margin-top: 15px;
+    text-align: center;
+  }
 }
