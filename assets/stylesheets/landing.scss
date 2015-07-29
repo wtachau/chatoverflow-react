@@ -4,13 +4,19 @@
 
 .landing-body {
   height: 100%;
+  width: 100%;
   overflow-y: scroll;
   position: absolute;
   font-family: $landing_page_font;
 
+  .container {
+    width: 950px;
+    margin: 0 auto;
+  }
+
   .purple {
     background-color: $purple;
-    color: $white;    
+    color: $white;
   }
 
   .main {
@@ -36,7 +42,7 @@
     }
   }
 
-  .second {
+  .topics {
     padding-top: 20px;
     padding-bottom: 80px;
 
@@ -45,7 +51,7 @@
     }
   }
 
-  .descriptions {
+  .description {
     padding-top: 60px;
     padding-bottom: 80px;
 
@@ -55,10 +61,10 @@
     }
   }
 
-  .bottomLogin {
+  .bottom-login {
     padding-top: 60px;
-    padding-bottom: 80px; 
-    
+    padding-bottom: 80px;
+
     h3 {
       text-align: center;
     }
@@ -68,4 +74,13 @@
       text-align: center;
     }
   }
+
+  .topic-list {
+    display: flex;
+  }
+    .topic-item {
+      flex-direction: column;
+      flex: 1 0 15.625em;
+      margin: 0.8em;
+    }
 }
