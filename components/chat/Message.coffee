@@ -1,10 +1,12 @@
-React = require("react")
-Marked = require("react-marked")
+React          = require("react")
+Marked         = require("react-marked")
 ReactBootstrap = require("react-bootstrap")
-moment = require("moment")
+moment         = require("moment")
+
 VoteButton = React.createFactory require("./VoteButton")
-Col = React.createFactory ReactBootstrap.Col
-Row = React.createFactory ReactBootstrap.Row
+Col        = React.createFactory ReactBootstrap.Col
+Row        = React.createFactory ReactBootstrap.Row
+
 { div, img, video, button } = React.DOM
 
 Message = React.createClass

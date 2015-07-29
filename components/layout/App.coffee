@@ -1,15 +1,17 @@
-React = require("react")
-Uri = require("jsuri")
-Router = require("react-router")
-RouteHandler = React.createFactory Router.RouteHandler
-LoginComponent = React.createFactory require("../LoginComponent")
-HeaderComponent = React.createFactory require("../HeaderComponent")
-MainComponent = React.createFactory require("../MainComponent")
-URLResources = require("../../common/URLResources")
-UserStore = require("../../stores/UserStore")
-UserActions = require("../../actions/UserActions")
+React                = require("react")
+Uri                  = require("jsuri")
+Router               = require("react-router")
+URLResources         = require("../../common/URLResources")
+UserStore            = require("../../stores/UserStore")
+UserActions          = require("../../actions/UserActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
-TopicSidebar = React.createFactory require("../sidebar/TopicSidebar")
+
+TopicSidebar    = React.createFactory require("../sidebar/TopicSidebar")
+LoginComponent  = React.createFactory require("../LoginComponent")
+HeaderComponent = React.createFactory require("../HeaderComponent")
+MainComponent   = React.createFactory require("../MainComponent")
+RouteHandler    = React.createFactory Router.RouteHandler
+
 { div } = React.DOM
 
 module.exports = React.createClass

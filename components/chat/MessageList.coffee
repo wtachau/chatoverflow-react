@@ -1,11 +1,12 @@
-React = require("react")
-MessageGroupList = React.createFactory require("./MessageGroupList")
-PinnedPost = React.createFactory require("./PinnedPost")
-UserStore = require("../../stores/UserStore")
-UserActions = require("../../actions/UserActions")
-ThreadStore = require("../../stores/ThreadStore")
-ThreadActions = require("../../actions/ThreadActions")
+React                = require("react")
+UserStore            = require("../../stores/UserStore")
+UserActions          = require("../../actions/UserActions")
+ThreadStore          = require("../../stores/ThreadStore")
+ThreadActions        = require("../../actions/ThreadActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+
+MessageGroupList = React.createFactory require("./MessageGroupList")
+PinnedPost       = React.createFactory require("./PinnedPost")
 
 { div, img } = React.DOM
 

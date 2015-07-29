@@ -1,7 +1,8 @@
-React = require("react")
+React          = require("react")
 ReactBootstrap = require("react-bootstrap")
+
 RoomInfo = React.createFactory require("./RoomInfo")
-Row = React.createFactory ReactBootstrap.Row
+Row      = React.createFactory ReactBootstrap.Row
 
 { div, h1 } = React.DOM
 

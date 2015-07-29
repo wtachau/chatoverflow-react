@@ -1,16 +1,17 @@
-React = require("react")
-ReactBootstrap = require("react-bootstrap")
-ListGroup = React.createFactory ReactBootstrap.ListGroup
-Badge = React.createFactory ReactBootstrap.Badge
-TopicSearch = React.createFactory require("./TopicSearch")
-TopicList = React.createFactory require("./TopicList")
-TopicListItem = React.createFactory require("./TopicListItem")
-RoomList = React.createFactory require("./RoomList")
-RoomListItem = React.createFactory require("./RoomListItem")
-UserActions = require("../../actions/UserActions")
-UserStore = require("../../stores/UserStore")
-MentionStore = require("../../stores/MentionStore")
+React                = require("react")
+ReactBootstrap       = require("react-bootstrap")
+UserActions          = require("../../actions/UserActions")
+UserStore            = require("../../stores/UserStore")
+MentionStore         = require("../../stores/MentionStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+
+TopicSearch   = React.createFactory require("./TopicSearch")
+TopicList     = React.createFactory require("./TopicList")
+TopicListItem = React.createFactory require("./TopicListItem")
+RoomList      = React.createFactory require("./RoomList")
+RoomListItem  = React.createFactory require("./RoomListItem")
+ListGroup     = React.createFactory ReactBootstrap.ListGroup
+Badge         = React.createFactory ReactBootstrap.Badge
 
 { span } = React.DOM
 

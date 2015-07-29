@@ -1,4 +1,4 @@
-alt = require("../alt")
+alt           = require("../alt")
 ThreadActions = require("../actions/ThreadActions")
 
 class ThreadStore

@@ -1,6 +1,6 @@
-React = require("react")
+React         = require("react")
 ThreadActions = require("../../actions/ThreadActions")
-UserActions = require("../../actions/UserActions")
+UserActions   = require("../../actions/UserActions")
 
 { div, button } = React.DOM
 

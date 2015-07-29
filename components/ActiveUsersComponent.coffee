@@ -1,9 +1,11 @@
-React = require("react")
-ReactBootstrap = require("react-bootstrap")
-ListGroup = React.createFactory ReactBootstrap.ListGroup
-RoomStore = require("../stores/RoomStore")
+React                = require("react")
+ReactBootstrap       = require("react-bootstrap")
+RoomStore            = require("../stores/RoomStore")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
+
 UserComponent = React.createFactory require("./UserComponent")
+ListGroup     = React.createFactory ReactBootstrap.ListGroup
+
 { div, h1, img } = React.DOM
 
 Row = React.createFactory ReactBootstrap.Row
