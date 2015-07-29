@@ -8,7 +8,6 @@ ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 TopicSidebar     = React.createFactory require("../sidebar/TopicSidebar")
 LandingComponent = React.createFactory require("../LandingComponent")
-LoginComponent   = React.createFactory require("../LoginComponent")
 HeaderComponent  = React.createFactory require("../HeaderComponent")
 MainComponent    = React.createFactory require("../MainComponent")
 RouteHandler     = React.createFactory Router.RouteHandler
@@ -49,4 +48,4 @@ module.exports = React.createClass
     if @state.user
       MainComponent {}
     else
-      LandingComponent loginClicked: UserActions.login
+      LandingComponent onLoginClick: UserActions.login
