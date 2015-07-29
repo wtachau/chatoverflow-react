@@ -30,6 +30,6 @@ MainLandingComponent = React.createClass
       Row {},
         Col md: 6,
           Button {bsSize: 'large'}, "Start Chatting"
-          Button {bsSize: 'large'}, "Learn More"
+          Button {bsSize: 'large', href: "#real-time"}, "Learn More"
 
 module.exports = MainLandingComponent

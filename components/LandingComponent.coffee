@@ -19,9 +19,13 @@ LandingComponent = React.createClass
       div {},
         TopicLandingComponent {}
       div {className: "purple"},
-        DescriptionLandingComponent {title: "Real problems, real time"}
+        DescriptionLandingComponent
+          title: "Real problems, real time",
+          id: "real-time"
       div {},
-        DescriptionLandingComponent {title: "Problemsolve with experts"}
+        DescriptionLandingComponent
+          title: "Problemsolve with experts",
+          id: "problem-solve"
       div {className: "purple"},
         LoginLandingComponent {onLoginClick: @props.onLoginClick}
 
