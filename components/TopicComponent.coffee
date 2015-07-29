@@ -1,17 +1,18 @@
-React = require("react")
-io = require("socket.io-client")
-UserStore = require("../stores/UserStore")
-UserActions = require("../actions/UserActions")
+React                = require("react")
+io                   = require("socket.io-client")
+UserStore            = require("../stores/UserStore")
+UserActions          = require("../actions/UserActions")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
-URLResources = require("../common/URLResources")
-FollowResources = require("../common/FollowResources")
-Router = require("react-router")
-RouteHandler = React.createFactory Router.RouteHandler
-RoomList = React.createFactory require("./chat/RoomList")
-{ div } = React.DOM
+URLResources         = require("../common/URLResources")
+FollowResources      = require("../common/FollowResources")
+Router               = require("react-router")
+RoomStore            = require("../stores/RoomStore")
+RoomActions          = require("../actions/RoomActions")
 
-RoomStore = require("../stores/RoomStore")
-RoomActions = require("../actions/RoomActions")
+RoomList     = React.createFactory require("./chat/RoomList")
+RouteHandler = React.createFactory Router.RouteHandler
+
+{ div } = React.DOM
 
 TopicComponent = React.createClass
   displayName: "TopicComponent"

@@ -1,10 +1,12 @@
-React = require("react")
+React          = require("react")
 ReactBootstrap = require("react-bootstrap")
-Router = require("react-router")
+Router         = require("react-router")
+
 UserComponent = React.createFactory require("./UserComponent")
-Navbar = React.createFactory(ReactBootstrap.Navbar)
-Nav = React.createFactory(ReactBootstrap.Nav)
-Link = React.createFactory Router.Link
+Navbar        = React.createFactory(ReactBootstrap.Navbar)
+Nav           = React.createFactory(ReactBootstrap.Nav)
+Link          = React.createFactory Router.Link
+
 { div, h3 } = React.DOM
 
 HeaderComponent = React.createClass

@@ -1,16 +1,14 @@
 React = require("react")
 ReactBootstrap = require("react-bootstrap")
-Router = require("react-router")
 URLResources = require("../../common/URLResources")
 RoomStore = require("../../stores/RoomStore")
 RoomActions = require("../../actions/RoomActions")
-UserActions = require("../../actions/UserActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
-ListGroup = React.createFactory ReactBootstrap.ListGroup
-ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
-Link = React.createFactory Router.Link
 RoomInfo = React.createFactory require("./RoomInfo")
+Comparators = require("../../common/Comparators")
+Router = require("react-router")
 
+Link = React.createFactory Router.Link
 Row = React.createFactory ReactBootstrap.Row
 Col = React.createFactory ReactBootstrap.Col
 TabbedArea = React.createFactory ReactBootstrap.TabbedArea
@@ -40,6 +38,11 @@ RoomList = React.createClass
     RoomActions.fetchTopicInfo @props.currentTopic
 
   render: ->
+    if @state.topicInfo
+      roomsByCreatedAt = @state.topicInfo.rooms.slice(0)
+      roomsByNewestMsg = @state.topicInfo.rooms.slice(0)
+      roomsByCreatedAt.sort Comparators.byCreateDate
+      roomsByNewestMsg.sort Comparators.byLatestMessage
     div {className: "rooms"},
       if @state.topicInfo
         div {className: "room-list-page"},
@@ -50,10 +53,10 @@ RoomList = React.createClass
             Row {className: "rooms-list"},
               TabbedArea {defaultActiveKey: 1, onClick: @refreshRoomList},
                 TabPane {eventKey: 1, tab: "Most Recent"},
-                  @state.topicInfo.rooms_newest.map (room, index) =>
+                  roomsByCreatedAt.map (room, index) =>
                     RoomInfo { room, topic: @state.topicInfo.id, key: index }
                 TabPane {eventKey: 2, tab: "Most Active"},
-                  @state.topicInfo.rooms_updated_at.map (room, index) =>
+                  roomsByNewestMsg.map (room, index) =>
                     RoomInfo { room, topic: @state.topicInfo.id , key: index}
 
 module.exports = RoomList

@@ -1,8 +1,10 @@
-React = require("react")
+React          = require("react")
 ReactBootstrap = require("react-bootstrap")
-Router = require("react-router")
+Router         = require("react-router")
+
 ListGroupItem = React.createFactory ReactBootstrap.ListGroupItem
-Link = React.createFactory Router.Link
+Link          = React.createFactory Router.Link
+
 { div } = React.DOM
 
 module.exports = React.createClass

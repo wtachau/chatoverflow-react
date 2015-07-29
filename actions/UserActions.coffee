@@ -1,5 +1,5 @@
-alt = require("../alt")
-URLResources = require("../common/URLResources")
+alt             = require("../alt")
+URLResources    = require("../common/URLResources")
 FollowResources = require("../common/FollowResources")
 
 class UserActions

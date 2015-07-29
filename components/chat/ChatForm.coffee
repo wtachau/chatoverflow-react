@@ -1,14 +1,15 @@
-React = require "react"
-mentions = require "react-mentions"
-ReactBootstrap = require "react-bootstrap"
-ThreadActions = require("../../actions/ThreadActions")
-RoomStore = require("../../stores/RoomStore")
-URLResources = require("../../common/URLResources")
+React                = require "react"
+mentions             = require "react-mentions"
+ReactBootstrap       = require "react-bootstrap"
+ThreadActions        = require("../../actions/ThreadActions")
+UserStore            = require("../../stores/UserStore")
+URLResources         = require("../../common/URLResources")
+ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+
+MentionsInput = React.createFactory mentions.MentionsInput
+Mention       = React.createFactory mentions.Mention
 
 {form} = React.DOM
-MentionsInput = React.createFactory mentions.MentionsInput
-Mention = React.createFactory mentions.Mention
-ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 ChatForm = React.createClass
   displayName: "ChatForm"
@@ -22,7 +23,7 @@ ChatForm = React.createClass
   mixins: [ReactStateMagicMixin]
 
   statics:
-    registerStore: RoomStore
+    registerStore: UserStore
 
   getInitialState: ->
     mentions: []
@@ -44,12 +45,13 @@ ChatForm = React.createClass
     for mention in @state.mentions
       if mention.display is "here"
         for user in @props.users
-          @state.mentions.push
-            display: user.username
-            id: user.username
-            index: mention.index
-            plainTextIndex: mention.plainTextIndex
-            type: null
+          unless user.username is @state.user.username
+            @state.mentions.push
+              display: user.username
+              id: user.username
+              index: mention.index
+              plainTextIndex: mention.plainTextIndex
+              type: null
         break
     @props.submitMessage e, @props.message.trim(), @state.mentions
     @props.setMessage ""
@@ -60,6 +62,10 @@ ChatForm = React.createClass
     mentions = @props.users.map ({username, id}) ->
       {id: id + 1, display: username}
     mentions.unshift display: "here", id: 1
+    for user, index in mentions
+      if user.display is @state.user.username
+        mentions.splice index, 1
+        break
     mentions
 
   inputChange: (e, newValue, newPlainTextValue, mentions) ->
@@ -77,6 +83,6 @@ ChatForm = React.createClass
         onKeyUp: @keyPress
         onKeyDown: @keyPress,
         markup: "@[__display__](#)"
-        Mention {trigger: "@", data: @formattedUserMentionsData()},
+        Mention {trigger: "@", data: @formattedUserMentionsData()}
 
 module.exports = ChatForm

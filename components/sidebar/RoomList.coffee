@@ -1,5 +1,7 @@
 React = require("react")
+
 RoomListItem = React.createFactory require("./RoomListItem")
+
 { h1, div } = React.DOM
 
 module.exports = React.createClass
