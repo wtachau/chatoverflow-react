@@ -111,6 +111,7 @@
 
       .chat-body {
         .text {
+          word-wrap: break-word;
           padding: 5px 15px;
           white-space: pre-wrap;
           p {
