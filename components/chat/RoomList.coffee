@@ -6,7 +6,9 @@ RoomActions = require("../../actions/RoomActions")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 RoomInfo = React.createFactory require("./RoomInfo")
 Comparators = require("../../common/Comparators")
+Router = require("react-router")
 
+Link = React.createFactory Router.Link
 Row = React.createFactory ReactBootstrap.Row
 Col = React.createFactory ReactBootstrap.Col
 TabbedArea = React.createFactory ReactBootstrap.TabbedArea
