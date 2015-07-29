@@ -112,6 +112,5 @@ RoomComponent = React.createClass
         setMessage: @setMessage
         message: @state.message
         users: @state.user.users
-      @chatForm
 
 module.exports = RoomComponent
