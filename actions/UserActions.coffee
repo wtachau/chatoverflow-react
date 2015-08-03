@@ -32,8 +32,11 @@ class UserActions
   createTopic: (name, callback) ->
     URLResources.callAPI "/topics", "post", {name}, callback
 
-  login: ->
-    window.location.assign("#{ URLResources.getLogicServerOrigin() }/login")
+  githubLogin: ->
+    window.location.assign("#{ URLResources.getLogicServerOrigin() }/github_login")
+
+  twitterLogin: ->
+    window.location.assign("#{ URLResources.getLogicServerOrigin() }/twitter_login")
 
   logout: ->
     @actions.setCurrentUser null

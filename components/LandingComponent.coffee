@@ -10,12 +10,15 @@ LandingComponent = React.createClass
   displayName: "LandingComponent"
 
   propTypes:
-    onLoginClick: React.PropTypes.func.isRequired
+    onGithubLoginClick: React.PropTypes.func.isRequired
+    onTwitterLoginClick: React.PropTypes.func.isRequired
 
   render: ->
     div {className: "landing-body"},
       div {className: "purple"},
-        MainLandingComponent {onLoginClick: @props.onLoginClick}
+        MainLandingComponent
+          onTwitterLoginClick: @props.onTwitterLoginClick
+          onGithubLoginClick: @props.onGithubLoginClick
       div {},
         TopicLandingComponent {}
       div {className: "purple"},
@@ -29,6 +32,9 @@ LandingComponent = React.createClass
           id: "problem-solve",
           image_src: "../assets/images/expert.png"
       div {className: "purple"},
-        LoginLandingComponent {onLoginClick: @props.onLoginClick}
+        LoginLandingComponent
+          onTwitterLoginClick: @props.onTwitterLoginClick
+          onGithubLoginClick: @props.onGithubLoginClick
+
 
 module.exports = LandingComponent
