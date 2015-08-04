@@ -1,7 +1,26 @@
-React = require "react"
-App = require "./components/layout/App"
+React  = require("react")
+Router = require("react-router")
+routes = require("./config/routes")
+App    = require("./components/layout/App")
+ga     = require("react-ga")
 
-require "./assets/vendor/bootstrap/stylesheets/_bootstrap.scss"
-require "./_test.scss"
+require("./assets/vendor/bootstrap/stylesheets/_bootstrap.scss")
+require("./assets/stylesheets/general.scss")
+require("./assets/stylesheets/ask.scss")
+require("./assets/stylesheets/chat.scss")
+require("./assets/stylesheets/landing.scss")
+require("./assets/stylesheets/rooms.scss")
+require("./assets/stylesheets/sidebar.scss")
+require("./assets/stylesheets/messages.scss")
+require("./assets/stylesheets/mentions.scss")
+require("./assets/stylesheets/pinnedPost.scss")
+require("./assets/stylesheets/header.scss")
+require("./assets/stylesheets/chatPanel.scss")
+require("./assets/stylesheets/user.scss")
+require("./assets/vendor/select.scss")
 
-React.render ( React.createElement App ), document.body
+ga.initialize(process.env.GA_TRACKING_ID)
+Router.run routes, Router.HistoryLocation, (Handler, state) ->
+  ga.pageview(state.pathname)
+  React.render (React.createElement Handler),
+  document.getElementById("react-root")

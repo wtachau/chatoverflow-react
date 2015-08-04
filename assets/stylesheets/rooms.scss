@@ -1,0 +1,240 @@
+@import "colors";
+@import "sizes";
+
+.rooms {
+  width: auto;
+  overflow: hidden;
+  height: 100%;
+
+  .room-list-page {
+    height: 100%;
+
+    .row {
+      margin: 0;
+      overflow: scroll;
+    }
+
+    .topic-header {
+      height: calc(#{$topic_height} + #{$rooms_tab_height});
+      background-color: $chat_background_purple;
+      .current-topic {
+        color: white;
+        font-size: 27px;
+        margin: 15px 0px 0px 20px;
+        text-transform: lowercase;
+      }
+    }
+
+    .rooms-list-container {
+
+      width: 100%;
+      height: calc(100% - #{$topic_height} - #{$rooms_tab_height});
+
+      .rooms-list {
+        height: 100%;
+        background-color: white;
+        border-right: 1px solid lightgray;
+
+        .tab-content {
+          position: relative;
+        }
+
+        >div{
+          >nav{
+            position: fixed;
+            left: 200px;
+            z-index: 1;
+            top: calc(#{$topic_height} + #{$header_height} + 1px);
+            height: initial;
+          }
+        }
+
+        .nav-tabs {
+          background-color: $chat_background_purple;
+          border-bottom: none;
+          li {
+            border-radius: 10px 10px 0px 0px;
+            margin-left: 2px;
+            background-color: $purple;
+            a {
+              color: white;
+              padding: 5px 15px;
+            }
+            &.active {
+              background-color: $white;
+              a {
+                color: inherit;
+              }
+            }
+          }
+        }
+        /* Bootstrap override */
+        .nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:hover,
+        .nav-tabs > li.active > a:focus {
+          background-color: transparent;
+          border: none;
+        }
+        .nav-tabs > li > a {
+          border: none;
+        }
+        .nav > li > a:hover, .nav > li > a:focus {
+          background-color: transparent;
+        }
+        /* End Bootstrap override */
+
+        .highlight-room {
+          background-color: $highlight_room_background_purple;
+        }
+
+        .room-info {
+          overflow: hidden;
+
+          &.list-group-item {
+            border: inherit;
+            border-bottom: 1px solid lightgray;
+            margin-bottom: inherit;
+          }
+
+          a {
+            color: inherit;
+          }
+
+          .answers {
+            float: left;
+            width: 75px;
+            text-align: center;
+            background-color: $answers_light_grey;
+            color: $answers_dark_grey;
+            margin-right: 40px;
+            padding: 5px 10px;
+
+            .answer-total {
+              font-weight: bold;
+              font-size: 20px;
+            }
+
+            .answer-text {
+              font-size: 12px;
+            }
+          }
+
+          .question-info {
+            float: left;
+
+            .topic-title {
+              color: $questions_purple;
+              font-weight: bold;
+            }
+
+            .question-header {
+              margin-bottom: 5px;
+            }
+
+            .question-title {
+              font-size: 16px;
+              padding-right: 10px;
+              font-weight: 500;
+              color: $devils_grey;
+              margin-top: 5px;
+            }
+            .question-text {
+              font-size: 15px;
+              font-weight: 200;
+              color: $devils_grey;
+              margin-top: 10px;
+            }
+          }
+
+          .time-asked {
+            font-size: 12px;
+            padding-top: 8px;
+          }
+
+          .room-user-image {
+            width: 50px;
+            padding: 5px;
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+#news-feed {
+  width: 100%;
+  float: none;
+
+  .rooms-list {
+    position: absolute;
+    top: 120px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    padding-bottom: 120px;
+  }
+
+  .topic-header {
+    height: calc(#{$topic_height} + 30px);
+    background-color: $chat_background_purple;
+    font-size: 27px;
+    padding-top: 28px;
+    padding-left: 10px;
+    color: white;
+    .current-topic {
+        font-size: 27px;
+        margin: 15px 0px 0px 20px;
+        text-transform: lowercase;
+    }
+    .home-header {
+      font-size: 30px;
+      text-align: center;
+      border: 2px solid white;
+      width: 30%;
+      margin: auto;
+      padding: 8px 5px 12px 5px;
+      margin-top: -10px;
+      border-radius: 15px;
+      cursor: pointer;
+      color: white;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .nav-tabs {
+    background-color: $chat_background_purple;
+    border-bottom: none;
+    li {
+      border-radius: 10px 10px 0px 0px;
+      margin-left: 2px;
+      background-color: $purple;
+      a {
+        color: white;
+        padding: 5px 15px;
+      }
+      &.active {
+        background-color: $white;
+        a {
+          color: inherit;
+        }
+      }
+    }
+  }
+  /* Bootstrap override */
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:hover,
+  .nav-tabs > li.active > a:focus {
+    background-color: transparent;
+    border: none;
+  }
+  .nav-tabs > li > a {
+    border: none;
+  }
+  .nav > li > a:hover, .nav > li > a:focus {
+    background-color: transparent;
+  }
+}

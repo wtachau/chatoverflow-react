@@ -1,0 +1,46 @@
+@import "colors";
+@import "sizes";
+@import "fonts";
+
+nav {
+
+  height: $header_height;
+
+  &.navbar-default {
+    margin-bottom: 0px;
+    background-color: $purple;
+    border: none;
+    border-radius: 0px;
+    z-index: 1;
+    .nav.navbar-nav {
+      width: 100%;
+    }
+  }
+  h3 {
+    &:hover{
+      text-decoration: none;
+    }
+    color: white;
+    position: absolute;
+    top: -8px;
+
+    &.chatsignal-logo {
+      left: 10px;
+      font-family: $navbar_chatsignal_home;
+    }
+  }
+  .newthread {
+    font-family: $navbar_start_new_thread;
+    right: 60px;
+    background-color: $chat_background_purple;
+    padding: 10px;
+    position: absolute;
+    color: white;
+    border-radius: 20px;
+    margin-top: 10px;
+    width: 125px;
+    line-height: 10px;
+    text-align: center;
+  }
+
+}

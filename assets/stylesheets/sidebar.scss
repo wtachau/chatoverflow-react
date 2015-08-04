@@ -1,0 +1,106 @@
+@import "colors";
+@import "sizes";
+@import "fonts";
+
+.sidebar {
+
+  width: $sidebar_width;
+  padding-left: 2px;
+  padding-top: 2px;
+  height: 100vh;
+  position: fixed;
+  color: $chat_background_purple;
+  background-color: $chat_sidebar_background;
+
+
+  .categories-header {
+    background-color: $chat_sidebar_background;
+    color: $white;
+    font-size: 16px;
+    font-family: $sidebar_list_title_font;
+    text-align: left;
+    padding: 5px;
+    padding-left: 10px;
+  }
+
+  a {
+
+    text-decoration: none;
+
+    .topic-name {
+      text-transform: lowercase;
+      font-family: $sidebar_list_item_font;
+      font-size: medium;
+      padding: 3px;
+      padding-left: 30px;
+      color: $white;
+      background-color: $chat_sidebar_background;
+      border: 0px;
+      border-radius: 0px;
+      height: 25px;
+      .thread-title {
+        float: left;
+        width: 130px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .thread-badge {
+        float: left;
+      }
+      &:hover {
+        background-color: $chat_background_purple;
+        .exit-x {
+          display: inherit;
+        }
+      }
+      .exit-x {
+        display: none;
+        float: right;
+        padding-right: 8px;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+
+  }
+
+  .topic-search {
+    .Select-control {
+      margin-top: 5px;
+      padding: 4px;
+    }
+    .Select-control, .Select-menu-outer {
+      width: 80%;
+      left: 25px;
+      background-color: $chat_sidebar_background;
+      color: white;
+      line-height: 8px;
+      border: none;
+    }
+    .Select-menu-outer {
+      position: relative;
+      padding: 0px;
+      .Select-option.is-focused {
+        background-color: grey;
+      }
+    }
+    .Select-placeholder {
+      padding: 8px 52px 8px 5px;
+      &:focus {
+        outline: none;
+      }
+    }
+    .Select-arrow {
+      top: 10px;
+    }
+  }
+
+  .active {
+    >span {
+      background-color: $chat_background_purple;
+    }
+  }
+
+}

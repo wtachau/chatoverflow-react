@@ -1,4 +1,19 @@
 #ignore these
 npm-debug.log
 node_modules/
+.idea/
 .DS_Store
+*.js
+*.svg
+*.swp
+*~
+bundle.js.map
+
+!bundle.js
+!webpack.config.js
+!webpack.dev.config.js
+!webpack.prod.config.js
+!webpack.staging.config.js
+!dev.js
+!assets/vendor/*.js
+!preprocessor.js

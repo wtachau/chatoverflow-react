@@ -1,0 +1,57 @@
+@import "colors";
+@import "sizes";
+@import "fonts";
+
+$header_padding: 10px;
+
+.nav .popup-link {
+  margin-top: calc(#{$header_padding} / 2);
+  margin-bottom: -10px;
+  position: absolute;
+  right: $header_padding;
+}
+.popup-link img {
+  width: calc(#{$header_height} - #{$header_padding});
+  border-radius: calc(#{$header_height} / 2);
+}
+
+.user-username {
+  font-size: 32px;
+}
+
+.user-modal {
+  display: block;
+}
+
+.user-karma {
+  font-size: 24px;
+}
+
+.active-users {
+  width: 30%;
+  float: right;
+  overflow: hidden;
+
+  .active-users-header {
+    height: 90px;
+    background-color: $chat_background_purple;
+    color: white;
+  }
+
+  .active-user {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    background-color: $active_users_background_purple;
+    padding: 10px 0px 10px 20px;
+
+    .user-details {
+      margin-left: 10px;
+      float: left;
+      .active-user-name {
+        color: $chat_text_purple;
+        font-weight: bold;
+      }
+    }
+  }
+}

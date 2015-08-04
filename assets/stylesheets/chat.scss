@@ -1,0 +1,30 @@
+@import "colors";
+@import "sizes";
+@import "fonts";
+.chat {
+
+  .main-section {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  .chat-form {
+    background: $chat_input_background_purple;
+    right: 0;
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    padding: 3px;
+    height: $chat_box_height;
+  }
+
+  .form-input {
+    border: 0;
+    padding: 10px;
+    width: 80%;
+    margin-right: .5%;
+    position: fixed;
+  }
+
+}

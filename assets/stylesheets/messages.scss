@@ -1,0 +1,192 @@
+@import "colors";
+@import "sizes";
+
+.messages-section {
+  width: 50%;
+  float: right;
+}
+
+.messages {
+
+  position: absolute;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100% - #{$chat_box_height} - #{$pinned_post_height} - 1px);
+  width: 50%;
+  vertical-align: top;
+
+  .message-group {
+    width: 100%;
+    overflow: auto;
+    display: block;
+    padding: 5px 0px;
+
+    &.left {
+      float: left;
+    }
+    &.right {
+      float: right;
+    }
+
+    .username {
+      margin-left: 11px;
+      color: $message_user_grey;
+      font-size: 12px;
+    }
+
+    .timestamp {
+      float: right;
+      font-size: 11px;
+      color: gray;
+      margin-top: 3px;
+    }
+
+    .message-column {
+      float: left;
+      min-height: 1px;
+      &.messages-body{
+        width: calc( 100% - #{$time_col_width} - #{$votes_col_width});
+      }
+      &.votes {
+        width: $votes_col_width;
+      }
+      &.time {
+        width: $time_col_width;
+      }
+    }
+
+    .message-row {
+
+      margin: 1px;
+
+      &.bubble {
+        border-radius: $bubble_border_radius;
+        max-width: 90%;
+        &.left {
+          float: left;
+          background-color: $messages_background_others;
+          &.top-bubble{
+            border-bottom-left-radius: 0px;
+          }
+          &.middle-bubble {
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+          }
+          &.bottom-bubble {
+            border-radius: $bubble_border_radius;
+            border-top-left-radius: 0px;
+          }
+        }
+        &.right {
+          float: right;
+          background-color: $messages_background_us;
+          &.top-bubble{
+            border-bottom-right-radius: 0px;
+          }
+          &.middle-bubble {
+            border-bottom-right-radius: 5px;
+            border-top-right-radius: 5px;
+          }
+          &.bottom-bubble {
+            border-radius: $bubble_border_radius;
+            border-top-right-radius: 0px;
+          }
+          &.single-bubble {
+            border-radius: $bubble_border_radius;
+          }
+        }
+      }
+
+      .username {
+        text-align: right;
+        width: $username_width;
+        float: left;
+        padding: 0px 10px;
+
+        .profile-pic {
+          max-width: 40px;
+          border-radius: 20px;
+        }
+      }
+
+      .chat-body {
+        .text {
+          word-wrap: break-word;
+          padding: 5px 15px;
+          white-space: pre-wrap;
+          p {
+            margin: inherit;
+          }
+        }
+
+        img, video {
+          max-width: 300px;
+          padding: 0px 10px 10px 10px;
+        }
+      }
+    }
+    &:hover {
+      .votes {
+        .vote-button {
+          display: inherit;
+        }
+      }
+    }
+    .votes {
+      text-align: center;
+      .vote-button {
+        float: left;
+        background-color: transparent;
+        border-color: transparent;
+        height: 20px;
+        padding: 2px 5px;
+        outline: 0;
+        display: none;
+        &.gold {
+          color: $star_gold;
+        }
+        &.display {
+          display: inherit;
+        }
+      }
+      .vote-total {
+        float: left;
+        color: gray;
+        font-size: 13px;
+        padding-top: 4px;
+      }
+    }
+  }
+}
+
+.image {
+  max-width: 500px;
+  height: "auto";
+}
+
+.profile-pic {
+  max-width: 40px;
+  border-radius: 20px;
+  float: left;
+}
+
+.margin-left {
+  margin-left: 9px;
+}
+
+.message {
+  width: 100%;
+  overflow: auto;
+  display: block;
+}
+
+.float-left {
+  float: left;
+}
+
+.loading-icon {
+  max-width: 40px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
