@@ -48,4 +48,6 @@ module.exports = React.createClass
     if @state.user
       MainComponent {}
     else
-      LandingComponent onLoginClick: UserActions.login
+      LandingComponent
+        onGithubLoginClick: UserActions.githubLogin
+        onTwitterLoginClick: UserActions.twitterLogin

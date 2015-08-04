@@ -9,7 +9,8 @@ MainLandingComponent = React.createClass
   displayName: "MainLandingComponent"
 
   propTypes:
-    onLoginClick: React.PropTypes.func.isRequired
+    onGithubLoginClick: React.PropTypes.func.isRequired
+    onTwitterLoginClick: React.PropTypes.func.isRequired
 
   render: ->
     div {className: "container main"},
@@ -17,10 +18,14 @@ MainLandingComponent = React.createClass
         Col md: 1,
           h2 {}, "chatsignal"
         Col md: 3, mdOffset: 8,
-          div {onClick: @props.onLoginClick},
+          div {onClick: @props.onGithubLoginClick},
             Button {bsSize: 'large'},
               i {className: "fa fa-github github-icon"}
               "Login with GitHub"
+          div {onClick: @props.onTwitterLoginClick},
+            Button {bsSize: 'large'},
+              i {className: "fa fa-twitter twitter-icon"}
+              "Login with Twitter"
       Row {className: "blank"}
       Row {},
         Col md: 12,
