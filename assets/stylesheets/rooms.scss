@@ -19,10 +19,20 @@
       height: calc(#{$topic_height} + #{$rooms_tab_height});
       background-color: $chat_background_red;
       border-bottom: 31px solid $tab_background_red;
+
+      .room-prefix {
+        color: white;
+        font-family: $room_header_room_font;
+        font-size: 12pt;
+        margin-left: 22px;
+        margin-top: 10px;
+      }
+
       .current-topic {
         color: white;
         font-size: 24pt;
-        margin: 15px 0px 0px 20px;
+        margin-left: 20px;
+        margin-top: -5px;
         font-family: $room_header_name_font;
 
         &:hover {
@@ -194,16 +204,16 @@
   }
 
   .topic-header {
-    height: calc(#{$topic_height} + 30px);
+    height: calc(60px + #{$rooms_tab_height});
     background-color: $chat_background_red;
     font-size: 27px;
     padding-top: 28px;
     padding-left: 10px;
     color: white;
     .current-topic {
-        font-size: 27px;
-        margin: 15px 0px 0px 20px;
-        text-transform: lowercase;
+      font-size: 27px;
+      margin: 15px 0px 0px 20px;
+      text-transform: lowercase;
     }
     .home-header {
       font-size: 30px;
@@ -225,17 +235,26 @@
   .nav-tabs {
     background-color: $tab_background_red;
     border-bottom: none;
+
     li {
       border-radius: 10px 10px 0px 0px;
       margin-left: 2px;
-      background-color: $purple;
+      background: transparent;
+
       a {
         color: white;
         padding: 5px 15px;
+        font-family: $room_header_name_font;
+        font-size: 12pt;
+        opacity: .5;
       }
+
       &.active {
-        background-color: $white;
+        font-weight: bold;
+        color: white;
+
         a {
+          opacity: 1;
           color: inherit;
         }
       }
