@@ -13,7 +13,7 @@ RoomListItem  = React.createFactory require("./RoomListItem")
 ListGroup     = React.createFactory ReactBootstrap.ListGroup
 Badge         = React.createFactory ReactBootstrap.Badge
 
-{ span } = React.DOM
+{ span, div, img, h3 } = React.DOM
 
 module.exports = React.createClass
   displayName: "TopicSidebar"
@@ -46,6 +46,9 @@ module.exports = React.createClass
 
   render: ->
     ListGroup {className: "sidebar"},
+      div {className: "logo-div"},
+        img {src: "../../assets/images/icon_placeholder.png", className: "logo"}
+        h3 {className: "categories-header"}, "chatSignal"
       TopicList
         topics: @props.user.followed_topics
         onClose: @onCloseTopic

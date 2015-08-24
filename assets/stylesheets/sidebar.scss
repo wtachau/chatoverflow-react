@@ -12,6 +12,15 @@
   color: $chat_background_purple;
   background-color: $chat_sidebar_background;
 
+  .logo-div {
+    padding-bottom: 10px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+    float: left;
+  }
 
   .categories-header {
     background-color: $chat_sidebar_background;
@@ -28,9 +37,9 @@
     text-decoration: none;
 
     .topic-name {
-      text-transform: lowercase;
       font-family: $sidebar_list_item_font;
       font-size: medium;
+      font-weight: 300;
       padding: 3px;
       padding-left: 30px;
       color: $white;
