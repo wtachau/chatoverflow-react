@@ -42,18 +42,12 @@ RoomInfo = React.createClass
       Link {to: "/topics/#{@props.topic}/rooms/#{@props.room.id}"},
         div {className: "answers"},
           div {className: "answer-total"}, answersTotal
-          div {className: "answer-text"},
-            if answersTotal is 1 then "answer" else "answers"
         Row {},
-          Col {className: "question-info", xs:8},
+          Col {className: "question-info", xs: 12},
             if @props.room.topic_title
               div {className: "topic-title"}, @props.room.topic_title
             div {className: "question-header"},
               div {className: "question-title"}, @props.room.title
-            div {className: "question-text"}, question
             div {className: "time-asked"}, timestamp
-            div {className: "followers"},
-              @props.room.followers.map (user, index) =>
-                img {src: user.pic_url, className: "room-user-image", key: index}
 
 module.exports = RoomInfo
