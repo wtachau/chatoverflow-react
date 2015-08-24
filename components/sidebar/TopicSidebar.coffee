@@ -48,7 +48,7 @@ module.exports = React.createClass
     ListGroup {className: "sidebar"},
       div {className: "logo-div"},
         img {src: "../../assets/images/icon_placeholder.png", className: "logo"}
-        h3 {className: "categories-header"}, "chatSignal"
+        h3 {className: "categories-header"}, "ChatSignal"
       TopicList
         topics: @props.user.followed_topics
         onClose: @onCloseTopic
