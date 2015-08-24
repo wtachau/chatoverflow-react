@@ -42,7 +42,7 @@
         >div{
           >nav{
             position: fixed;
-            left: 200px;
+            left: $sidebar_width;
             z-index: 1;
             top: calc(#{$topic_height} + #{$header_height} + 1px);
             height: initial;
