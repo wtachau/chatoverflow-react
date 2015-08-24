@@ -1,10 +1,12 @@
 @import "colors";
 @import "sizes";
+@import "fonts";
 
 .rooms {
   width: auto;
   overflow: hidden;
   height: 100%;
+  color: $text_grey;
 
   .room-list-page {
     height: 100%;
@@ -16,12 +18,28 @@
 
     .topic-header {
       height: calc(#{$topic_height} + #{$rooms_tab_height});
-      background-color: $chat_background_purple;
+      background-color: $chat_background_red;
+      border-bottom: 31px solid $tab_background_red;
+
+      .room-prefix {
+        color: white;
+        font-family: $room_header_room_font;
+        font-size: 12pt;
+        margin-left: 22px;
+        margin-top: 10px;
+      }
+
       .current-topic {
         color: white;
-        font-size: 27px;
-        margin: 15px 0px 0px 20px;
-        text-transform: lowercase;
+        font-size: 24pt;
+        margin-left: 20px;
+        margin-top: -5px;
+        font-family: $room_header_name_font;
+
+        &:hover {
+          border: none;
+          text-decoration: none;
+        }
       }
     }
 
@@ -44,25 +62,35 @@
             position: fixed;
             left: 200px;
             z-index: 1;
-            top: calc(#{$topic_height} + #{$header_height} + 1px);
+            top: calc(#{$topic_height} + #{$header_height} + 2px);
             height: initial;
+            overflow: hidden;
           }
         }
 
         .nav-tabs {
-          background-color: $chat_background_purple;
+          background-color: $tab_background_red;
           border-bottom: none;
+
           li {
             border-radius: 10px 10px 0px 0px;
             margin-left: 2px;
-            background-color: $purple;
+            background: transparent;
+
             a {
               color: white;
               padding: 5px 15px;
+              font-family: $room_header_name_font;
+              font-size: 12pt;
+              opacity: .5;
             }
+
             &.active {
-              background-color: $white;
+              font-weight: bold;
+              color: white;
+
               a {
+                opacity: 1;
                 color: inherit;
               }
             }
@@ -83,12 +111,15 @@
         }
         /* End Bootstrap override */
 
-        .highlight-room {
-          background-color: $highlight_room_background_purple;
-        }
 
         .room-info {
           overflow: hidden;
+          background-color: $thread_inactive_background;
+          font-family: $room_info_font;
+
+          &.highlight-room {
+            background-color: $thread_active_background;
+          }
 
           &.list-group-item {
             border: inherit;
@@ -104,18 +135,12 @@
             float: left;
             width: 75px;
             text-align: center;
-            background-color: $answers_light_grey;
             color: $answers_dark_grey;
-            margin-right: 40px;
             padding: 5px 10px;
 
             .answer-total {
               font-weight: bold;
-              font-size: 20px;
-            }
-
-            .answer-text {
-              font-size: 12px;
+              font-size: 32px;
             }
           }
 
@@ -177,16 +202,16 @@
   }
 
   .topic-header {
-    height: calc(#{$topic_height} + 30px);
-    background-color: $chat_background_purple;
+    height: calc(60px + #{$rooms_tab_height});
+    background-color: $chat_background_red;
     font-size: 27px;
     padding-top: 28px;
     padding-left: 10px;
     color: white;
     .current-topic {
-        font-size: 27px;
-        margin: 15px 0px 0px 20px;
-        text-transform: lowercase;
+      font-size: 27px;
+      margin: 15px 0px 0px 20px;
+      text-transform: lowercase;
     }
     .home-header {
       font-size: 30px;
@@ -206,19 +231,28 @@
   }
 
   .nav-tabs {
-    background-color: $chat_background_purple;
+    background-color: $tab_background_red;
     border-bottom: none;
+
     li {
       border-radius: 10px 10px 0px 0px;
       margin-left: 2px;
-      background-color: $purple;
+      background: transparent;
+
       a {
         color: white;
         padding: 5px 15px;
+        font-family: $room_header_name_font;
+        font-size: 12pt;
+        opacity: .5;
       }
+
       &.active {
-        background-color: $white;
+        font-weight: bold;
+        color: white;
+
         a {
+          opacity: 1;
           color: inherit;
         }
       }

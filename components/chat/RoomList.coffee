@@ -47,6 +47,7 @@ RoomList = React.createClass
       if @state.topicInfo
         div {className: "room-list-page"},
           Row {className: "topic-header"},
+            div {className: "room-prefix"}, "Room"
             Link {to: "/topics/#{@props.currentTopic}"},
               div {className: "current-topic"}, @state.topicInfo.name
           div {className: "rooms-list-container"},
