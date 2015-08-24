@@ -8,7 +8,7 @@ ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 MessageGroupList = React.createFactory require("./MessageGroupList")
 PinnedPost       = React.createFactory require("./PinnedPost")
 
-{ div, img } = React.DOM
+{ div, i } = React.DOM
 
 AutoScrollWindow = 160
 
@@ -33,10 +33,10 @@ MessageList = React.createClass
   componentWillUpdate: (nextProps) ->
     messagesComp = @messagesComponent()
     if messagesComp
-      if nextProps.currentRoom != @props.currentRoom
+      if nextProps.currentRoom isnt @props.currentRoom
          @isNewThread = true
       else
-        @hasNewMessages = nextProps.messages.length != @props.messages.length
+        @hasNewMessages = nextProps.messages.length isnt @props.messages.length
         if @hasNewMessages
           @preLoadScrollHeight = messagesComp.scrollHeight
 
@@ -61,7 +61,7 @@ MessageList = React.createClass
     messagesComponent.scrollTop = messagesComponent.scrollHeight
 
   onOldMessagesReceived: (messagesComponent) ->
-    messagesComponent.scrollTop = messagesComponent.scrollHeight - 
+    messagesComponent.scrollTop = messagesComponent.scrollHeight -
       @preLoadScrollHeight
 
   getScrollPosition: (messagesComponent) ->
@@ -80,7 +80,7 @@ MessageList = React.createClass
     messageGroups = []
     group = []
     rest.map (message, index) =>
-      if index != 0 and rest[index-1].user.username != message.user.username
+      if index isnt 0 and rest[index-1].user.username isnt message.user.username
         messageGroups.push group
         group = []
       group.push message
@@ -98,7 +98,7 @@ MessageList = React.createClass
             currentRoom: @props.currentRoom
           div {className: "messages", ref: "messages", onScroll: @checkWindowScroll},
             if (not @state.thread.isFinishedLoadingMessages or @messagesComponent.scrollHeight)
-              img {className: "loading-icon", src: "../../../assets/images/loading.gif"}
+              i {className: "icon-spinner icon-spin icon-large"}
             MessageGroupList { messageGroups, shouldUpdateScrollHeight: @shouldUpdateScrollHeight }
 
 module.exports = MessageList
