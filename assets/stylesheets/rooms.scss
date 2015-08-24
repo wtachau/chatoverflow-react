@@ -1,5 +1,6 @@
 @import "colors";
 @import "sizes";
+@import "fonts";
 
 .rooms {
   width: auto;
@@ -16,12 +17,18 @@
 
     .topic-header {
       height: calc(#{$topic_height} + #{$rooms_tab_height});
-      background-color: $chat_background_purple;
+      background-color: $chat_background_red;
+      border-bottom: 31px solid $tab_background_red;
       .current-topic {
         color: white;
-        font-size: 27px;
+        font-size: 24pt;
         margin: 15px 0px 0px 20px;
-        text-transform: lowercase;
+        font-family: $room_header_name_font;
+
+        &:hover {
+          border: none;
+          text-decoration: none;
+        }
       }
     }
 
@@ -44,25 +51,35 @@
             position: fixed;
             left: 200px;
             z-index: 1;
-            top: calc(#{$topic_height} + #{$header_height} + 1px);
+            top: calc(#{$topic_height} + #{$header_height} + 2px);
             height: initial;
+            overflow: hidden;
           }
         }
 
         .nav-tabs {
-          background-color: $chat_background_purple;
+          background-color: $tab_background_red;
           border-bottom: none;
+
           li {
             border-radius: 10px 10px 0px 0px;
             margin-left: 2px;
-            background-color: $purple;
+            background: transparent;
+
             a {
               color: white;
               padding: 5px 15px;
+              font-family: $room_header_name_font;
+              font-size: 12pt;
+              opacity: .5;
             }
+
             &.active {
-              background-color: $white;
+              font-weight: bold;
+              color: white;
+
               a {
+                opacity: 1;
                 color: inherit;
               }
             }
@@ -178,7 +195,7 @@
 
   .topic-header {
     height: calc(#{$topic_height} + 30px);
-    background-color: $chat_background_purple;
+    background-color: $chat_background_red;
     font-size: 27px;
     padding-top: 28px;
     padding-left: 10px;
@@ -206,7 +223,7 @@
   }
 
   .nav-tabs {
-    background-color: $chat_background_purple;
+    background-color: $tab_background_red;
     border-bottom: none;
     li {
       border-radius: 10px 10px 0px 0px;
