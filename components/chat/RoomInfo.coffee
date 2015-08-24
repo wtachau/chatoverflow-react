@@ -43,7 +43,7 @@ RoomInfo = React.createClass
         div {className: "answers"},
           div {className: "answer-total"}, answersTotal
         Row {},
-          Col {className: "question-info", xs:8},
+          Col {className: "question-info", xs: 12},
             if @props.room.topic_title
               div {className: "topic-title"}, @props.room.topic_title
             div {className: "question-header"},
