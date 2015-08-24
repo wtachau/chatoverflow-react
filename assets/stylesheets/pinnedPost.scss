@@ -3,13 +3,14 @@
 
 .pinned-post {
 
-  background-color: $pinned_post_background_red;
+  background-color: $pinned_post_background;
   height: $pinned_post_height;
   overflow: auto;
   width: 100%;
   vertical-align: top;
   padding: 5px;
-  margin-left: 0px;
+  margin-left: 0;
+  border-bottom: 1px solid #ddd;
 
   .username {
     text-align: center;
