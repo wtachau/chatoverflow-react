@@ -6,6 +6,7 @@
   width: auto;
   overflow: hidden;
   height: 100%;
+  color: $text_grey;
 
   .room-list-page {
     height: 100%;
@@ -110,12 +111,15 @@
         }
         /* End Bootstrap override */
 
-        .highlight-room {
-          background-color: $highlight_room_background_purple;
-        }
 
         .room-info {
           overflow: hidden;
+          background-color: $thread_inactive_background;
+          font-family: $room_info_font;
+
+          &.highlight-room {
+            background-color: $thread_active_background;
+          }
 
           &.list-group-item {
             border: inherit;
@@ -131,18 +135,13 @@
             float: left;
             width: 75px;
             text-align: center;
-            background-color: $answers_light_grey;
             color: $answers_dark_grey;
             margin-right: 40px;
             padding: 5px 10px;
 
             .answer-total {
               font-weight: bold;
-              font-size: 20px;
-            }
-
-            .answer-text {
-              font-size: 12px;
+              font-size: 32px;
             }
           }
 
