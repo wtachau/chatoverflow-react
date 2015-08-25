@@ -8,6 +8,7 @@
 
 .messages {
 
+  background-color: $thread_active_background;
   position: absolute;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -142,8 +143,8 @@
         padding: 2px 5px;
         outline: 0;
         display: none;
-        &.gold {
-          color: $star_gold;
+        &.red {
+          color: $heart_red;
         }
         &.display {
           display: inherit;

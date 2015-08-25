@@ -81,8 +81,9 @@ ChatForm = React.createClass
         onChange: @inputChange
         displayTransform: @displayMention
         onKeyUp: @keyPress
-        onKeyDown: @keyPress,
+        onKeyDown: @keyPress
         markup: "@[__display__](#)"
+        placeholder: "Enter your response here."
         Mention {trigger: "@", data: @formattedUserMentionsData()}
 
 module.exports = ChatForm
