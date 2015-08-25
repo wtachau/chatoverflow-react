@@ -62,7 +62,7 @@
             position: fixed;
             left: $sidebar_width;
             z-index: 1;
-            top: calc(#{$topic_height} + #{$header_height} + 2px);
+            top: calc(#{$topic_height} + 2px);
             height: initial;
             overflow: hidden;
           }
