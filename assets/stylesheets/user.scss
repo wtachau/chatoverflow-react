@@ -10,6 +10,7 @@ $header_padding: 10px;
   position: absolute;
   right: $header_padding;
 }
+
 .popup-link img {
   width: calc(#{$header_height} - #{$header_padding});
   border-radius: calc(#{$header_height} / 2);
@@ -34,7 +35,7 @@ $header_padding: 10px;
 
   .active-users-header {
     height: 90px;
-    background-color: $chat_background_red;
+    background-color: $primary_background;
     color: white;
   }
 
@@ -42,14 +43,15 @@ $header_padding: 10px;
     width: 100%;
     overflow: hidden;
     margin: 0 auto;
-    background-color: $active_users_background_red;
-    padding: 10px 0px 10px 20px;
+    background-color: $light_background;
+    padding: 10px 0 10px 20px;
 
     .user-details {
       margin-left: 10px;
       float: left;
+
       .active-user-name {
-        color: $text_grey;
+        color: $primary_text;
         font-weight: bold;
       }
     }

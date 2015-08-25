@@ -7,9 +7,7 @@
   width: 100%;
   overflow-y: scroll;
   position: absolute;
-  font-family: $landing_page_font;
-  // :'(
-  //background-image: url(/assets/images/Logo.jpeg);
+  font-family: $primary_font;
 
   .container {
     max-width: 950px;
@@ -17,8 +15,8 @@
   }
 
   .purple {
-    background-color: $purple;
-    color: $white;
+    background-color: $landing_background;
+    color: white;
   }
 
   .main {
@@ -30,7 +28,7 @@
     }
 
     .blank {
-      margin: 100px 0px;
+      margin: 100px 0;
     }
 
     h1 {
@@ -40,7 +38,7 @@
     .btn {
       margin-top: 10px;
       margin-right: 10px;
-      border-radius: 0px;
+      border-radius: 0;
     }
   }
 
@@ -49,7 +47,7 @@
     padding-bottom: 80px;
 
     .subtitle {
-      margin: 15px 0px;
+      margin: 15px 0;
     }
   }
 
@@ -59,7 +57,7 @@
 
     p {
       font-size: 18px;
-      margin: 20px 0px;
+      margin: 20px 0;
     }
   }
 
