@@ -12,6 +12,10 @@
   color: $chat_background_purple;
   background-color: $chat_sidebar_background;
 
+  nav.sidebar-nav {
+    height: 25px;
+  }
+
   .logo-div {
     padding-bottom: 10px;
   }
