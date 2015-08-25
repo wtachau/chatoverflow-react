@@ -4,14 +4,18 @@ UserActions          = require("../../actions/UserActions")
 UserStore            = require("../../stores/UserStore")
 MentionStore         = require("../../stores/MentionStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+Router         = require("react-router")
 
 TopicSearch   = React.createFactory require("./TopicSearch")
 TopicList     = React.createFactory require("./TopicList")
 TopicListItem = React.createFactory require("./TopicListItem")
 RoomList      = React.createFactory require("./RoomList")
 RoomListItem  = React.createFactory require("./RoomListItem")
+UserComponent = React.createFactory require("../UserComponent")
 ListGroup     = React.createFactory ReactBootstrap.ListGroup
 Badge         = React.createFactory ReactBootstrap.Badge
+Nav           = React.createFactory ReactBootstrap.Nav
+Link          = React.createFactory Router.Link
 
 { span, div, img, h3 } = React.DOM
 
@@ -48,7 +52,14 @@ module.exports = React.createClass
     ListGroup {className: "sidebar"},
       div {className: "logo-div"},
         img {src: "../../assets/images/icon_placeholder.png", className: "logo"}
-        h3 {className: "categories-header"}, "ChatSignal"
+        Link to: "home",
+          h3 {className: "categories-header"}, "ChatSignal"
+      Nav {className: "sidebar-nav"},
+        Link to: "ask",
+          div {className: "newthread"}, "+ New Thread"
+        UserComponent
+          user: @props.user
+          includeLogout: true
       TopicList
         topics: @props.user.followed_topics
         onClose: @onCloseTopic
