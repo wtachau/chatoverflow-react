@@ -11,11 +11,6 @@ $header_padding: 10px;
   right: $header_padding;
 }
 
-.popup-link img {
-  width: calc(#{$header_height} - #{$header_padding});
-  border-radius: calc(#{$header_height} / 2);
-}
-
 .user-username {
   font-size: 32px;
 }
