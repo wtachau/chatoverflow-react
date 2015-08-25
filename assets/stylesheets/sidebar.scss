@@ -9,7 +9,7 @@
   padding-top: 2px;
   height: 100vh;
   position: fixed;
-  color: $chat_background_purple;
+  color: $chat_background_red;
   background-color: $chat_sidebar_background;
 
   .logo-div {
@@ -59,7 +59,7 @@
         float: left;
       }
       &:hover {
-        background-color: $chat_background_purple;
+        background-color: $chat_background_red;
         .exit-x {
           display: inherit;
         }
@@ -78,7 +78,7 @@
 
   .topic-search {
     margin-top: 15px;
-    
+
     .Select-control {
       margin-top: 5px;
       padding: 4px;
@@ -111,7 +111,7 @@
 
   .active {
     >span {
-      background-color: $chat_background_purple;
+      background-color: $chat_background_red;
     }
   }
 

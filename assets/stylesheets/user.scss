@@ -34,7 +34,7 @@ $header_padding: 10px;
 
   .active-users-header {
     height: 90px;
-    background-color: $chat_background_purple;
+    background-color: $chat_background_red;
     color: white;
   }
 
@@ -42,14 +42,14 @@ $header_padding: 10px;
     width: 100%;
     overflow: hidden;
     margin: 0 auto;
-    background-color: $active_users_background_purple;
+    background-color: $active_users_background_red;
     padding: 10px 0px 10px 20px;
 
     .user-details {
       margin-left: 10px;
       float: left;
       .active-user-name {
-        color: $chat_text_purple;
+        color: $text_grey;
         font-weight: bold;
       }
     }
