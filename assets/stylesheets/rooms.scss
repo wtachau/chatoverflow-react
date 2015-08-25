@@ -21,6 +21,10 @@
       background-color: $chat_background_red;
       border-bottom: 31px solid $tab_background_red;
 
+      a {
+        text-decoration: none;
+      }
+
       .room-prefix {
         color: white;
         font-family: $room_header_room_font;
@@ -38,7 +42,6 @@
 
         &:hover {
           border: none;
-          text-decoration: none;
         }
       }
     }
