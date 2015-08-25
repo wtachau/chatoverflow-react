@@ -6,7 +6,7 @@
   width: auto;
   overflow: hidden;
   height: 100%;
-  color: $text_grey;
+  color: $primary_text;
 
   .room-list-page {
     height: 100%;
@@ -18,8 +18,8 @@
 
     .topic-header {
       height: calc(#{$topic_height} + #{$rooms_tab_height});
-      background-color: $chat_background_red;
-      border-bottom: 31px solid $tab_background_red;
+      background-color: $primary_background;
+      border-bottom: 31px solid $secondary_background;
 
       a {
         text-decoration: none;
@@ -27,7 +27,7 @@
 
       .room-prefix {
         color: white;
-        font-family: $room_header_room_font;
+        font-family: $text_font;
         font-size: 12pt;
         margin-left: 22px;
         margin-top: 10px;
@@ -38,7 +38,7 @@
         font-size: 24pt;
         margin-left: 20px;
         margin-top: -5px;
-        font-family: $room_header_name_font;
+        font-family: $primary_font;
 
         &:hover {
           border: none;
@@ -47,43 +47,42 @@
     }
 
     .rooms-list-container {
-
       width: 100%;
       height: calc(100% - #{$topic_height} - #{$rooms_tab_height});
 
       .rooms-list {
         height: 100%;
         background-color: white;
-        border-right: 1px solid lightgray;
+        border-right: 1px solid $border_color;
 
         .tab-content {
           position: relative;
         }
 
-        >div{
-          >nav{
+        > div{
+          > nav{
             position: fixed;
             left: $sidebar_width;
             z-index: 1;
-            top: calc(#{$topic_height} + #{$header_height} + 2px);
+            top: calc(#{$topic_height} + 2px);
             height: initial;
             overflow: hidden;
           }
         }
 
         .nav-tabs {
-          background-color: $tab_background_red;
+          background-color: $secondary_background;
           border-bottom: none;
 
           li {
-            border-radius: 10px 10px 0px 0px;
+            border-radius: 10px 10px 0 0;
             margin-left: 2px;
             background: transparent;
 
             a {
               color: white;
               padding: 5px 15px;
-              font-family: $room_header_name_font;
+              font-family: $primary_font;
               font-size: 12pt;
               opacity: .5;
             }
@@ -99,6 +98,7 @@
             }
           }
         }
+
         /* Bootstrap override */
         .nav-tabs > li.active > a,
         .nav-tabs > li.active > a:hover,
@@ -106,9 +106,11 @@
           background-color: transparent;
           border: none;
         }
+
         .nav-tabs > li > a {
           border: none;
         }
+
         .nav > li > a:hover, .nav > li > a:focus {
           background-color: transparent;
         }
@@ -118,7 +120,7 @@
         .room-info {
           overflow: hidden;
           background-color: $thread_inactive_background;
-          font-family: $room_info_font;
+          font-family: $text_font;
 
           &.highlight-room {
             background-color: $thread_active_background;
@@ -126,7 +128,7 @@
 
           &.list-group-item {
             border: inherit;
-            border-bottom: 1px solid lightgray;
+            border-bottom: 1px solid $border_color;
             margin-bottom: inherit;
           }
 
@@ -138,7 +140,7 @@
             float: left;
             width: 75px;
             text-align: center;
-            color: $answers_dark_grey;
+            color: $primary_text;
             padding: 5px 10px;
 
             .answer-total {
@@ -162,13 +164,13 @@
               font-size: 16px;
               padding-right: 10px;
               font-weight: 500;
-              color: $devils_grey;
+              color: $primary_text;
               margin-top: 5px;
             }
             .question-text {
               font-size: 15px;
               font-weight: 200;
-              color: $devils_grey;
+              color: $primary_text;
               margin-top: 10px;
             }
           }
@@ -205,16 +207,18 @@
 
   .topic-header {
     height: calc(60px + #{$rooms_tab_height});
-    background-color: $chat_background_red;
+    background-color: $primary_background;
     font-size: 27px;
     padding-top: 28px;
     padding-left: 10px;
     color: white;
+
     .current-topic {
       font-size: 27px;
-      margin: 15px 0px 0px 20px;
+      margin: 15px 0 0 20px;
       text-transform: lowercase;
     }
+
     .home-header {
       font-size: 30px;
       text-align: center;
@@ -233,18 +237,18 @@
   }
 
   .nav-tabs {
-    background-color: $tab_background_red;
+    background-color: $secondary_background;
     border-bottom: none;
 
     li {
-      border-radius: 10px 10px 0px 0px;
+      border-radius: 10px 10px 0 0;
       margin-left: 2px;
       background: transparent;
 
       a {
         color: white;
         padding: 5px 15px;
-        font-family: $room_header_name_font;
+        font-family: $primary_font;
         font-size: 12pt;
         opacity: .5;
       }
@@ -260,6 +264,7 @@
       }
     }
   }
+
   /* Bootstrap override */
   .nav-tabs > li.active > a,
   .nav-tabs > li.active > a:hover,
@@ -267,9 +272,11 @@
     background-color: transparent;
     border: none;
   }
+
   .nav-tabs > li > a {
     border: none;
   }
+
   .nav > li > a:hover, .nav > li > a:focus {
     background-color: transparent;
   }

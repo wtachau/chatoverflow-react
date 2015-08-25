@@ -3,14 +3,17 @@
 @import "fonts";
 
 .sidebar {
-
   width: $sidebar_width;
   padding-left: 2px;
   padding-top: 2px;
   height: 100vh;
   position: fixed;
-  color: $chat_background_red;
+  color: $primary_background;
   background-color: $chat_sidebar_background;
+
+  nav.sidebar-nav {
+    height: 25px;
+  }
 
   .logo-div {
     padding-bottom: 10px;
@@ -24,9 +27,9 @@
 
   .categories-header {
     background-color: $chat_sidebar_background;
-    color: $white;
+    color: white;
     font-size: 24px;
-    font-family: $sidebar_list_title_font;
+    font-family: $primary_font;
     text-align: left;
     padding: 5px;
     padding-left: 15px;
@@ -34,20 +37,20 @@
   }
 
   a {
-
     text-decoration: none;
 
     .topic-name {
-      font-family: $sidebar_list_item_font;
+      font-family: $text_font;
       font-size: 16px;
       font-weight: 300;
       padding: 3px;
       padding-left: 15px;
-      color: $white;
+      color: white;
       background-color: $chat_sidebar_background;
-      border: 0px;
-      border-radius: 0px;
+      border: 0;
+      border-radius: 0;
       height: 25px;
+
       .thread-title {
         float: left;
         width: 130px;
@@ -55,25 +58,29 @@
         white-space: nowrap;
         overflow: hidden;
       }
+
       .thread-badge {
         float: left;
       }
+
       &:hover {
-        background-color: $chat_background_red;
+        background-color: $primary_background;
+
         .exit-x {
           display: inherit;
         }
       }
+
       .exit-x {
         display: none;
         float: right;
         padding-right: 8px;
+
         &:hover {
           text-decoration: none;
         }
       }
     }
-
   }
 
   .topic-search {
@@ -83,6 +90,7 @@
       margin-top: 5px;
       padding: 4px;
     }
+
     .Select-control, .Select-menu-outer {
       width: 80%;
       left: 25px;
@@ -91,28 +99,32 @@
       line-height: 8px;
       border: none;
     }
+
     .Select-menu-outer {
       position: relative;
-      padding: 0px;
+      padding: 0;
+
       .Select-option.is-focused {
         background-color: grey;
       }
     }
+
     .Select-placeholder {
       padding: 8px 52px 8px 5px;
+
       &:focus {
         outline: none;
       }
     }
+
     .Select-arrow {
       top: 10px;
     }
   }
 
   .active {
-    >span {
-      background-color: $chat_background_red;
+    > span {
+      background-color: $primary_background;
     }
   }
-
 }

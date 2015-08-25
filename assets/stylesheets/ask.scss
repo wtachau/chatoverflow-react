@@ -11,13 +11,14 @@ h1 {
 
   .question-header {
     padding: 20px;
-    font-family: $new_thread_page_font;
+    font-family: $primary_font;
+
     .btn {
       font-size: 36px;
       border: inherit;
-      border-bottom: 1px solid #333333;
+      border-bottom: 1px solid #333;
       border-radius: inherit;
-      padding: 0px 12px;
+      padding: 0 12px;
       top: -2px;
 
       &:active, &:focus {
@@ -43,14 +44,14 @@ h1 {
     height: $welcome_chat_height;
 
     .ask-form-button {
-      background: $chat_button_red;
-      color: $white;
+      background: $primary_background;
+      color: white;
       font-size: 18px;
       border-width: 1px;
       padding: 10px;
       position: relative;
       left: 50%;
-      top: 0px;
+      top: 0;
       width: 50%;
     }
   }
