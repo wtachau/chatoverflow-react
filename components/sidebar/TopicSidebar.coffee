@@ -4,7 +4,7 @@ UserActions          = require("../../actions/UserActions")
 UserStore            = require("../../stores/UserStore")
 MentionStore         = require("../../stores/MentionStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
-Router         = require("react-router")
+Router               = require("react-router")
 
 TopicSearch   = React.createFactory require("./TopicSearch")
 TopicList     = React.createFactory require("./TopicList")
