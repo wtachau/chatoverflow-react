@@ -1,5 +1,6 @@
 @import "colors";
 @import "sizes";
+@import "fonts";
 
 .pinned-post {
 
@@ -36,7 +37,9 @@
     width: calc(100% - #{$username_width});
 
     .text {
-      padding: 15px 95px 0px 0px;
+      padding: 15px 95px 0 0;
+      font-size: 24px;
+      font-family: $room_header_name_font;
     }
 
     img, video {
