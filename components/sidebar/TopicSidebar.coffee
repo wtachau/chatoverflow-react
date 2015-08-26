@@ -19,7 +19,7 @@ Link          = React.createFactory Router.Link
 
 { span, div, img, h3 } = React.DOM
 
-module.exports = React.createClass
+TopicSidebar = React.createClass
   displayName: "TopicSidebar"
 
   mixins: [ReactStateMagicMixin]
@@ -54,12 +54,7 @@ module.exports = React.createClass
         img {src: "../../assets/images/icon_placeholder.png", className: "logo"}
         Link to: "home",
           h3 {className: "categories-header"}, "ChatSignal"
-      Nav {className: "sidebar-nav"},
-        Link to: "ask",
-          div {className: "newthread"}, "+ New Thread"
-        UserComponent
-          user: @props.user
-          includeLogout: true
+
       TopicList
         topics: @props.user.followed_topics
         onClose: @onCloseTopic
@@ -72,3 +67,10 @@ module.exports = React.createClass
         onClose: @onCloseRoom
         badge: @badge
 
+      div {className: "sidebar-profile"},
+        UserComponent
+          user: @props.user
+          includeLogout: true
+        div {className: "sidebar-username"}, @props.user?.username
+
+module.exports = TopicSidebar

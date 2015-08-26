@@ -11,8 +11,25 @@
   color: $primary_background;
   background-color: $chat_sidebar_background;
 
-  nav.sidebar-nav {
-    height: 25px;
+  .sidebar-profile {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    color: white;
+    overflow: hidden;
+
+    .popup-link {
+      float: left;
+    }
+
+    .sidebar-username {
+      line-height: 40px;
+      vertical-align: middle;
+      float: left;
+      margin-left: 10px;
+      font-family: $text_font;
+      font-weight: 200;
+    }
   }
 
   .logo-div {
