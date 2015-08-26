@@ -14,7 +14,7 @@ Col = React.createFactory ReactBootstrap.Col
 TabbedArea = React.createFactory ReactBootstrap.TabbedArea
 TabPane = React.createFactory ReactBootstrap.TabPane
 
-{ div } = React.DOM
+{ div, i } = React.DOM
 
 RoomList = React.createClass
   displayName: "RoomList"
@@ -50,6 +50,9 @@ RoomList = React.createClass
             div {className: "room-prefix"}, "Room"
             Link {to: "/topics/#{@props.currentTopic}"},
               div {className: "current-topic"}, @state.topicInfo.name
+            Link {to: "/ask", className: "new-thread"},
+              "New Thread",
+              i {className: "fa fa-plus"}
           div {className: "rooms-list-container"},
             Row {className: "rooms-list"},
               TabbedArea {defaultActiveKey: 1, onClick: @refreshRoomList},
