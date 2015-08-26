@@ -19,7 +19,7 @@ Link          = React.createFactory Router.Link
 
 { span, div, img, h3 } = React.DOM
 
-module.exports = React.createClass
+TopicSidebar = React.createClass
   displayName: "TopicSidebar"
 
   mixins: [ReactStateMagicMixin]
@@ -73,3 +73,4 @@ module.exports = React.createClass
           includeLogout: true
         div {className: "sidebar-username"}, @props.user?.username
 
+module.exports = TopicSidebar
