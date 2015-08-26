@@ -54,12 +54,7 @@ module.exports = React.createClass
         img {src: "../../assets/images/icon_placeholder.png", className: "logo"}
         Link to: "home",
           h3 {className: "categories-header"}, "ChatSignal"
-      Nav {className: "sidebar-nav"},
-        Link to: "ask",
-          div {className: "newthread"}, "+ New Thread"
-        UserComponent
-          user: @props.user
-          includeLogout: true
+
       TopicList
         topics: @props.user.followed_topics
         onClose: @onCloseTopic
@@ -71,4 +66,10 @@ module.exports = React.createClass
         rooms: @props.user.followed_rooms
         onClose: @onCloseRoom
         badge: @badge
+
+      div {className: "sidebar-profile"},
+        UserComponent
+          user: @props.user
+          includeLogout: true
+        div {className: "sidebar-username"}, @props.user?.username
 
