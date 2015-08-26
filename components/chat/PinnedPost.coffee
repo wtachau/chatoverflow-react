@@ -11,7 +11,7 @@ UserComponent = React.createFactory require("../UserComponent")
 Row           = React.createFactory ReactBootstrap.Row
 Button        = React.createFactory ReactBootstrap.Button
 
-{ div, button, img } = React.DOM
+{ div, button, img, i } = React.DOM
 
 PinnedPost = React.createClass
   displayName: "PinnedPost"
@@ -31,14 +31,16 @@ PinnedPost = React.createClass
 
   buttonComponent: ->
     isFollowing = FollowResources.isFollowingRoom @props.currentRoom, @state.user.user
-    followText = "Unfollow"
-    followImgSrc = "../../../assets/images/check.png"
+    followText = "Following"
+    starClass = "fa-star"
+    mainClass = "following"
     unless isFollowing
       followText = "Follow"
-      followImgSrc = "../../../assets/images/plus.png"
-    div {className: "follow-button"},
-      img {src: followImgSrc}
-      div {}, followText
+      starClass = "fa-star-o"
+      mainClass = ""
+    div {className: "follow-button #{mainClass}"},
+      followText,
+      i {className: "fa #{starClass}"}
 
   render: ->
     timestamp = moment(@props.originalPost.created_at).format("h:mm A")
