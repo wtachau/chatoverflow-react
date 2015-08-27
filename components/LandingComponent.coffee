@@ -15,13 +15,13 @@ LandingComponent = React.createClass
 
   render: ->
     div {className: "landing-body"},
-      div {className: "purple"},
+      div {className: "red"},
         MainLandingComponent
           onTwitterLoginClick: @props.onTwitterLoginClick
           onGithubLoginClick: @props.onGithubLoginClick
       div {},
         TopicLandingComponent {}
-      div {className: "purple"},
+      div {className: "red"},
         DescriptionLandingComponent
           title: "Real problems, real time",
           id: "real-time",
@@ -31,7 +31,7 @@ LandingComponent = React.createClass
           title: "Problemsolve with experts",
           id: "problem-solve",
           image_src: "../assets/images/expert.png"
-      div {className: "purple"},
+      div {className: "red"},
         LoginLandingComponent
           onTwitterLoginClick: @props.onTwitterLoginClick
           onGithubLoginClick: @props.onGithubLoginClick

@@ -21,6 +21,11 @@
     color: $white;
   }
 
+  .red {
+    background-color: $red;
+    color: $white;
+  }
+
   .main {
     padding-top: 50px;
     padding-bottom: 200px;
@@ -79,11 +84,9 @@
 
   .topic {
     float: left;
-    margin-right: 60px;
-    margin-bottom: 50px;
+    margin: 0 30px 50px;
     padding: 30px;
     border: 1px solid $landing_topic_border;
-    box-shadow: 2px 2px 10px $landing_topic_shadow;
   }
 
   .topic-image {
