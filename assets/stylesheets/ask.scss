@@ -4,10 +4,13 @@
 
 h1 {
   text-align: center;
+  color: white;
 }
 
 .home {
   position: relative;
+  height: 100%;
+  background-color: $chat_sidebar_background;
 
   .question-header {
     padding: 20px;
@@ -24,11 +27,13 @@ h1 {
       &:active, &:focus {
         -webkit-box-shadow: none;
         box-shadow: none;
+        color: $primary_background;
       }
     }
 
     .btn-default {
       background: inherit;
+      color: $primary_background;
     }
 
     .btn-group.open .dropdown-toggle{
@@ -47,12 +52,9 @@ h1 {
       background: $primary_background;
       color: white;
       font-size: 18px;
-      border-width: 1px;
-      padding: 10px;
       position: relative;
-      left: 50%;
-      top: 0;
-      width: 50%;
+      width: 30%;
+      border-color: transparent;
     }
   }
 }

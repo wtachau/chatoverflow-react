@@ -11,6 +11,27 @@
   color: $primary_background;
   background-color: $chat_sidebar_background;
 
+  .new-thread {
+    position: absolute;
+    bottom: 27px;
+    right: 10px;
+    text-transform: uppercase;
+    background-color: $primary_background;
+    color: white;
+    border-radius: 4px;
+    padding: 3px 5px;
+    font-size: 12px;
+
+    .fa {
+      border-left: 1px solid $primary_background;
+      padding-left: 5px;
+    }
+
+    span {
+      padding-right: 5px;
+    }
+  }
+
   .sidebar-profile {
     position: absolute;
     left: 20px;
@@ -30,6 +51,7 @@
       font-family: $text_font;
       font-weight: 200;
     }
+
   }
 
   .logo-div {
