@@ -25,12 +25,12 @@ LandingComponent = React.createClass
         DescriptionLandingComponent
           title: "Real problems, real time",
           id: "real-time",
-          image_src: "../assets/images/realtime.jpg"
+          image_src: "../assets/images/real-time.png"
       div {},
         DescriptionLandingComponent
           title: "Problemsolve with experts",
           id: "problem-solve",
-          image_src: "../assets/images/expert.png"
+          image_src: "../assets/images/maze-icon.png"
       div {className: "red"},
         LoginLandingComponent
           onTwitterLoginClick: @props.onTwitterLoginClick

@@ -26,6 +26,6 @@ DescriptionLandingComponent = React.createClass
             pharetra vulputate, felis tellus mollis orci, sed rhoncus
             sapien nunc eget odio."
         Col md: 4, mdOffset: 2,
-          img {src: @props.image_src, width: "375px"}
+          img {src: @props.image_src, width: "260px"}
 
 module.exports = DescriptionLandingComponent
