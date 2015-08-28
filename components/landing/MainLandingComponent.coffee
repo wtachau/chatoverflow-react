@@ -13,7 +13,7 @@ MainLandingComponent = React.createClass
     onTwitterLoginClick: React.PropTypes.func.isRequired
 
   render: ->
-    logo = "../assets/images/cs-logo-letter.svg"
+    logo = "../assets/images/cs-logo-letter.png"
     div {className: "container main"},
       Row {},
         Col md: 1,
