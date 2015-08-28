@@ -17,7 +17,7 @@ Badge         = React.createFactory ReactBootstrap.Badge
 Nav           = React.createFactory ReactBootstrap.Nav
 Link          = React.createFactory Router.Link
 
-{ span, div, img, h3 } = React.DOM
+{ span, div, img, h3, i } = React.DOM
 
 TopicSidebar = React.createClass
   displayName: "TopicSidebar"
@@ -67,10 +67,14 @@ TopicSidebar = React.createClass
         onClose: @onCloseRoom
         badge: @badge
 
-      div {className: "sidebar-profile"},
-        UserComponent
-          user: @props.user
-          includeLogout: true
-        div {className: "sidebar-username"}, @props.user?.username
+      div {className: "profile-and-new-thread"},
+        div {className: "sidebar-profile"},
+          UserComponent
+            user: @props.user
+            includeLogout: true
+          div {className: "sidebar-username"}, @props.user?.username
+        Link {to: "/ask", className: "new-thread"},
+          "New Thread",
+          i {className: "fa fa-plus"}
 
 module.exports = TopicSidebar

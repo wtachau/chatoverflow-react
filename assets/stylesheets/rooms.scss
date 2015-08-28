@@ -22,27 +22,6 @@
       border-bottom: 31px solid $secondary_background;
       position: relative;
 
-      .new-thread {
-        position: absolute;
-        top: 15px;
-        right: 10px;
-        text-transform: uppercase;
-        background-color: white;
-        color: $primary_background;
-        border-radius: 4px;
-        padding: 3px 5px;
-        font-size: 12px;
-
-        .fa {
-          border-left: 1px solid $primary_background;
-          padding-left: 5px;
-        }
-
-        span {
-          padding-right: 5px;
-        }
-      }
-
       a {
         text-decoration: none;
       }
