@@ -69,6 +69,7 @@ AskComponent = React.createClass
         title: @state.questionTitle.trim(),
         text: @state.questionText.trim()},
         @onSubmitQuestion
+      @props.slideSidebarLeft()
       e.preventDefault()
 
   # After a new question is created, reset parameters
@@ -89,8 +90,6 @@ AskComponent = React.createClass
         for topic in @state.room.topics
           if topic.id is parseInt(@state.room.topicSelected)
             dropdownTitle = topic.name
-    $( ".sidebar" ).removeClass( "position-left" ).addClass( "position-right" )
-    $( ".home" ).removeClass( "ask-position-left" ).addClass( "ask-position-right" )
     div {className: "home ask-position-left"},
       Row {},
         Col md: 12,

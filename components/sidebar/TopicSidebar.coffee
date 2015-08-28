@@ -7,6 +7,7 @@ MentionStore         = require("../../stores/MentionStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 Router               = require("react-router")
 
+AskComponent  = React.createFactory require("../AskComponent")
 TopicSearch   = React.createFactory require("./TopicSearch")
 TopicList     = React.createFactory require("./TopicList")
 TopicListItem = React.createFactory require("./TopicListItem")
@@ -49,36 +50,47 @@ TopicSidebar = React.createClass
     else
       span {}, ""
 
-  render: ->
-    $( ".sidebar" ).removeClass( "position-right" ).addClass( "position-left" )
-    # $( ".home" ).removeClass( "ask-position-right" ).addClass( "shift-to-left" )
+  slideSidebarRight: ->
+    $( ".home" ).removeClass( "ask-position-left" ).addClass( "ask-position-right" )
+    $( ".sidebar" ).removeClass( "position-left" ).addClass( "position-right" )
+
+  slideSidebarLeft: ->
     $( ".home" ).removeClass( "ask-position-right" ).addClass( "ask-position-left" )
-    ListGroup {className: "sidebar"},
-      div {className: "logo-div"},
-        img {src: "../../assets/images/icon_placeholder.png", className: "logo"}
-        Link to: "home",
-          h3 {className: "categories-header"}, "ChatSignal"
+    $( ".sidebar" ).removeClass( "position-right" ).addClass( "position-left" )
 
-      TopicList
-        topics: @props.user.followed_topics
-        onClose: @onCloseTopic
+  render: ->
+    div {},
+      AskComponent {slideSidebarLeft: @slideSidebarLeft}
 
-      TopicSearch
-        user: @props.user
+      ListGroup {className: "sidebar position-left"},
 
-      RoomList
-        rooms: @props.user.followed_rooms
-        onClose: @onCloseRoom
-        badge: @badge
+        div {className: "logo-div", onClick: @slideSidebarLeft},
+          img {src: "../../assets/images/icon_placeholder.png", className: "logo"}
+          Link to: "home",
+            h3 {className: "categories-header"}, "ChatSignal"
+        div {onClick: @slideSidebarLeft},
+          TopicList
+            topics: @props.user.followed_topics
+            onClose: @onCloseTopic
+            onClick: @slideSidebarLeft
 
-      div {className: "profile-and-new-thread"},
-        div {className: "sidebar-profile"},
-          UserComponent
+          TopicSearch
             user: @props.user
-            includeLogout: true
-          div {className: "sidebar-username"}, @props.user?.username
-        Link {to: "/ask", className: "new-thread"},
-          "New Thread",
-          i {className: "fa fa-plus"}
+
+          RoomList
+            rooms: @props.user.followed_rooms
+            onClose: @onCloseRoom
+            badge: @badge
+
+        div {className: "profile-and-new-thread"},
+          div {className: "sidebar-profile"},
+            UserComponent
+              user: @props.user
+              includeLogout: true
+            div {className: "sidebar-username"}, @props.user?.username
+          div {className: "new-thread", onClick: @slideSidebarRight},
+            "New Thread",
+            i {className: "fa fa-plus"}
+
 
 module.exports = TopicSidebar

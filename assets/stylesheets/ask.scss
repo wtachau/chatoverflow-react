@@ -7,27 +7,23 @@ h1 {
   color: white;
 }
 
-&.ask-position-left {
-  left: -110%;
-}
-
-&.ask-position-right {
-  left: -25%;
-}
-
-&.shift-to-left {
-  z-index: 999;
-}
-
 .home {
-  position: relative;
+  position: absolute;
   height: 100%;
   background-color: $chat_sidebar_background;
   z-index: 998;
-  -webkit-transition: left 0.35s ease;
-  -moz-transition: left 0.35s ease;
-  transition: left 0.35s ease;
+  -webkit-transition: left 0.5s ease;
+  -moz-transition: left 0.5s ease;
+  transition: left 0.5s ease;
   width: 102%;
+
+  &.ask-position-left {
+    left: -100%;
+  }
+
+  &.ask-position-right {
+    left: -15%;
+  }
 
   .question-header {
     padding: 20px;

@@ -31,8 +31,7 @@ HomeComponent = React.createClass
     roomsByNewestMessage.sort Comparators.byLatestMessage
     div {className: "rooms", id: "news-feed"},
       div {className: "current-topic topic-header"},
-        Link to: "ask",
-          div {className: "home-header"}, ">> ask a question"
+        div {className: "home-header"}, "Welcome to ChatSignal."
       TabbedArea {eventKey: 1, defaultActiveKey: 1},
         TabPane {eventKey: 1, tab: "Most Recent"},
           HomeList {roomsSorted: roomsByCreatedAt}

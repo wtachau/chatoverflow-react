@@ -18,6 +18,5 @@ routes =
         Route {name: "room", path: "rooms/:room_id", handler: RoomComponent}
         DefaultRoute {name: "active_users", handler: ActiveUsersComponent}
       DefaultRoute {name: "home", handler: HomeComponent}
-      Route {name: "ask", path: "/ask", handler: AskComponent}
 
 module.exports = routes
