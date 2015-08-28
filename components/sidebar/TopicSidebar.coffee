@@ -1,3 +1,4 @@
+$                    = require("jquery")
 React                = require("react")
 ReactBootstrap       = require("react-bootstrap")
 UserActions          = require("../../actions/UserActions")
@@ -49,6 +50,9 @@ TopicSidebar = React.createClass
       span {}, ""
 
   render: ->
+    $( ".sidebar" ).removeClass( "position-right" ).addClass( "position-left" )
+    # $( ".home" ).removeClass( "ask-position-right" ).addClass( "shift-to-left" )
+    $( ".home" ).removeClass( "ask-position-right" ).addClass( "ask-position-left" )
     ListGroup {className: "sidebar"},
       div {className: "logo-div"},
         img {src: "../../assets/images/icon_placeholder.png", className: "logo"}

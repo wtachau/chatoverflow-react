@@ -8,6 +8,7 @@ ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 Router               = require("react-router")
 ReactBootstrap       = require("react-bootstrap")
 URLResources         = require("../common/URLResources")
+$                    = require("jquery")
 
 Row            = React.createFactory ReactBootstrap.Row
 Col            = React.createFactory ReactBootstrap.Col
@@ -88,8 +89,9 @@ AskComponent = React.createClass
         for topic in @state.room.topics
           if topic.id is parseInt(@state.room.topicSelected)
             dropdownTitle = topic.name
-
-    div {className: "home"},
+    $( ".sidebar" ).removeClass( "position-left" ).addClass( "position-right" )
+    $( ".home" ).removeClass( "ask-position-left" ).addClass( "ask-position-right" )
+    div {className: "home ask-position-left"},
       Row {},
         Col md: 12,
           h1 {className: "question-header"},

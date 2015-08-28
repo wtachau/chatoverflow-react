@@ -10,6 +10,18 @@
   position: fixed;
   color: $primary_background;
   background-color: $chat_sidebar_background;
+  z-index: 999;
+  -webkit-transition: left 0.5s ease;
+  -moz-transition: left 0.5s ease;
+  transition: left 0.5s ease;
+
+  &.position-left {
+    left: 0;
+  }
+
+  &.position-right {
+    left: 81%;
+  }
 
   .new-thread {
     position: absolute;
