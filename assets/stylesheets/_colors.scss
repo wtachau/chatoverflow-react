@@ -1,17 +1,15 @@
 /* Colors */
 
 /* Background Colors */
-$primary_background: #d9585f;
-$secondary_background: #e09ea0;
-$light_background: #F5E2E3;
-$chat_sidebar_background: #27353C;
+$primary_background: #db575c;
+$secondary_background: #f2c1c2;
+$light_background: #f5e2e3;
+$chat_sidebar_background: #25353c;
 $pinned_post_background: #fefefe;
 $thread_active_background: #f9f9f9;
 $thread_inactive_background: #efefef;
 $messages_background_others: #eeeeee;
-$red: #DB575C;
-$pink: #F2C1C2;
-$dark : #25353C;
+$button_hover: $chat_sidebar_background;
 
 /* Text Colors */
 $primary_text: #27353c;

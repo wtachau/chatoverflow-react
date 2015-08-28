@@ -20,15 +20,15 @@
   }
 
   .red {
-    background-color: $red;
-    color: $white;
+    background-color: $primary_background;
+    color: white;
   }
 
   .gradient {
-    background: -webkit-linear-gradient($red, white); 
-    background: -o-linear-gradient($red, white); 
-    background: -moz-linear-gradient($red, white); 
-    background: linear-gradient($red, white); 
+    background: -webkit-linear-gradient($primary_background, white); 
+    background: -o-linear-gradient($primary_background, white); 
+    background: -moz-linear-gradient($primary_background, white); 
+    background: linear-gradient($primary_background, white); 
   }
 
   .skyline {
@@ -74,7 +74,7 @@
 
       &:hover{
         color: white;
-        background-color: $dark;
+        background-color: $button_hover;
       }
 
     }
