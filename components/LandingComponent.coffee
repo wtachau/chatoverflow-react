@@ -15,10 +15,10 @@ LandingComponent = React.createClass
 
   render: ->
     div {className: "landing-body"},
-      div {className: "red"},
+      div {className: "skyline"},
         MainLandingComponent
           onTwitterLoginClick: @props.onTwitterLoginClick
-          onGithubLoginClick: @props.onGithubLoginClick
+          onGithubLoginClick: @props.onGithubLoginClick 
       div {},
         TopicLandingComponent {}
       div {className: "red"},
