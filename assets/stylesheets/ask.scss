@@ -61,13 +61,21 @@ h1 {
     padding: 1px;
     height: $welcome_chat_height;
 
-    .ask-form-button {
-      background: $primary_background;
-      color: white;
+    .ask-button {
       font-size: 18px;
       position: relative;
-      width: 30%;
+      width: 100px;
       border-color: transparent;
+      color: white;
+      margin-right: 20px;
+
+      &.submit-form-button {
+        background: $primary_background;
+      }
+
+      &.cancel-form-button {
+        background: $border_color;
+      }
     }
   }
 }

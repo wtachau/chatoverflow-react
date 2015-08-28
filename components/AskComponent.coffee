@@ -125,9 +125,13 @@ AskComponent = React.createClass
                   onKeyDown: @keyPress
                   placeholder: "Describe your question (required)"
                 Button
-                  className: "ask-form-button"
+                  className: "ask-button submit-form-button"
                   onClick: @submitQuestion
-                  "SUBMIT"
+                  "Submit"
+                Button
+                  className: "ask-button cancel-form-button"
+                  onClick: @props.slideSidebarLeft
+                  "Cancel"
 
 module.exports = AskComponent
 

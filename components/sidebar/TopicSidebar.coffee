@@ -51,12 +51,12 @@ TopicSidebar = React.createClass
       span {}, ""
 
   slideSidebarRight: ->
-    $( ".home" ).removeClass( "ask-position-left" ).addClass( "ask-position-right" )
-    $( ".sidebar" ).removeClass( "position-left" ).addClass( "position-right" )
+    $(".home").removeClass("ask-position-left").addClass("ask-position-right")
+    $(".sidebar").removeClass("position-left").addClass("position-right")
 
   slideSidebarLeft: ->
-    $( ".home" ).removeClass( "ask-position-right" ).addClass( "ask-position-left" )
-    $( ".sidebar" ).removeClass( "position-right" ).addClass( "position-left" )
+    $(".home").removeClass("ask-position-right").addClass("ask-position-left")
+    $(".sidebar").removeClass("position-right").addClass("position-left")
 
   render: ->
     div {},
