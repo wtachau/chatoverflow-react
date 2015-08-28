@@ -3,7 +3,7 @@ ReactBootstrap = require("react-bootstrap")
 Row = React.createFactory(ReactBootstrap.Row)
 Col = React.createFactory(ReactBootstrap.Col)
 Button = React.createFactory(ReactBootstrap.Button)
-{ div, h1, h2, h3, i } = React.DOM
+{ div, h1, h2, h3, i, img } = React.DOM
 
 MainLandingComponent = React.createClass
   displayName: "MainLandingComponent"
@@ -13,10 +13,11 @@ MainLandingComponent = React.createClass
     onTwitterLoginClick: React.PropTypes.func.isRequired
 
   render: ->
+    logo = "../assets/images/cs-logo-letter.svg"
     div {className: "container main"},
       Row {},
         Col md: 1,
-          h2 {}, "chatsignal"
+          h2 {}, " "
         Col md: 3, mdOffset: 8,
           div {onClick: @props.onGithubLoginClick},
             Button {bsSize: 'large'},
@@ -29,11 +30,13 @@ MainLandingComponent = React.createClass
       Row {className: "blank"}
       Row {},
         Col md: 12,
+          div {className: "logo"},
+            img {src: logo, width: "80px"}
           h1 {}, "Learn and help as fast as you type."
           h3 {}, "Chatsignal is Slack x StackOverflow and a few more things you
             should know about."
       Row {},
-        Col md: 6,
+        Col md: 12,
           Button {bsSize: 'large'}, "Start Chatting"
           Button {bsSize: 'large', href: "#real-time"}, "Learn More"
 
