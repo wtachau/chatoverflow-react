@@ -4,18 +4,22 @@ UserActions          = require("../../actions/UserActions")
 UserStore            = require("../../stores/UserStore")
 MentionStore         = require("../../stores/MentionStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+Router               = require("react-router")
 
 TopicSearch   = React.createFactory require("./TopicSearch")
 TopicList     = React.createFactory require("./TopicList")
 TopicListItem = React.createFactory require("./TopicListItem")
 RoomList      = React.createFactory require("./RoomList")
 RoomListItem  = React.createFactory require("./RoomListItem")
+UserComponent = React.createFactory require("../UserComponent")
 ListGroup     = React.createFactory ReactBootstrap.ListGroup
 Badge         = React.createFactory ReactBootstrap.Badge
+Nav           = React.createFactory ReactBootstrap.Nav
+Link          = React.createFactory Router.Link
 
-{ span } = React.DOM
+{ span, div, img, h3, i } = React.DOM
 
-module.exports = React.createClass
+TopicSidebar = React.createClass
   displayName: "TopicSidebar"
 
   mixins: [ReactStateMagicMixin]
@@ -46,6 +50,11 @@ module.exports = React.createClass
 
   render: ->
     ListGroup {className: "sidebar"},
+      div {className: "logo-div"},
+        img {src: "../../assets/images/icon_placeholder.png", className: "logo"}
+        Link to: "home",
+          h3 {className: "categories-header"}, "ChatSignal"
+
       TopicList
         topics: @props.user.followed_topics
         onClose: @onCloseTopic
@@ -58,3 +67,14 @@ module.exports = React.createClass
         onClose: @onCloseRoom
         badge: @badge
 
+      div {className: "profile-and-new-thread"},
+        div {className: "sidebar-profile"},
+          UserComponent
+            user: @props.user
+            includeLogout: true
+          div {className: "sidebar-username"}, @props.user?.username
+        Link {to: "/ask", className: "new-thread"},
+          "New Thread",
+          i {className: "fa fa-plus"}
+
+module.exports = TopicSidebar

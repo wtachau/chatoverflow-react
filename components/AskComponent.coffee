@@ -126,7 +126,7 @@ AskComponent = React.createClass
                 Button
                   className: "ask-form-button"
                   onClick: @submitQuestion
-                  "Submit"
+                  "SUBMIT"
 
 module.exports = AskComponent
 

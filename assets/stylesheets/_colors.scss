@@ -1,31 +1,26 @@
 /* Colors */
-$chat_input_background_purple: #7985D6;
-$chat_button_purple: #383478;
-$chat_background_grey: #eee;
-$chat_background_purple: #7985D6;
-$chat_bubble_blue: #B6ECFF;
-$chat_sidebar_background: #252525;
-$purple: #383478;
+
+/* Background Colors */
+$primary_background: #d9585f;
+$secondary_background: #e09ea0;
+$light_background: #F5E2E3;
+$chat_sidebar_background: #27353C;
+$pinned_post_background: #fefefe;
+$thread_active_background: #f9f9f9;
+$thread_inactive_background: #efefef;
+$messages_background_others: #eeeeee;
 $red: #DB575C;
 $pink: #F2C1C2;
 $dark : #25353C;
-$white: #FFFFFF;
-$pinned_post_background_grey: #E0E0E0;
-$answers_light_grey: #E0E0E0;
-$answers_dark_grey: #5A5A5A;
 
-$questions_purple: #6772B7;
-$chat_text_purple: #6772B7;
+/* Text Colors */
+$primary_text: #27353c;
+$star_active: #fdda31;
 
-$highlight_room_background_purple: #EEEDFC;
-$active_users_background_purple: #EEEDFC;
-$messages_background_us: #DFF4FC;
-$messages_background_others: #EEEDFC;
+/* Border Colors */
+$border_color: #d3d3d3;
 
-$star_gold: #FFD700;
-$message_user_grey: #A1A1A1;
-$devils_grey: #666666;
-
-$landing_body_gray: #E4E4E4;
-$landing_topic_border: rgba (239, 239, 239, 1);
-$landing_topic_shadow: rgb(205, 205, 205);
+/* Landing Page */
+$landing_background: #383478;
+$landing_topic_border: #efefef;
+$landing_topic_shadow: #cdcdcd;

@@ -48,8 +48,6 @@ MainComponent = React.createClass
 
   render: ->
     div {},
-      HeaderComponent
-        user: @state.user.user
       div {className: "chat"},
         TopicSidebar
           user: @state.user.user

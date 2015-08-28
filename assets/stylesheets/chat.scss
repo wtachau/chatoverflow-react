@@ -2,7 +2,6 @@
 @import "sizes";
 @import "fonts";
 .chat {
-
   .main-section {
     overflow: hidden;
     width: 100%;
@@ -10,11 +9,10 @@
   }
 
   .chat-form {
-    background: $chat_input_background_purple;
     right: 0;
     position: absolute;
     bottom: 0;
-    width: 50%;
+    width: 70%;
     padding: 3px;
     height: $chat_box_height;
   }
