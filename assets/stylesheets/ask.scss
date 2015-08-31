@@ -15,14 +15,14 @@ h1 {
   -webkit-transition: left 0.5s ease;
   -moz-transition: left 0.5s ease;
   transition: left 0.5s ease;
-  width: 102%;
+  width: $ask_shift_amount;
 
   &.ask-position-left {
-    left: -100%;
+    left: (-$ask_shift_amount);
   }
 
   &.ask-position-right {
-    left: -15%;
+    left: 0;
   }
 
   .question-header {

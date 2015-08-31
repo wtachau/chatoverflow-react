@@ -58,7 +58,7 @@ AskComponent = React.createClass
         numberTopics = @state.room.topics.length
         randomIndex = Math.round(numberTopics * Math.random())
         randomTopic = @state.room.topics[randomIndex]
-        RoomActions.setTopicSelected randomTopic.id
+        RoomActions.setTopicSelected randomTopic?.id
 
   # Send a new question to the node server
   submitQuestion: (e) ->
