@@ -26,9 +26,10 @@ HomeComponent = React.createClass
       RoomActions.fetchFollowedTopics()
       RoomActions.setTopicSelected null
 
-  slideSidebarRight: ->
+  slideSidebarRight: (e) ->
     $(".home").removeClass("ask-position-left").addClass("ask-position-right")
     $(".sidebar").removeClass("position-left").addClass("position-right")
+    e.stopPropagation()
 
   render: ->
     roomsByCreatedAt = @state.followedTopicsRooms.slice(0)

@@ -1,3 +1,4 @@
+$                    = require("jquery")
 React                = require("react")
 io                   = require("socket.io-client")
 Router               = require("react-router")
@@ -46,12 +47,17 @@ MainComponent = React.createClass
     @socket.emit "subscribe mention",
       {username: @state.user.user.username}
 
+  slideSidebarLeft: ->
+    if $(".home").hasClass("ask-position-right")
+      $(".home").removeClass("ask-position-right").addClass("ask-position-left")
+      $(".sidebar").removeClass("position-right").addClass("position-left")
+
   render: ->
     div {},
       div {className: "chat"},
         TopicSidebar
           user: @state.user.user
-        div {className: "chat-panel"},
+        div {className: "chat-panel", onClick: @slideSidebarLeft},
           RouteHandler {socket: @socket}
       audio {ref: "plingsound"},
         source {src: "../../../assets/sounds/pling.wav", type: "audio/wav"}

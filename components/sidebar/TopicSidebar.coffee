@@ -50,12 +50,13 @@ TopicSidebar = React.createClass
     else
       span {}, ""
 
-  slideSidebarRight: ->
+  slideSidebarRight: (e) ->
     if $(".home").hasClass("ask-position-right")
       @slideSidebarLeft()
     else
       $(".home").removeClass("ask-position-left").addClass("ask-position-right")
       $(".sidebar").removeClass("position-left").addClass("position-right")
+      e.stopPropagation()
 
   slideSidebarLeft: ->
     $(".home").removeClass("ask-position-right").addClass("ask-position-left")
@@ -65,25 +66,23 @@ TopicSidebar = React.createClass
     div {},
       AskComponent {slideSidebarLeft: @slideSidebarLeft}
 
-      ListGroup {className: "sidebar position-left"},
+      ListGroup {className: "sidebar position-left", onClick: @slideSidebarLeft},
 
-        div {className: "logo-div", onClick: @slideSidebarLeft},
+        div {className: "logo-div"},
           img {src: "../../assets/images/icon_placeholder.png", className: "logo"}
           Link to: "home",
             h3 {className: "categories-header"}, "ChatSignal"
-        div {onClick: @slideSidebarLeft},
-          TopicList
-            topics: @props.user.followed_topics
-            onClose: @onCloseTopic
-            onClick: @slideSidebarLeft
+        TopicList
+          topics: @props.user.followed_topics
+          onClose: @onCloseTopic
 
-          TopicSearch
-            user: @props.user
+        TopicSearch
+          user: @props.user
 
-          RoomList
-            rooms: @props.user.followed_rooms
-            onClose: @onCloseRoom
-            badge: @badge
+        RoomList
+          rooms: @props.user.followed_rooms
+          onClose: @onCloseRoom
+          badge: @badge
 
         div {className: "profile-and-new-thread"},
           div {className: "sidebar-profile"},
