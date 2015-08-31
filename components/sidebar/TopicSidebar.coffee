@@ -51,8 +51,11 @@ TopicSidebar = React.createClass
       span {}, ""
 
   slideSidebarRight: ->
-    $(".home").removeClass("ask-position-left").addClass("ask-position-right")
-    $(".sidebar").removeClass("position-left").addClass("position-right")
+    if $(".home").hasClass("ask-position-right")
+      @slideSidebarLeft()
+    else
+      $(".home").removeClass("ask-position-left").addClass("ask-position-right")
+      $(".sidebar").removeClass("position-left").addClass("position-right")
 
   slideSidebarLeft: ->
     $(".home").removeClass("ask-position-right").addClass("ask-position-left")
@@ -91,6 +94,5 @@ TopicSidebar = React.createClass
           div {className: "new-thread", onClick: @slideSidebarRight},
             "New Thread",
             i {className: "fa fa-plus"}
-
 
 module.exports = TopicSidebar
