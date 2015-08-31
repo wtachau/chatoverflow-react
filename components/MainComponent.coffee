@@ -51,6 +51,8 @@ MainComponent = React.createClass
     if $(".home").hasClass("ask-position-right")
       $(".home").removeClass("ask-position-right").addClass("ask-position-left")
       $(".sidebar").removeClass("position-right").addClass("position-left")
+      $(".new-thread").removeClass("cancel-color").html("New Thread").append('<i class="fa fa-plus"></i>')
+
 
   render: ->
     div {},

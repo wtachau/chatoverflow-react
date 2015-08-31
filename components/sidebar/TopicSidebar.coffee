@@ -56,11 +56,13 @@ TopicSidebar = React.createClass
     else
       $(".home").removeClass("ask-position-left").addClass("ask-position-right")
       $(".sidebar").removeClass("position-left").addClass("position-right")
+      $(".new-thread").html("Cancel").addClass("cancel-color")
       e.stopPropagation()
 
   slideSidebarLeft: ->
     $(".home").removeClass("ask-position-right").addClass("ask-position-left")
     $(".sidebar").removeClass("position-right").addClass("position-left")
+    $(".new-thread").removeClass("cancel-color").html("New Thread").append('<i class="fa fa-plus"></i>')
 
   render: ->
     div {},

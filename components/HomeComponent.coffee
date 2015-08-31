@@ -29,6 +29,7 @@ HomeComponent = React.createClass
   slideSidebarRight: (e) ->
     $(".home").removeClass("ask-position-left").addClass("ask-position-right")
     $(".sidebar").removeClass("position-left").addClass("position-right")
+    $(".new-thread").html("Cancel").addClass("cancel-color")
     e.stopPropagation()
 
   render: ->

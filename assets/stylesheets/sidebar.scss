@@ -35,6 +35,11 @@
     font-size: 12px;
     cursor: pointer;
 
+    &.cancel-color {
+      color: $primary_text;
+      background: $border_color;
+    }
+
     .fa {
       border-left: 1px solid $primary_background;
       padding-left: 5px;
