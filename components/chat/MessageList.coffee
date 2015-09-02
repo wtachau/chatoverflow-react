@@ -3,6 +3,7 @@ UserStore            = require("../../stores/UserStore")
 UserActions          = require("../../actions/UserActions")
 ThreadStore          = require("../../stores/ThreadStore")
 ThreadActions        = require("../../actions/ThreadActions")
+MessageResources     = require("../../common/MessageResources")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 
 MessageGroupList = React.createFactory require("./MessageGroupList")
@@ -75,21 +76,8 @@ MessageList = React.createClass
       ThreadActions.fetchOldMessages @props.currentRoom,
         parseInt(@state.thread.oldestPage) + 1
 
-  createGroups: (rest) ->
-  # groups messages together by username
-    messageGroups = []
-    group = []
-    rest.map (message, index) =>
-      if index isnt 0 and rest[index-1].user.username isnt message.user.username
-        messageGroups.push group
-        group = []
-      group.push message
-    unless group.length is 0
-      messageGroups.push group
-    messageGroups
-
   render: ->
-    messageGroups = @createGroups @props.messages
+    messageGroups = MessageResources.createGroups @props.messages
     div {},
       unless @props.messages.length is 0
         div {},

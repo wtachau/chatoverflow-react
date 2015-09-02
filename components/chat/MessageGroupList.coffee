@@ -1,4 +1,5 @@
 React                = require("react")
+MessageResources     = require("../../common/MessageResources")
 UserStore            = require("../../stores/UserStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
 ReactBootstrap       = require("react-bootstrap")
@@ -21,33 +22,10 @@ MessageGroupList = React.createClass
   propTypes:
     messageGroups: React.PropTypes.array.isRequired
 
-  selectBubbleType: (index, length) ->
-    if length is 1
-      "single-bubble"
-    else if index is 0
-      "top-bubble"
-    else if index is length - 1
-      "bottom-bubble"
-    else
-      "middle-bubble"
-
-  getMessageProperties: (group) ->
-    group.map (message, index) =>
-      properties = {}
-      if message.user.username is @state.user.username
-        properties.isUser = true
-        properties.side = "right"
-        properties.bubbleType = @selectBubbleType index, group.length
-      else
-        properties.isUser = false
-        properties.side = "left"
-        properties.bubbleType = @selectBubbleType index, group.length
-      properties
-
   render: ->
     div {},
       @props.messageGroups.map (group, index) =>
-        properties = @getMessageProperties group
+        properties = MessageResources.getMessageProperties group, @state.user
         side = if group[0].user.username is @state.user.username then "right" else "left"
         Row {className: "message-group #{side} row-no-margin", key: index},
           Col md: 1,
