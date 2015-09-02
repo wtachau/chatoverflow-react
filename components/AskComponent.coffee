@@ -8,6 +8,7 @@ ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 Router               = require("react-router")
 ReactBootstrap       = require("react-bootstrap")
 URLResources         = require("../common/URLResources")
+$                    = require("jquery")
 
 Row            = React.createFactory ReactBootstrap.Row
 Col            = React.createFactory ReactBootstrap.Col
@@ -57,7 +58,7 @@ AskComponent = React.createClass
         numberTopics = @state.room.topics.length
         randomIndex = Math.round(numberTopics * Math.random())
         randomTopic = @state.room.topics[randomIndex]
-        RoomActions.setTopicSelected randomTopic.id
+        RoomActions.setTopicSelected randomTopic?.id
 
   # Send a new question to the node server
   submitQuestion: (e) ->
@@ -68,6 +69,7 @@ AskComponent = React.createClass
         title: @state.questionTitle.trim(),
         text: @state.questionText.trim()},
         @onSubmitQuestion
+      @props.slideSidebarLeft()
       e.preventDefault()
 
   # After a new question is created, reset parameters
@@ -88,8 +90,7 @@ AskComponent = React.createClass
         for topic in @state.room.topics
           if topic.id is parseInt(@state.room.topicSelected)
             dropdownTitle = topic.name
-
-    div {className: "home"},
+    div {className: "home ask-position-left"},
       Row {},
         Col md: 12,
           h1 {className: "question-header"},
@@ -124,9 +125,13 @@ AskComponent = React.createClass
                   onKeyDown: @keyPress
                   placeholder: "Describe your question (required)"
                 Button
-                  className: "ask-form-button"
+                  className: "ask-button submit-form-button"
                   onClick: @submitQuestion
                   "Submit"
+                Button
+                  className: "ask-button cancel-form-button"
+                  onClick: @props.slideSidebarLeft
+                  "Cancel"
 
 module.exports = AskComponent
 

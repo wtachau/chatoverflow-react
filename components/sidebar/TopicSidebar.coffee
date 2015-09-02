@@ -1,21 +1,27 @@
+$                    = require("jquery")
 React                = require("react")
 ReactBootstrap       = require("react-bootstrap")
 UserActions          = require("../../actions/UserActions")
 UserStore            = require("../../stores/UserStore")
 MentionStore         = require("../../stores/MentionStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
+Router               = require("react-router")
 
+AskComponent  = React.createFactory require("../AskComponent")
 TopicSearch   = React.createFactory require("./TopicSearch")
 TopicList     = React.createFactory require("./TopicList")
 TopicListItem = React.createFactory require("./TopicListItem")
 RoomList      = React.createFactory require("./RoomList")
 RoomListItem  = React.createFactory require("./RoomListItem")
+UserComponent = React.createFactory require("../UserComponent")
 ListGroup     = React.createFactory ReactBootstrap.ListGroup
 Badge         = React.createFactory ReactBootstrap.Badge
+Nav           = React.createFactory ReactBootstrap.Nav
+Link          = React.createFactory Router.Link
 
-{ span } = React.DOM
+{ span, div, img, h3, i } = React.DOM
 
-module.exports = React.createClass
+TopicSidebar = React.createClass
   displayName: "TopicSidebar"
 
   mixins: [ReactStateMagicMixin]
@@ -44,17 +50,50 @@ module.exports = React.createClass
     else
       span {}, ""
 
+  slideSidebarRight: (e) ->
+    if $(".home").hasClass("ask-position-right")
+      @slideSidebarLeft()
+    else
+      $(".home").removeClass("ask-position-left").addClass("ask-position-right")
+      $(".sidebar").removeClass("position-left").addClass("position-right")
+      $(".new-thread").html("Cancel").addClass("cancel-color")
+      e.stopPropagation()
+
+  slideSidebarLeft: ->
+    $(".home").removeClass("ask-position-right").addClass("ask-position-left")
+    $(".sidebar").removeClass("position-right").addClass("position-left")
+    $(".new-thread").removeClass("cancel-color").html("New Thread").append('<i class="fa fa-plus"></i>')
+
   render: ->
-    ListGroup {className: "sidebar"},
-      TopicList
-        topics: @props.user.followed_topics
-        onClose: @onCloseTopic
+    div {},
+      AskComponent {slideSidebarLeft: @slideSidebarLeft}
 
-      TopicSearch
-        user: @props.user
+      ListGroup {className: "sidebar position-left", onClick: @slideSidebarLeft},
 
-      RoomList
-        rooms: @props.user.followed_rooms
-        onClose: @onCloseRoom
-        badge: @badge
+        div {className: "logo-div"},
+          img {src: "../../assets/images/icon_placeholder.png", className: "logo"}
+          Link to: "home",
+            h3 {className: "categories-header"}, "ChatSignal"
+        TopicList
+          topics: @props.user.followed_topics
+          onClose: @onCloseTopic
 
+        TopicSearch
+          user: @props.user
+
+        RoomList
+          rooms: @props.user.followed_rooms
+          onClose: @onCloseRoom
+          badge: @badge
+
+        div {className: "profile-and-new-thread"},
+          div {className: "sidebar-profile"},
+            UserComponent
+              user: @props.user
+              includeLogout: true
+            div {className: "sidebar-username"}, @props.user?.username
+          div {className: "new-thread", onClick: @slideSidebarRight},
+            "New Thread",
+            i {className: "fa fa-plus"}
+
+module.exports = TopicSidebar

@@ -3,41 +3,111 @@
 @import "fonts";
 
 .sidebar {
-
   width: $sidebar_width;
   padding-left: 2px;
   padding-top: 2px;
   height: 100vh;
   position: fixed;
-  color: $chat_background_purple;
+  color: $primary_background;
   background-color: $chat_sidebar_background;
+  z-index: 999;
+  -webkit-transition: left 0.5s ease;
+  -moz-transition: left 0.5s ease;
+  transition: left 0.5s ease;
 
+  &.position-left {
+    left: 0;
+  }
+
+  &.position-right {
+    left: $ask_shift_amount;
+  }
+
+  .new-thread {
+    position: absolute;
+    bottom: 27px;
+    right: 10px;
+    text-transform: uppercase;
+    background-color: $primary_background;
+    color: white;
+    border-radius: 4px;
+    padding: 3px 5px;
+    font-size: 12px;
+    cursor: pointer;
+
+    &.cancel-color {
+      color: $primary_text;
+      background: $border_color;
+    }
+
+    .fa {
+      border-left: 1px solid $primary_background;
+      padding-left: 5px;
+    }
+
+    span {
+      padding-right: 5px;
+    }
+  }
+
+  .sidebar-profile {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    color: white;
+    overflow: hidden;
+
+    .popup-link {
+      float: left;
+    }
+
+    .sidebar-username {
+      line-height: 40px;
+      vertical-align: middle;
+      float: left;
+      margin-left: 10px;
+      font-family: $text_font;
+      font-weight: 200;
+    }
+
+  }
+
+  .logo-div {
+    padding-bottom: 10px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+    float: left;
+  }
 
   .categories-header {
     background-color: $chat_sidebar_background;
-    color: $white;
-    font-size: 16px;
-    font-family: $sidebar_list_title_font;
+    color: white;
+    font-size: 24px;
+    font-family: $primary_font;
     text-align: left;
     padding: 5px;
-    padding-left: 10px;
+    padding-left: 15px;
+    margin-bottom: 5px;
   }
 
   a {
-
     text-decoration: none;
 
     .topic-name {
-      text-transform: lowercase;
-      font-family: $sidebar_list_item_font;
-      font-size: medium;
+      font-family: $text_font;
+      font-size: 16px;
+      font-weight: 300;
       padding: 3px;
-      padding-left: 30px;
-      color: $white;
+      padding-left: 15px;
+      color: white;
       background-color: $chat_sidebar_background;
-      border: 0px;
-      border-radius: 0px;
+      border: 0;
+      border-radius: 0;
       height: 25px;
+
       .thread-title {
         float: left;
         width: 130px;
@@ -45,32 +115,39 @@
         white-space: nowrap;
         overflow: hidden;
       }
+
       .thread-badge {
         float: left;
       }
+
       &:hover {
-        background-color: $chat_background_purple;
+        background-color: $primary_background;
+
         .exit-x {
           display: inherit;
         }
       }
+
       .exit-x {
         display: none;
         float: right;
         padding-right: 8px;
+
         &:hover {
           text-decoration: none;
         }
       }
     }
-
   }
 
   .topic-search {
+    margin-top: 15px;
+
     .Select-control {
       margin-top: 5px;
       padding: 4px;
     }
+
     .Select-control, .Select-menu-outer {
       width: 80%;
       left: 25px;
@@ -79,28 +156,32 @@
       line-height: 8px;
       border: none;
     }
+
     .Select-menu-outer {
       position: relative;
-      padding: 0px;
+      padding: 0;
+
       .Select-option.is-focused {
         background-color: grey;
       }
     }
+
     .Select-placeholder {
       padding: 8px 52px 8px 5px;
+
       &:focus {
         outline: none;
       }
     }
+
     .Select-arrow {
       top: 10px;
     }
   }
 
   .active {
-    >span {
-      background-color: $chat_background_purple;
+    > span {
+      background-color: $primary_background;
     }
   }
-
 }

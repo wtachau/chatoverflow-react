@@ -10,14 +10,14 @@ TopicLandingComponent = React.createClass
 
   render: ->
     placeHolder = "../assets/images/placeHolder.png"
-    ios         = "../assets/images/ios.jpg"
-    java        = "../assets/images/java.png"
-    c_logo      = "../assets/images/c++.png"
-    ruby        = "../assets/images/ror.png"
-    uxui        = "../assets/images/uxui.jpg"
-    research    = "../assets/images/research.jpg"
-    sketch      = "../assets/images/sketch.png"
-    interaction = "../assets/images/interaction.png"
+    ios         = "../assets/images/cs-apple.png"
+    java        = "../assets/images/cs-java.png"
+    c_logo      = "../assets/images/cs-c++.png"
+    ruby        = "../assets/images/cs-rails.png"
+    uxui        = "../assets/images/cs-ui.png"
+    research    = "../assets/images/cs-research.png"
+    sketch      = "../assets/images/cs-sketch.png"
+    interaction = "../assets/images/cs-interaction.png"
     div {className: "container topics"},
       Row {},
         Col md: 12,
@@ -44,13 +44,13 @@ TopicLandingComponent = React.createClass
             img {src: uxui, width: "100px", className: "topic-image"}
             p {className: "topic-title"}, "UX/UI"
           div {className: "topic"},
-            img {src: research, width: "100px", height: "100px", className: "topic-image"}
-            p {className: "topic-title"}, "Research"
-          div {className: "topic"},
             img {src: sketch, width: "100px", className: "topic-image"}
             p {className: "topic-title"}, "Sketch"
           div {className: "topic"},
             img {src: interaction, width: "100px", className: "topic-image"}
             p {className: "topic-title"}, "Interaction"
+          div {className: "topic"},
+            img {src: research, width: "100px", height: "100px", className: "topic-image"}
+            p {className: "topic-title"}, "Research"
 
 module.exports = TopicLandingComponent

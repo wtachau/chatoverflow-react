@@ -2,7 +2,7 @@ React         = require("react")
 ThreadActions = require("../../actions/ThreadActions")
 UserActions   = require("../../actions/UserActions")
 
-{ div, button } = React.DOM
+{ div, button, i } = React.DOM
 
 VoteButton = React.createClass
   displayName: "Message"
@@ -21,7 +21,7 @@ VoteButton = React.createClass
 
   buttonColor: ->
     for votes, index in @props.votes
-      return {color: "gold", index: index} if votes.message_id is @props.message.id
+      return {color: "red", index: index} if votes.message_id is @props.message.id
     {color: "", index: -1}
 
   render: ->
@@ -31,7 +31,7 @@ VoteButton = React.createClass
       button
         className: "vote-button upvote btn #{@color.color} #{displayClass}"
         onClick: @vote,
-        "\u2605"
+        i {className: "fa fa-heart"}
       if @props.message.vote_total > 0
         div {className: "vote-total"}, @props.message.vote_total
 
