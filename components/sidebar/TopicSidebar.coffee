@@ -71,7 +71,7 @@ TopicSidebar = React.createClass
       ListGroup {className: "sidebar position-left", onClick: @slideSidebarLeft},
 
         div {className: "logo-div"},
-          img {src: "../../assets/images/icon_placeholder.png", className: "logo"}
+          img {src: "../../assets/images/cs_logo.png", className: "logo"}
           Link to: "home",
             h3 {className: "categories-header"}, "ChatSignal"
         TopicList
