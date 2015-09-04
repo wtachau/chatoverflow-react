@@ -74,17 +74,18 @@ TopicSidebar = React.createClass
           img {src: "../../assets/images/cs_logo.png", className: "logo"}
           Link to: "home",
             h3 {className: "categories-header"}, "ChatSignal"
-        TopicList
-          topics: @props.user.followed_topics
-          onClose: @onCloseTopic
+        div {className: "followed-sidebar"},
+          TopicList
+            topics: @props.user.followed_topics
+            onClose: @onCloseTopic
 
-        TopicSearch
-          user: @props.user
+          TopicSearch
+            user: @props.user
 
-        RoomList
-          rooms: @props.user.followed_rooms
-          onClose: @onCloseRoom
-          badge: @badge
+          RoomList
+            rooms: @props.user.followed_rooms
+            onClose: @onCloseRoom
+            badge: @badge
 
         div {className: "profile-and-new-thread"},
           div {className: "sidebar-profile"},

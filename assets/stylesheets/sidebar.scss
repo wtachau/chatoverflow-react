@@ -23,6 +23,12 @@
     left: $ask_shift_amount;
   }
 
+  .followed-sidebar {
+    height: calc(100% - 160px);
+    margin-top: 10px;
+    overflow-y: auto;
+  }
+
   .new-thread {
     position: absolute;
     bottom: 27px;
