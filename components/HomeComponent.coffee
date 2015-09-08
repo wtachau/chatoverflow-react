@@ -4,6 +4,7 @@ React                = require("react")
 ReactBootstrap       = require("react-bootstrap")
 ReactStateMagicMixin = require("../assets/vendor/ReactStateMagicMixin")
 RoomActions          = require("../actions/RoomActions")
+ThreadActions        = require("../actions/ThreadActions")
 RoomStore            = require("../stores/RoomStore")
 Router               = require("react-router")
 
@@ -27,9 +28,7 @@ HomeComponent = React.createClass
       RoomActions.setTopicSelected null
 
   slideSidebarRight: (e) ->
-    $(".home").removeClass("ask-position-left").addClass("ask-position-right")
-    $(".sidebar").removeClass("position-left").addClass("position-right")
-    $(".new-thread").html("Cancel").addClass("cancel-color")
+    ThreadActions.openPanel()
     e.stopPropagation()
 
   render: ->

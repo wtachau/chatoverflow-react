@@ -2,6 +2,7 @@ $                    = require("jquery")
 React                = require("react")
 ReactBootstrap       = require("react-bootstrap")
 UserActions          = require("../../actions/UserActions")
+ThreadActions        = require("../../actions/ThreadActions")
 UserStore            = require("../../stores/UserStore")
 MentionStore         = require("../../stores/MentionStore")
 ReactStateMagicMixin = require("../../assets/vendor/ReactStateMagicMixin")
@@ -50,25 +51,18 @@ TopicSidebar = React.createClass
     else
       span {}, ""
 
-  slideSidebarRight: (e) ->
+  togglePanel: (e) ->
     if $(".home").hasClass("ask-position-right")
-      @slideSidebarLeft()
+      ThreadActions.closePanel()
     else
-      $(".home").removeClass("ask-position-left").addClass("ask-position-right")
-      $(".sidebar").removeClass("position-left").addClass("position-right")
-      $(".new-thread").html("Cancel").addClass("cancel-color")
+      ThreadActions.openPanel()
       e.stopPropagation()
-
-  slideSidebarLeft: ->
-    $(".home").removeClass("ask-position-right").addClass("ask-position-left")
-    $(".sidebar").removeClass("position-right").addClass("position-left")
-    $(".new-thread").removeClass("cancel-color").html("New Thread").append('<i class="fa fa-plus"></i>')
 
   render: ->
     div {},
       AskComponent {slideSidebarLeft: @slideSidebarLeft}
 
-      ListGroup {className: "sidebar position-left", onClick: @slideSidebarLeft},
+      ListGroup {className: "sidebar position-left", onClick: ThreadActions.closePanel},
 
         div {className: "logo-div"},
           img {src: "/assets/images/cs_logo.png", className: "logo"}
@@ -93,7 +87,7 @@ TopicSidebar = React.createClass
               user: @props.user
               includeLogout: true
             div {className: "sidebar-username"}, @props.user?.username
-          div {className: "new-thread", onClick: @slideSidebarRight},
+          div {className: "new-thread", onClick: @togglePanel},
             "New Thread",
             i {className: "fa fa-plus"}
 
